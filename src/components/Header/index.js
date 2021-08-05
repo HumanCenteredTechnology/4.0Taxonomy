@@ -1,11 +1,12 @@
 import React from 'react';
 
 //Styles
-import { Content } from './Header.styles'
+import './Header.css';
+//import { Content } from './Header.styles'
 
 const Header = () => {
     return (
-        <div>
+        <div className="wrapper">
             <h1>4.0 Taxonomy</h1>
         </div>
         

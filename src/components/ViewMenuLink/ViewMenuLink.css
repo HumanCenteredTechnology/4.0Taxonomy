@@ -1,0 +1,12 @@
+
+.viewMenuWrapper {
+    display: flex;
+    align-items: right;
+    flex-direction: column;
+    padding: 2vh;
+}
+
+.viewMenuText {
+    font-family: Comfortaa, sans-serif;
+    font-weight: 600;
+}
