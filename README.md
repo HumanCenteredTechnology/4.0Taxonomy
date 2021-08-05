@@ -16,7 +16,7 @@
 
 ## Material-UI
 
-#### npm install @material-ui/core
+### npm install @material-ui/core
 
 ## Styled-components
 
