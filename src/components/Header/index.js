@@ -7,7 +7,7 @@ import './Header.css';
 const Header = () => {
     return (
         <div className="wrapper">
-            <h1>4.0 Taxonomy</h1>
+            <h1>Search4.0</h1>
         </div>
         
         

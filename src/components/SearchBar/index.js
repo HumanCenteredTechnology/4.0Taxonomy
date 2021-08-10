@@ -8,7 +8,8 @@ const SearchBar = () => {
         <div className="searchBar">
             <TextField className="input"
                 id="outlined-basic"
-                label="Search"
+                //label="Search"
+                placeholder="Search a tech or need"
                 variant="outlined"
             />
         </div>

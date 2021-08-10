@@ -7,7 +7,7 @@ import React from 'react';
 import Home from './components/Home';
 
 //Styles
-import { GlobalStyle } from './GlobalStyle';
+//import { GlobalStyle } from './GlobalStyle';
 
 const App = () => (
     <Home />
