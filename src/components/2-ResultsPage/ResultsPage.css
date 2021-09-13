@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Comfortaa, sans-serif;
+}
+
+.resultsList {
+  width: 90vw;
+  max-width: 1170px;
+  margin: 5rem auto;
+  display: grid;
+  gap: 2rem;
+}
+
+.result {
+  background: white;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 2px;
+  border-color: lightgrey;
+  padding: 1rem 2rem;
+}
+
+.result h3 {
+  margin-top: 0.5rem;
+}
+
+.result p {
+  margin-top: 2rem;
+}
+
+.buttonContainer {
+  margin-top: 5rem;
+}
