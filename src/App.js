@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
 
 //Routing
 
-
 //Components
-import Home from './components/Home';
+import HomePage from "./components/1-HomePage";
+import ResultsPage from "./components/2-ResultsPage";
 
 //Styles
 //import { GlobalStyle } from './GlobalStyle';
 
-const App = () => (
-    <Home />
-);
+const App = () =>
+    //<HomePage />;
+    <ResultsPage />;
 
 export default App;
