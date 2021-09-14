@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 //Components
 import SearchBar from '../SearchBar';
-import Button from '@material-ui/core/Button';
+import Result from '../Result';
 
 //Style
 import './ResultsPage.css';
@@ -20,24 +20,23 @@ const ResultsPage = () => {
 
 const results = [
     {
+        id: 0,
         title : 'Title 1',
         description : 'Description'
     },
     {
+        id: 1,
         title : 'Title 2',
         description : 'Description'
     },
     {
+        id: 2,
         title : 'Title 3',
         description : 'Description'
     },
 ];
 
 
-const result = {
-    title : 'Title',
-    description : 'Description'
-}
 
 //mostra tutti i risultati
 const ResultsList = () => {
@@ -45,7 +44,7 @@ const ResultsList = () => {
         <section className='resultsList'>
             {results.map((result) =>{
                 return (
-                    <Result result={result}/> 
+                    <Result key={result.id} {...result}/>       //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
                 );
             })}
         </section>
@@ -54,27 +53,6 @@ const ResultsList = () => {
 
 
 //singolo risultato
-const Result = (props) => {
-    const { title, description } = props.result;
-    return (
-        <article className='result'>
-            <h3>{title}</h3>
-            <p>{description}</p>
 
-            <ViewResultButton />
-        </article>
-    );
-}
-
-
-const ViewResultButton = () => {
-    return (
-        <div className='buttonContainer'>
-            <Button href="#text-buttons" color="black">
-                View
-            </Button>
-        </div>
-    );
-}
 
 export default ResultsPage;
