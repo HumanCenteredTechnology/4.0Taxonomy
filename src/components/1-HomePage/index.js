@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Header from "../Header";
 import SearchBar from "../SearchBar";
 import ViewMenuLink from "../ViewMenuLink";
+//Hokks
+import { useResultsFetch } from "../hooks/useFetch";
 //Styles
 import { Container } from "@material-ui/core";
 import "./HomePage.css";

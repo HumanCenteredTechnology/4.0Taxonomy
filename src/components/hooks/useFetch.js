@@ -6,11 +6,11 @@ const initialState = {
 };
 
 export const useFetch = () => {
-  const [state, setState] = useState(initialState); //
+  /*   const [state, setState] = useState(initialState); //
   const [loading, setLoading] = useState(false); //caricamento API
   const [error, setError] = useState(false); //errore API
 
-  /*  const fetchResults = async (searchTerm = "") => {
+   const fetchResults = async (searchTerm = "") => {
     try {
       setError(false);
       setLoading(true);
