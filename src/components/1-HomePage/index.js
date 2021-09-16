@@ -9,21 +9,15 @@ import { Container } from "@material-ui/core";
 import "./HomePage.css";
 
 const HomePage = () => {
-
-  const [state, setState] = useState();           //
-  const [loading, setLoading] = useState(false);  //caricamento API
-  const [error, setError] = useState(false);      //errore API
-
   return (
     <>
-    
       <Header />
       <Container className="container" maxWidth="md">
-          <SearchBar />
-          <ViewMenuLink />
+        <SearchBar />
+        <ViewMenuLink />
       </Container>
     </>
   );
-}
+};
 
 export default HomePage;
