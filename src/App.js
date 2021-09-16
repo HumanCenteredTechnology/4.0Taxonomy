@@ -10,7 +10,7 @@ import ResultsPage from "./components/2-ResultsPage";
 //import { GlobalStyle } from './GlobalStyle';
 
 const App = () =>
-    //<HomePage />;
-    <ResultsPage />;
+    <HomePage />;
+    //<ResultsPage />;
 
 export default App;

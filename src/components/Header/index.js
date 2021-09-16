@@ -9,11 +9,7 @@ const Header = () => {
         <div className="wrapper">
             <h1>Search4.0</h1>
         </div>
-        
-        
         )
-
-
 }
 
 export default Header;

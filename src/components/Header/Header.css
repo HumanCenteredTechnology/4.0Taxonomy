@@ -1,21 +1,16 @@
 .wrapper {
-
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    height: 30vh;
-    width: 100%;
-    padding: 0 0 10vh 2vh;
-
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height: 30vh;
+  width: 100%;
+  margin-top: 5vh;
+  padding: 0 0 10vh 2vh;
 }
 
-
-
 h1 {
-    font-size: 72px;
-    /*text-transform: lowercase;*/
-    font-family: Comfortaa, sans-serif;
-
-
+  font-size: 72px;
+  /*text-transform: lowercase;*/
+  font-family: Comfortaa, sans-serif;
 }

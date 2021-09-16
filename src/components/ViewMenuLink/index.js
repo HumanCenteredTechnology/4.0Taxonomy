@@ -6,7 +6,7 @@ const ViewMenuLink = () => {
 
     return (
         <div className="viewMenuWrapper" >
-        <Button href="#text-buttons" color="black">
+        <Button href="#text-buttons" color="default">
             or view the menu
         </Button>
         <img className="viewMenuIcon" src="" /> 

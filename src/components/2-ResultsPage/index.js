@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 
 //Components
 import SearchBar from '../SearchBar';
@@ -18,7 +18,8 @@ const ResultsPage = () => {
     );
 }
 
-const results = [
+
+const data = [
     {
         id: 0,
         title : 'Title 1',
@@ -33,16 +34,13 @@ const results = [
         id: 2,
         title : 'Title 3',
         description : 'Description'
-    },
+    }
 ];
 
-
-
-//mostra tutti i risultati
 const ResultsList = () => {
     return (
         <section className='resultsList'>
-            {results.map((result) =>{
+            {data.map((result) =>{
                 return (
                     <Result key={result.id} {...result}/>       //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
                 );
@@ -51,8 +49,39 @@ const ResultsList = () => {
     );
 }
 
+/* const ResultsFetch = () => {
+    const [results, setResults] = useState([]);
 
-//singolo risultato
+    const getResults = async() => {
+        const response = await fetch(json);  //url sarà preso da API
+        const results = await response.json();
+        //setResults(results);
+        console.log(results);
+    }
+
+    useEffect( () => {
+        getResults();
+
+    }, [])
+    return (
+        <>
+            <ul className="results">
+                {results.map((result) => {
+                    return (
+                        <Result  key={result.id} {...result}/>
+                    );
+                })}
+            </ul>
+        </>
+    )
+}  */
+
+
+//mostra tutti i risultati
+
+
+
 
 
 export default ResultsPage;
+//export default ResultsFetch;

@@ -1,0 +1,9 @@
+/*           display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          heigth: "100vh", */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
