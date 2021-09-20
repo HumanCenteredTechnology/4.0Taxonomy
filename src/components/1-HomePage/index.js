@@ -10,12 +10,20 @@ import { useResultsFetch } from "../hooks/useFetch";
 import { Container } from "@material-ui/core";
 import "./HomePage.css";
 
+const dataUrl = "http://localhost:3000/data.json";
+const getSearchMention = async (e) => {
+  const searchMention = e.target.elements.searchMention.value;
+  e.preventDefault(); //impedisce il refresh della pagina
+  const api_call = await fetch(dataUrl);
+  const data = await api_call.json();
+  console.log(data);
+};
 const HomePage = () => {
   return (
     <>
       <Header />
       <Container className="container" maxWidth="md">
-        <SearchBar />
+        <SearchBar getSearchMention={getSearchMention} />
         <ViewMenuLink />
       </Container>
     </>
