@@ -12,13 +12,13 @@ import { Container } from "@material-ui/core";
 import "./HomePage.css";
 
 const apiUrl = "http://localhost:5000/";
-const getSearchMention = async (e) => {
+/* const getSearchMention = async (e) => {
   const searchMention = e.target.elements.searchMention.value;
   e.preventDefault(); //impedisce il refresh della pagina
   const api_call = await fetch(`${apiUrl}${searchMention}`);
   const data = await api_call.json();
   console.log(data);
-};
+}; */
 
 const HomePage = () => {
   const [menuOpened, setMenuOpened] = useState(null);
@@ -34,9 +34,10 @@ const HomePage = () => {
     <>
       <Header />
       <Container className="container" maxWidth="md">
-        <SearchBar getSearchMention={getSearchMention} />
+        <SearchBar />
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
+      <h3>{}</h3>
     </>
   );
 };
