@@ -1,87 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 //Components
-import SearchBar from '../SearchBar';
-import Result from '../Result';
+import SearchBar from "../SearchBar";
+import Result from "../Result";
+
+//hooks
+import { useFetch } from "../../hooks/useFetch";
 
 //Style
-import './ResultsPage.css';
-
+import "./ResultsPage.css";
 
 const ResultsPage = () => {
-    return (
-        <div>
-            <SearchBar />
-            <ResultsList />
-        </div>
+  return (
+    <div>
+      <ResultsList />
+    </div>
+  );
+};
 
-    );
-}
-
-
-const data = [
-    {
-        id: 0,
-        title : 'Title 1',
-        description : 'Description'
-    },
-    {
-        id: 1,
-        title : 'Title 2',
-        description : 'Description'
-    },
-    {
-        id: 2,
-        title : 'Title 3',
-        description : 'Description'
-    }
-];
-
-const ResultsList = () => {
-    return (
-        <section className='resultsList'>
-            {data.map((result) =>{
-                return (
-                    <Result key={result.id} {...result}/>       //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
-                );
-            })}
-        </section>
-    );
-}
-
-/* const ResultsFetch = () => {
-    const [results, setResults] = useState([]);
-
-    const getResults = async() => {
-        const response = await fetch(json);  //url sarà preso da API
-        const results = await response.json();
-        //setResults(results);
-        console.log(results);
-    }
-
-    useEffect( () => {
-        getResults();
-
-    }, [])
-    return (
-        <>
-            <ul className="results">
-                {results.map((result) => {
-                    return (
-                        <Result  key={result.id} {...result}/>
-                    );
-                })}
-            </ul>
-        </>
-    )
-}  */
-
+const ResultsList = ({}) => {
+  const { fetchResults, searchMention, setSearchMention } = useFetch();
+  const [state, setState] = useState(null);
+  useEffect(() => {
+    setState(fetchResults);
+    console.log(setState);
+  }, [fetchResults]);
+  return (
+    <section className="resultsList">
+      {/* <p>{state.results[0].mention}</p> */}
+      {/*      {result.map((result) => {
+        return (
+          <Result key={result.mention} {...result} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+        );
+      })} */}
+    </section>
+  );
+};
 
 //mostra tutti i risultati
-
-
-
-
 
 export default ResultsPage;
 //export default ResultsFetch;
