@@ -11,11 +11,18 @@ import { useResultsFetch } from "../../hooks/useFetch";
 import { Container } from "@material-ui/core";
 import "./HomePage.css";
 
-const initialState = {
-  category: "",
-  link: "",
-  mention: "",
-};
+/* const initialState = {
+  results: [{ category: "", link: "", mention: "" }],
+}; */
+const initialState = [
+  {
+    results: {
+      category: "",
+      link: "",
+      mention: "",
+    },
+  },
+];
 
 const HomePage = () => {
   //per il fetch riceve la searchMention come stato da SearchBar
@@ -23,14 +30,24 @@ const HomePage = () => {
   const [state, setState] = useState(initialState);
 
   const fetch = async (searchMention = "") => {
-    const results = await API.fetchResults(searchMention);
-    setState(...results);
+    try {
+      const results = await API.fetchResults(searchMention); //dovrebbe esserci anche un controllo sulla risposto (se undefined)
+      //setState(...results);
+      setState(() => ({
+        results: [...results],
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetch(searchMention);
+    console.log(searchMention);
+    console.log("Fetching Results" + searchMention);
   }, [searchMention]);
 
   useEffect(() => {
+    console.log("Done");
     console.log(state);
   }, [state]);
 
@@ -51,9 +68,9 @@ const HomePage = () => {
         <SearchBar setSearchMention={setSearchMention} />
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
-      <h3>{state.mention}</h3>
-      <h3>{state.category}</h3>
-      <h3>{state.link}</h3>
+      <h3></h3>
+      <h3></h3>
+      <h3></h3>
     </>
   );
 };

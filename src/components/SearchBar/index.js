@@ -8,18 +8,18 @@ import { Input } from "@material-ui/core";
 const SearchBar = ({ setSearchMention }) => {
   /* const [searchMention, setSearchMention] = useState(""); */
   const [state, setState] = useState("");
-  const [error, setError] = useState(false);
+  //const [error, setError] = useState(false);
 
   const handleChange = (e) => {
-    const name = e.currentTarget.name;
+    //const name = e.currentTarget.name;
     const value = e.currentTarget.value;
-    if (name === "search-input") setState(value); //stato interno (potrebbe diventare setSearchMention per aiutare la ricerca in futuro)
-    console.log(value);
+    //if (name === "search-input")
+    setState(value); //stato interno (potrebbe diventare setSearchMention per aiutare la ricerca in futuro)
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(state);
     setSearchMention(state);
+    console.log(state);
   };
 
   return (
