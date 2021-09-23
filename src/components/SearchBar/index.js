@@ -5,46 +5,22 @@ import API from "../../API.js";
 import "./SearchBar.css";
 import { Input } from "@material-ui/core";
 
-const SearchBar = ({ getSearchMention }) => {
-  const [searchMention, setSearchMention] = useState("");
+const SearchBar = ({ setSearchMention }) => {
+  /* const [searchMention, setSearchMention] = useState(""); */
+  const [state, setState] = useState("");
   const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const name = e.currentTarget.name;
     const value = e.currentTarget.value;
-    if (name === "search-input") setSearchMention(value);
+    if (name === "search-input") setState(value); //stato interno (potrebbe diventare setSearchMention per aiutare la ricerca in futuro)
     console.log(value);
-    /* const { value } = e.target;
-    setSearchMention(value);
-    console.log(searchMention); */
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(searchMention);
-    const results = await API.fetchResults(searchMention);
-    console.log(results);
-
-    /*    setError(false);
-    try {
-      const results = await API.fetchResults(searchTerm);
-      console.log(results);
-    } catch (error) {
-      setError(true);
-    } */
-    /*     e.preventDefault();
-    fetch("http://localhost:5000/", {
-      method: "POST",
-    });*/
+    console.log(state);
+    setSearchMention(state);
   };
-
-  /*   useEffect(() => {
-    handleSubmit("");
-    fetch("/hello").then((resp) =>
-      resp.json().then((data) => {
-        console.log(data);
-      })
-    );
-  }, []); */
 
   return (
     <form className="searchBar" onSubmit={handleSubmit}>
@@ -54,7 +30,7 @@ const SearchBar = ({ getSearchMention }) => {
         id="outlined-basic"
         //label="Search"
         placeholder="Search a tech or need"
-        value={searchMention}
+        value={state}
         variant="outlined"
         onChange={handleChange}
       />
