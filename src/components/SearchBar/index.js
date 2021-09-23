@@ -7,7 +7,6 @@ import TextField from "@material-ui/core/TextField";
 
 const SearchBar = ({ setSearchMention }) => {
   const [state, setState] = useState("");
-  console.log(state);
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMention(state);

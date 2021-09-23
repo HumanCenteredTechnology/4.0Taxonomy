@@ -18,13 +18,12 @@ const ResultsPage = () => {
   );
 };
 
-const ResultsList = ({}) => {
-  const { fetchResults, searchMention, setSearchMention } = useFetch();
+const ResultsList = () => {
+  const { results } = useFetch();
   const [state, setState] = useState(null);
   useEffect(() => {
-    setState(fetchResults);
-    console.log(setState);
-  }, [fetchResults]);
+    console.log(results);
+  }, [results]);
   return (
     <section className="resultsList">
       {/* <p>{state.results[0].mention}</p> */}
@@ -37,7 +36,4 @@ const ResultsList = ({}) => {
   );
 };
 
-//mostra tutti i risultati
-
 export default ResultsPage;
-//export default ResultsFetch;

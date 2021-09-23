@@ -28,9 +28,9 @@ const HomePage = () => {
     console.log("cliccato");
   };
 
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log(fetchResults);
-  }, [fetchResults]);
+  }, [fetchResults]); */
 
   return (
     <>
@@ -40,7 +40,7 @@ const HomePage = () => {
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
 
-      <ResultsPage></ResultsPage>
+      <ResultsPage />
     </>
   );
 };
