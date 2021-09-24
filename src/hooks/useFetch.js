@@ -1,32 +1,44 @@
 import { useState, useEffect } from "react";
+import API from "../API.js";
 
 const initialState = {
   results: [],
-  total_results: 0,
 };
 
 export const useFetch = () => {
-  /*   const [state, setState] = useState(initialState); //
-  const [loading, setLoading] = useState(false); //caricamento API
-  const [error, setError] = useState(false); //errore API
+  //per il fetch riceve la searchMention come stato da SearchBar
+  const [searchMention, setSearchMention] = useState("");
+  const [results, setResults] = useState(initialState);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  //const hasInput = useRef(false);
 
-   const fetchResults = async (searchTerm = "") => {
+  const fetch = async (searchMention = "") => {
     try {
       setError(false);
       setLoading(true);
+      const fetchResults = await API.fetchResults(searchMention);
 
-      const results = await API.fetchResults(searchTerm); //dalle api caricherà i risultati. da vedere poi
-
-      setState((prev) => ({
-        ...results,
+      setResults(() => ({
+        results: [...fetchResults],
       }));
     } catch (error) {
       setError(true);
+      console.log(error);
     }
     setLoading(false);
   };
+  useEffect(() => {
+    setResults(initialState);
+    console.log("Fetching results for " + searchMention);
+    fetch(searchMention);
+  }, [searchMention]);
 
-  useEffect(() => {});
+  //only for testing
+  useEffect(() => {
+    console.log("Done");
+    console.log(results);
+  }, [results]);
 
-  return { state, loading, error }; */
+  return { results, loading, error, searchMention, setSearchMention };
 };
