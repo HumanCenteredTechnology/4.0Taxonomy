@@ -2,7 +2,6 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 
 const Result = ({ mention, category, link }) => {
-  //const { title, description } = props.result;
   return (
     <article className="result">
       <h3>{mention}</h3>

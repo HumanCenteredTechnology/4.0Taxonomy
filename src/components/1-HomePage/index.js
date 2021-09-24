@@ -12,10 +12,6 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container } from "@material-ui/core";
 import "./HomePage.css";
 
-/* const initialState = {
-  results: [{ category: "", link: "", mention: "" }],
-}; */
-
 const HomePage = () => {
   const { results, setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
@@ -27,10 +23,6 @@ const HomePage = () => {
     setMenuOpened(e.currentTarget);
     console.log("cliccato");
   };
-
-  /*   useEffect(() => {
-    console.log(fetchResults);
-  }, [fetchResults]); */
 
   return (
     <>

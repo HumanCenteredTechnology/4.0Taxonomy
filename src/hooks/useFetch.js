@@ -1,17 +1,8 @@
 import { useState, useEffect } from "react";
 import API from "../API.js";
+
 const initialState = {
   results: [],
-};
-
-const ss = {
-  results: [
-    {
-      category: "",
-      link: "",
-      mention: "",
-    },
-  ],
 };
 
 export const useFetch = () => {
@@ -26,9 +17,8 @@ export const useFetch = () => {
     try {
       setError(false);
       setLoading(true);
-      const fetchResults = await API.fetchResults(searchMention); //dovrebbe esserci anche un controllo sulla risposto (se undefined)
+      const fetchResults = await API.fetchResults(searchMention);
 
-      //setState(...results);
       setResults(() => ({
         results: [...fetchResults],
       }));
@@ -44,6 +34,7 @@ export const useFetch = () => {
     fetch(searchMention);
   }, [searchMention]);
 
+  //only for testing
   useEffect(() => {
     console.log("Done");
     console.log(results);

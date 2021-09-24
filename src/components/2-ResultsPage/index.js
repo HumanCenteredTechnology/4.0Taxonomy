@@ -23,6 +23,7 @@ const ResultsPage = ({ results }) => {
   );
 };
 
+//se la pagina dei risultati sarà "staccata"
 const ResultsList = () => {
   return (
     <section className="resultsList">
