@@ -6,19 +6,34 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
 import NotFound from "./components/NotFound";
+import FormPage from "./components/3 - FormPage";
 
 //Styles
-//import { GlobalStyle } from './GlobalStyle';
+import {
+  makeStyles,
+  CssBaseline,
+  createTheme,
+  ThemeProvider,
+} from "@material-ui/core"; //creare un tema principale che utilizzeranno tutte le pagine
+
+const theme = createTheme({
+  palette: {
+    background: {},
+  },
+});
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/:queryId" element={<ResultsPage />} />
-        <Route path="/*" element={<NotFound default />} />
-      </Routes>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/result/:queryId" element={<ResultsPage />} />
+          <Route path="/*" element={<NotFound default />} />
+          <Route path="/form" element={<FormPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
   );
 };
 
