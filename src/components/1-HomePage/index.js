@@ -17,7 +17,7 @@ import "./HomePage.css";
 }; */
 
 const HomePage = () => {
-  const { setSearchMention } = useFetch();
+  const { results, setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
   const [menuOpened, setMenuOpened] = useState(null);
   const handleCloseMenu = () => {
@@ -39,8 +39,7 @@ const HomePage = () => {
         <SearchBar setSearchMention={setSearchMention} />
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
-
-      <ResultsPage />
+      <ResultsPage results={results} />
     </>
   );
 };
