@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SubmitButton = ({ text, size, color, variant, onClick, ...other }) => {
+const StandardButton = ({ text, size, color, variant, onClick, ...other }) => {
   const classes = useStyles();
 
   return (
@@ -26,4 +26,4 @@ const SubmitButton = ({ text, size, color, variant, onClick, ...other }) => {
     </MuiButton>
   );
 };
-export default SubmitButton;
+export default StandardButton;

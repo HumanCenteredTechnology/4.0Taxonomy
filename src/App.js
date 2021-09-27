@@ -17,14 +17,19 @@ import {
 } from "@material-ui/core"; //creare un tema principale che utilizzeranno tutte le pagine
 
 const theme = createTheme({
+  root: {
+    background: "#757ce8",
+  },
+
   palette: {
-    background: {},
+    background: { paper: "#ffff" },
   },
 });
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />

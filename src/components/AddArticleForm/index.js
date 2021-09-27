@@ -5,7 +5,7 @@ import { useForm } from "../../hooks/useForm";
 
 //Styles
 import { Grid, makeStyles, TextField } from "@material-ui/core";
-import SubmitButton from "../SubmitButton";
+import StandardButton from "../StandardButton";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFormControl-root": {
@@ -63,8 +63,12 @@ const AddArticleForm = () => {
             onChange={handleChange}
           />
           <div>
-            <SubmitButton type="submit" text="Submit" onClick={handleSubmit} />
-            <SubmitButton
+            <StandardButton
+              type="submit"
+              text="Submit"
+              onClick={handleSubmit}
+            />
+            <StandardButton
               text="Reset"
               color="default"
               onClick={() => {

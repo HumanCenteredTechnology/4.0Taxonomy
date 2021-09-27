@@ -4,6 +4,13 @@ import API from "../../API.js";
 //Styles
 import "./SearchBar.css";
 import TextField from "@material-ui/core/TextField";
+import { Box, styled } from "@material-ui/core";
+
+const SearchBox = styled(TextField)(() => ({
+  "& fieldset": {
+    borderRadius: "30px",
+  },
+}));
 
 const SearchBar = ({ setSearchMention }) => {
   const [state, setState] = useState("");
@@ -13,16 +20,30 @@ const SearchBar = ({ setSearchMention }) => {
   };
   return (
     <form className="searchBar" onSubmit={handleSubmit}>
-      <TextField
-        className="input"
-        name="search-input"
-        id="outlined-basic"
-        //label="Search"
-        placeholder="Search a tech or need"
-        value={state}
-        variant="outlined"
-        onChange={(e) => setState(e.currentTarget.value)}
-      />
+      <Box
+        sx={{
+          margin: "auto",
+          width: 500,
+          maxWidth: "100%",
+          bgcolor: "white",
+          borderRadius: 30,
+        }}
+      >
+        <SearchBox
+          sx={{
+            borderRadius: 40,
+          }}
+          fullWidth
+          className="input"
+          name="search-input"
+          id="outlined-basic"
+          //label="Search"
+          placeholder="Search a tech or need"
+          value={state}
+          variant="outlined"
+          onChange={(e) => setState(e.currentTarget.value)}
+        />
+      </Box>
     </form>
   );
 };

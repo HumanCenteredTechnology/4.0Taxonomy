@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../../API.js";
+import { Link as RouterLink } from "react-router-dom";
 //Components
 import Header from "../Header";
+import StandardButton from "../StandardButton/index.js";
 import SearchBar from "../SearchBar";
 import ViewMenuButton from "../ViewMenuButton";
 import Menu from "../Menu";
@@ -26,6 +28,15 @@ const HomePage = () => {
 
   return (
     <>
+      <StandardButton
+        variant="outlined"
+        text="Add Article"
+        size="small"
+        color="default"
+        component={RouterLink}
+        to="/form"
+      />
+
       <Header />
       <Container className="container" maxWidth="md">
         <SearchBar setSearchMention={setSearchMention} />
