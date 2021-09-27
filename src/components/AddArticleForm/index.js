@@ -17,17 +17,35 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues = {
   title: "",
-  category: "",
   link: "",
 };
 
 const AddArticleForm = () => {
-  const { values, setValues, handleChange } = useForm(initialValues);
+  const { values, setValues, errors, setErrors, handleChange } =
+    useForm(initialValues);
 
   const classes = useStyles();
 
+  const validate = () => {
+    let temp = {};
+    temp.title = values.title ? "" : "Please enter a title";
+
+    temp.link = values.link ? "" : "Please enter a valid link";
+    setErrors({ ...temp });
+    console.log(values);
+    return Object.values(temp).every((x) => x == "");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (validate()) {
+      console.log("test");
+    }
+  };
+
   return (
-    <form className={classes.root}>
+    <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
       <Grid container>
         <Grid item xs={6}>
           <TextField
@@ -45,12 +63,12 @@ const AddArticleForm = () => {
             onChange={handleChange}
           />
           <div>
-            <SubmitButton type="submit" text="Submit" />
+            <SubmitButton type="submit" text="Submit" onClick={handleSubmit} />
             <SubmitButton
               text="Reset"
               color="default"
               onClick={() => {
-                setValues("");
+                setValues(initialValues);
               }}
             />
           </div>
