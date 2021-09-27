@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import API from "../../API.js";
 
+//Components
+import StandardButton from "../controls/StandardButton";
+import TextInput from "../controls/TextInput";
 //Hooks
 import { useForm } from "../../hooks/useForm";
-
 //Styles
 import { Grid, makeStyles, TextField } from "@material-ui/core";
-import StandardButton from "../StandardButton";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFormControl-root": {
@@ -32,15 +35,16 @@ const AddArticleForm = () => {
 
     temp.link = values.link ? "" : "Please enter a valid link";
     setErrors({ ...temp });
-    console.log(values);
-    return Object.values(temp).every((x) => x == "");
+
+    return Object.values(temp).every((x) => x === "");
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validate()) {
-      console.log("test");
+      API.submitArticle(values);
+      console.log("submitting...");
     }
   };
 
@@ -48,19 +52,21 @@ const AddArticleForm = () => {
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
       <Grid container>
         <Grid item xs={6}>
-          <TextField
+          <TextInput
             variant="outlined"
             label="Title"
             name="title"
             value={values.title}
             onChange={handleChange}
+            error={errors.title}
           />
-          <TextField
+          <TextInput
             variant="outlined"
             label="Link"
             name="link"
             value={values.link}
             onChange={handleChange}
+            error={errors.link}
           />
           <div>
             <StandardButton

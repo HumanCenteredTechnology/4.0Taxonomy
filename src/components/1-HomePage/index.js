@@ -3,9 +3,9 @@ import API from "../../API.js";
 import { Link as RouterLink } from "react-router-dom";
 //Components
 import Header from "../Header";
-import StandardButton from "../StandardButton/index.js";
+import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
-import ViewMenuButton from "../ViewMenuButton";
+import ViewMenuButton from "../controls/ViewMenuButton";
 import Menu from "../Menu";
 import ResultsPage from "../2-ResultsPage";
 //Hooks
