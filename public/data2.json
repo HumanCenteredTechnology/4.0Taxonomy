@@ -1,0 +1,92 @@
+{
+    "L0": [
+        {
+            "name": "I4.0 Problems"
+        },
+        {
+            "name": "Enabling Technologies"
+        }
+    ],
+    "L1": [
+        {
+            "name": "Process Optimization",
+            "parent": "I4.0 Problems"
+        },
+        {
+            "name": "Product Innovation",
+            "parent": "I4.0 Problems"
+        }
+    ],
+    "L2": [
+        {
+            "name": "Equipment efficiency improvement",
+            "parent": "Process Optimization"
+        },
+        {
+            "name": "Worker security improvement and accident prevention",
+            "parent": "Process Optimization"
+        },
+        {
+            "name": "Worker routine and operation optimization",
+            "parent": "Process Optimization"
+        },
+        {
+            "name": "Supply chain",
+            "parent": "Process Optimization"
+        },
+        {
+            "name": "Quality assurance",
+            "parent": "Process Optimization"
+        },
+        {
+            "name": "Product servitization",
+            "parent": "Product Innovation"
+        },
+        {
+            "name": "Usability improvement",
+            "parent": "Product Innovation"
+        },
+        {
+            "name": "Smart products - Intelligent self-diagnosing products",
+            "parent": "Product Innovation"
+        },
+        {
+            "name": "Cost and number of parts/component reduction",
+            "parent": "Product Innovation"
+        },
+        {
+            "name": "After-Sales support",
+            "parent": "Product Innovation"
+        }
+    ],
+    "L3": [
+        {
+            "name": "Real-time production monitoring analysis and supervision",
+            "parent": "Equipment efficiency improvement"
+        },
+        {
+            "name": "Predictive maintenance",
+            "parent": "Equipment efficiency improvement"
+        },
+        {
+            "name": "Vertical interconnection and integration (between departments in a factory",
+            "parent": "Equipment efficiency improvement"
+        },
+        {
+            "name": "Smart PPE (personal protection equipment)",
+            "parent": "Worker security improvement and accident prevention"
+        },
+        {
+            "name": "Worker attention and mental state monitoring",
+            "parent": "Worker security improvement and accident prevention"
+        },
+        {
+            "name": "People counting, analysis and crowd detection",
+            "parent": "Worker security improvement and accident prevention"
+        },
+        {
+            "name": "Time and method smart measurement",
+            "parent": "Worker routine and operation optimization"
+        }
+    ]
+}

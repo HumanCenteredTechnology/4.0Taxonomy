@@ -1,20 +1,48 @@
-[
-    {
-        "id":0,
-        "mention":"Title 1",
-        "category":"category",
-        "link":"link"
-    },
-    {
-        "id":1,
-        "mention":"Title 2",
-        "category":"category",
-        "link":"link"
-    },
-    {
-        "id":2,
-        "mention":"Title 3",
-        "category":"category",
-        "link":"link"
+{
+    "topLevel": [
+        "1",
+        "2"
+    ],
+    "levels": {
+        "1": {
+            "parent": null,
+            "title": "I4.0 Problems",
+            "children": [
+                "11",
+                "12"
+            ]
+        },
+        "11": {
+            "parent": 1,
+            "title": "Process Optimization",
+            "children": [
+                "111",
+                "112",
+                "113",
+                "114",
+                "115"
+            ]
+        },
+        "12": {
+            "parent": 1,
+            "title": "Product Innovation",
+            "children": [
+                "121",
+                "122",
+                "123",
+                "124",
+                "125"
+            ]
+        },
+        "2": {
+            "parent": null,
+            "title": "Enabling Technologies",
+            "children": [
+                "21",
+                "22",
+                "23",
+                "24"
+            ]
+        }
     }
-]
+}
