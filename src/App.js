@@ -20,7 +20,6 @@ const theme = createTheme({
   root: {
     background: "#757ce8",
   },
-
   palette: {
     background: { paper: "#ffff" },
   },

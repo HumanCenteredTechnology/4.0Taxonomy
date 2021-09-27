@@ -7,13 +7,13 @@ import TextInput from "../controls/TextInput";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 //Styles
-import { Grid, makeStyles, TextField } from "@material-ui/core";
+import { CardActions, CardContent, CardHeader, Grid, makeStyles, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFormControl-root": {
-      width: "80%",
-      margin: theme.spacing(1),
+
+      margin: theme.spacing(2),
     },
   },
 }));
@@ -48,42 +48,51 @@ const AddArticleForm = () => {
     }
   };
 
+  const handleReset = () => {
+    setErrors({});
+    setValues(initialValues);
+  }
+
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
-      <Grid container>
-        <Grid item xs={6}>
-          <TextInput
-            variant="outlined"
-            label="Title"
-            name="title"
-            value={values.title}
-            onChange={handleChange}
-            error={errors.title}
-          />
-          <TextInput
-            variant="outlined"
-            label="Link"
-            name="link"
-            value={values.link}
-            onChange={handleChange}
-            error={errors.link}
-          />
-          <div>
-            <StandardButton
-              type="submit"
-              text="Submit"
-              onClick={handleSubmit}
+      <CardHeader
+        title="Submit an article"
+        subheader="Complete the form"
+      />
+      <CardContent>
+        <Grid container spacing={3} >
+          <Grid item md={6} xs={10} xl={3}>
+            <TextInput
+              variant="outlined"
+              label="Title"
+              name="title"
+              value={values.title}
+              onChange={handleChange}
+              error={errors.title}
             />
-            <StandardButton
-              text="Reset"
-              color="default"
-              onClick={() => {
-                setValues(initialValues);
-              }}
+            <TextInput
+              variant="outlined"
+              label="Link"
+              name="link"
+              value={values.link}
+              onChange={handleChange}
+              error={errors.link}
             />
-          </div>
+          </Grid>
         </Grid>
-      </Grid>
+      </CardContent>
+      <CardActions>
+        <StandardButton
+          type="submit"
+          text="Submit"
+          onClick={handleSubmit}
+        />
+        <StandardButton
+          text="Reset"
+          color="default"
+          onClick={handleReset}
+        />
+      </CardActions>
     </form>
   );
 };

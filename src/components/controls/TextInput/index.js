@@ -3,6 +3,7 @@ import { TextField } from "@material-ui/core";
 const TextInput = ({ name, label, value, error = null, onChange }) => {
     return (
         <TextField
+            fullWidth
             variant="outlined"
             label={label}
             name={name}

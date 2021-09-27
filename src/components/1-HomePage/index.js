@@ -11,7 +11,7 @@ import ResultsPage from "../2-ResultsPage";
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
 //Styles
-import { Container } from "@material-ui/core";
+import { Container, Pagination } from "@material-ui/core";
 import "./HomePage.css";
 
 const HomePage = () => {
