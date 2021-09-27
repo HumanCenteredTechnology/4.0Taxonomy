@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/useForm";
 
 //Styles
 import { Grid, makeStyles, TextField } from "@material-ui/core";
+import SubmitButton from "../SubmitButton";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFormControl-root": {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
+
 const initialValues = {
   title: "",
   category: "",
@@ -42,6 +44,16 @@ const AddArticleForm = () => {
             value={values.link}
             onChange={handleChange}
           />
+          <div>
+            <SubmitButton type="submit" text="Submit" />
+            <SubmitButton
+              text="Reset"
+              color="default"
+              onClick={() => {
+                setValues("");
+              }}
+            />
+          </div>
         </Grid>
       </Grid>
     </form>
