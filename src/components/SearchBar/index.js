@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import API from "../../API.js";
 //Styles
@@ -14,9 +15,11 @@ const SearchBox = styled(TextField)(() => ({
 
 const SearchBar = ({ setSearchMention }) => {
   const [state, setState] = useState("");
+  let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMention(state);
+    navigate("/" + state);
   };
   return (
     <form className="searchBar" onSubmit={handleSubmit}>
@@ -43,6 +46,7 @@ const SearchBar = ({ setSearchMention }) => {
           variant="outlined"
           onChange={(e) => setState(e.currentTarget.value)}
         />
+
       </Box>
     </form>
   );

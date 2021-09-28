@@ -19,7 +19,7 @@ const ResultsPage = () => {
   const { results, loading, setSearchMention, found } = useFetch(queryId);
 
   let displayResults
-  console.log(results)
+
 
 
   if (found) {
@@ -33,7 +33,8 @@ const ResultsPage = () => {
     <>
       <SearchBar setSearchMention={setSearchMention} />
       <h1>Results</h1>
-      {displayResults}
+      {/* {displayResults} */}
+      {found ? <ResultsList results={results} /> : <NotFound />}
     </>
   );
 };
@@ -43,7 +44,6 @@ const ResultsPage = () => {
 const ResultsList = ({ results }) => {
   return (
     <section className="resultsList">
-      <p>result</p>
       {results.results.map((result) => {
         return (
           <Result key={result.mention} {...result} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API

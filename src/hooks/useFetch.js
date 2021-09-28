@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import API from "../API.js";
 
+
 const initialState = {
   results: [],
 };
@@ -8,7 +9,7 @@ const initialState = {
 export const useFetch = (queryId) => {
   //per il fetch riceve la searchMention come stato da SearchBar
   const [searchMention, setSearchMention] = useState("");
-  const [results, setResults] = useState({ initialState }); //da levare initialState
+  const [results, setResults] = useState({ initialState });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
@@ -25,11 +26,15 @@ export const useFetch = (queryId) => {
         setResults(() => ({
           results: [...fetchResults],
         }));
-        console.log(results)
+
 
         if (results !== initialState.results) {
           setFound(true)
+          console.log("not found")
+        } else {
+          setFound(false)
         }
+        if (found === true) console.log("found")
       } catch (error) {
         setError(true);
         console.log(error);
@@ -37,6 +42,8 @@ export const useFetch = (queryId) => {
       setLoading(false);
     };
     fetch()
+
+    console.log(results)
   }, [queryId])
 
   return { results, loading, error, searchMention, setSearchMention, found };
