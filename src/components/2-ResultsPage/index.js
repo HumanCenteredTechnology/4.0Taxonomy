@@ -11,6 +11,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 //Style
 import "./ResultsPage.css";
+import { Container, Box, Divider } from "@material-ui/core";
 //import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
 
@@ -27,7 +28,7 @@ const ResultsPage = () => {
 
   return (
 
-    <>
+    <Container >
       <StandardButton
         variant="outlined"
         text="Add Article"
@@ -36,11 +37,18 @@ const ResultsPage = () => {
         component={RouterLink}
         to="/form"
       />
-      {found ? <TopicsList results={results} /> : <></>}
-      <SearchBar setSearchMention={setSearchMention} />
-      <h1>Results</h1>
+      <Box sx={{ marginY: 5 }}>
+        <SearchBar setSearchMention={setSearchMention} />
+      </Box>
+
+      <h2>{found ? results.related_elements.length : ""} Results found for "{queryId}"</h2>
+      <Divider variant="middle" />
+      <Box sx={{ marginTop: 10, marginX: 5 }}>
+        <p>topics</p>
+        {found ? <TopicsList results={results} /> : <></>}
+      </Box>
       {found ? <ResultsList results={results} /> : <NotFound />}
-    </>
+    </Container>
   );
 };
 
@@ -52,7 +60,7 @@ const ResultsList = ({ results }) => {
       <section className="resultsList">
         {results.related_elements.map((r_el) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[2]} links={r_el[3]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
       </section>

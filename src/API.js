@@ -21,7 +21,7 @@ const apiSettings = {
         ],
       "related_elements":
         [
-          ["Smart warehouse", "Supply Chain", ["Link to Article", "Link to Article"]],
+          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
     }
