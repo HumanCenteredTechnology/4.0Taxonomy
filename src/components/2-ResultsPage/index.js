@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link as RouterLink } from "react-router-dom";
 //Components
 import SearchBar from "../SearchBar";
 import Result from "../Result";
+import StandardButton from "../controls/StandardButton/";
 
 //hooks
 import { useFetch } from "../../hooks/useFetch";
@@ -31,6 +32,14 @@ const ResultsPage = () => {
   return (
 
     <>
+      <StandardButton
+        variant="outlined"
+        text="Add Article"
+        size="small"
+        color="default"
+        component={RouterLink}
+        to="/form"
+      />
       <SearchBar setSearchMention={setSearchMention} />
       <h1>Results</h1>
       {/* {displayResults} */}
@@ -43,13 +52,15 @@ const ResultsPage = () => {
 //se la pagina dei risultati sarà "staccata"
 const ResultsList = ({ results }) => {
   return (
-    <section className="resultsList">
-      {results.results.map((result) => {
-        return (
-          <Result key={result.mention} {...result} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
-        );
-      })}
-    </section>
+    <>
+      <section className="resultsList">
+        {results.results.map((result) => {
+          return (
+            <Result key={result.mention} {...result} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+          );
+        })}
+      </section>
+    </>
 
   );
 };

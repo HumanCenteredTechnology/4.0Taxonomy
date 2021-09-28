@@ -8,13 +8,21 @@ const apiSettings = {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(searchMention),
+      body: JSON.stringify(searchMention),  //
     });
     const data = await results.json();
     return data;
   },
-  submitArticle: async (article) => {   //deve passare un articolo fornendogli un id
-    const data = await JSON.parse(JSON.stringify(article)); //prima rende stringa le chiavi dell'oggetto poi trasforma in json
+  submitArticle: async (article) => {   //invia un articolo
+    //prepara l'articolo in formato leggibile dalle API
+    const articleToSend = {
+      path: "/add_article",
+      method: "POST",
+      title: article.title,
+      abstract: article.abstract,
+      body: article.body
+    }
+    const data = await JSON.parse(JSON.stringify(articleToSend)); //prima rende stringa le chiavi dell'oggetto poi trasforma in json
     console.log(data);
 
   }

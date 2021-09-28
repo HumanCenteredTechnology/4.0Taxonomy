@@ -7,7 +7,7 @@ import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
 import ViewMenuButton from "../controls/ViewMenuButton";
 import Menu from "../Menu";
-import ResultsPage from "../2-ResultsPage";
+
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
 //Styles
@@ -36,7 +36,6 @@ const HomePage = () => {
         component={RouterLink}
         to="/form"
       />
-
       <Header />
       <Container className="container" maxWidth="md">
         <SearchBar setSearchMention={setSearchMention} />

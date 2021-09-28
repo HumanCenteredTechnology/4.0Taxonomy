@@ -34,7 +34,7 @@ export const useFetch = (queryId) => {
         } else {
           setFound(false)
         }
-        if (found === true) console.log("found")
+        if (found === true) console.log("found")    //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
       } catch (error) {
         setError(true);
         console.log(error);
@@ -43,8 +43,10 @@ export const useFetch = (queryId) => {
     };
     fetch()
 
+
     console.log(results)
   }, [queryId])
+
 
   return { results, loading, error, searchMention, setSearchMention, found };
 };

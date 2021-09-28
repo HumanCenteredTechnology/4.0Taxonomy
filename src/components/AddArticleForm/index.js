@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues = {
   title: "",
-  link: "",
+  abstract: "",
+  body: "",
 };
 
 const AddArticleForm = () => {
@@ -32,8 +33,8 @@ const AddArticleForm = () => {
   const validate = () => {
     let temp = {};
     temp.title = values.title ? "" : "Please enter a title";
-
-    temp.link = values.link ? "" : "Please enter a valid link";
+    temp.abstract = values.abstract ? "" : "Please enter a valid abstract";
+    temp.body = values.body ? "" : "Please enter a valid body";
     setErrors({ ...temp });
 
     return Object.values(temp).every((x) => x === "");
@@ -72,11 +73,19 @@ const AddArticleForm = () => {
             />
             <TextInput
               variant="outlined"
-              label="Link"
-              name="link"
-              value={values.link}
+              label="Abstract"
+              name="abstract"
+              value={values.abstract}
               onChange={handleChange}
-              error={errors.link}
+              error={errors.abstract}
+            />
+            <TextInput
+              variant="outlined"
+              label="Body"
+              name="body"
+              value={values.body}
+              onChange={handleChange}
+              error={errors.body}
             />
           </Grid>
         </Grid>
