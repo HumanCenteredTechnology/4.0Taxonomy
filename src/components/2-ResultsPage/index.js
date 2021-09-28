@@ -36,9 +36,7 @@ const ResultsPage = () => {
         component={RouterLink}
         to="/form"
       />
-
-      <TopicsList />
-
+      {found ? <TopicsList results={results} /> : <></>}
       <SearchBar setSearchMention={setSearchMention} />
       <h1>Results</h1>
       {found ? <ResultsList results={results} /> : <NotFound />}
@@ -52,9 +50,9 @@ const ResultsList = ({ results }) => {
   return (
     <>
       <section className="resultsList">
-        {results.results.map((result) => {
+        {results.related_elements.map((r_el) => {
           return (
-            <Result key={result.mention} {...result} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
       </section>
@@ -63,13 +61,18 @@ const ResultsList = ({ results }) => {
   );
 };
 
-const TopicsList = ({ topics }) => {
+const TopicsList = ({ results }) => {
   return (
     <div>
-      <TopicChip
-        name="Problems" /*  topics[].category */
-        label="Predictive maintenance" /* topics[].name*/
-      />
+      {results.topics.map((topic) => {
+        return (
+          <TopicChip
+            key={topic[0]}
+            label={topic[0]}
+            name={topic[1]}
+          />
+        )
+      })}
     </div>
   )
 }

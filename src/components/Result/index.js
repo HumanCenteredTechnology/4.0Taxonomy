@@ -1,12 +1,12 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 
-const Result = ({ mention, category, link }) => {
+const Result = ({ name, parent, links }) => {
   return (
     <article className="result">
-      <h3>{mention}</h3>
-      <p>{category}</p>
-      <p>{link}</p>
+      <h3>{name}</h3>
+      <p>{parent}</p>
+      <p>{links}</p>
 
       <ViewResultButton />
     </article>

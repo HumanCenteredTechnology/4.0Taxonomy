@@ -11,7 +11,22 @@ const apiSettings = {
       },
       body: JSON.stringify(searchMention),  //
     });
-    const data = await results.json();
+    //const data = await results.json();
+    const data =
+    {
+      "topics":
+        [
+          ["Amazon Web Services", "Technology", "Link Wikipedia"],
+          ["Predictive Maintenance", "Problems", "Link Wikipedia"]
+        ],
+      "related_elements":
+        [
+          ["Smart warehouse", "Supply Chain", ["Link to Article", "Link to Article"]],
+          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
+        ]
+    }
+    JSON.parse(JSON.stringify(data))
+    console.log(data)
     return data;
   },
   submitArticle: async (article) => {   //invia un articolo

@@ -3,7 +3,8 @@ import API from "../API.js";
 
 
 const initialState = {
-  results: [],
+  topics: [],
+  related_elements: []
 };
 
 export const useFetch = (queryId) => {
@@ -13,7 +14,6 @@ export const useFetch = (queryId) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
-  //const hasInput = useRef(false);
 
   useEffect(() => {
     const fetch = async () => {
@@ -24,10 +24,11 @@ export const useFetch = (queryId) => {
         const fetchResults = await API.fetchResults(queryId);
 
         setResults(() => ({
-          results: [...fetchResults],
+          topics: [...fetchResults.topics],
+          related_elements: [...fetchResults.related_elements]
         }));
 
-
+        console.log(results)
         if (results !== initialState.results) {
           setFound(true)
           console.log("not found")
@@ -44,7 +45,7 @@ export const useFetch = (queryId) => {
     fetch()
 
 
-    console.log(results)
+
   }, [queryId])
 
 
