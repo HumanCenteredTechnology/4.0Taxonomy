@@ -15,7 +15,7 @@ import { Container, Pagination } from "@material-ui/core";
 import "./HomePage.css";
 
 const HomePage = () => {
-  const { results, setSearchMention } = useFetch();
+  const { setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
   const [menuOpened, setMenuOpened] = useState(null);
   const handleCloseMenu = () => {
@@ -42,7 +42,7 @@ const HomePage = () => {
         <SearchBar setSearchMention={setSearchMention} />
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
-      <ResultsPage results={results} />
+      {/* <ResultsPage results={results} /> */}
     </>
   );
 };

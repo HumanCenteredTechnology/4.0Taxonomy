@@ -5,40 +5,39 @@ const initialState = {
   results: [],
 };
 
-export const useFetch = () => {
+export const useFetch = (queryId) => {
   //per il fetch riceve la searchMention come stato da SearchBar
   const [searchMention, setSearchMention] = useState("");
-  const [results, setResults] = useState(initialState);
+  const [results, setResults] = useState({ initialState }); //da levare initialState
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [found, setFound] = useState(false)
   //const hasInput = useRef(false);
 
-  const fetch = async (searchMention = "") => {
-    try {
-      setError(false);
-      setLoading(true);
-      const fetchResults = await API.fetchResults(searchMention);
-
-      setResults(() => ({
-        results: [...fetchResults],
-      }));
-    } catch (error) {
-      setError(true);
-      console.log(error);
-    }
-    setLoading(false);
-  };
   useEffect(() => {
-    setResults(initialState);
-    console.log("Fetching results for " + searchMention);
-    fetch(searchMention);
-  }, [searchMention]);
+    const fetch = async () => {
+      try {
+        setError(false);
+        setLoading(true);
+        setFound(false)
+        const fetchResults = await API.fetchResults(queryId);
 
-  //only for testing
-  useEffect(() => {
-    console.log("Done");
-    console.log(results);
-  }, [results]);
+        setResults(() => ({
+          results: [...fetchResults],
+        }));
+        console.log(results)
 
-  return { results, loading, error, searchMention, setSearchMention };
+        if (results !== initialState.results) {
+          setFound(true)
+        }
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetch()
+  }, [queryId])
+
+  return { results, loading, error, searchMention, setSearchMention, found };
 };

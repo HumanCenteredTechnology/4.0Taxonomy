@@ -32,8 +32,8 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/result/:queryId" element={<ResultsPage />} />
-          <Route path="/*" element={<NotFound default />} />
+          <Route path="/:queryId" element={<ResultsPage />} />
+          {/* <Route path="/*" element={<NotFound default />} /> */}
           <Route path="/form" element={<FormPage />} />
         </Routes>
       </Router>
@@ -42,3 +42,6 @@ const App = () => {
 };
 
 export default App;
+
+//per come funziona il sito forse NotFound deve essere gestito in ResultsPage (cioè dopo che ha una query
+//e restituisce un oggetto vuoto, fa comparire non trovato)
