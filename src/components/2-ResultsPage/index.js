@@ -4,13 +4,15 @@ import { useParams, Link as RouterLink } from "react-router-dom";
 import SearchBar from "../SearchBar";
 import Result from "../Result";
 import StandardButton from "../controls/StandardButton/";
-
+import NotFound from "../NotFound";
+import TopicChip from "../TopicChip";
 //hooks
 import { useFetch } from "../../hooks/useFetch";
 
 //Style
 import "./ResultsPage.css";
-import NotFound from "../NotFound";
+//import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
+
 
 const ResultsPage = () => {
 
@@ -23,12 +25,6 @@ const ResultsPage = () => {
 
 
 
-  if (found) {
-    displayResults = <ResultsList results={results} />
-
-  } else {
-    displayResults = <NotFound />
-  }
   return (
 
     <>
@@ -40,9 +36,11 @@ const ResultsPage = () => {
         component={RouterLink}
         to="/form"
       />
+
+      <TopicsList />
+
       <SearchBar setSearchMention={setSearchMention} />
       <h1>Results</h1>
-      {/* {displayResults} */}
       {found ? <ResultsList results={results} /> : <NotFound />}
     </>
   );
@@ -64,5 +62,16 @@ const ResultsList = ({ results }) => {
 
   );
 };
+
+const TopicsList = ({ topics }) => {
+  return (
+    <div>
+      <TopicChip
+        name="Problems" /*  topics[].category */
+        label="Predictive maintenance" /* topics[].name*/
+      />
+    </div>
+  )
+}
 
 export default ResultsPage;

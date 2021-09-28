@@ -2,6 +2,7 @@ const API_URL = "http://localhost:5000/";
 //
 const apiSettings = {
   fetchResults: async (searchMention) => {
+    //dovrà inviare solo la stringa searchMention e non un json
     const results = await fetch(`${API_URL}`, {
       //mode: "no-cors", //c'è bisogno di fare il controllo del ritorno (result.json())
       method: "POST",

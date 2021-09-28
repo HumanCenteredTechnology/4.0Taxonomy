@@ -21,6 +21,7 @@ const theme = createTheme({
     background: "#757ce8",
   },
   palette: {
+    secondary: { main: "#2d7e32" },
     background: { paper: "#ffff" },
   },
 });
