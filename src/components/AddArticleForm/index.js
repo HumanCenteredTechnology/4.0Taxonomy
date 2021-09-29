@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-import API from "../../API.js";
+
 
 //Components
 import StandardButton from "../controls/StandardButton";
 import TextInput from "../controls/TextInput";
+import VerifySubmit from "../VerifySubmit";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 //Styles
-import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box } from "@material-ui/core";
+import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box, Modal } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,22 +22,24 @@ const useStyles = makeStyles((theme) => ({
 
 
 const AddArticleForm = () => {
-  const { values, errors, handleChange, handleReset, submit } = useForm();
+  const { values, errors, handleChange, handleReset, submit, response } = useForm();
   const classes = useStyles();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     submit();
-
+    handleOpen()
   };
 
-
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
       <CardHeader
         title="Submit an article"
-        subheader="Complete the form"
+        subheader="Complete the form and submit your article"
       />
       <CardContent>
         <Grid container spacing={1}>
@@ -84,6 +87,16 @@ const AddArticleForm = () => {
           onClick={handleReset}
         />
       </CardActions>
+
+      {response.verified_entities ?
+        <Modal
+          open={open}
+          onClose={handleClose}
+        >
+          <VerifySubmit response={response} handleClose={handleClose} />
+        </Modal>
+        : <> </>
+      /* la condizione così fa schifo, deve essere scritta meglio*/}
     </form>
   );
 };

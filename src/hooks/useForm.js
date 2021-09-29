@@ -9,6 +9,8 @@ const initialValues = {
 export const useForm = () => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
+  const [response, setResponse] = useState({})
+  const [loaded, setLoaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +34,14 @@ export const useForm = () => {
     return Object.values(temp).every((x) => x === "");
   };
 
-  const submit = () => {
+  const submit = async () => {
+    setLoaded(false)
     if (validate()) {
       console.log("submitting...");
-      API.submitArticle(values);
+      setResponse(await API.submitArticle(values));
+      setLoaded(true)
     }
   }
 
-  return { values, setValues, errors, setErrors, handleChange, handleReset, validate, submit };
+  return { values, setValues, errors, setErrors, handleChange, handleReset, validate, submit, response, loaded };
 };

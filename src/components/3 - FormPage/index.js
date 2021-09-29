@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Card, Container, makeStyles } from "@material-ui/core";
-
+//Hooks
+import { useForm } from "../../hooks/useForm";
+//Components
 import AddArticleForm from "../AddArticleForm";
 import StandardButton from "../controls/StandardButton";
-import VerifySubmit from "../VerifySubmit";
+
+
+
 const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(8),
@@ -14,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 
 const FormPage = () => {
   const classes = useStyles();
-
   return (
     <Container>
       <StandardButton
@@ -29,7 +32,7 @@ const FormPage = () => {
       <Card className={classes.pageContent} sx={{ width: "50%" }}>
         <AddArticleForm />
       </Card>
-      <VerifySubmit />
+
     </ Container>
   );
 };
