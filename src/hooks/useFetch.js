@@ -21,10 +21,9 @@ export const useFetch = (queryId) => {
         setError(false);
         setLoading(true);
         setFound(false)
-        const formData = new FormData()
-        formData.append('search-input', queryId)
+
         //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
-        const fetchResults = await API.fetchResults(formData);
+        const fetchResults = await API.fetchResults(queryId);
 
 
         setResults(() => ({
