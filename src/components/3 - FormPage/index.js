@@ -29,7 +29,7 @@ const FormPage = () => {
       <Card className={classes.pageContent} sx={{ width: "50%" }}>
         <AddArticleForm />
       </Card>
-      {/* <VerifySubmit /> */}
+      <VerifySubmit />
     </ Container>
   );
 };
