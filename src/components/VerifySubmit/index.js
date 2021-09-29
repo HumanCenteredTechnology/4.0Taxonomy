@@ -4,6 +4,7 @@ import TopicChip from '../TopicChip'
 import StandardButton from '../controls/StandardButton'
 
 
+
 const entities = {
     "verified_entities":
         [
@@ -24,10 +25,11 @@ const VerifySubmit = () => {
     const [unvEnt, setUnvEnt] = useState(entities.unverified_entities)
 
     return (
-        <Box sx={{
+        <Paper sx={{
             p: 4,
             m: 5,
         }}>
+
             <p>Found in the taxonomy</p>
             <Box sx={{ my: 2 }}>
                 <Grid container
@@ -71,7 +73,7 @@ const VerifySubmit = () => {
                 text="Confirm"
             />
 
-        </ Box>
+        </ Paper>
     )
 }
 

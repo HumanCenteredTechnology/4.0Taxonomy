@@ -1,22 +1,32 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+import TopicChip from "../TopicChip";
+import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
 
-const Result = ({ mention, category, link }) => {
+const Result = ({ name, parent, category, links }) => {
   return (
-    <article className="result">
-      <h3>{mention}</h3>
-      <p>{category}</p>
-      <p>{link}</p>
+    <Card sx={{ maxWidth: 300 }}>
+      <CardHeader title={name} subheader={category + " / " + parent} />
+      <CardContent>
+        <p>{links}</p>
+
+        {/*         <TopicChip
+          label={parent}
+          name={category}
+          variant="outlined"
+          size="small"
+        /> */}
+      </CardContent>
 
       <ViewResultButton />
-    </article>
+    </Card>
   );
 };
 
 const ViewResultButton = () => {
   return (
     <div className="buttonContainer">
-      <Button href="#text-buttons" color="black">
+      <Button href="#text-buttons">
         View
       </Button>
     </div>

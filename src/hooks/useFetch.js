@@ -1,44 +1,56 @@
 import { useState, useEffect } from "react";
 import API from "../API.js";
 
+
 const initialState = {
-  results: [],
+  topics: [],
+  related_elements: []
 };
 
-export const useFetch = () => {
+export const useFetch = (queryId) => {
   //per il fetch riceve la searchMention come stato da SearchBar
   const [searchMention, setSearchMention] = useState("");
-  const [results, setResults] = useState(initialState);
+  const [results, setResults] = useState({ initialState });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  //const hasInput = useRef(false);
+  const [found, setFound] = useState(false)
 
-  const fetch = async (searchMention = "") => {
-    try {
-      setError(false);
-      setLoading(true);
-      const fetchResults = await API.fetchResults(searchMention);
-
-      setResults(() => ({
-        results: [...fetchResults],
-      }));
-    } catch (error) {
-      setError(true);
-      console.log(error);
-    }
-    setLoading(false);
-  };
   useEffect(() => {
-    setResults(initialState);
-    console.log("Fetching results for " + searchMention);
-    fetch(searchMention);
-  }, [searchMention]);
+    const fetch = async () => {
+      try {
+        setError(false);
+        setLoading(true);
+        setFound(false)
+        const formData = new FormData()
+        formData.append('search-input', queryId)
+        //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
+        const fetchResults = await API.fetchResults(formData);
 
-  //only for testing
-  useEffect(() => {
-    console.log("Done");
-    console.log(results);
-  }, [results]);
 
-  return { results, loading, error, searchMention, setSearchMention };
+        setResults(() => ({
+          topics: [...fetchResults.topics],
+          related_elements: [...fetchResults.related_elements]
+        }));
+
+        if (results !== initialState.results) {
+          setFound(true)
+          console.log("not found")
+        } else {
+          setFound(false)
+        }
+        if (found === true) console.log("found")    //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetch()
+
+
+
+  }, [queryId])
+
+
+  return { results, loading, error, searchMention, setSearchMention, found };
 };

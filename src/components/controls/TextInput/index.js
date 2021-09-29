@@ -10,6 +10,8 @@ const TextInput = ({ name, label, value, error = null, onChange }) => {
             value={value}
             onChange={onChange}
             {...(error && { error: true, helperText: error })}
+            multiline
+            minRows={(name === "abstract" ? 4 : 0) || (name === "body" ? 6 : 0)}
         />
     );
 }

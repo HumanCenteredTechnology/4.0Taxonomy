@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 import API from "../../API.js";
 //Styles
 import "./SearchBar.css";
 import TextField from "@material-ui/core/TextField";
-import { Box, styled, Grid } from "@material-ui/core";
+import { Box, styled } from "@material-ui/core";
 
 const SearchBox = styled(TextField)(() => ({
   "& fieldset": {
@@ -14,41 +15,40 @@ const SearchBox = styled(TextField)(() => ({
 
 const SearchBar = ({ setSearchMention }) => {
   const [state, setState] = useState("");
+  let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMention(state);
+    navigate("/" + state);
   };
   return (
-    <Grid>
-      <form className="searchBar" onSubmit={handleSubmit}>
-        <Box
+    <form className="searchBar" onSubmit={handleSubmit}>
+      <Box
+        sx={{
+          margin: "auto",
+          width: 500,
+          maxWidth: "100%",
+          bgcolor: "white",
+          borderRadius: 30,
+        }}
+      >
+        <SearchBox
           sx={{
-            margin: "auto",
-            width: 500,
-            maxWidth: "100%",
-            bgcolor: "white",
-            borderRadius: 30,
+            borderRadius: 40,
           }}
-        >
-          <SearchBox
-            sx={{
-              borderRadius: 40,
-            }}
-            fullWidth
-            className="input"
-            name="search-input"
-            id="outlined-basic"
-            //label="Search"
-            placeholder="Search a tech or need"
-            value={state}
-            variant="outlined"
-            onChange={(e) => setState(e.currentTarget.value)}
-          />
+          fullWidth
+          className="input"
+          name="search-input"
+          id="outlined-basic"
+          //label="Search"
+          placeholder="Search a tech or need"
+          value={state}
+          variant="outlined"
+          onChange={(e) => setState(e.currentTarget.value)}
+        />
 
-        </Box>
-      </form>
-    </Grid>
-
+      </Box>
+    </form>
   );
 };
 

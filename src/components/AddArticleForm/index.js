@@ -7,7 +7,7 @@ import TextInput from "../controls/TextInput";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 //Styles
-import { CardActions, CardContent, CardHeader, Grid, makeStyles, TextField } from "@material-ui/core";
+import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,40 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues = {
-  title: "",
-  link: "",
-};
+
 
 const AddArticleForm = () => {
-  const { values, setValues, errors, setErrors, handleChange } =
-    useForm(initialValues);
-
+  const { values, errors, handleChange, handleReset, submit } = useForm();
   const classes = useStyles();
-
-  const validate = () => {
-    let temp = {};
-    temp.title = values.title ? "" : "Please enter a title";
-
-    temp.link = values.link ? "" : "Please enter a valid link";
-    setErrors({ ...temp });
-
-    return Object.values(temp).every((x) => x === "");
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    submit();
 
-    if (validate()) {
-      API.submitArticle(values);
-      console.log("submitting...");
-    }
   };
 
-  const handleReset = () => {
-    setErrors({});
-    setValues(initialValues);
-  }
+
 
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
@@ -60,26 +39,38 @@ const AddArticleForm = () => {
         subheader="Complete the form"
       />
       <CardContent>
-        <Grid container spacing={3} >
-          <Grid item md={6} xs={10} xl={3}>
-            <TextInput
-              variant="outlined"
-              label="Title"
-              name="title"
-              value={values.title}
-              onChange={handleChange}
-              error={errors.title}
-            />
-            <TextInput
-              variant="outlined"
-              label="Link"
-              name="link"
-              value={values.link}
-              onChange={handleChange}
-              error={errors.link}
-            />
+        <Grid container spacing={1}>
+          <Grid  >
+            <Grid item md={5} xs={10} xl={4}>
+              <TextInput
+                variant="outlined"
+                label="Title"
+                name="title"
+                value={values.title}
+                onChange={handleChange}
+                error={errors.title}
+              />
+              <TextInput
+                variant="outlined"
+                label="Abstract"
+                name="abstract"
+                value={values.abstract}
+                onChange={handleChange}
+                error={errors.abstract}
+              />
+              <TextInput
+                variant="outlined"
+                label="Body"
+                name="body"
+                value={values.body}
+                onChange={handleChange}
+                error={errors.body}
+              />
+            </Grid>
           </Grid>
+          <Box sx={{ width: "200", height: "200", bgcolor: "primary" }}></Box>
         </Grid>
+
       </CardContent>
       <CardActions>
         <StandardButton
