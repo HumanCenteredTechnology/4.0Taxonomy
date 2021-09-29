@@ -1,17 +1,29 @@
 const API_URL = "http://localhost:5000/";
 //
+
+const defaultSettings = {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+}
+
 const apiSettings = {
   fetchResults: async (searchMention) => {
     //dovrà inviare solo la stringa searchMention e non un json
     const results = await fetch(`${API_URL}`, {
       //mode: "no-cors", //c'è bisogno di fare il controllo del ritorno (result.json())
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      ...defaultSettings,
       body: JSON.stringify(searchMention),  //
     });
+    /* if (results.ok) {   //se riceve risposta dalle api
+      console.log("received")
+    } else {
+      console.log("not received")
+    } */
     //const data = await results.json();
+    const res = await results.json()
+    console.log(res)
     const data =
     {
       "topics":
