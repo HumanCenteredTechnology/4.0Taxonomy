@@ -21,14 +21,17 @@ export const useFetch = (queryId) => {
         setError(false);
         setLoading(true);
         setFound(false)
-        const fetchResults = await API.fetchResults(queryId);
+        const formData = new FormData()
+        formData.append('search-input', queryId)
+        //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
+        const fetchResults = await API.fetchResults(formData);
+
 
         setResults(() => ({
           topics: [...fetchResults.topics],
           related_elements: [...fetchResults.related_elements]
         }));
 
-        console.log(results)
         if (results !== initialState.results) {
           setFound(true)
           console.log("not found")

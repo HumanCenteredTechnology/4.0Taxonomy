@@ -78,6 +78,7 @@ const TopicsList = ({ results }) => {
             key={topic[0]}
             label={topic[0]}
             name={topic[1]}
+            clickable={true}
           />
         )
       })}
