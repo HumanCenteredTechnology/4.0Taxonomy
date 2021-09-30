@@ -45,9 +45,6 @@ export const useFetch = (queryId) => {
       setLoading(false);
     };
     fetch()
-
-
-
   }, [queryId])
 
 
