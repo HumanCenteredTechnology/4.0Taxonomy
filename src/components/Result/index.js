@@ -22,7 +22,7 @@ const Result = ({ name, parent, category, links }) => {
       <CardContent>
         {links.map((link, i)=>{
           return (
-            <Link href={link} underline="none"> Link {i} {bull} </Link>
+            <Link key={i} href={link} underline="none"> Link {i} {bull} </Link>
           )
         })}
         {/* <p>{links}</p> */}

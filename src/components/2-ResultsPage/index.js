@@ -39,7 +39,7 @@ const ResultsPage = () => {
       <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
       <Divider variant="middle" />
       <Box sx={{ marginTop: 10, marginX: 5 }}>
-        {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
+        {found ? <><p>topics suggested</p> <TopicsList results={results } /></>   : <></>}
       </Box>
       {found ? <ResultsList results={results} /> : <NotFound />}
     </Container>
@@ -52,9 +52,9 @@ const ResultsList = ({ results }) => {
   return (
     <>
       <section className="resultsList">
-        {results.related_elements.map((r_el) => {
+        {results.related_elements.map((r_el, i) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
       </section>
@@ -76,7 +76,7 @@ const TopicsList = ({ results }) => {
           return (
             <Grid item key={i}>
               <TopicChip
-                key={topic[0]}
+                key={i}
                 label={topic[0]}
                 name={topic[1]}
                 clickable={true}

@@ -23,10 +23,9 @@ export const useFetch = (queryId) => {
         setLoading(true);
         setFound(false)
 
-        //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
         const fetchResults = await API.fetchResults(queryId);
 
-        if (fetchResults.length === 0 ) {
+        if (fetchResults.related_elements.length === 0 ) {
           setFound(false)
           console.log("not found")
         } else {
@@ -37,7 +36,7 @@ export const useFetch = (queryId) => {
           setFound(true)
         }
         
-        if (found === true) console.log("found")    //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
+           //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
       } catch (error) {
         setError(true);
         console.log(error);
