@@ -45,7 +45,7 @@ const VerifySubmit = ({ response, handleClose }) => {
         <p>Found in the taxonomy</p>
             <Box sx={{ my: 2 }}>
                 <Grid container
-                    columnSpacing={{ xs: 1, md: 0 }}
+                    columnSpacing={{ xs: 0.5, md: 0 }}
                     rowSpacing={{ xs: 1, md: 1 }}
                     columns={{ xs: 4, sm: 8, md: 12 }}
                     justifyContent="flex-start"
@@ -55,8 +55,9 @@ const VerifySubmit = ({ response, handleClose }) => {
                             <Grid item key={index} >
                                 <TopicChip
                                     label={fEl[0]}
-                                    name={fEl[2]}
+                                    name={fEl[1]}
                                     clickable={false}
+                                    size="small"
                                 />
                             </Grid>
                         )
