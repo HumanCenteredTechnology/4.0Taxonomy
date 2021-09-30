@@ -88,7 +88,7 @@ const AddArticleForm = () => {
         />
       </CardActions>
 
-      {response.verified_entities ?
+      {response.found_elements ?
         <Modal
           open={open}
           onClose={handleClose}

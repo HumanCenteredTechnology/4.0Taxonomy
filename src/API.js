@@ -46,14 +46,12 @@ const apiSettings = {
     //invia il form
     /* const response = await fetch(`${API_URL}add_article`, {
       method: "POST",
-      title: formData.title,
-      abstract: formData.abstract,
-      body: formData.body
+      body: formData
     }); */
 
     //JSON.parse(JSON.stringify(resp))
     const response = {
-      "verified_entities":
+      "found_elements":
         [
           ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]],
@@ -61,13 +59,12 @@ const apiSettings = {
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
 
         ],
-      "unverified_entities":
+      "not_found_elements":
         [
           ["Computer", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
     }
-
 
     return response
 

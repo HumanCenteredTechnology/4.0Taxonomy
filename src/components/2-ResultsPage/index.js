@@ -22,12 +22,7 @@ const ResultsPage = () => {
 
   const { results, loading, setSearchMention, found } = useFetch(queryId);
 
-  let displayResults
-
-
-
   return (
-
     <Container >
       <StandardButton
         variant="outlined"
