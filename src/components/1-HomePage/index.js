@@ -12,7 +12,7 @@ import Menu from "../Menu";
 import { useFetch } from "../../hooks/useFetch";
 //Styles
 import { Container, Pagination } from "@material-ui/core";
-import "./HomePage.css";
+
 
 const HomePage = () => {
   const { setSearchMention } = useFetch();
@@ -27,7 +27,7 @@ const HomePage = () => {
   };
 
   return (
-    <>
+    <Container>
       <StandardButton
         variant="outlined"
         text="Add Article"
@@ -42,7 +42,7 @@ const HomePage = () => {
         <ViewMenuButton onClick={handleOpenMenuClick} />
       </Container>
       {/* <ResultsPage results={results} /> */}
-    </>
+    </Container>
   );
 };
 

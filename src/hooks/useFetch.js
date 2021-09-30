@@ -3,8 +3,9 @@ import API from "../API.js";
 
 
 const initialState = {
+  
+  related_elements: [],
   topics: [],
-  related_elements: []
 };
 
 export const useFetch = (queryId) => {
@@ -25,18 +26,17 @@ export const useFetch = (queryId) => {
         //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
         const fetchResults = await API.fetchResults(queryId);
 
-
-        setResults(() => ({
-          topics: [...fetchResults.topics],
-          related_elements: [...fetchResults.related_elements]
-        }));
-
-        if (results !== initialState.results) {
-          setFound(true)
+        if (fetchResults.length === 0 ) {
+          setFound(false)
           console.log("not found")
         } else {
-          setFound(false)
+          setResults(() => ({
+            related_elements: [...fetchResults.related_elements],
+            topics: [...fetchResults.topics]
+          }));
+          setFound(true)
         }
+        
         if (found === true) console.log("found")    //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
       } catch (error) {
         setError(true);

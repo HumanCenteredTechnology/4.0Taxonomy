@@ -13,10 +13,11 @@ const apiSettings = {
       method: "POST",
       body: formData
     });
+    
     //const data = await results.json();
-    const res = await results.json()
-    console.log(res)
-    const data =
+    const data = await results.json()
+    
+    /* const data =
     {
       "topics":
         [
@@ -28,7 +29,7 @@ const apiSettings = {
           ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
-    }
+    } */
     JSON.parse(JSON.stringify(data))
     return data;
   },
@@ -42,8 +43,7 @@ const apiSettings = {
     console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
     //invia il form
-    /* const response = await fetch(`${API_URL}`, {
-      path: "/add_article",
+    /* const response = await fetch(`${API_URL}add_article`, {
       method: "POST",
       title: formData.title,
       abstract: formData.abstract,

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import API from "../../API.js";
 //Styles
-import "./SearchBar.css";
+
 import TextField from "@material-ui/core/TextField";
 import { Box, styled } from "@material-ui/core";
 

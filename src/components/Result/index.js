@@ -1,14 +1,20 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
-import { Card, CardHeader, CardContent, CardActions } from "@material-ui/core";
+import { Card, CardHeader, CardContent, CardActions, Link } from "@material-ui/core";
 
 const Result = ({ name, parent, category, links }) => {
+
   return (
     <Card sx={{ maxWidth: 300 }}>
       <CardHeader title={name} subheader={category + " / " + parent} />
       <CardContent>
-        <p>{links}</p>
+        {links.map((link, i)=>{
+          return (
+            <Link href={link} underline="none"> Link {i} </Link>
+          )
+        })}
+        {/* <p>{links}</p> */}
 
         {/*         <TopicChip
           label={parent}

@@ -44,7 +44,7 @@ const ResultsPage = () => {
       <h2>{found ? results.related_elements.length : ""} Results found for "{queryId}"</h2>
       <Divider variant="middle" />
       <Box sx={{ marginTop: 10, marginX: 5 }}>
-        <p>topics</p>
+        <p>topics suggested</p>
         {found ? <TopicsList results={results} /> : <></>}
       </Box>
       {found ? <ResultsList results={results} /> : <NotFound />}
@@ -60,7 +60,7 @@ const ResultsList = ({ results }) => {
       <section className="resultsList">
         {results.related_elements.map((r_el) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[2]} links={r_el[3]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
       </section>
@@ -79,6 +79,7 @@ const TopicsList = ({ results }) => {
             label={topic[0]}
             name={topic[1]}
             clickable={true}
+            link={topic[2]}
           />
         )
       })}

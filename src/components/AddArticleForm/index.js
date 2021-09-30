@@ -44,7 +44,7 @@ const AddArticleForm = () => {
       <CardContent>
         <Grid container spacing={1}>
           <Grid  >
-            <Grid item md={5} xs={10} xl={4}>
+            <Grid item md={10} lg={10} xs={10} xl={8}>
               <TextInput
                 variant="outlined"
                 label="Title"
@@ -71,7 +71,7 @@ const AddArticleForm = () => {
               />
             </Grid>
           </Grid>
-          <Box sx={{ width: "200", height: "200", bgcolor: "primary" }}></Box>
+          {/* <Box sx={{ width: "200", height: "200", bgcolor: "primary" }}></Box> */}
         </Grid>
 
       </CardContent>

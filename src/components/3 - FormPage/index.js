@@ -11,8 +11,19 @@ import StandardButton from "../controls/StandardButton";
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
-    margin: theme.spacing(8),
-    padding: theme.spacing(1),
+    [theme.breakpoints.up('md')]:{
+      margin: theme.spacing(16),
+      padding: theme.spacing(1),
+    },
+    [theme.breakpoints.between('sm', 'md')]:{
+      margin: theme.spacing(8),
+      padding: theme.spacing(1),
+    },
+    [theme.breakpoints.between('xs','sm')]:{
+      margin: theme.spacing(0),
+      padding: theme.spacing(1),
+    }
+   
   },
 }));
 
