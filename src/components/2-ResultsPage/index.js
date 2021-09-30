@@ -11,7 +11,7 @@ import { useFetch } from "../../hooks/useFetch";
 
 //Style
 import "./ResultsPage.css";
-import { Container, Box, Divider } from "@material-ui/core";
+import { Container, Box, Divider, Grid } from "@material-ui/core";
 //import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
 
@@ -41,11 +41,10 @@ const ResultsPage = () => {
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
 
-      <h2>{found ? results.related_elements.length : ""} Results found for "{queryId}"</h2>
+      <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
       <Divider variant="middle" />
       <Box sx={{ marginTop: 10, marginX: 5 }}>
-        <p>topics suggested</p>
-        {found ? <TopicsList results={results} /> : <></>}
+        {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
       </Box>
       {found ? <ResultsList results={results} /> : <NotFound />}
     </Container>
@@ -71,19 +70,28 @@ const ResultsList = ({ results }) => {
 
 const TopicsList = ({ results }) => {
   return (
-    <div>
-      {results.topics.map((topic) => {
-        return (
-          <TopicChip
-            key={topic[0]}
-            label={topic[0]}
-            name={topic[1]}
-            clickable={true}
-            link={topic[2]}
-          />
-        )
-      })}
-    </div>
+    <Box sx={{ my: 2 }}>
+      <Grid container
+        columnSpacing={{ xs: 0, md: 2 }}
+        rowSpacing={{ xs: 2, md: 2 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        justifyContent="flex-start"
+        direction="row">
+        {results.topics.map((topic, i) => {
+          return (
+            <Grid item key={i}>
+              <TopicChip
+                key={topic[0]}
+                label={topic[0]}
+                name={topic[1]}
+                clickable={true}
+                link={topic[2]}
+              />
+            </Grid>
+          )
+        })}
+      </Grid>
+    </Box>
   )
 }
 
