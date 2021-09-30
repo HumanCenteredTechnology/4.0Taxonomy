@@ -44,13 +44,14 @@ const apiSettings = {
     console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
     //invia il form
-    /* const response = await fetch(`${API_URL}add_article`, {
+    const resp = await(await fetch(`${API_URL}add_article`, {
       method: "POST",
       body: formData
-    }); */
-
+    })).json();
+    //const data = await resp.json()
+    console.log(await resp)
     //JSON.parse(JSON.stringify(resp))
-    const response = {
+    /* const response = {
       "found_elements":
         [
           ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
@@ -64,9 +65,9 @@ const apiSettings = {
           ["Computer", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
-    }
+    } */
 
-    return response
+    return resp
 
   }
 };

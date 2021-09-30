@@ -8,7 +8,7 @@ import VerifySubmit from "../VerifySubmit";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 //Styles
-import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box, Modal } from "@material-ui/core";
+import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box, Modal, Dialog } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -87,14 +87,19 @@ const AddArticleForm = () => {
           onClick={handleReset}
         />
       </CardActions>
+      
 
-      {response.found_elements ?
-        <Modal
-          open={open}
-          onClose={handleClose}
-        >
-          <VerifySubmit response={response} handleClose={handleClose} />
-        </Modal>
+      {response.founded_elements ?
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        scroll="body"
+      >
+        <VerifySubmit response={response} handleClose={handleClose} />
+
+
+      </Dialog>
+        
         : <> </>
       /* la condizione così fa schifo, deve essere scritta meglio*/}
     </form>
