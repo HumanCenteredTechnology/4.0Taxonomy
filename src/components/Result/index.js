@@ -1,53 +1,53 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
-import { Card, CardHeader, CardContent, CardActions, Link, Box, Divider, Grid } from "@material-ui/core";
+import { Card, CardHeader, CardContent, CardActions, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
 
 
+const topic = [["Data Science", "Technology"], ["Smart PPE", "Problems"]]
 
 const Result = ({ name, parent, category, articles }) => {
 
   return (
-    <Card sx={{ maxWidth: 500 }}>
-      <CardHeader title={name} subheader={category + " / " + parent} />
+    <Card>
+      <Typography sx={{ fontSize: 14 }} color="textSecondary" gutterBottom>
+        {parent}
+      </Typography>
+      <CardHeader title={name} />
       <Divider variant="middle" />
       <CardContent>
         <Grid container spacing={1}>
-          <Grid item >
-            <p>Resources</p>
-            <Box padding={1} overflow="hidden" textOverflow="ellipsis">
-              <ul>
-                {articles.map((article, i) => {
-                  return (
-                    <li> <Link key={i} href={article[1]} underline="none"> {article[0]} </Link> </li>
-                  )
-                })}
-              </ul>
-            </Box>
+          <Grid item xs={6}>
+            <Typography variant="body1" >Resources:</Typography>
+            <Resources articles={articles} />
           </Grid>
-          <Divider orientation="vertical" flexItem />
-          <Grid item>
-            <p>Related technologies</p>
+          <Grid item xs={1}>
+            <Divider orientation="vertical" />
+          </Grid>
+          <Grid item xs={5}>
+            <Typography variant="body1" >Related technologies</Typography>
             <Box sx={{ my: 2 }}>
               <Grid container
-                columnSpacing={{ xs: 0, md: 2 }}
-                rowSpacing={{ xs: 2, md: 2 }}
-                columns={{ xs: 4, sm: 8, md: 12 }}
-                justifyContent="flex-start"
+                spacing={1}
+                columnspacing={{ xs: 1 }}
+                rowspacing={{ xs: 1 }}
+                columns={{ xs: 1 }}
+                justifycontent="flex-start"
                 direction="row">
-                {/* {articles.topics.map((topic, i) => {
+                {topic.map((topic, i) => {
                   return (
-                    <Grid item key={i}>
+                    <Grid item key={topic + i}>
                       <TopicChip
                         key={i}
                         label={topic[0]}
                         name={topic[1]}
                         clickable={true}
                         link={topic[2]}
+                        size={"small"}
                       />
                     </Grid>
                   )
-                })} */}
+                })}
               </Grid>
             </Box>
           </Grid>
@@ -63,6 +63,73 @@ const Result = ({ name, parent, category, articles }) => {
     </Card>
   );
 };
+
+const Resources = ({ articles }) => {
+  const [isLong, setIsLong] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+
+  const handleShowMore = () => {
+    if (showMore === true)
+      setShowMore(false);
+    else setShowMore(true);
+
+  }
+
+  useEffect(() => {
+    if (articles.length > 4) {
+      setIsLong(true)
+    } else {
+      setIsLong(false)
+    }
+  }, [articles])
+  return (
+    <Box component="div" >
+      <List>
+        {isLong ?
+          <> {
+            articles.slice(0, 4)
+              .map((article, i) => {
+                return (
+                  <ListItemText  > <Link key={article + i} href={article[1]} >
+                    <Typography variant="body2" noWrap >
+                      {article[0]}
+                    </Typography>
+                  </Link> </ListItemText>
+                )
+              })
+          }</> : <>
+            {
+              articles.map((article, i) => {
+                return (
+                  <ListItemText > <Link key={article + i} href={article[1]} >
+                    <Typography variant="body2" noWrap>
+                      {article[0]}
+                    </Typography>
+                  </Link> </ListItemText>
+                )
+              })
+            } </>}
+        {showMore ? <>
+          {
+            articles.slice(4)
+              .map((article, i) => {
+                return (
+                  <ListItemText > <Link key={article + i} href={article[1]} >
+                    <Typography variant="body2" noWrap>
+                      {article[0]}
+                    </Typography>
+                  </Link> </ListItemText>
+                )
+              })
+          }
+        </> : <></>}
+      </List>
+      {isLong ? <Button variant="text" onClick={handleShowMore}>Show more</Button> : <> </>}
+
+
+    </Box>
+  )
+}
 
 const ViewResultButton = () => {
   return (

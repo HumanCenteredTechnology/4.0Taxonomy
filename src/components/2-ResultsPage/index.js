@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 //Components
 import SearchBar from "../SearchBar";
@@ -10,8 +10,8 @@ import TopicChip from "../TopicChip";
 import { useFetch } from "../../hooks/useFetch";
 
 //Style
-import "./ResultsPage.css";
-import { Container, Box, Divider, Grid } from "@material-ui/core";
+//import "./ResultsPage.css";
+import { Container, Box, Divider, Grid, Typography } from "@material-ui/core";
 //import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
 
@@ -24,7 +24,7 @@ const ResultsPage = () => {
   const { results, loading, setSearchMention, found } = useFetch(queryId);
 
   return (
-    <Container >
+    <Container  >
       <StandardButton
         variant="outlined"
         text="Add Article"
@@ -38,7 +38,9 @@ const ResultsPage = () => {
       </Box>
 
       <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
-      <Divider variant="middle" />
+      <Box sx={{ marginY: 5 }}>
+        <Divider margin={2} variant="middle" />
+      </Box>
 
       {found ? <ResultsList results={results} /> : <NotFound />}
       <Box sx={{ marginTop: 10, marginX: 5 }}>
@@ -53,16 +55,39 @@ const ResultsPage = () => {
 
 const ResultsList = ({ results }) => {
   return (
-    <>
-      <section className="resultsList">
+    <Grid container spacing={3}>
+      <Grid item xs={6}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          p: 1,
+          m: 2,
+        }}>
+          <Typography variant="h4" >Needs</Typography>
+        </Box>
+
         {results.related_elements.map((r_el, i) => {
           return (
-            <Result key={i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={r_el + i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
-      </section>
-    </>
-
+      </Grid>
+      <Grid item xs={6}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          p: 1,
+          m: 2,
+        }}>
+          <Typography variant="h4" >Technologies</Typography>
+        </Box>
+        {results.related_elements.map((r_el, i) => {
+          return (
+            <Result key={r_el + i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+          );
+        })}
+      </Grid>
+    </Grid>
   );
 };
 
@@ -70,14 +95,15 @@ const TopicsList = ({ results }) => {
   return (
     <Box sx={{ my: 2 }}>
       <Grid container
-        columnSpacing={{ xs: 0, md: 2 }}
-        rowSpacing={{ xs: 2, md: 2 }}
+        spacing={1}
+        columnspacing={{ xs: 0, md: 2 }}
+        rowspacing={{ xs: 2, md: 2 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
-        justifyContent="flex-start"
+        justifycontent="flex-start"
         direction="row">
         {results.topics.map((topic, i) => {
           return (
-            <Grid item key={i}>
+            <Grid item key={topic + i}>
               <TopicChip
                 key={i}
                 label={topic[0]}
