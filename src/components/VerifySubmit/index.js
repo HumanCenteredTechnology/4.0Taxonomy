@@ -40,61 +40,61 @@ const VerifySubmit = ({ response, handleClose }) => {
     }
     return (
         <>
-        <DialogTitle>Confirm submission</DialogTitle>
-        <DialogContent>
-        <p>Found in the taxonomy</p>
-            <Box sx={{ my: 2 }}>
-                <Grid container
-                    columnSpacing={{ xs: 0.5, md: 0 }}
-                    rowSpacing={{ xs: 1, md: 1 }}
-                    columns={{ xs: 4, sm: 8, md: 12 }}
-                    justifyContent="flex-start"
-                    direction="row">
-                    {foundElements.map((fEl, index) => {
-                        return (
-                            <Grid item key={index} >
-                                <TopicChip
-                                    label={fEl[0]}
-                                    name={fEl[1]}
-                                    clickable={false}
-                                    size="small"
-                                />
-                            </Grid>
-                        )
-                    })}
-                </Grid>
-            </Box>
-            <Box sx={{ my: 4 }}>
-                <p>Not found in the taxonomy (click to add)</p>
-                <Autocomplete
-                    multiple
-                    id="tags-outlined"
-                    options={notFoundElements}
-                    getOptionLabel={(option) => option}
-                    renderInput={(params) => (
-                        <TextField
-                            {...params}
-                            variant="standard"
-                            label=""
-                            placeholder="Click to add"
-                        />
-                    )}
-                    onChange={handleChange}
+            <DialogTitle>Confirm submission</DialogTitle>
+            <DialogContent>
+                <p>Found in the taxonomy</p>
+                <Box sx={{ my: 2 }}>
+                    <Grid container
+                        columnSpacing={{ xs: 0.5, md: 0 }}
+                        rowSpacing={{ xs: 1, md: 1 }}
+                        columns={{ xs: 4, sm: 8, md: 12 }}
+                        justifyContent="flex-start"
+                        direction="row">
+                        {foundElements.map((fEl, index) => {
+                            return (
+                                <Grid item key={index} >
+                                    <TopicChip
+                                        label={fEl[0]}
+                                        name={fEl[1]}
+                                        clickable={false}
+                                        size="small"
+                                    />
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Box>
+                <Box sx={{ my: 4 }}>
+                    <p>Not found in the taxonomy (click to add)</p>
+                    <Autocomplete
+                        multiple
+                        id="tags-outlined"
+                        options={notFoundElements}
+                        getOptionLabel={(option) => option}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                label=""
+                                placeholder="Click to add"
+                            />
+                        )}
+                        onChange={handleChange}
+                    />
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <StandardButton
+                    text="Cancel"
+                    color="default"
+                    onClick={() => { handleClose() }}
                 />
-            </Box>
-        </DialogContent>
-        <DialogActions>
-        <StandardButton
-                text="Cancel"
-                color="default"
-                onClick={() => { handleClose() }}
-            />
-        <StandardButton
-                text="Confirm"
-            />
-            
-        </DialogActions>
-            
+                <StandardButton
+                    text="Confirm"
+                />
+
+            </DialogActions>
+
         </>
     )
 }

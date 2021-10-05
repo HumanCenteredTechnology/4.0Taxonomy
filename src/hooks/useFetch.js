@@ -3,7 +3,7 @@ import API from "../API.js";
 
 
 const initialState = {
-  
+
   related_elements: [],
   topics: [],
 };
@@ -25,7 +25,7 @@ export const useFetch = (queryId) => {
 
         const fetchResults = await API.fetchResults(queryId);
 
-        if (fetchResults.related_elements.length === 0 ) {
+        if (fetchResults.related_elements.length === 0 && fetchResults.topics.length === 0) {
           setFound(false)
           console.log("not found")
         } else {
@@ -34,9 +34,10 @@ export const useFetch = (queryId) => {
             topics: [...fetchResults.topics]
           }));
           setFound(true)
+          console.log("found")
         }
-        
-           //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
+
+        //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
       } catch (error) {
         setError(true);
         console.log(error);

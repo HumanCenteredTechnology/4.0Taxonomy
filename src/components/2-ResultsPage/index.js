@@ -15,6 +15,7 @@ import { Container, Box, Divider, Grid } from "@material-ui/core";
 //import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
 
+
 const ResultsPage = () => {
 
   const { queryId } = useParams();
@@ -38,23 +39,25 @@ const ResultsPage = () => {
 
       <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
       <Divider variant="middle" />
-      <Box sx={{ marginTop: 10, marginX: 5 }}>
-        {found ? <><p>topics suggested</p> <TopicsList results={results } /></>   : <></>}
-      </Box>
+
       {found ? <ResultsList results={results} /> : <NotFound />}
+      <Box sx={{ marginTop: 10, marginX: 5 }}>
+        {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
+      </Box>
     </Container>
   );
 };
 
+//inserire un "Argomenti correlati" in fondo che utilizza i topics della ricerca, 
+//cliccandoci apre una nuova pagina risultati con l'argomento selezionato come queryId
 
-//se la pagina dei risultati sarà "staccata"
 const ResultsList = ({ results }) => {
   return (
     <>
       <section className="resultsList">
         {results.related_elements.map((r_el, i) => {
           return (
-            <Result key={i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} links={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
+            <Result key={i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
           );
         })}
       </section>
