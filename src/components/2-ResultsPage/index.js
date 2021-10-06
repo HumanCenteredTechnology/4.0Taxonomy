@@ -14,7 +14,14 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container, Box, Divider, Grid, Typography } from "@material-ui/core";
 //import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
-
+const bull = (
+  <Box
+    component="span"
+    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(1)' }}
+  >
+    |
+  </Box>
+);
 
 const ResultsPage = () => {
 

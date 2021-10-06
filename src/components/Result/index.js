@@ -4,29 +4,44 @@ import TopicChip from "../TopicChip";
 import { Card, CardHeader, CardContent, CardActions, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
 
 
-const topic = [["Data Science", "Technology"], ["Smart PPE", "Problems"]]
+const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
 
 const Result = ({ name, parent, category, articles }) => {
 
   return (
+<Box sx={{
+          justifyContent: 'center',
+          p: 1,
+          m: 0,
+        }}>
     <Card>
-      <Typography sx={{ fontSize: 14 }} color="textSecondary" gutterBottom>
+    <Box sx={{
+          justifyContent: 'center',
+          p: 2,
+          m: 0,
+        }}>
+      <Typography sx={{ fontSize: 14 }} color="textSecondary" >
         {parent}
       </Typography>
-      <CardHeader title={name} />
-      <Divider variant="middle" />
-      <CardContent>
+      <Typography variant="h5"  >
+        {name}
+      </Typography>
+      </Box>
+      
+      {/* <Divider variant="middle" /> */}
+      <Box>
         <Grid container spacing={1}>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}>
             <Typography variant="body1" >Resources:</Typography>
             <Resources articles={articles} />
           </Grid>
           <Grid item xs={1}>
             <Divider orientation="vertical" />
-          </Grid>
+          </Grid> */}
           <Grid item xs={5}>
+            
+            <Box sx={{ p:2, my: 0 }}>
             <Typography variant="body1" >Related technologies</Typography>
-            <Box sx={{ my: 2 }}>
               <Grid container
                 spacing={1}
                 columnspacing={{ xs: 1 }}
@@ -53,14 +68,15 @@ const Result = ({ name, parent, category, articles }) => {
           </Grid>
         </Grid>
 
-      </CardContent>
+      </Box>
       <CardActions>
-        {/* <ViewResultButton /> */}
+        <ViewResultButton /> 
       </CardActions>
 
 
 
     </Card>
+    </Box>
   );
 };
 
@@ -135,7 +151,7 @@ const ViewResultButton = () => {
   return (
     <div className="buttonContainer">
       <Button href="#text-buttons">
-        View
+        View Use Cases
       </Button>
     </div>
   );
