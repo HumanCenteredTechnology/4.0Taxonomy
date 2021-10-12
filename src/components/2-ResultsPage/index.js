@@ -43,16 +43,14 @@ const ResultsPage = () => {
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
-
       <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
       <Box sx={{ marginY: 5 }}>
         <Divider margin={2} variant="middle" />
       </Box>
-
       {found ? <ResultsList results={results} /> : <NotFound />}
-      <Box sx={{ marginTop: 10, marginX: 5 }}>
+      {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
-      </Box>
+      </Box> */}
     </Container>
   );
 };
@@ -61,6 +59,19 @@ const ResultsPage = () => {
 //cliccandoci apre una nuova pagina risultati con l'argomento selezionato come queryId
 
 const ResultsList = ({ results }) => {
+
+  const sortResults = (r_el, i) => {
+    let sorter = "";
+    if (r_el[3] === "Problems") {
+      return sorter = "Problems"
+    }
+    if (r_el[3] === "Technology") {
+      return sorter = "Technology"
+    } else {
+      return sorter = "";
+    }
+  }
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={6}>
@@ -74,9 +85,11 @@ const ResultsList = ({ results }) => {
         </Box>
 
         {results.related_elements.map((r_el, i) => {
-          return (
-            <Result key={r_el + i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
-          );
+          if (sortResults(r_el, i) === "Problems") {
+            return (
+              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            );
+          } else return <> </>;
         })}
       </Grid>
       <Grid item xs={6}>
@@ -89,9 +102,12 @@ const ResultsList = ({ results }) => {
           <Typography variant="h4" >Technologies</Typography>
         </Box>
         {results.related_elements.map((r_el, i) => {
-          return (
-            <Result key={r_el + i} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} /> //l'id serve per la key(richiesta da React), dovrebbe esserci nelle API
-          );
+
+          if (sortResults(r_el, i) === "Technology") {
+            return (
+              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            );
+          } else return <> </>;
         })}
       </Grid>
     </Grid>
@@ -110,9 +126,9 @@ const TopicsList = ({ results }) => {
         direction="row">
         {results.topics.map((topic, i) => {
           return (
-            <Grid item key={topic + i}>
+            <Grid item>
               <TopicChip
-                key={i}
+                key={topic[0]}
                 label={topic[0]}
                 name={topic[1]}
                 clickable={true}

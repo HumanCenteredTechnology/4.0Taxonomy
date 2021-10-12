@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import API from "../../API.js";
 //Styles
@@ -14,7 +14,14 @@ const SearchBox = styled(TextField)(() => ({
 }));
 
 const SearchBar = ({ setSearchMention }) => {
-  const [state, setState] = useState("");
+  /*   const { queryId } = useParams();
+    let query = () => {
+      if (queryId === "") return "";
+      else return queryId;
+    } */
+  const [state, setState] = useState("");    //da controllare, passa da input non controllato a controllato
+
+
   let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

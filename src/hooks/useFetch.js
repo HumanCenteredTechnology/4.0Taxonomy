@@ -3,7 +3,6 @@ import API from "../API.js";
 
 
 const initialState = {
-
   related_elements: [],
   topics: [],
 };
