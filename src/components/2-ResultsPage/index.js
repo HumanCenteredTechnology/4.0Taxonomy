@@ -21,19 +21,23 @@ const ResultsPage = () => {
   const { results, loading, setSearchMention, found } = useFetch(queryId);
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
-  const [listState, setListState] = useState(0);
+  const [techFirst, setTechFirst] = useState(false);
   
 
   useEffect(() => {
-    const prob = results.unrelated_elements.filter(res => res[3] === "Problems")
-    const tech = results.related_elements.filter(res => res[3] === "Technology")
-    //prob.push(results.unrelated_elements.filter(res => res[3] === "Problems"))
-    //tech.push(results.unrelated_elements.filter(res => res[3] === "Technology"))
-    if (prob.length !== 0 && tech.length !== 0) setListState(0)
-    else if (prob.length > 0 && tech.length == 0) setListState(1)
-    else if (tech.length > 0 && prob.length == 0) setListState(2)
-    setProblems(prob)
-    setTechnologies(tech)
+
+    if (results.related_elements.length !== 0 && results.unrelated_elements.length !== 0) {
+      results.related_elements.map((rel) =>{
+        if (rel[3] === "Problems") {
+          setProblems(results.related_elements.filter(res => res[3] === "Problems"))
+          setTechnologies(results.unrelated_elements.filter(res => res[3] === "Technology"))
+        }
+        if (rel[3] === "Technology") {
+          setProblems(results.unrelated_elements.filter(res => res[3] === "Problems"))
+          setTechnologies(results.related_elements.filter(res => res[3] === "Technology"))
+        }
+      })
+    }
   }, [results])
   
   return (
@@ -54,7 +58,7 @@ const ResultsPage = () => {
         <Divider margin={2} variant="middle" />
       </Box>
       <Grid container spacing={3}>
-        {found ? <ResultsList problems={problems} technologies={technologies} listState={listState} /> : <NotFound />}
+        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound />}
       </Grid>
       {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
@@ -64,49 +68,8 @@ const ResultsPage = () => {
 };
 
 
-const ResultsList = ({ problems, technologies, listState }) => {
-  if (listState == 1) {
-    return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            p: 1,
-            m: 2,
-          }}>
-            <Typography variant="h4" >Needs</Typography>
-          </Box>
-          {technologies.map((r_el, i) => {
-            return (
-              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
-            );
-          })}
-        </Grid>
-      </Grid>
-    );
-  } 
-  if (listState == 2) {
-    return (
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            p: 1,
-            m: 2,
-          }}>
-            <Typography variant="h4" >Technologies</Typography>
-          </Box>
-          {technologies.map((r_el, i) => {
-            return (
-              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
-            );
-          })}
-        </Grid>
-      </Grid>
-    );
-  }
+const ResultsList = ({ problems, technologies }) => {
+  
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
