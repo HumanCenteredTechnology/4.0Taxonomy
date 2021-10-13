@@ -21,7 +21,9 @@ const SearchBar = ({ setSearchMention }) => {
   } */
   const [state, setState] = useState(queryId);    //da controllare, passa da input non controllato a controllato
 
-
+  useEffect(()=>{
+    setState(queryId)
+  }, [queryId])
   let navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -21,22 +21,21 @@ const ResultsPage = () => {
   const { results, loading, setSearchMention, found } = useFetch(queryId);
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
-  const [techFirst, setTechFirst] = useState(false);
   
 
   useEffect(() => {
 
-    if (results.related_elements.length !== 0 && results.unrelated_elements.length !== 0) {
-      results.related_elements.map((rel) =>{
-        if (rel[3] === "Problems") {
-          setProblems(results.related_elements.filter(res => res[3] === "Problems"))
-          setTechnologies(results.unrelated_elements.filter(res => res[3] === "Technology"))
-        }
-        if (rel[3] === "Technology") {
-          setProblems(results.unrelated_elements.filter(res => res[3] === "Problems"))
+    if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
+      if(results.related_elements[0].at(3) === "Problems") {
+        setProblems(results.related_elements.filter(res => res[3] === "Problems"))
+        setTechnologies(results.unrelated_elements.filter(res => res[3] === "Technology"))
+      }
+      if(results.related_elements[0].at(3) === "Technology") {
+        setProblems(results.unrelated_elements.filter(res => res[3] === "Problems"))
           setTechnologies(results.related_elements.filter(res => res[3] === "Technology"))
-        }
-      })
+      }
+      console.log(problems)
+      console.log(technologies)
     }
   }, [results])
   
@@ -53,7 +52,7 @@ const ResultsPage = () => {
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
-      <h3>We found a total of {found ? results.related_elements.length + results.unrelated_elements.length: "0"} results for "{queryId}"</h3>
+      <h3>We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"</h3>
       <Box sx={{ marginY: 3 }}>
         <Divider margin={2} variant="middle" />
       </Box>
@@ -79,7 +78,7 @@ const ResultsList = ({ problems, technologies }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h4" >Needs</Typography>
+          <Typography variant="h5" >Needs ({problems.length})</Typography>
         </Box>
         {problems.map((r_el, i) => {
           return (
@@ -94,7 +93,7 @@ const ResultsList = ({ problems, technologies }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h4" >Technologies</Typography>
+          <Typography variant="h5" >Technologies ({technologies.length})</Typography>
         </Box>
         {technologies.map((r_el, i) => {
           return (
