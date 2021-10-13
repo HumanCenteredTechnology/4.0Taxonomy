@@ -22,42 +22,20 @@ const ResultsPage = () => {
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
   const [listState, setListState] = useState(0);
-  /* const filterResults = (results) => {
-    let prob = results.related_elements.filter(res => res[3] === "Problems")
-    let tech = results.related_elements.filter(res => res[3] === "Technology")
-    if (prob.length !== 0 && tech.length !== 0) listState = 0        //se ci sono 2 colonne
-    else if (prob.length >= 0) listState = 1                                 //se ci sono solo problems
-    else listState = 2
-    return [prob, tech]
-  } */
+  
 
   useEffect(() => {
-    const prob = results.related_elements.filter(res => res[3] === "Problems")
+    const prob = results.unrelated_elements.filter(res => res[3] === "Problems")
     const tech = results.related_elements.filter(res => res[3] === "Technology")
+    //prob.push(results.unrelated_elements.filter(res => res[3] === "Problems"))
+    //tech.push(results.unrelated_elements.filter(res => res[3] === "Technology"))
     if (prob.length !== 0 && tech.length !== 0) setListState(0)
-    else if (prob.length > 0) setListState(1)
-    else if (tech.length > 0) setListState(2)
+    else if (prob.length > 0 && tech.length == 0) setListState(1)
+    else if (tech.length > 0 && prob.length == 0) setListState(2)
     setProblems(prob)
     setTechnologies(tech)
   }, [results])
-  useEffect(() => {
-    let res
-    switch (listState) {
-      case 0:
-        res = <ResultsList problems={problems} technologies={technologies} />;
-        break
-      case 1:
-        res = <ResultsList problems={problems} />;
-        break
-      case 2:
-        res = <ResultsList technologies={technologies} />;
-        break
-      default:
-        res = <></>;
-    }
-    return res
-  }, [listState])
-
+  
   return (
     <Container  >
       <StandardButton
@@ -71,15 +49,13 @@ const ResultsPage = () => {
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
-      <h2>{found ? results.related_elements.length : "0"} Results found for "{queryId}"</h2>
-      <Box sx={{ marginY: 5 }}>
+      <h3>We found a total of {found ? results.related_elements.length + results.unrelated_elements.length: "0"} results for "{queryId}"</h3>
+      <Box sx={{ marginY: 3 }}>
         <Divider margin={2} variant="middle" />
       </Box>
       <Grid container spacing={3}>
-        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound />}
-
+        {found ? <ResultsList problems={problems} technologies={technologies} listState={listState} /> : <NotFound />}
       </Grid>
-
       {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
       </Box> */}
@@ -88,9 +64,49 @@ const ResultsPage = () => {
 };
 
 
-const ResultsList = ({ problems, technologies }) => {
-
-
+const ResultsList = ({ problems, technologies, listState }) => {
+  if (listState == 1) {
+    return (
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            p: 1,
+            m: 2,
+          }}>
+            <Typography variant="h4" >Needs</Typography>
+          </Box>
+          {technologies.map((r_el, i) => {
+            return (
+              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            );
+          })}
+        </Grid>
+      </Grid>
+    );
+  } 
+  if (listState == 2) {
+    return (
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            p: 1,
+            m: 2,
+          }}>
+            <Typography variant="h4" >Technologies</Typography>
+          </Box>
+          {technologies.map((r_el, i) => {
+            return (
+              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            );
+          })}
+        </Grid>
+      </Grid>
+    );
+  }
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>

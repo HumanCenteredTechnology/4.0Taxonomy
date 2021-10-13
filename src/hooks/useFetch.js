@@ -5,6 +5,7 @@ import API from "../API.js";
 const initialState = {
   related_elements: [],
   topics: [],
+  unrelated_elements: []
 };
 
 export const useFetch = (queryId) => {
@@ -30,7 +31,8 @@ export const useFetch = (queryId) => {
         } else {
           setResults(() => ({
             related_elements: [...fetchResults.related_elements],
-            topics: [...fetchResults.topics]
+            topics: [...fetchResults.topics],
+            unrelated_elements: [...fetchResults.unrelated_elements]
           }));
           setFound(true)
           console.log("found")

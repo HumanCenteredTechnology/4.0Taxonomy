@@ -42,43 +42,48 @@ const Result = ({ name, parent, category, articles }) => {
           </Typography>
         </Box>
         {/* <Divider variant="middle" /> */}
-        <Box sx={{ p: 2, my: 0 }}>
-          <Grid container spacing={1}>
-            <Grid item xs={12}>
-              <Typography variant="body1" >Resources:</Typography>
-              <Resources articles={articles} />
-            </Grid>
-            {/*  <Grid item xs={1}>
-              <Divider orientation="vertical" />
-            </Grid>
-            <Grid item xs={5}>
+        {Array.isArray(articles) ? 
+    <Box sx={{ p: 2, my: 0 }}>
+    <Grid container spacing={1}>
+      <Grid item xs={12}>
+        <Typography variant="body1" >Resources:</Typography>
+        <Resources articles={articles} />
+      </Grid>
+      {/*  <Grid item xs={1}>
+        <Divider orientation="vertical" />
+      </Grid>
+      <Grid item xs={5}>
 
-              <Typography variant="body1" >Related technologies</Typography>
-              <Grid container
-                spacing={1}
-                columnspacing={{ xs: 1 }}
-                rowspacing={{ xs: 1 }}
-                columns={{ xs: 1 }}
-                justifycontent="flex-start"
-                direction="row">
-                {topic.map((topic, i) => {
-                  return (
-                    <Grid item key={topic + i}>
-                      <TopicChip
-                        key={topic[0]}
-                        label={topic[0]}
-                        name={topic[1]}
-                        clickable={true}
-                        link={topic[2]}
-                        size={"small"}
-                      />
-                    </Grid>
-                  )
-                })}
+        <Typography variant="body1" >Related technologies</Typography>
+        <Grid container
+          spacing={1}
+          columnspacing={{ xs: 1 }}
+          rowspacing={{ xs: 1 }}
+          columns={{ xs: 1 }}
+          justifycontent="flex-start"
+          direction="row">
+          {topic.map((topic, i) => {
+            return (
+              <Grid item key={topic + i}>
+                <TopicChip
+                  key={topic[0]}
+                  label={topic[0]}
+                  name={topic[1]}
+                  clickable={true}
+                  link={topic[2]}
+                  size={"small"}
+                />
               </Grid>
-            </Grid> */}
-          </Grid>
-        </Box>
+            )
+          })}
+        </Grid>
+      </Grid> */}
+    </Grid>
+  </Box>
+  :
+  <></>
+  }
+        
       </Card>
     </Box>
   );
@@ -109,6 +114,7 @@ const Resources = ({ articles }) => {
   }, [articles])
 
   return (
+    
     <Box >
       <List disablePadding>
         {isLong ?
@@ -138,7 +144,7 @@ const Resources = ({ articles }) => {
           }
         </> : <></>}
       </List>
-      {isLong ? <Link component="button" onClick={handleShowMore}>{buttonText}</Link> : <> </>}
+      {isLong ? <Button size="small" onClick={handleShowMore}>{buttonText}</Button> : <> </>}
     </Box>
   )
 }
