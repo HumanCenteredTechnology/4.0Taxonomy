@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
-import { Card, CardHeader, CardContent, CardActions, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
+import { Card, Tooltip, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
 
 
 const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
@@ -41,11 +41,10 @@ const Result = ({ name, parent, category, articles }) => {
             {wiki} <Link href="#">Read more</Link>
           </Typography>
         </Box>
-
         {/* <Divider variant="middle" /> */}
         <Box sx={{ p: 2, my: 0 }}>
           <Grid container spacing={1}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <Typography variant="body1" >Resources:</Typography>
               <Resources articles={articles} />
             </Grid>
@@ -78,16 +77,8 @@ const Result = ({ name, parent, category, articles }) => {
                 })}
               </Grid>
             </Grid> */}
-
           </Grid>
-
         </Box>
-        {/* <CardActions>
-          <ViewResultButton />
-        </CardActions> */}
-
-
-
       </Card>
     </Box>
   );
@@ -96,11 +87,16 @@ const Result = ({ name, parent, category, articles }) => {
 const Resources = ({ articles }) => {
   const [isLong, setIsLong] = useState(false);
   const [showMore, setShowMore] = useState(false);
+  const [buttonText, setButtonText] = useState('Show More')
 
   const handleShowMore = () => {
-    if (showMore === true)
+    if (showMore === true) {
       setShowMore(false);
-    else setShowMore(true);
+      setButtonText('Show more')
+    } else {
+      setShowMore(true);
+      setButtonText('Show less')
+    }
 
   }
 
@@ -111,54 +107,53 @@ const Resources = ({ articles }) => {
       setIsLong(false)
     }
   }, [articles])
+
   return (
-    <Box component="div" >
-      <List>
+    <Box >
+      <List disablePadding>
         {isLong ?
           <> {
             articles.slice(0, 4)
-              .map((article, i) => {
+              .map((art, i) => {
                 return (
-                  <ListItemText key={article[0]} > <Link href={article[1]} >
-                    <Typography variant="body2" noWrap >
-                      {article[0]}
-                    </Typography>
-                  </Link> </ListItemText>
+                  <Article key={art + i} art={art} />
                 )
               })
           }</> : <>
             {
-              articles.map((article, i) => {
+              articles.map((art, i) => {
                 return (
-                  <ListItemText > <Link key={article[0]} href={article[1]} >
-                    <Typography variant="body2" noWrap>
-                      {article[0]}
-                    </Typography>
-                  </Link> </ListItemText>
+                  <Article key={art + i} art={art} />
                 )
               })
             } </>}
         {showMore ? <>
           {
             articles.slice(4)
-              .map((article, i) => {
+              .map((art, i) => {
                 return (
-                  <ListItemText > <Link key={article[0]} href={article[1]} >
-                    <Typography variant="body2" noWrap>
-                      {article[0]}
-                    </Typography>
-                  </Link> </ListItemText>
+                  <Article key={art + i} art={art} />
                 )
               })
           }
         </> : <></>}
       </List>
-      {isLong ? <Button variant="text" onClick={handleShowMore}>Show more</Button> : <> </>}
-
-
+      {isLong ? <Link component="button" onClick={handleShowMore}>{buttonText}</Link> : <> </>}
     </Box>
   )
 }
+
+const Article = ({ art }) => {
+  return (
+    <ListItemText  >
+      <Link href={art[1]} >
+        <Typography variant="body2" noWrap >
+          {art[0]}
+        </Typography>
+      </Link>
+    </ListItemText>
+  );
+};
 
 const ViewResultButton = () => {
   return (

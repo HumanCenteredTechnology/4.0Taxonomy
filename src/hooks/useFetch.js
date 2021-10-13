@@ -10,7 +10,7 @@ const initialState = {
 export const useFetch = (queryId) => {
   //per il fetch riceve la searchMention come stato da SearchBar
   const [searchMention, setSearchMention] = useState("");
-  const [results, setResults] = useState({ initialState });
+  const [results, setResults] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)

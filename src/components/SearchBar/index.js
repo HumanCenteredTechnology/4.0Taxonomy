@@ -14,12 +14,12 @@ const SearchBox = styled(TextField)(() => ({
 }));
 
 const SearchBar = ({ setSearchMention }) => {
-  /*   const { queryId } = useParams();
-    let query = () => {
-      if (queryId === "") return "";
-      else return queryId;
-    } */
-  const [state, setState] = useState("");    //da controllare, passa da input non controllato a controllato
+  const { queryId } = useParams();
+  /* let query = () => {
+    if (queryId === "") return "";
+    else return queryId;
+  } */
+  const [state, setState] = useState(queryId);    //da controllare, passa da input non controllato a controllato
 
 
   let navigate = useNavigate();

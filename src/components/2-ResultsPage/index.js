@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link as RouterLink } from "react-router-dom";
 //Components
 import SearchBar from "../SearchBar";
@@ -12,23 +12,51 @@ import { useFetch } from "../../hooks/useFetch";
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography } from "@material-ui/core";
-//import { Stack } from '@material-ui/core/' da aggiungere quando passo a v5
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(1)' }}
-  >
-    |
-  </Box>
-);
+
 
 const ResultsPage = () => {
 
   const { queryId } = useParams();
-
-
   const { results, loading, setSearchMention, found } = useFetch(queryId);
+  const [problems, setProblems] = useState([]);
+  const [technologies, setTechnologies] = useState([]);
+  const [listState, setListState] = useState(0);
+  /* const filterResults = (results) => {
+    let prob = results.related_elements.filter(res => res[3] === "Problems")
+    let tech = results.related_elements.filter(res => res[3] === "Technology")
+    if (prob.length !== 0 && tech.length !== 0) listState = 0        //se ci sono 2 colonne
+    else if (prob.length >= 0) listState = 1                                 //se ci sono solo problems
+    else listState = 2
+    return [prob, tech]
+  } */
+
+  useEffect(() => {
+    const prob = results.related_elements.filter(res => res[3] === "Problems")
+    const tech = results.related_elements.filter(res => res[3] === "Technology")
+    if (prob.length !== 0 && tech.length !== 0) setListState(0)
+    else if (prob.length > 0) setListState(1)
+    else if (tech.length > 0) setListState(2)
+    setProblems(prob)
+    setTechnologies(tech)
+  }, [results])
+  useEffect(() => {
+    let res
+    switch (listState) {
+      case 0:
+        res = <ResultsList problems={problems} technologies={technologies} />;
+        break
+      case 1:
+        res = <ResultsList problems={problems} />;
+        break
+      case 2:
+        res = <ResultsList technologies={technologies} />;
+        break
+      default:
+        res = <></>;
+    }
+    return res
+  }, [listState])
 
   return (
     <Container  >
@@ -47,7 +75,11 @@ const ResultsPage = () => {
       <Box sx={{ marginY: 5 }}>
         <Divider margin={2} variant="middle" />
       </Box>
-      {found ? <ResultsList results={results} /> : <NotFound />}
+      <Grid container spacing={3}>
+        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound />}
+
+      </Grid>
+
       {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
       </Box> */}
@@ -55,26 +87,13 @@ const ResultsPage = () => {
   );
 };
 
-//inserire un "Argomenti correlati" in fondo che utilizza i topics della ricerca, 
-//cliccandoci apre una nuova pagina risultati con l'argomento selezionato come queryId
 
-const ResultsList = ({ results }) => {
+const ResultsList = ({ problems, technologies }) => {
 
-  const sortResults = (r_el, i) => {
-    let sorter = "";
-    if (r_el[3] === "Problems") {
-      return sorter = "Problems"
-    }
-    if (r_el[3] === "Technology") {
-      return sorter = "Technology"
-    } else {
-      return sorter = "";
-    }
-  }
 
   return (
     <Grid container spacing={3}>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -83,16 +102,13 @@ const ResultsList = ({ results }) => {
         }}>
           <Typography variant="h4" >Needs</Typography>
         </Box>
-
-        {results.related_elements.map((r_el, i) => {
-          if (sortResults(r_el, i) === "Problems") {
-            return (
-              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
-            );
-          } else return <> </>;
+        {problems.map((r_el, i) => {
+          return (
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+          );
         })}
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6}>
         <Box sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -101,13 +117,10 @@ const ResultsList = ({ results }) => {
         }}>
           <Typography variant="h4" >Technologies</Typography>
         </Box>
-        {results.related_elements.map((r_el, i) => {
-
-          if (sortResults(r_el, i) === "Technology") {
-            return (
-              <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
-            );
-          } else return <> </>;
+        {technologies.map((r_el, i) => {
+          return (
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+          );
         })}
       </Grid>
     </Grid>
