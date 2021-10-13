@@ -73,8 +73,7 @@ const ResultsList = ({ problems, technologies }) => {
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
         <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
+          display: 'flex',  
           p: 1,
           m: 2,
         }}>
@@ -89,7 +88,6 @@ const ResultsList = ({ problems, technologies }) => {
       <Grid item xs={12} sm={6}>
         <Box sx={{
           display: 'flex',
-          justifyContent: 'center',
           p: 1,
           m: 2,
         }}>
