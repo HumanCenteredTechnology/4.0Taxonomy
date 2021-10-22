@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
-import API from "../../API.js";
 //Styles
 
-import TextField from "@material-ui/core/TextField";
-import { Box, styled } from "@material-ui/core";
+import { Box, styled, TextField } from "@material-ui/core";
 
 const SearchBox = styled(TextField)(() => ({
   "& fieldset": {
@@ -15,16 +13,14 @@ const SearchBox = styled(TextField)(() => ({
 
 const SearchBar = ({ setSearchMention }) => {
   const { queryId } = useParams();
-  /* let query = () => {
-    if (queryId === "") return "";
-    else return queryId;
-  } */
-  const [state, setState] = useState(queryId);    //da controllare, passa da input non controllato a controllato
+  const [state, setState] = useState("");    //da controllare, passa da input non controllato a controllato
 
-  useEffect(()=>{
+  useEffect(() => {
     setState(queryId)
   }, [queryId])
+
   let navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSearchMention(state);
@@ -42,9 +38,6 @@ const SearchBar = ({ setSearchMention }) => {
         }}
       >
         <SearchBox
-          sx={{
-            borderRadius: 40,
-          }}
           fullWidth
           className="input"
           name="search-input"
@@ -55,7 +48,6 @@ const SearchBar = ({ setSearchMention }) => {
           variant="outlined"
           onChange={(e) => setState(e.currentTarget.value)}
         />
-
       </Box>
     </form>
   );

@@ -9,15 +9,19 @@ const apiSettings = {
     formData.append('search-input', queryId)
     //fetch
     const results = await fetch(`${API_URL}`, {
-      //mode: "no-cors",
       method: "POST",
-      body: formData
+      mode: "cors",
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      body: formData,
+
     });
-    
+
     //const data = await results.json();
     const data = await results.json()
     console.log(await data)
-    
+
     /* const data =
     {
       "topics":
@@ -44,7 +48,7 @@ const apiSettings = {
     console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
     //invia il form
-    const resp = await(await fetch(`${API_URL}add_article`, {
+    const resp = await (await fetch(`${API_URL}add_article`, {
       method: "POST",
       body: formData
     })).json();

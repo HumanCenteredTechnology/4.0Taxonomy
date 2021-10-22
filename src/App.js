@@ -5,12 +5,10 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //Components
 import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
-import NotFound from "./components/NotFound";
 import FormPage from "./components/3 - FormPage";
 
 //Styles
 import {
-  makeStyles,
   CssBaseline,
   createTheme,
   ThemeProvider,
@@ -34,7 +32,6 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/:queryId" element={<ResultsPage />} />
-          {/* <Route path="/*" element={<NotFound default />} /> */}
           <Route path="/form" element={<FormPage />} />
         </Routes>
       </Router>

@@ -1,11 +1,19 @@
 import React from "react";
 
-const NotFound = () => {
+const NotFound = (error) => {
 
   return (
-    <div>
-      <h1>No result found</h1>
-    </div>
+    <>
+      {error ?
+        <div>
+          <h1>There's an error with database connection </h1 >
+        </div >
+        :
+        <div>
+          <h1>No result found</h1>
+        </div>
+      }
+    </>
   );
 };
 

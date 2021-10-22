@@ -11,53 +11,72 @@ import { useFetch } from "../../hooks/useFetch";
 
 //Style
 //import "./ResultsPage.css";
-import { Container, Box, Divider, Grid, Typography } from "@material-ui/core";
+import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
 
 
 
 const ResultsPage = () => {
 
   const { queryId } = useParams();
-  const { results, loading, setSearchMention, found } = useFetch(queryId);
+  const { results, loading, error, setSearchMention, found } = useFetch(queryId);
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
-  
+
 
   useEffect(() => {
 
     if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
-      if(results.related_elements[0].at(3) === "Problems") {
+      if (results.related_elements[0].at(3) === "Problems") {
         setProblems(results.related_elements.filter(res => res[3] === "Problems"))
         setTechnologies(results.unrelated_elements.filter(res => res[3] === "Technology"))
       }
-      if(results.related_elements[0].at(3) === "Technology") {
+      if (results.related_elements[0].at(3) === "Technology") {
         setProblems(results.unrelated_elements.filter(res => res[3] === "Problems"))
-          setTechnologies(results.related_elements.filter(res => res[3] === "Technology"))
+        setTechnologies(results.related_elements.filter(res => res[3] === "Technology"))
       }
       console.log(problems)
       console.log(technologies)
     }
   }, [results])
-  
+
   return (
     <Container  >
-      <StandardButton
-        variant="outlined"
-        text="Add Article"
-        size="small"
-        color="default"
-        component={RouterLink}
-        to="/form"
-      />
+      <AppBar
+        position="static"
+        edge="start"
+        color="transparent"
+        elevation={0}
+        sx={{
+          shadows: 0,
+
+        }}
+      >
+        <Toolbar>
+          <Box sx={{ flexGrow: 1 }} />
+          <StandardButton
+            variant="text"
+            text="Add Article"
+            size="small"
+            color="inherit"
+            component={RouterLink}
+            to="/form"
+          />
+        </Toolbar>
+      </AppBar>
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
-      <h3>We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"</h3>
+      {!error ?
+        <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
+        </Typography>
+        :
+        <></>}
       <Box sx={{ marginY: 3 }}>
         <Divider margin={2} variant="middle" />
       </Box>
       <Grid container spacing={3}>
-        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound />}
+        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound error={error} />}
+        {/* <ResultsList problems={problems} technologies={technologies} /> */}
       </Grid>
       {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
@@ -68,12 +87,12 @@ const ResultsPage = () => {
 
 
 const ResultsList = ({ problems, technologies }) => {
-  
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12} sm={6}>
         <Box sx={{
-          display: 'flex',  
+          display: 'flex',
           p: 1,
           m: 2,
         }}>

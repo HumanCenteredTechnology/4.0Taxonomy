@@ -1,47 +1,82 @@
 import React, { useState, useEffect } from "react";
-import API from "../../API.js";
 import { Link as RouterLink } from "react-router-dom";
 //Components
-import Header from "../Header";
 import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
 import ViewMenuButton from "../controls/ViewMenuButton";
-import Menu from "../Menu";
+import BrowsableTree from "../BrowsableTree/";
 
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
 //Styles
-import { Container, Pagination } from "@material-ui/core";
+import { Container, AppBar, Toolbar, Typography, Box } from "@material-ui/core";
+import { TrapFocus } from '@mui/material';
 
 
 const HomePage = () => {
   const { setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
-  const [menuOpened, setMenuOpened] = useState(null);
-  const handleCloseMenu = () => {
-    setMenuOpened(null);
-  };
-  const handleOpenMenuClick = (e) => {
-    setMenuOpened(e.currentTarget);
-    console.log("cliccato");
+  const [menuOpened, setMenuOpened] = useState(false);
+
+  const handleOpenMenuClick = () => {
+    if (!menuOpened) setMenuOpened(true);
+    else setMenuOpened(false);
   };
 
   return (
     <Container>
-      <StandardButton
-        variant="outlined"
-        text="Add Article"
-        size="small"
-        color="default"
-        component={RouterLink}
-        to="/form"
-      />
-      <Header />
-      <Container className="container" maxWidth="md">
-        <SearchBar setSearchMention={setSearchMention} />
-        <ViewMenuButton onClick={handleOpenMenuClick} />
-      </Container>
-      {/* <ResultsPage results={results} /> */}
+      <AppBar
+        position="static"
+        edge="start"
+        color="transparent"
+        elevation={0}
+        sx={{
+          shadows: 0,
+
+        }}
+      >
+        <Toolbar>
+          <Box sx={{ flexGrow: 1 }} />
+          <StandardButton
+            variant="text"
+            text="Add Article"
+            size="small"
+            color="inherit"
+            component={RouterLink}
+            to="/form"
+          />
+        </Toolbar>
+      </AppBar>
+      <Box
+        sx={{
+          margin: "auto",
+          my: 5,
+          width: 500,
+          maxWidth: "100%"
+        }}>
+        <Typography align="center" variant="h1">Search4.0</Typography>
+      </Box>
+      <SearchBar setSearchMention={setSearchMention} />
+      <Box
+        sx={{
+          mx: "auto",
+          my: 5,
+          width: 250,
+          alignContent: "center"
+        }}>
+        <StandardButton
+          variant="text"
+          size="small"
+          color="default"
+          onClick={handleOpenMenuClick}
+          text="OR EXPLORE THE DATABASE">
+        </ StandardButton>
+      </Box>
+
+      {menuOpened && (
+        <BrowsableTree />
+      )}
+
     </Container>
   );
 };

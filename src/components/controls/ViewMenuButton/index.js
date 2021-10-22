@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 const ViewMenuButton = ({ callback }) => {
   return (
     <div className="viewMenuWrapper" type="button" onClick={callback}>
-      <Button href="#text-buttons" size="medium" color="default">
+      <Button size="medium" color="default">
         or view the menu
       </Button>
       <img className="viewMenuIcon" src="" />
