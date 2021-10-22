@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
 import { Card, Tooltip, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
-
+import { Skeleton } from "@mui/material";
 
 const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
 const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitation cupidatat veniam ut fugiat tempor quis esse sit excepteur. Cupidatat aute in ullamco minim minim Lorem officia deserunt amet labore nostrud quis esse..."
 
-const Result = ({ name, parent, category, articles }) => {
+const Result = ({ name, parent, category, articles, loading }) => {
 
   let navigate = useNavigate();
 
@@ -42,14 +42,14 @@ const Result = ({ name, parent, category, articles }) => {
           </Typography>
         </Box>
         {/* <Divider variant="middle" /> */}
-        {Array.isArray(articles) ? 
-    <Box sx={{ p: 2, my: 0 }}>
-    <Grid container spacing={1}>
-      <Grid item xs={12}>
-        <Typography variant="body1" >Resources:</Typography>
-        <Resources articles={articles} />
-      </Grid>
-      {/*  <Grid item xs={1}>
+        {Array.isArray(articles) ?
+          <Box sx={{ p: 2, my: 0 }}>
+            <Grid container spacing={1}>
+              <Grid item xs={12}>
+                <Typography variant="body1" >Resources:</Typography>
+                <Resources articles={articles} />
+              </Grid>
+              {/*  <Grid item xs={1}>
         <Divider orientation="vertical" />
       </Grid>
       <Grid item xs={5}>
@@ -78,12 +78,12 @@ const Result = ({ name, parent, category, articles }) => {
           })}
         </Grid>
       </Grid> */}
-    </Grid>
-  </Box>
-  :
-  <></>
-  }
-        
+            </Grid>
+          </Box>
+          :
+          <></>
+        }
+
       </Card>
     </Box>
   );
@@ -114,7 +114,7 @@ const Resources = ({ articles }) => {
   }, [articles])
 
   return (
-    
+
     <Box >
       <List disablePadding>
         {isLong ?

@@ -8,16 +8,19 @@ const apiSettings = {
     const formData = new FormData()
     formData.append('search-input', queryId)
     //fetch
+
     const results = await fetch(`${API_URL}`, {
       method: "POST",
-      mode: "cors",
+      /* mode: "cors",
       headers: {
         'Content-Type': 'multipart/form-data'
-      },
+      }, */
       body: formData,
 
     });
-
+    for (var key of formData.entries()) {
+      console.log(key[0] + " : " + key[1])
+    }
     //const data = await results.json();
     const data = await results.json()
     console.log(await data)

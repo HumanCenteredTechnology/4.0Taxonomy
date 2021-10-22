@@ -25,7 +25,7 @@ export const useFetch = (queryId) => {
 
         const fetchResults = await API.fetchResults(queryId);
 
-        if (fetchResults.related_elements.length === 0 && fetchResults.topics.length === 0) {
+        if (fetchResults.related_elements == null) {
           setFound(false)
           console.log("not found")
         } else {

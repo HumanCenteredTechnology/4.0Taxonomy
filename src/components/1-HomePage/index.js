@@ -5,6 +5,7 @@ import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
 import ViewMenuButton from "../controls/ViewMenuButton";
 import BrowsableTree from "../BrowsableTree/";
+import { TopNavBar } from "../TopNavBar";
 
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
@@ -25,28 +26,7 @@ const HomePage = () => {
 
   return (
     <Container>
-      <AppBar
-        position="static"
-        edge="start"
-        color="transparent"
-        elevation={0}
-        sx={{
-          shadows: 0,
-
-        }}
-      >
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
-          <StandardButton
-            variant="text"
-            text="Add Article"
-            size="small"
-            color="inherit"
-            component={RouterLink}
-            to="/form"
-          />
-        </Toolbar>
-      </AppBar>
+      <TopNavBar homeIcon={false} />
       <Box
         sx={{
           margin: "auto",

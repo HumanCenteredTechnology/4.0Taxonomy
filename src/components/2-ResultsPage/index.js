@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link as RouterLink } from "react-router-dom";
+import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 //Components
 import SearchBar from "../SearchBar";
 import Result from "../Result";
 import StandardButton from "../controls/StandardButton/";
 import NotFound from "../NotFound";
 import TopicChip from "../TopicChip";
+import { TopNavBar } from "../TopNavBar";
 //hooks
 import { useFetch } from "../../hooks/useFetch";
 
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-
+import { Skeleton, IconButton } from "@mui/material";
+import { HomeRounded } from "@mui/icons-material";
 
 
 const ResultsPage = () => {
@@ -21,6 +23,8 @@ const ResultsPage = () => {
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
+
+
 
 
   useEffect(() => {
@@ -41,28 +45,7 @@ const ResultsPage = () => {
 
   return (
     <Container  >
-      <AppBar
-        position="static"
-        edge="start"
-        color="transparent"
-        elevation={0}
-        sx={{
-          shadows: 0,
-
-        }}
-      >
-        <Toolbar>
-          <Box sx={{ flexGrow: 1 }} />
-          <StandardButton
-            variant="text"
-            text="Add Article"
-            size="small"
-            color="inherit"
-            component={RouterLink}
-            to="/form"
-          />
-        </Toolbar>
-      </AppBar>
+      <TopNavBar homeIcon={true} />
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
@@ -75,7 +58,7 @@ const ResultsPage = () => {
         <Divider margin={2} variant="middle" />
       </Box>
       <Grid container spacing={3}>
-        {found ? <ResultsList problems={problems} technologies={technologies} /> : <NotFound error={error} />}
+        {found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} />}
         {/* <ResultsList problems={problems} technologies={technologies} /> */}
       </Grid>
       {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
@@ -86,7 +69,7 @@ const ResultsPage = () => {
 };
 
 
-const ResultsList = ({ problems, technologies }) => {
+const ResultsList = ({ problems, technologies, loading }) => {
 
   return (
     <Grid container spacing={3}>
@@ -100,7 +83,7 @@ const ResultsList = ({ problems, technologies }) => {
         </Box>
         {problems.map((r_el, i) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} loading={loading} />
           );
         })}
       </Grid>
@@ -114,7 +97,7 @@ const ResultsList = ({ problems, technologies }) => {
         </Box>
         {technologies.map((r_el, i) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} />
+            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} loading={loading} />
           );
         })}
       </Grid>
