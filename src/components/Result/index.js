@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
 import { Card, Tooltip, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
@@ -10,7 +10,6 @@ const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitatio
 
 const Result = ({ name, parent, category, articles, loading }) => {
 
-  let navigate = useNavigate();
 
   return (
     <Box sx={{
@@ -24,15 +23,16 @@ const Result = ({ name, parent, category, articles, loading }) => {
           p: 2,
           m: 0,
         }}>
-          <Typography variant="body2" color="textSecondary" >
-            {parent}
-          </Typography>
           <Link
-            component="button"
-            onClick={() => {
-              navigate("/" + name)
-            }}
-          >
+            component={RouterLink}
+            to={"/" + parent}>
+            <Typography variant="body2" color="textSecondary" >
+              {parent}
+            </Typography>
+          </Link>
+          <Link
+            component={RouterLink}
+            to={"/" + name}>
             <Typography variant="h6" gutterBottom  >
               {name}
             </Typography>
@@ -132,7 +132,8 @@ const Resources = ({ articles }) => {
                   <Article key={art + i} art={art} />
                 )
               })
-            } </>}
+            } </>
+        }
         {showMore ? <>
           {
             articles.slice(4)

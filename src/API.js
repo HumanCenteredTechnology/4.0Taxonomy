@@ -18,12 +18,12 @@ const apiSettings = {
       body: formData,
 
     });
-    for (var key of formData.entries()) {
+    /* for (var key of formData.entries()) {
       console.log(key[0] + " : " + key[1])
-    }
+    } */
     //const data = await results.json();
     const data = await results.json()
-    console.log(await data)
+    //console.log(await data)
 
     /* const data =
     {
@@ -48,7 +48,7 @@ const apiSettings = {
     formData.append('abstract', article.abstract)
     formData.append('body', article.body)
 
-    console.log(JSON.stringify(Object.fromEntries(formData.entries())))
+    //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
     //invia il form
     const resp = await (await fetch(`${API_URL}add_article`, {
@@ -56,7 +56,7 @@ const apiSettings = {
       body: formData
     })).json();
     //const data = await resp.json()
-    console.log(await resp)
+    //console.log(await resp)
     //JSON.parse(JSON.stringify(resp))
     /* const response = {
       "found_elements":

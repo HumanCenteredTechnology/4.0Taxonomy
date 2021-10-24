@@ -4,11 +4,7 @@ import { Box, AppBar, Toolbar, IconButton } from '@mui/material';
 import { HomeRounded } from '@mui/icons-material';
 import StandardButton from '../controls/StandardButton';
 
-export const TopNavBar = ({ homeIcon }) => {
-    let navigate = useNavigate();
-    const homeButtonClick = () => {
-        navigate('/')
-    }
+const TopNavBar = ({ isHome, isForm }) => {
     return (
         <AppBar
             position="static"
@@ -20,20 +16,26 @@ export const TopNavBar = ({ homeIcon }) => {
             }}
         >
             <Toolbar>
-                {homeIcon ? <IconButton aria-label="home" onClick={homeButtonClick}>
+                {!isHome ? <IconButton aria-label="home" component={RouterLink} to="/">
                     <HomeRounded />
                 </IconButton>
                     : <></>}
                 <Box sx={{ flexGrow: 1 }} />
-                <StandardButton
-                    variant="text"
-                    text="Add Article"
-                    size="small"
-                    color="inherit"
-                    component={RouterLink}
-                    to="/form"
-                />
+                {!isForm ?
+                    <StandardButton
+                        variant="text"
+                        text="Add Article"
+                        size="small"
+                        color="inherit"
+                        component={RouterLink}
+                        to="/form"
+                    />
+                    : <></>
+                }
+
             </Toolbar>
         </AppBar>
     )
 }
+
+export default TopNavBar;

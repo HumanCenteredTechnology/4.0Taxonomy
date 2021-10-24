@@ -3,10 +3,9 @@ import { useParams, useNavigate, Link as RouterLink } from "react-router-dom";
 //Components
 import SearchBar from "../SearchBar";
 import Result from "../Result";
-import StandardButton from "../controls/StandardButton/";
 import NotFound from "../NotFound";
 import TopicChip from "../TopicChip";
-import { TopNavBar } from "../TopNavBar";
+import TopNavBar from "../TopNavBar";
 //hooks
 import { useFetch } from "../../hooks/useFetch";
 
@@ -31,21 +30,19 @@ const ResultsPage = () => {
 
     if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
       if (results.related_elements[0].at(3) === "Problems") {
-        setProblems(results.related_elements.filter(res => res[3] === "Problems"))
-        setTechnologies(results.unrelated_elements.filter(res => res[3] === "Technology"))
+        setProblems(results.related_elements)
+        setTechnologies(results.unrelated_elements)
       }
       if (results.related_elements[0].at(3) === "Technology") {
-        setProblems(results.unrelated_elements.filter(res => res[3] === "Problems"))
-        setTechnologies(results.related_elements.filter(res => res[3] === "Technology"))
+        setProblems(results.unrelated_elements)
+        setTechnologies(results.related_elements)
       }
-      console.log(problems)
-      console.log(technologies)
     }
   }, [results])
 
   return (
     <Container  >
-      <TopNavBar homeIcon={true} />
+      <TopNavBar />
       <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
       </Box>
@@ -81,9 +78,9 @@ const ResultsList = ({ problems, technologies, loading }) => {
         }}>
           <Typography variant="h5" >Needs ({problems.length})</Typography>
         </Box>
-        {problems.map((r_el, i) => {
+        {problems.map((el, i) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} loading={loading} />
+            <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} loading={loading} />
           );
         })}
       </Grid>
@@ -95,9 +92,9 @@ const ResultsList = ({ problems, technologies, loading }) => {
         }}>
           <Typography variant="h5" >Technologies ({technologies.length})</Typography>
         </Box>
-        {technologies.map((r_el, i) => {
+        {technologies.map((el, i) => {
           return (
-            <Result key={r_el[0]} name={r_el[0]} parent={r_el[1]} category={r_el[3]} articles={r_el[2]} loading={loading} />
+            <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} loading={loading} />
           );
         })}
       </Grid>

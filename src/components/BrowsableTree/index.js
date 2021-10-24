@@ -19,7 +19,7 @@ const BrowsableTree = () => {
         navigate("/" + id);
     }
     const renderItem = (nodes) => (
-        <TreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} >
+        <TreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label}  >
             {Array.isArray(nodes.subLevels)
                 ? nodes.subLevels.map((node) => renderItem(node))
                 : null}

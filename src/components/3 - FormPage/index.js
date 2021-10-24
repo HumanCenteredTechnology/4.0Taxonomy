@@ -5,6 +5,7 @@ import { Card, Container, makeStyles, AppBar, Toolbar, Box } from "@material-ui/
 //Components
 import AddArticleForm from "../AddArticleForm";
 import StandardButton from "../controls/StandardButton";
+import TopNavBar from "../TopNavBar";
 
 
 
@@ -33,28 +34,7 @@ const FormPage = () => {
   const classes = useStyles();
   return (
     <Container>
-      <AppBar
-        position="static"
-        edge="start"
-        color="transparent"
-        elevation={0}
-        sx={{
-          shadows: 0,
-
-        }}
-      >
-        <Toolbar>
-          <StandardButton
-            variant="text"
-            text="Go Back"
-            size="small"
-            color="default"
-            component={RouterLink} //se ci fosse un context si potrebbe tornare indietro
-            to="/"
-          />
-          <Box sx={{ flexGrow: 1 }} />
-        </Toolbar>
-      </AppBar>
+      <TopNavBar isForm={true} />
 
 
       <Card className={classes.pageContent} sx={{ width: "50%" }}>

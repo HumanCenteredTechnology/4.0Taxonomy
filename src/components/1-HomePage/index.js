@@ -5,7 +5,7 @@ import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
 import ViewMenuButton from "../controls/ViewMenuButton";
 import BrowsableTree from "../BrowsableTree/";
-import { TopNavBar } from "../TopNavBar";
+import TopNavBar from "../TopNavBar";
 
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
@@ -26,7 +26,7 @@ const HomePage = () => {
 
   return (
     <Container>
-      <TopNavBar homeIcon={false} />
+      <TopNavBar isHome={true} />
       <Box
         sx={{
           margin: "auto",
