@@ -44,7 +44,7 @@ const AddArticleForm = () => {
       <CardContent>
         <Grid container spacing={1}>
           <Grid  >
-            <Grid item md={10} lg={10} xs={10} xl={8}>
+            <Grid item md={10} lg={10} xs={10} xl={12}>
               <TextInput
                 variant="outlined"
                 label="Title"
@@ -77,31 +77,28 @@ const AddArticleForm = () => {
       </CardContent>
       <CardActions>
         <StandardButton
-          type="submit"
-          text="Submit"
-          onClick={handleSubmit}
-        />
-        <StandardButton
           text="Reset"
           color="default"
           onClick={handleReset}
         />
+        <Box sx={{ flexGrow: 1 }} />
+        <StandardButton
+          type="submit"
+          text="Submit"
+          onClick={handleSubmit}
+        />
       </CardActions>
-      
+
 
       {response.founded_elements ?
         <Dialog
-        open={open}
-        onClose={handleClose}
-        scroll="body"
-      >
-        <VerifySubmit response={response} handleClose={handleClose} />
-
-
-      </Dialog>
-        
-        : <> </>
-      /* la condizione così fa schifo, deve essere scritta meglio*/}
+          open={open}
+          onClose={handleClose}
+          scroll="body"
+        >
+          <VerifySubmit response={response} handleClose={handleClose} />
+        </Dialog>
+        : <> </>}
     </form>
   );
 };
