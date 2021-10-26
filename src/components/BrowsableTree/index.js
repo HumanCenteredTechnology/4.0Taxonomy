@@ -17,8 +17,11 @@ const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 const BrowsableTree = ({ isVerificationTree, responseTree }) => {
     const [needs, setNeeds] = useState(initialNeeds)
     const [tech, setTech] = useState(initialTech)
-
-
+    const [addCheckBox, setAddCheckBox] = useState(false)
+    useEffect(() => {
+        setAddCheckBox(isVerificationTree)
+        console.log(isVerificationTree)
+    }, [isVerificationTree])
 
     /* useEffect(() => {
         if (responseTree.length !== 0) {
@@ -32,13 +35,14 @@ const BrowsableTree = ({ isVerificationTree, responseTree }) => {
 
 
 
-    const renderItem = (nodes) => (
-        <CustomTreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} isVerificationTree={isVerificationTree} >
+    const renderItem = (nodes, addCheckBox) => (
+        <CustomTreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} addCheckBox={addCheckBox} >
             {Array.isArray(nodes.subLevels)
                 ? nodes.subLevels.map((node) => renderItem(node))
                 : null}
         </CustomTreeItem>
-    );
+    )
+
     return (
         <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={6}>
@@ -51,8 +55,7 @@ const BrowsableTree = ({ isVerificationTree, responseTree }) => {
                     defaultExpandIcon={<ChevronRightIcon />}
                     isVerificationTree={isVerificationTree}
                     sx={{ maxHeight: 400, flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialNeeds.map(n => (renderItem(n)))}
-
+                    {initialNeeds.map((n, addCheckBox) => (renderItem(n, addCheckBox)))}
                 </ TreeView>
             </Grid>
             <Grid item xs={12} sm={12} md={6}>
@@ -64,7 +67,7 @@ const BrowsableTree = ({ isVerificationTree, responseTree }) => {
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
                     sx={{ height: 400, flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialTech.map(n => (renderItem(n)))}
+                    {initialTech.map((n, addCheckBox) => (renderItem(n, addCheckBox)))}
                 </ TreeView>
             </Grid>
 
@@ -81,7 +84,7 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
         icon: iconProp,
         expansionIcon,
         displayIcon,
-        isVerificationTree
+        addCheckBox
     } = props;
 
     const {
@@ -111,6 +114,7 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
     let navigate = useNavigate();
 
     const handleClick = () => {
+
         navigate("/" + label);
     }
     return (
@@ -129,7 +133,7 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
             <div onClick={handleExpansionClick} className={classes.iconContainer}>
                 {icon}
             </div>
-            {isVerificationTree ?
+            {addCheckBox ?
                 <>
                     <Typography
                         onClick={handleSelectionClick}

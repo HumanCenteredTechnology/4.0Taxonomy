@@ -25,7 +25,7 @@ const apiSettings = {
     } */
     //const data = await results.json();
     const data = await results.json()
-    //console.log(await data)
+    console.log(await data)
 
     /* const data =
     {

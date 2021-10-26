@@ -54,7 +54,7 @@ const HomePage = () => {
         </Box>
 
         {menuOpened && (
-          <BrowsableTree />
+          <BrowsableTree isVerificationTree={false} />
         )}
 
       </Container>

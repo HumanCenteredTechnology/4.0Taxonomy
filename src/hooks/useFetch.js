@@ -36,6 +36,7 @@ export const useFetch = (queryId) => {
           }));
           setFound(true)
           console.log("found")
+          //console.log(results)
         }
 
         //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)

@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { IconButton, Autocomplete, TextField, Typography, Grid, Box, DialogActions, DialogContent, DialogTitle, Stepper, Step, StepLabel, FormControl, FormControlLabel, Checkbox, FormGroup, FormLabel, List, ListItem, ListItemText } from '@mui/material'
+import { IconButton, Autocomplete, TextField, Typography, Box, DialogActions, DialogContent, DialogTitle, Stepper, Step, StepLabel, FormControl, FormControlLabel, Checkbox, FormGroup, FormLabel, List, ListItem, ListItemText, Menu, MenuItem, InputLabel, ListSubheader, Select } from '@mui/material'
 import HighlightOffRoundedIcon from '@mui/icons-material/HighlightOffRounded';
 import TopicChip from '../TopicChip'
 import StandardButton from '../controls/StandardButton'
 import BrowsableTree from '../BrowsableTree'
+import OptionList from '../OptionList';
+import taxonomy from "../../taxonomy.json";
+const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).subLevels))
+const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 const initialResponse = {
     "founded_elements":
         [
@@ -20,6 +24,8 @@ const initialResponse = {
         ]
 }
 
+const dialogTitles = ['Check inside the database', 'Check outside the database', 'Identify topics']
+
 const VerifySubmit = ({ response, handleClose }) => {
 
 
@@ -27,6 +33,7 @@ const VerifySubmit = ({ response, handleClose }) => {
     const [notFoundElements, setNotFoundElements] = useState(initialResponse.not_founded_elements)
     const [selectedEl, setSelectedEl] = useState([]);
     const [toIdentify, setToIdentify] = useState(false)
+    const [checkedEl, setCheckedEl] = useState({ selectedOptions: [] })
     const [steps, setSteps] = useState(['Check inside the database', 'Check outside the database']);
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
@@ -109,13 +116,44 @@ const VerifySubmit = ({ response, handleClose }) => {
         setNotFoundElements(notFoundElements => [...notFoundElements, value])
         setSelectedEl(selectedEl.filter(el => el !== value))
     }
+    const ITEM_HEIGHT = 48;
+    const ITEM_PADDING_TOP = 8;
+    const MenuProps = {
+        PaperProps: {
+            style: {
+                maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+                width: 250,
+            },
+        },
+    };
+
+
+    const identifyEl = (el) => (
+        <Box>
+            <Typography variant="body1">{el}</Typography>
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+                <OptionList
+                    options={initialNeeds}
+                    onChange={(selectedOptions) => ({
+
+                        selectedOptions: [selectedOptions],
+                        //setCheckedEl(selectedOptions)
+
+                    })}
+                    selectedOptions={checkedEl} />
+
+            </FormControl>
+        </Box>
+    )
+
+
 
     return (
         <Box>
             <Box sx={{ m: 1 }} >
                 <StepperView activeStep={activeStep} isStepOptional={isStepOptional} isStepSkipped={isStepSkipped} steps={steps} />
             </Box>
-            <DialogTitle>Confirm submission</DialogTitle>
+            <DialogTitle>{dialogTitles[activeStep]}</DialogTitle>
             <DialogContent>
                 {activeStep === 0 ?
                     <Box sx={{ my: 2 }}>
@@ -152,6 +190,7 @@ const VerifySubmit = ({ response, handleClose }) => {
                         : activeStep === 2 ?
                             <Box sx={{ my: 4, mx: 5 }}>
                                 <Typography variant="body1">Identify .... </Typography>
+                                {Array.isArray(selectedEl) ? selectedEl.map((el, i) => identifyEl(el, i)) : <></>}
                             </Box>
                             : <></>
                 }
@@ -233,5 +272,7 @@ const FormCheck = ({ foundElements }) => {
         </Box>
     )
 }
+
+
 
 export default VerifySubmit
