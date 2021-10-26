@@ -19,7 +19,6 @@ const initialResponse = {
             ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
 }
-const steps = ['Check inside the database', 'Check outside the database'];
 
 const VerifySubmit = ({ response, handleClose }) => {
 
@@ -27,6 +26,8 @@ const VerifySubmit = ({ response, handleClose }) => {
     const [foundElements, setFoundElements] = useState(initialResponse.founded_elements)
     const [notFoundElements, setNotFoundElements] = useState(initialResponse.not_founded_elements)
     const [selectedEl, setSelectedEl] = useState([]);
+    const [toIdentify, setToIdentify] = useState(false)
+    const [steps, setSteps] = useState(['Check inside the database', 'Check outside the database']);
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
 
@@ -44,9 +45,9 @@ const VerifySubmit = ({ response, handleClose }) => {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
-
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
+
     };
 
     const handleBack = () => {
@@ -77,10 +78,23 @@ const VerifySubmit = ({ response, handleClose }) => {
         setNotFoundElements(response.not_founded_elements)
 
     }, [response])
+
+    useEffect(() => {
+
+        if (selectedEl.length > 0 && toIdentify === false) {
+            setToIdentify(true)
+            setSteps(steps.concat('Identify topics'))
+        }
+        if (selectedEl.length === 0 && toIdentify === true) {
+            setToIdentify(false)
+            setSteps(steps.filter(s => s !== 'Identify topics'))
+        }
+
+        //console.log(steps, toIdentify)
+    }, [selectedEl])
     //qui prende i valori dall'autocomplete e li mette nello stato
     const handleChange = (e, value) => {
         setSelectedEl(value)
-        console.log(selectedEl)
     }
 
     const handleSelection = (el, i) => (
@@ -91,50 +105,55 @@ const VerifySubmit = ({ response, handleClose }) => {
     )
 
     const handleDeleteEl = (e) => {
-        setNotFoundElements(notFoundElements => [...notFoundElements, e.currentTarget.value])
-        setSelectedEl(selectedEl.filter(el => el !== e.currentTarget.value))
-        console.log(selectedEl)
+        let value = e.currentTarget.value
+        setNotFoundElements(notFoundElements => [...notFoundElements, value])
+        setSelectedEl(selectedEl.filter(el => el !== value))
     }
 
     return (
         <Box>
             <Box sx={{ m: 1 }} >
-                <StepperView activeStep={activeStep} isStepOptional={isStepOptional} isStepSkipped={isStepSkipped} />
+                <StepperView activeStep={activeStep} isStepOptional={isStepOptional} isStepSkipped={isStepSkipped} steps={steps} />
             </Box>
             <DialogTitle>Confirm submission</DialogTitle>
             <DialogContent>
-                {activeStep == 0 ?
+                {activeStep === 0 ?
                     <Box sx={{ my: 2 }}>
                         <p>Found in the taxonomy</p>
                         <FormCheck foundElements={foundElements} />
                     </Box>
-                    :
-                    <Box sx={{ my: 4, mx: 5 }}>
-                        <p>Not found in the taxonomy (click to add)</p>
-                        <Autocomplete
-                            sx={{ width: 400 }}
-                            multiple
-                            renderTags={() => null}
-                            id="tags-outlined"
-                            options={notFoundElements}
-                            getOptionLabel={(option) => option}
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    variant="standard"
-                                    label=""
-                                    placeholder="Click to add"
-                                />
-                            )}
-                            onChange={handleChange}
-                            value={selectedEl}
-                            filterSelectedOptions
-                        />
-                        <Typography variant="body1">Selected topics: </Typography>
-                        <List sx={{ width: 400 }}>
-                            {Array.isArray(selectedEl) ? selectedEl.map((el, i) => handleSelection(el, i)) : <></>}
-                        </List>
-                    </Box>
+                    : activeStep === 1 ?
+                        <Box sx={{ my: 4, mx: 5 }}>
+                            <p>Not found in the taxonomy (click to add)</p>
+                            <Autocomplete
+                                sx={{ width: 400 }}
+                                multiple
+                                renderTags={() => null}
+                                id="tags-outlined"
+                                options={notFoundElements}
+                                getOptionLabel={(option) => option}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        variant="standard"
+                                        label=""
+                                        placeholder="Click to add"
+                                    />
+                                )}
+                                onChange={handleChange}
+                                value={selectedEl}
+                                filterSelectedOptions
+                            />
+                            <Typography variant="body1">Selected topics: </Typography>
+                            <List sx={{ width: 400 }}>
+                                {Array.isArray(selectedEl) ? selectedEl.map((el, i) => handleSelection(el, i)) : <></>}
+                            </List>
+                        </Box>
+                        : activeStep === 2 ?
+                            <Box sx={{ my: 4, mx: 5 }}>
+                                <Typography variant="body1">Identify .... </Typography>
+                            </Box>
+                            : <></>
                 }
             </DialogContent>
             <DialogActions>
@@ -151,7 +170,7 @@ const VerifySubmit = ({ response, handleClose }) => {
     )
 }
 
-const StepperView = ({ activeStep, isStepOptional, isStepSkipped }) => {
+const StepperView = ({ activeStep, isStepOptional, isStepSkipped, steps }) => {
     return (
         <Stepper activeStep={activeStep}>
             {steps.map((label, index) => {

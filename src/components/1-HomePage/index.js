@@ -25,39 +25,40 @@ const HomePage = () => {
   };
 
   return (
-    <Container>
+    <Box>
       <TopNavBar isHome={true} />
-      <Box
-        sx={{
-          margin: "auto",
-          my: 5,
-          width: 500,
-          maxWidth: "100%"
-        }}>
-        <Typography align="center" variant="h1">Search4.0</Typography>
-      </Box>
-      <SearchBar setSearchMention={setSearchMention} />
-      <Box
-        sx={{
-          mx: "auto",
-          my: 5,
-          width: 250,
-          alignContent: "center"
-        }}>
-        <StandardButton
-          variant="text"
-          size="small"
-          color="default"
-          onClick={handleOpenMenuClick}
-          text="OR EXPLORE THE DATABASE">
-        </ StandardButton>
-      </Box>
+      <Container>
 
-      {menuOpened && (
-        <BrowsableTree />
-      )}
+        <Box
+          sx={{
+            margin: "auto",
+            my: 5,
+          }}>
+          <Typography align="center" variant="h1">Search4.0</Typography>
+        </Box>
+        <SearchBar setSearchMention={setSearchMention} />
+        <Box
+          sx={{
+            mx: "auto",
+            my: 5,
+            width: 250,
+            alignContent: "center"
+          }}>
+          <StandardButton
+            variant="text"
+            size="small"
+            color="default"
+            onClick={handleOpenMenuClick}
+            text="OR EXPLORE THE DATABASE">
+          </ StandardButton>
+        </Box>
 
-    </Container>
+        {menuOpened && (
+          <BrowsableTree />
+        )}
+
+      </Container>
+    </Box>
   );
 };
 

@@ -10,9 +10,6 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 const SearchBox = styled(TextField)(({ theme }) => ({
   "& fieldset": {
     borderRadius: "30px",
-    [theme.breakpoints.down('md')]: {
-      maxWidth: "300",
-    },
   },
 
 }));
@@ -38,7 +35,6 @@ const SearchBar = ({ size, setSearchMention }) => {
       <Box
         sx={{
           margin: "auto",
-          width: 500,
           maxWidth: "80%",
           bgcolor: "white",
           borderRadius: 30,

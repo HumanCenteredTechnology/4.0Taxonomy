@@ -14,9 +14,15 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
 import { Skeleton, IconButton } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from "@mui/material/styles";
+
+
 
 
 const ResultsPage = () => {
+  const theme = useTheme()
+  const hidden = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { queryId } = useParams();
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
@@ -41,27 +47,34 @@ const ResultsPage = () => {
   }, [results])
 
   return (
-    <Container  >
+    <Box>
       <TopNavBar />
-      {/* <Box sx={{ marginY: 5 }}>
-        <SearchBar setSearchMention={setSearchMention} />
-      </Box> */}
-      {!error ?
-        <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
-        </Typography>
-        :
-        <></>}
-      <Box sx={{ marginY: 3 }}>
-        <Divider margin={2} variant="middle" />
-      </Box>
-      <Grid container spacing={3}>
-        {found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} />}
-        {/* <ResultsList problems={problems} technologies={technologies} /> */}
-      </Grid>
-      {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
+      <Container  >
+        {hidden ? <></> :
+          <Box sx={{ marginY: 5 }}>
+            <SearchBar sx={{}} setSearchMention={setSearchMention} />
+          </Box>
+        }
+
+        {!error ?
+          <Box sx={{ marginY: 2 }}>
+            <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
+            </Typography>
+          </Box>
+          :
+          <></>}
+        <Box sx={{ marginY: 3 }}>
+          <Divider margin={2} variant="middle" />
+        </Box>
+        <Grid container spacing={3}>
+          {found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} />}
+          {/* <ResultsList problems={problems} technologies={technologies} /> */}
+        </Grid>
+        {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
         {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
       </Box> */}
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
