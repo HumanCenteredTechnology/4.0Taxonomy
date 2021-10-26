@@ -97,7 +97,7 @@ const VerifySubmit = ({ response, handleClose }) => {
     }
 
     return (
-        <>
+        <Box>
             <Box sx={{ m: 1 }} >
                 <StepperView activeStep={activeStep} isStepOptional={isStepOptional} isStepSkipped={isStepSkipped} />
             </Box>
@@ -109,9 +109,10 @@ const VerifySubmit = ({ response, handleClose }) => {
                         <FormCheck foundElements={foundElements} />
                     </Box>
                     :
-                    <Box sx={{ my: 4 }}>
+                    <Box sx={{ my: 4, mx: 5 }}>
                         <p>Not found in the taxonomy (click to add)</p>
                         <Autocomplete
+                            sx={{ width: 400 }}
                             multiple
                             renderTags={() => null}
                             id="tags-outlined"
@@ -130,9 +131,7 @@ const VerifySubmit = ({ response, handleClose }) => {
                             filterSelectedOptions
                         />
                         <Typography variant="body1">Selected topics: </Typography>
-
-
-                        <List>
+                        <List sx={{ width: 400 }}>
                             {Array.isArray(selectedEl) ? selectedEl.map((el, i) => handleSelection(el, i)) : <></>}
                         </List>
                     </Box>
@@ -147,11 +146,8 @@ const VerifySubmit = ({ response, handleClose }) => {
                 <StandardButton
                     text={activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                     onClick={handleNext} />
-
-
             </DialogActions>
-
-        </>
+        </ Box>
     )
 }
 
@@ -199,9 +195,8 @@ const FormCheck = ({ foundElements }) => {
 
     return (
         <Box sx={{
-            width: '100%',
-            bgcolor: 'background.paper',
-            position: 'relative',
+            width: '80%',
+            margin: "0 auto",
             overflow: 'auto',
             maxHeight: 400,
             '& ul': { padding: 0 },

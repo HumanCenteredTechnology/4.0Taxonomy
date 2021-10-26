@@ -4,6 +4,7 @@ const API_URL = "http://localhost:5000/";
 
 const apiSettings = {
   fetchResults: async (queryId) => {
+    if (queryId === "" || queryId === undefined) return {};
     //prepara il form da inviare
     const formData = new FormData()
     formData.append('search-input', queryId)

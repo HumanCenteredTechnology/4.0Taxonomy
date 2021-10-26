@@ -92,6 +92,8 @@ const AddArticleForm = () => {
 
       {response.founded_elements ?
         <Dialog
+          fullWidth
+          maxWidth="md"
           open={open}
           onClose={handleClose}
           scroll="body"

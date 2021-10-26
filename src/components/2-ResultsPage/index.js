@@ -43,9 +43,9 @@ const ResultsPage = () => {
   return (
     <Container  >
       <TopNavBar />
-      <Box sx={{ marginY: 5 }}>
+      {/* <Box sx={{ marginY: 5 }}>
         <SearchBar setSearchMention={setSearchMention} />
-      </Box>
+      </Box> */}
       {!error ?
         <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
         </Typography>
