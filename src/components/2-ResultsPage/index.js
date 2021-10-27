@@ -22,7 +22,7 @@ import { useTheme } from "@mui/material/styles";
 
 const ResultsPage = () => {
   const theme = useTheme()
-  const hidden = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { queryId } = useParams();
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
@@ -50,7 +50,7 @@ const ResultsPage = () => {
     <Box>
       <TopNavBar isResults={true} />
       <Container  >
-        {hidden ? <></> :
+        {isSmallDevice ? <></> :
           <Box sx={{ marginY: 5 }}>
             <SearchBar setSearchMention={setSearchMention} />
           </Box>
