@@ -33,15 +33,18 @@ const useStyles = makeStyles((theme) => ({
 const FormPage = () => {
   const classes = useStyles();
   return (
-    <Container>
+    <Box>
       <TopNavBar isForm={true} />
+      <Container>
 
 
-      <Card className={classes.pageContent} sx={{ width: "50%" }}>
-        <AddArticleForm />
-      </Card>
 
-    </ Container>
+        <Card className={classes.pageContent} sx={{ width: "50%" }}>
+          <AddArticleForm />
+        </Card>
+
+      </ Container>
+    </Box>
   );
 };
 

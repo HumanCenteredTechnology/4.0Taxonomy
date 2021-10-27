@@ -34,7 +34,7 @@ const HomePage = () => {
             margin: "auto",
             my: 5,
           }}>
-          <Typography align="center" variant="h1">Search4.0</Typography>
+          <Typography align="center" variant="h1">Planet4 Taxonomy Explorer</Typography>
         </Box>
         <SearchBar setSearchMention={setSearchMention} />
         <Box

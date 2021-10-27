@@ -89,7 +89,7 @@ const ResultsList = ({ problems, technologies, loading }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h5" >Needs ({problems.length})</Typography>
+          <Typography variant="h5" > Business Needs ({problems.length})</Typography>
         </Box>
         {problems.map((el, i) => {
           return (
@@ -103,7 +103,7 @@ const ResultsList = ({ problems, technologies, loading }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h5" >Technologies ({technologies.length})</Typography>
+          <Typography variant="h5" >Enabling Technologies ({technologies.length})</Typography>
         </Box>
         {technologies.map((el, i) => {
           return (
