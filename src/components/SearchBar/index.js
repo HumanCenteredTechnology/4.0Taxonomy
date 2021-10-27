@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 
 //Styles
-
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { Box, styled, TextField } from "@material-ui/core";
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -14,9 +15,12 @@ const SearchBox = styled(TextField)(({ theme }) => ({
 
 }));
 
-const SearchBar = ({ size, setSearchMention }) => {
+const SearchBar = ({ size, maxWidth, setSearchMention }) => {
   const { queryId } = useParams();
   const [state, setState] = useState("");    //da controllare, passa da input non controllato a controllato
+
+
+
 
   useEffect(() => {
     setState(queryId)
@@ -30,12 +34,14 @@ const SearchBar = ({ size, setSearchMention }) => {
     setSearchMention(state);
     navigate("/" + state);
   };
+
+
   return (
     <form className="searchBar" onSubmit={handleSubmit}>
       <Box
         sx={{
           margin: "auto",
-          maxWidth: "80%",
+          maxWidth: maxWidth || "60%",
           bgcolor: "white",
           borderRadius: 30,
         }}

@@ -48,11 +48,11 @@ const ResultsPage = () => {
 
   return (
     <Box>
-      <TopNavBar />
+      <TopNavBar isResults={true} />
       <Container  >
         {hidden ? <></> :
           <Box sx={{ marginY: 5 }}>
-            <SearchBar sx={{}} setSearchMention={setSearchMention} />
+            <SearchBar setSearchMention={setSearchMention} />
           </Box>
         }
 
