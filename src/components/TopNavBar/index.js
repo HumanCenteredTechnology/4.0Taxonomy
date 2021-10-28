@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useFetch } from '../../hooks/useFetch';
 import { useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, AppBar, Toolbar, IconButton, useScrollTrigger } from '@mui/material';
@@ -30,7 +30,7 @@ const ElevationScroll = ({ children, isSmallDevice, isHome }) => {
     if (children.type === SearchBar) {
         return (
             <Fade in={trigger}>
-                <Box>
+                <Box sx={{ flexGrow: 1 }}>
                     {children}
                 </Box>
             </Fade>
@@ -45,8 +45,8 @@ const TopNavBar = ({ isHome, isResults, isForm, children }) => {
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const { queryId } = useParams();
-
     const { setSearchMention } = useFetch(queryId);
+
     return (
         <CssBaseline>
             <ElevationScroll children={children} hidden={isSmallDevice} isResults={isResults} isHome={isHome}>
@@ -60,11 +60,11 @@ const TopNavBar = ({ isHome, isResults, isForm, children }) => {
                             <HomeRounded />
                         </IconButton>
                             : <></>}
-                        <Box sx={{ flexGrow: 1 }} />
+                        {isSmallDevice ? <Box sx={{ flexGrow: 1 }} /> : <></>}
 
                         {isResults ? isSmallDevice ?
                             <SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"100%"} />
-                            : <ElevationScroll children={children}><SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"27em"} /></ElevationScroll>
+                            : <ElevationScroll children={children}><SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"80%"} /></ElevationScroll>
                             : <></>}
                         <Box sx={{ flexGrow: 1 }} />
                         {!isForm ?

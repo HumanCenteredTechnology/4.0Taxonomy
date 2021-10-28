@@ -7,45 +7,23 @@ import StandardButton from '../controls/StandardButton'
 import BrowsableTree from '../BrowsableTree'
 import CheckBoxTree from '../CheckBoxTree';
 import taxonomy from "../../taxonomy.json";
+import VerifySubmit from '../VerifySubmit';
 const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).subLevels))
 const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 
-/* const useStyles = makeStyles((theme) => ({
-    root: {
-        "& .MuiFormControl-root": {
-
-            margin: theme.spacing(2),
-        },
-    },
-})); */
-const initialResponse = {
-    "founded_elements":
-        [
-            ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-            ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]],
-            ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-            ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-
-        ],
-    "not_founded_elements":
-        [
-            ["Computer", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-            ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-        ]
-}
-
-
-const VerifySubmit = ({ response, steps, setSteps }) => {
+const VerifySubmit2 = ({ response, steps, setSteps }) => {
     //const classes = useStyles();
 
-    const [foundElements, setFoundElements] = useState([])
+
+    const [notFoundElements, setNotFoundElements] = useState([])
     const [selectedEl, setSelectedEl] = useState([]);
     const [toIdentify, setToIdentify] = useState(false)
 
 
 
     useEffect(() => {
-        setFoundElements(response.founded_elements)
+        setNotFoundElements(response.not_founded_elements)
+
     }, [response])
 
     useEffect(() => {
@@ -73,6 +51,7 @@ const VerifySubmit = ({ response, steps, setSteps }) => {
 
     const handleDeleteEl = (e) => {
         let value = e.currentTarget.value
+        setNotFoundElements(notFoundElements => [...notFoundElements, value])
         setSelectedEl(selectedEl.filter(el => el !== value))
     }
 
@@ -80,19 +59,37 @@ const VerifySubmit = ({ response, steps, setSteps }) => {
     return (
         <form autoComplete="off">
             <CardHeader
-                title="Check inside database"
-                subheader="Check explanation..."
+                title="Not found in the taxonomy"
+                subheader="click to add..."
             />
             <CardContent>
-
                 <Box sx={{ my: 2 }}>
-                    <p>Found in the taxonomy</p>
-                    <FormCheck foundElements={foundElements} />
+                    <Autocomplete
+                        sx={{ width: 400 }}
+                        multiple
+                        renderTags={() => null}
+                        id="tags-outlined"
+                        options={notFoundElements}
+                        getOptionLabel={(option) => option}
+                        renderInput={(params) => (
+                            <TextField
+                                {...params}
+                                variant="standard"
+                                label=""
+                                placeholder="Click to add"
+                            />
+                        )}
+                        onChange={handleChange}
+                        value={selectedEl}
+                        filterSelectedOptions
+                    />
+                    <Typography variant="body1">Selected topics: </Typography>
+                    <List sx={{ width: 400 }}>
+                        {Array.isArray(selectedEl) ? selectedEl.map((el, i) => handleSelection(el, i)) : <></>}
+                    </List>
                 </Box>
-
             </CardContent>
             <CardActions>
-
             </CardActions>
         </ form>
     )
@@ -101,44 +98,7 @@ const VerifySubmit = ({ response, steps, setSteps }) => {
 
 
 
-const FormCheck = ({ foundElements }) => {
-    const [needs, setNeeds] = useState([])
-    const [tech, setTech] = useState([])
 
-
-
-    useEffect(() => {
-        if (foundElements.length !== 0) {
-            setNeeds(foundElements.filter(el => el[1] === "Problems"))
-            setTech(foundElements.filter(el => el[1] === "Technology"))
-        }
-    }, [foundElements])
-
-    const renderForm = (el) => (
-        <FormControlLabel control={<Checkbox defaultChecked />} label={el[0]} />
-    )
-
-    return (
-        <Box sx={{
-            width: '80%',
-            margin: "0 auto",
-            overflow: 'auto',
-            maxHeight: 400,
-            '& ul': { padding: 0 },
-        }}>
-            <FormControl>
-                <FormLabel>Needs</FormLabel>
-                <FormGroup>
-                    {needs.map(el => (renderForm(el)))}
-                </FormGroup>
-                <FormLabel>Technologies</FormLabel>
-                <FormGroup>
-                    {tech.map(el => (renderForm(el)))}
-                </FormGroup>
-            </ FormControl>
-        </Box>
-    )
-}
 
 const IdentifyEl = ({ el }) => {
     const [selectValue, setSelectValue] = useState([])
@@ -149,7 +109,6 @@ const IdentifyEl = ({ el }) => {
         setInternalValue(checkedEl)
         console.log(internalValue)
     }
-
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
     const MenuProps = {
@@ -161,9 +120,6 @@ const IdentifyEl = ({ el }) => {
             },
         },
     };
-
-
-
     return (
         <Box>
             <Typography variant="body1">{el}</Typography>
@@ -183,23 +139,8 @@ const IdentifyEl = ({ el }) => {
                         internalValue={internalValue} />
                 </Select>
             </FormControl>
-
         </Box>
     )
 }
 
-
-{/* */ }
-
-{/* <Box sx={{ my: 4, mx: 5 }}>
-    <Typography variant="body1">Identify .... </Typography>
-    {selectedEl.map((el, i) => {
-        return (
-            <IdentifyEl el={el} />
-        );
-    })}
-</Box> */}
-
-
-
-export default VerifySubmit
+export default VerifySubmit2;

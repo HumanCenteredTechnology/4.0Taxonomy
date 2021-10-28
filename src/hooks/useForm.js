@@ -11,6 +11,7 @@ export const useForm = () => {
   const [errors, setErrors] = useState({});
   const [response, setResponse] = useState({})
   const [loaded, setLoaded] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +24,7 @@ export const useForm = () => {
   const handleReset = () => {
     setErrors({});
     setValues(initialValues);
+    setIsSubmit(false)
   }
 
   const validate = () => {
@@ -36,12 +38,14 @@ export const useForm = () => {
 
   const submit = async () => {
     setLoaded(false)
+    console.log(isSubmit)
     if (validate()) {
       console.log("submitting...");
       setResponse(await API.submitArticle(values));
+      setIsSubmit(true)
       setLoaded(true)
     }
   }
 
-  return { values, setValues, errors, setErrors, handleChange, handleReset, validate, submit, response, loaded };
+  return { values, setValues, errors, setErrors, handleChange, handleReset, validate, submit, isSubmit, setIsSubmit, response, loaded };
 };

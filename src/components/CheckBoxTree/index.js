@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Checkbox, FormControlLabel, Box, MenuItem } from "@mui/material";
 
 
-const CheckBoxTree = ({ initialNeeds, sendToParent }) => {
+const CheckBoxTree = ({ initialNeeds, sendToParent, internalValue }) => {
     const [checkedEl, setCheckedEl] = useState([])
     const [checkedElPlain, setCheckedElPlain] = useState([])
 
@@ -17,10 +17,11 @@ const CheckBoxTree = ({ initialNeeds, sendToParent }) => {
             return newKeys
         }, [])
     }
+
     useEffect(() => {
         setCheckedElPlain(flatten(checkedEl))
-        console.log(checkedElPlain)
-        sendToParent(checkedElPlain)
+
+        sendToParent(checkedEl, checkedElPlain)
     }, [checkedEl])
     return (
         <OptionList
@@ -30,7 +31,7 @@ const CheckBoxTree = ({ initialNeeds, sendToParent }) => {
                     ...selectedOptions,
                 })
             }}
-            selectedOptions={checkedEl} />
+            selectedOptions={!Object.keys(internalValue).length === 0 ? checkedEl : internalValue} />
     )
 }
 

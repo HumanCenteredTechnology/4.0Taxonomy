@@ -21,19 +21,9 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const AddArticleForm = () => {
-  const { values, errors, handleChange, handleReset, submit, response } = useForm();
+const AddArticleForm = ({ values, errors, handleChange, handleReset, handleSubmit }) => {
   const classes = useStyles();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    submit();
-    handleOpen()
-  };
-
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">
@@ -90,7 +80,7 @@ const AddArticleForm = () => {
       </CardActions>
 
 
-      {response.founded_elements ?
+      {/* {response.founded_elements ?
         <Dialog
           fullWidth
           maxWidth="md"
@@ -100,7 +90,7 @@ const AddArticleForm = () => {
         >
           <VerifySubmit response={response} handleClose={handleClose} />
         </Dialog>
-        : <> </>}
+        : <> </>} */}
     </form>
   );
 };
