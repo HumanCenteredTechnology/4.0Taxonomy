@@ -9,12 +9,12 @@ const initialState = {
 };
 
 export const useFetch = (queryId) => {
-  //per il fetch riceve la searchMention come stato da SearchBar
   const [searchMention, setSearchMention] = useState("");
   const [results, setResults] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
+  const [queryMatch, setQueryMatch] = useState();
 
   useEffect(() => {
     const fetch = async () => {
@@ -49,6 +49,15 @@ export const useFetch = (queryId) => {
     fetch()
   }, [queryId])
 
+  /* useEffect(() => {
+    const fetchMatch = async () => {
+      const fetchAutocomplete = await API.fetchAutocomplete(queryId);
+      setQueryMatch(fetchAutocomplete);
+    }
 
-  return { results, loading, error, searchMention, setSearchMention, found };
+    fetchMatch()
+  }, [])
+ */
+
+  return { results, loading, error, searchMention, setSearchMention, found, queryMatch, setQueryMatch };
 };

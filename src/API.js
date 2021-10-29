@@ -3,6 +3,18 @@ const API_URL = "http://localhost:5000/";
 
 
 const apiSettings = {
+  fetchAutocomplete: async (query) => {
+    const response = await fetch(`${API_URL}search?word=${query}`, {
+      method: "GET",
+    });
+    if (response.ok) {
+      const data = response.json()
+      JSON.parse(JSON.stringify(data))
+      //console.log(await data)
+      return data
+    }
+
+  },
   fetchResults: async (queryId) => {
     //se non c'è nessuna
     if (queryId === "" || queryId === undefined) return {};
