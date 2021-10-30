@@ -8,13 +8,17 @@ const initialState = {
   unrelated_elements: []
 };
 
+const initialQueries = { word: [] }
+
 export const useFetch = (queryId) => {
+  const [query, setQuery] = useState("");
   const [searchMention, setSearchMention] = useState("");
   const [results, setResults] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
-  const [queryMatch, setQueryMatch] = useState();
+  const [options, setOptions] = useState(initialQueries)
+  const [queryMatch, setQueryMatch] = useState(initialQueries);
 
   useEffect(() => {
     const fetch = async () => {
@@ -49,15 +53,28 @@ export const useFetch = (queryId) => {
     fetch()
   }, [queryId])
 
-  /* useEffect(() => {
+  useEffect(() => {
     const fetchMatch = async () => {
-      const fetchAutocomplete = await API.fetchAutocomplete(queryId);
-      setQueryMatch(fetchAutocomplete);
+      try {
+        const fetchAutocomplete = await API.fetchAutocomplete(query);
+        if (fetchAutocomplete == null) {
+          console.log("not found")
+          setQueryMatch(initialQueries)
+        } else if (fetchAutocomplete.word != null) {
+          setQueryMatch(() => ({
+            ...fetchAutocomplete
+          }))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
     }
-
     fetchMatch()
-  }, [])
- */
+  }, [query])
+  useEffect(() => {
+    if (queryMatch != null) setOptions(queryMatch.word)
+  }, [queryMatch])
 
-  return { results, loading, error, searchMention, setSearchMention, found, queryMatch, setQueryMatch };
+  return { results, loading, error, setQuery, searchMention, setSearchMention, found, queryMatch, setQueryMatch, options };
 };

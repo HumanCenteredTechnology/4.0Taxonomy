@@ -3,10 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import API from "../../API";
 
 //Styles
-import { useTheme } from '@mui/material/styles';
+import { styled, alpha } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { Box, styled, Divider } from "@material-ui/core";
-import { Autocomplete, TextField } from "@mui/material";
+import { Box, Divider } from "@material-ui/core";
+import { Autocomplete, TextField, IconButton, Paper } from "@mui/material";
 import InputAdornment from '@mui/material/InputAdornment';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
@@ -16,58 +16,46 @@ const SearchBox = styled(TextField)(({ theme }) => ({
   "& fieldset": {
     borderRadius: "30px",
   },
+  "& .MuiOutlinedInput-root": {
+    '&:hover fieldset': {
+      border: `${1}px solid`,
+      borderColor: `${theme.palette.grey[400]}`,
+      boxShadow: `${theme.shadows[4]}`,
+    },
+    "&.Mui-focused fieldset": {
+      border: `${1}px solid`,
+      borderColor: `${theme.palette.grey[400]}`,
+      width: "100%",
+      boxShadow: `${theme.shadows[4]}`,
+      transition: "width 200ms ease- out"
+    }
+  }
 
 }));
 
-const initialQueries = ["s", "as"]
 
 
-const SearchBar = ({ size, maxWidth, setSearchMention }) => {
+
+const SearchBar = ({ size, maxWidth }) => {
   const { queryId } = useParams();
-  const [query, setQuery] = useState("");
-  const [options, setOptions] = useState(initialQueries)
-  const { queryMatch, setQueryMatch } = useFetch(initialQueries);
+  const { setQuery, options, setSearchMention } = useFetch();
 
   useEffect(() => {
     setQuery(queryId)
   }, [queryId])
 
-  useEffect(() => {
-    const fetchMatch = async () => {
-      const fetchAutocomplete = await API.fetchAutocomplete(query);
-      if (fetchAutocomplete == null) {
-        console.log("not found")
-      } else {
-        setQueryMatch(() => ({
-          word: [...fetchAutocomplete.word]
-        }))
-        console.log(queryMatch)
-      }
-
-    }
-
-
-    fetchMatch()
-
-  }, [query])
-
-  useEffect(() => {
-    //setOptions(queryMatch)
-  }, [queryMatch])
-
   let navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    if (query === "" || query === undefined) return;
-    setSearchMention(query);
-    navigate("/" + query);
+  const handleSubmit = (e, value) => {
+    console.log(value)
+    if (value === "" || value === undefined) return;
+    setSearchMention(value);
+    navigate("/" + value);
   };
   const searchQueryMatches = (input) => {
   }
 
-
   return (
-
     <Box
       sx={{
         margin: "auto",
@@ -78,32 +66,39 @@ const SearchBar = ({ size, maxWidth, setSearchMention }) => {
     >
       <Autocomplete
         freeSolo
+        disableListWrap
         options={options}
         getOptionLabel={option => option}
         onInputChange={(e) => setQuery(e.currentTarget.value)}
-        onChange={(e) => handleSubmit(e)}
+        onChange={(e, value) => handleSubmit(e, value)}
         clearIcon={<ClearRoundedIcon fontSize="medium" />}
-        filterOptions={(options, state) => options}
+        PaperComponent={({ children }) => (
+          <Paper style={{ background: "yellow", height: "120%" }}>{children}</Paper>
+        )}
         renderInput={(params) => (
           <SearchBox
             {...params}
             size={size || "large"}
             label="Search a tech or need"
             variant="outlined"
+            InputLabelProps={{
+              ...params.InputLabelProps,
+            }}
             InputProps={{
               ...params.InputProps,
               type: 'search',
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Divider orientation="vertical" variant="middle" flexItem />
-                  <SearchRoundedIcon />
+              /* endAdornment: (
+                <InputAdornment position="start">
+                  <IconButton>
+                    <SearchRoundedIcon />
+                  </IconButton>
                 </InputAdornment>
-              )
+              ), */
+
             }}
           />
         )}
       >
-
       </Autocomplete>
     </Box>
 
@@ -111,33 +106,3 @@ const SearchBar = ({ size, maxWidth, setSearchMention }) => {
 };
 
 export default SearchBar;
-{/* <form className="searchBar" onSubmit={handleSubmit}>
-      <Box
-        sx={{
-          margin: "auto",
-          maxWidth: maxWidth || "60%",
-          bgcolor: "white",
-          borderRadius: 30,
-        }}
-      >
-        <SearchBox
-          fullWidth
-          size={size || "large"}
-          className="input"
-          name="search-input"
-          id="outlined-basic"
-          //label="Search"
-          placeholder="Search a tech or need"
-          value={query}
-          variant="outlined"
-          onChange={(e) => setQuery(e.currentTarget.value)}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchRoundedIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Box>
-    </form> */}

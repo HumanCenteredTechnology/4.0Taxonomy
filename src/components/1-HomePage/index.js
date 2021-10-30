@@ -36,7 +36,7 @@ const HomePage = () => {
           }}>
           <Typography align="center" variant="h1">Planet4 Taxonomy Explorer</Typography>
         </Box>
-        <SearchBar setSearchMention={setSearchMention} />
+        <SearchBar />
         <Box
           sx={{
             mx: "auto",

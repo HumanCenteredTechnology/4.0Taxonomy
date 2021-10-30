@@ -79,7 +79,7 @@ const apiSettings = {
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]],
           ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-
+ 
         ],
       "not_found_elements":
         [
