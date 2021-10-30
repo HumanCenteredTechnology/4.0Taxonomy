@@ -28,7 +28,6 @@ const HomePage = () => {
     <Box>
       <TopNavBar isHome={true} />
       <Container>
-
         <Box
           sx={{
             margin: "auto",
@@ -40,17 +39,18 @@ const HomePage = () => {
         <Box
           sx={{
             mx: "auto",
-            my: 5,
-            width: 250,
-            alignContent: "center"
+            mt: 10,
+            width: "100%",
+            textAlign: "center"
           }}>
           <StandardButton
             variant="text"
             size="small"
             color="default"
             onClick={handleOpenMenuClick}
-            text="OR EXPLORE THE DATABASE">
+            text={!menuOpened ? "OR EXPLORE THE DATABASE" : "CLOSE VIEW"}>
           </ StandardButton>
+
         </Box>
 
         {menuOpened && (

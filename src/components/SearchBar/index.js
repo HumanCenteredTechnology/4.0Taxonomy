@@ -12,25 +12,24 @@ import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
 import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import { useFetch } from "../../hooks/useFetch";
 
-const SearchBox = styled(TextField)(({ theme }) => ({
+const SearchBox = styled(Autocomplete)(({ theme }) => ({
   "& fieldset": {
     borderRadius: "30px",
   },
   "& .MuiOutlinedInput-root": {
     '&:hover fieldset': {
-      border: `${1}px solid`,
+      border: `${0}px solid`,
       borderColor: `${theme.palette.grey[400]}`,
       boxShadow: `${theme.shadows[4]}`,
     },
     "&.Mui-focused fieldset": {
-      border: `${1}px solid`,
+      border: `${0}px solid`,
       borderColor: `${theme.palette.grey[400]}`,
       width: "100%",
       boxShadow: `${theme.shadows[4]}`,
       transition: "width 200ms ease- out"
     }
-  }
-
+  },
 }));
 
 
@@ -64,42 +63,48 @@ const SearchBar = ({ size, maxWidth }) => {
         borderRadius: 30,
       }}
     >
-      <Autocomplete
+      <SearchBox
         freeSolo
-        disableListWrap
         options={options}
         getOptionLabel={option => option}
         onInputChange={(e) => setQuery(e.currentTarget.value)}
         onChange={(e, value) => handleSubmit(e, value)}
-        clearIcon={<ClearRoundedIcon fontSize="medium" />}
+        renderOption={(props, option, { selected }) => (
+          <li {...props}>
+            <IconButton>
+              <SearchRoundedIcon />
+            </IconButton>
+            {option}
+          </li>
+        )}
         PaperComponent={({ children }) => (
-          <Paper style={{ background: "yellow", height: "120%" }}>{children}</Paper>
+          <Paper elevation={4} sx={{ marginTop: "3px", background: "white" }}>{children}</Paper>
         )}
         renderInput={(params) => (
-          <SearchBox
+          <TextField
             {...params}
             size={size || "large"}
-            label="Search a tech or need"
+            placeholder="Search a tech or need"
             variant="outlined"
-            InputLabelProps={{
-              ...params.InputLabelProps,
-            }}
             InputProps={{
               ...params.InputProps,
-              type: 'search',
-              /* endAdornment: (
-                <InputAdornment position="start">
-                  <IconButton>
-                    <SearchRoundedIcon />
-                  </IconButton>
-                </InputAdornment>
-              ), */
+              type: 'text',
+              startAdornment: (
+                <>
+                  <InputAdornment position="start">
+                    <IconButton>
+                      <SearchRoundedIcon />
 
+                    </IconButton>
+                  </InputAdornment>
+
+                </>
+              ),
             }}
           />
         )}
       >
-      </Autocomplete>
+      </SearchBox>
     </Box>
 
   );
