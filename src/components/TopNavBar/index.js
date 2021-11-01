@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFetch } from '../../hooks/useFetch';
 import { useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
-import { Box, AppBar, Toolbar, IconButton, useScrollTrigger } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Tooltip, useScrollTrigger } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { HomeRounded } from '@mui/icons-material';
@@ -56,17 +56,21 @@ const TopNavBar = ({ isHome, isResults, isForm, children }) => {
                     color="inherit"
                 >
                     <Toolbar variant="dense">
-                        {!isHome ? <IconButton aria-label="home" component={RouterLink} to="/">
-                            <HomeRounded />
-                        </IconButton>
+                        {!isHome ?
+                            <Tooltip title="Go to Homepage" arrow>
+                                <IconButton aria-label="home" component={RouterLink} to="/">
+                                    <HomeRounded />
+                                </IconButton>
+                            </Tooltip>
                             : <></>}
-                        {isSmallDevice ? <Box sx={{ flexGrow: 1 }} /> : <></>}
+                        {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <><Box sx={{ flexShrink: 1 }} /></>}
 
                         {isResults ? isSmallDevice ?
                             <SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"100%"} />
-                            : <ElevationScroll children={children}><SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"80%"} /></ElevationScroll>
+                            : <ElevationScroll children={children}><SearchBar setSearchMention={setSearchMention} size={"small"} maxWidth={"100%"} /></ElevationScroll>
                             : <></>}
-                        <Box sx={{ flexGrow: 1 }} />
+                        {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1 }} />}
+
                         {!isForm ?
                             <StandardButton
                                 variant="text"

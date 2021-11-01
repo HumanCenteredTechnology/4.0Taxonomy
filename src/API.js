@@ -50,6 +50,11 @@ const apiSettings = {
         [
           ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
+        ],
+        "unrelated_elements":
+        [
+          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
+          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
     } */
     JSON.parse(JSON.stringify(data))

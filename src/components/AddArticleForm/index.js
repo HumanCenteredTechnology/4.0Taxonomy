@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
 
 
 //Components
@@ -7,6 +7,7 @@ import TextInput from "../controls/TextInput";
 import VerifySubmit from "../VerifySubmit";
 //Hooks
 import { useForm } from "../../hooks/useForm";
+import { FormContext } from '../3 - FormPage';
 //Styles
 import { CardActions, CardContent, CardHeader, Grid, makeStyles, Box, Modal, Dialog } from "@material-ui/core";
 
@@ -23,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AddArticleForm = ({ values, errors, handleChange, handleReset, handleSubmit }) => {
   const classes = useStyles();
-
 
   return (
     <form className={classes.root} onSubmit={handleSubmit} autoComplete="off">

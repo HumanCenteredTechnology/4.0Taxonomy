@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link as RouterLink } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
-import { Card, Tooltip, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
-import { Skeleton } from "@mui/material";
+import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
+import { Skeleton, Tooltip } from "@mui/material";
 
 const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
 const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitation cupidatat veniam ut fugiat tempor quis esse sit excepteur. Cupidatat aute in ullamco minim minim Lorem officia deserunt amet labore nostrud quis esse..."
@@ -151,13 +151,17 @@ const Resources = ({ articles }) => {
 }
 
 const Article = ({ art }) => {
+  let isPdf = false;
+  if (art[1].endsWith('pdf')) isPdf = true
   return (
-    <ListItemText  >
-      <Link href={art[1]} >
-        <Typography variant="body2" noWrap >
-          {art[0]}
-        </Typography>
-      </Link>
+    <ListItemText>
+      <Tooltip title={isPdf ? "Opens a pdf in a new window" : "Opens in a new window"} followCursor>
+        <Link href={art[1]} >
+          <Typography variant="body2" noWrap >
+            {art[0]}
+          </Typography>
+        </Link>
+      </Tooltip>
     </ListItemText>
   );
 };

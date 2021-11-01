@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Card, Container, makeStyles, AppBar, Toolbar, Box } from "@material-ui/core";
 import { Stepper, Step, StepLabel, Typography, CardActions } from "@mui/material"
@@ -6,12 +6,14 @@ import { Stepper, Step, StepLabel, Typography, CardActions } from "@mui/material
 import AddArticleForm from "../AddArticleForm";
 import VerifySubmit from "../VerifySubmit";
 import VerifySubmit2 from "../VerifySubmit2";
+import VerifySubmit3 from "../VerifySubmit3";
 import StandardButton from "../controls/StandardButton";
 import TopNavBar from "../TopNavBar";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 
 
+export const FormContext = createContext();
 
 const useStyles = makeStyles((theme) => ({
   pageContent: {
@@ -36,10 +38,14 @@ const useStyles = makeStyles((theme) => ({
 
 const FormPage = () => {
   const classes = useStyles();
-  const { values, errors, handleChange, handleReset, submit, isSubmit, setIsSubmit, response, loaded } = useForm();
+
+  const { values, errors, handleChange, handleCheckboxChange, handleReset, submit, isSubmit, setIsSubmit, loaded } = useForm();
   const [steps, setSteps] = useState(['Insert your article', 'Review article in the database', 'Review affinity with other topics']);
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
+  const [response, setResponse] = useState([])
+  const [foundEl, setFoundEl] = useState([])
+  const [notFoundEl, setNotFoundEl] = useState([])
 
   const isStepOptional = (step) => {
     return step === 2;
@@ -62,8 +68,6 @@ const FormPage = () => {
 
   useEffect(() => {
     if (loaded) handleNext()
-
-
   }, [loaded])
 
   const handleBack = () => {
@@ -91,13 +95,30 @@ const FormPage = () => {
       setActiveStep(0);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    submit();
+    setResponse(await submit());
   };
+  const orderCheckbox = (el) => {
+    return { [JSON.stringify(el)]: true }
+  }
+  useEffect(() => {
+    if (Array.isArray(response.founded_elements))
+      setFoundEl({
+        needs: response.founded_elements.filter(el => el[1] === "Problems").map(el => orderCheckbox(el[0])),
+        tech: response.founded_elements.filter(el => el[1] === "Technology").map(el => orderCheckbox(el[0]))
+      })
+    console.log(response)
+  }, [response])
+
+  useEffect(() => {
+    console.log(foundEl)
+  }, [foundEl])
+
+
 
   return (
-    <Box>
+    <FormContext.Provider value={{ response, setResponse, foundEl, setFoundEl }}>
       <TopNavBar isForm={true} />
       <Container>
         <Box sx={{ m: 1 }} >
@@ -109,12 +130,14 @@ const FormPage = () => {
           {activeStep === 0 ?
             <AddArticleForm values={values} errors={errors} handleChange={handleChange} handleReset={handleReset} handleSubmit={handleSubmit} />
             : activeStep === 1 ?
-              <VerifySubmit response={response} steps={steps} setSteps={setSteps} />
-              : activeStep === 2 ?
-                < VerifySubmit2 response={response} steps={steps} setSteps={setSteps} />
-                : activeStep === 3 ?
-                  <h1>step4</h1>
-                  : <> </>
+              loaded ?
+                <VerifySubmit />
+                : activeStep === 2 ?
+                  < VerifySubmit2 steps={steps} setSteps={setSteps} />
+                  : activeStep === 3 ?
+                    <VerifySubmit3 steps={steps} setSteps={setSteps} />
+                    : <> </>
+              : <> </>
           }
           <CardActions>
             {activeStep > 0 ?
@@ -136,7 +159,7 @@ const FormPage = () => {
         </Card>
 
       </ Container>
-    </Box>
+    </FormContext.Provider>
   );
 };
 

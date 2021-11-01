@@ -51,7 +51,7 @@ const ResultsPage = () => {
       <TopNavBar isResults={true} />
       <Container  >
         {isSmallDevice ? <></> :
-          <Box sx={{ marginY: 5 }}>
+          <Box sx={{ marginY: 5, alignContent: "center" }}>
             <SearchBar setSearchMention={setSearchMention} />
           </Box>
         }

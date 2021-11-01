@@ -17,6 +17,7 @@ const SearchBox = styled(Autocomplete)(({ theme }) => ({
     borderRadius: "30px",
   },
   "& .MuiOutlinedInput-root": {
+
     '&:hover fieldset': {
       border: `${0}px solid`,
       borderColor: `${theme.palette.grey[400]}`,
@@ -28,8 +29,17 @@ const SearchBox = styled(Autocomplete)(({ theme }) => ({
       width: "100%",
       boxShadow: `${theme.shadows[4]}`,
       transition: "width 200ms ease- out"
-    }
+    },
   },
+  "& .MuiInputLabel-root": {
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    whiteSpace: "nowrap",
+    width: 1
+  }
 }));
 
 
@@ -46,7 +56,6 @@ const SearchBar = ({ size, maxWidth }) => {
   let navigate = useNavigate();
 
   const handleSubmit = (e, value) => {
-    console.log(value)
     if (value === "" || value === undefined) return;
     setSearchMention(value);
     navigate("/" + value);
@@ -61,19 +70,21 @@ const SearchBar = ({ size, maxWidth }) => {
         maxWidth: maxWidth || "60%",
         bgcolor: "white",
         borderRadius: 30,
+        flexGrow: 1
       }}
     >
       <SearchBox
         freeSolo
+        id="search-bar"
         options={options}
         getOptionLabel={option => option}
         onInputChange={(e) => setQuery(e.currentTarget.value)}
         onChange={(e, value) => handleSubmit(e, value)}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
-            <IconButton>
+            <InputAdornment position="start">
               <SearchRoundedIcon />
-            </IconButton>
+            </InputAdornment>
             {option}
           </li>
         )}
@@ -92,12 +103,8 @@ const SearchBar = ({ size, maxWidth }) => {
               startAdornment: (
                 <>
                   <InputAdornment position="start">
-                    <IconButton>
-                      <SearchRoundedIcon />
-
-                    </IconButton>
+                    <SearchRoundedIcon />
                   </InputAdornment>
-
                 </>
               ),
             }}
