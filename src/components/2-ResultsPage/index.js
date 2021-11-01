@@ -12,7 +12,7 @@ import { useFetch } from "../../hooks/useFetch";
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton } from "@mui/material";
+import { Skeleton, IconButton, Card, Button } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
@@ -58,8 +58,9 @@ const ResultsPage = () => {
 
         {!error ?
           <Box sx={{ marginY: 2 }}>
-            <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
-            </Typography>
+            {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
+              <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
+              </Typography>}
           </Box>
           :
           <></>}
@@ -67,7 +68,8 @@ const ResultsPage = () => {
           <Divider margin={2} variant="middle" />
         </Box>
         <Grid container spacing={3}>
-          {found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} />}
+          {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
+
           {/* <ResultsList problems={problems} technologies={technologies} /> */}
         </Grid>
         {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
@@ -89,13 +91,18 @@ const ResultsList = ({ problems, technologies, loading }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h5" > Business Needs ({problems.length})</Typography>
+          <Typography variant="h5" > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
         </Box>
-        {problems.map((el, i) => {
-          return (
-            <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} loading={loading} />
-          );
-        })}
+        {loading ? <LoadingSkeleton />
+          :
+          <>
+            {problems.map((el, i) => {
+              return (
+                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
+              );
+            })}
+          </>}
+
       </Grid>
       <Grid item xs={12} sm={6}>
         <Box sx={{
@@ -103,13 +110,17 @@ const ResultsList = ({ problems, technologies, loading }) => {
           p: 1,
           m: 2,
         }}>
-          <Typography variant="h5" >Enabling Technologies ({technologies.length})</Typography>
+          <Typography variant="h5" >{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
         </Box>
-        {technologies.map((el, i) => {
-          return (
-            <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} loading={loading} />
-          );
-        })}
+        {loading ? <LoadingSkeleton />
+          :
+          <>
+            {technologies.map((el, i) => {
+              return (
+                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
+              );
+            })}
+          </>}
       </Grid>
     </Grid>
   );
@@ -142,5 +153,64 @@ const TopicsList = ({ results }) => {
     </Box>
   )
 }
+
+const LoadingSkeleton = () => {
+  return (
+    <>
+      {Array.from(Array(2)).map(() => {
+        return (
+          <ResultSkeleton />
+        );
+      })}
+    </>
+  )
+}
+
+const ResultSkeleton = () => (
+  <Box sx={{
+    justifyContent: 'center',
+    p: 1,
+    m: 0,
+  }}>
+    <Card>
+      <Box sx={{
+        justifyContent: 'center',
+        p: 2,
+        m: 0,
+      }}>
+        <Typography variant="body2" color="textSecondary" >
+          <Skeleton animation="wave" variant="text" />
+        </Typography>
+        <Typography variant="h6" gutterBottom  >
+          <Skeleton animation="wave" variant="text" />
+        </Typography>
+        <Typography variant="body2">
+          <Skeleton animation="wave" variant="text" />
+        </Typography>
+        <Typography variant="body2">
+          <Skeleton animation="wave" variant="text" />
+        </Typography>
+        <Typography variant="body2">
+          <Skeleton animation="wave" variant="text" width="50%" />
+        </Typography>
+      </Box>
+      <Box sx={{ p: 2, my: 0 }}>
+        <Typography variant="body1" >
+          <Skeleton animation="wave" variant="text" width="20%" />
+        </Typography>
+        {Array.from(Array(5)).map((el, i) => {
+          return (
+            <Typography key={i} variant="body2" noWrap >
+              <Skeleton animation="wave" variant="text" width={`${Math.floor(Math.random() * (8 - 4 + 1)) + 4}0%`} />
+            </Typography>
+          );
+        })}
+        <Skeleton animation="wave" variant="rectangular" width="20%" />
+      </Box>
+    </Card>
+
+
+  </Box>
+)
 
 export default ResultsPage;

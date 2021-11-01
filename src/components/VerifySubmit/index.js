@@ -25,23 +25,30 @@ const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 
 const VerifySubmit = () => {
     //const classes = useStyles();
-    const { handleChange, convertToEventParams } = useForm();
-    const { foundEl, setFoundEl } = useContext(FormContext);
+
+    const { values, handleCheckboxChange, convertToEventParams } = useContext(FormContext)
     const [selectedEl, setSelectedEl] = useState([]);
     const [isEl, setIsEl] = useState(false);
 
-    useEffect(() => {
-        console.log(foundEl)
-    })
 
-    const renderForm = (el) => {
-        console.log(el)
+
+    const renderForm = (el, branch) => {
+        //console.log(Object.values(el))
+
+        let name = Object.keys(el);
+        let value = Object.values(el)
+        //console.log(name + value + branch)
         return (
-            <FormControlLabel name={Object.entries(el)[0]} label={Object.entries(el)[0]} onChange={handleChange} control={<Checkbox />} />
+            <FormControlLabel
+                key={name}
+                label={name}
+                control={
+                    <Checkbox
+                        name={name}
+                        onChange={e => handleCheckboxChange(branch, convertToEventParams(name, e.target.checked))}
+                        value={value} />} />
         )
-
     }
-
     return (
         <>
             <CardHeader
@@ -61,11 +68,11 @@ const VerifySubmit = () => {
                         <FormControl>
                             <FormLabel>Needs</FormLabel>
                             <FormGroup>
-                                {/* {foundEl.needs.map(el => renderForm(el))} */}
+                                {values.needs.map(el => renderForm(el, "needs"))}
                             </FormGroup>
                             <FormLabel>Technologies</FormLabel>
                             <FormGroup>
-                                {foundEl.tech.map(el => renderForm(el))}
+                                {values.tech.map(el => renderForm(el, "tech"))}
                             </FormGroup>
                         </ FormControl>
                     </Box>

@@ -58,7 +58,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children }) => {
                     <Toolbar variant="dense">
                         {!isHome ?
                             <Tooltip title="Go to Homepage" arrow>
-                                <IconButton aria-label="home" component={RouterLink} to="/">
+                                <IconButton sx={{ mx: 1 }} aria-label="home" component={RouterLink} to="/">
                                     <HomeRounded />
                                 </IconButton>
                             </Tooltip>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
+import API from "../../API";
 import { Link as RouterLink } from "react-router-dom";
 import { Card, Container, makeStyles, AppBar, Toolbar, Box } from "@material-ui/core";
 import { Stepper, Step, StepLabel, Typography, CardActions } from "@mui/material"
@@ -36,15 +37,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const initialValues = {
+  title: "",
+  abstract: "",
+  body: "",
+  needs: [],
+  tech: [],
+};
+
+const initialResponse = {
+  founded_elements:
+    [],
+  not_founded_elements:
+    []
+}
+
+
 const FormPage = () => {
   const classes = useStyles();
 
-  const { values, errors, handleChange, handleCheckboxChange, handleReset, submit, isSubmit, setIsSubmit, loaded } = useForm();
+  const { } = useForm();
   const [steps, setSteps] = useState(['Insert your article', 'Review article in the database', 'Review affinity with other topics']);
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
-  const [response, setResponse] = useState([])
-  const [foundEl, setFoundEl] = useState([])
+  const [values, setValues] = useState(initialValues);
+  const [check, setCheck] = useState([]);
+  const [response, setResponse] = useState(initialResponse)
+  const [errors, setErrors] = useState({});
+  const [loaded, setLoaded] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const [notFoundEl, setNotFoundEl] = useState([])
 
   const isStepOptional = (step) => {
@@ -97,28 +119,92 @@ const FormPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setResponse(await submit());
+
+    setResponse(await submit);
+    //setSavedValues(saveValues)
   };
-  const orderCheckbox = (el) => {
-    return { [JSON.stringify(el)]: true }
-  }
+
+
   useEffect(() => {
+    console.log(values)
+  }, [values])
+
+
+
+  //ci sarebbe da formattare bene a seconda dello step
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+    //console.log(values)
+  };
+
+  const convertToEventParams = (name, value) => ({
+    target: {
+      name, value
+    }
+  })
+
+  const handleCheckboxChange = (branch, e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [branch]: values[branch].map(el => el.hasOwnProperty(name) ? { [name]: value } : el),
+    });
+    //console.log(checkboxes)
+  }
+
+
+
+  const handleReset = () => {
+    setErrors({});
+    setValues(initialValues);
+    setIsSubmit(false)
+  }
+
+  const validate = () => {
+    let temp = {};
+    temp.title = values.title ? "" : "Please enter a title";
+    temp.abstract = values.abstract ? "" : "Please enter a valid abstract";
+    temp.body = values.body ? "" : "Please enter a valid body";
+    setErrors({ ...temp });
+    return Object.values(temp).every((x) => x === "");
+  };
+
+  const submit = async () => {
+    setLoaded(false)
+    try {
+      if (validate()) {
+        console.log("submitting...");
+        const response = await API.submitArticle(values);
+        setIsSubmit(true)
+        setLoaded(true)
+        return orderResponse(response);
+      }
+      else return initialResponse
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const orderCheckbox = (el) => {
+    return { [el]: true }
+  }
+
+  const orderResponse = (response) => {
     if (Array.isArray(response.founded_elements))
-      setFoundEl({
+      setValues({
         needs: response.founded_elements.filter(el => el[1] === "Problems").map(el => orderCheckbox(el[0])),
         tech: response.founded_elements.filter(el => el[1] === "Technology").map(el => orderCheckbox(el[0]))
       })
     console.log(response)
-  }, [response])
-
-  useEffect(() => {
-    console.log(foundEl)
-  }, [foundEl])
-
+  }
 
 
   return (
-    <FormContext.Provider value={{ response, setResponse, foundEl, setFoundEl }}>
+    <FormContext.Provider value={{ values, setValues, check, response, setResponse, errors, handleChange, handleReset, handleSubmit, handleCheckboxChange, convertToEventParams }}>
       <TopNavBar isForm={true} />
       <Container>
         <Box sx={{ m: 1 }} >
@@ -128,7 +214,7 @@ const FormPage = () => {
 
         <Card className={classes.pageContent} sx={{ width: "50%" }}>
           {activeStep === 0 ?
-            <AddArticleForm values={values} errors={errors} handleChange={handleChange} handleReset={handleReset} handleSubmit={handleSubmit} />
+            <AddArticleForm />
             : activeStep === 1 ?
               loaded ?
                 <VerifySubmit />
