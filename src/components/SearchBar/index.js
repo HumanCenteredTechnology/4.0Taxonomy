@@ -45,9 +45,9 @@ const SearchBox = styled(Autocomplete)(({ theme }) => ({
 
 
 
-const SearchBar = ({ size, maxWidth }) => {
+const SearchBar = ({ size, maxWidth, width }) => {
   const { queryId } = useParams();
-  const { setQuery, options, setSearchMention } = useFetch();
+  const { query, setQuery, options } = useFetch();
 
   useEffect(() => {
     setQuery(queryId)
@@ -57,16 +57,16 @@ const SearchBar = ({ size, maxWidth }) => {
 
   const handleSubmit = (e, value) => {
     if (value === "" || value === undefined) return;
-    setSearchMention(value);
     navigate("/" + value);
   };
-  const searchQueryMatches = (input) => {
-  }
+
+
 
   return (
     <Box
       sx={{
         margin: "auto",
+        width: width || "100%",
         maxWidth: maxWidth || "60%",
         bgcolor: "white",
         borderRadius: 30,
@@ -77,8 +77,9 @@ const SearchBar = ({ size, maxWidth }) => {
         freeSolo
         id="search-bar"
         options={options}
+        inputValue={query || ""}
         getOptionLabel={option => option}
-        onInputChange={(e) => setQuery(e.currentTarget.value)}
+        onInputChange={(e, newValue) => setQuery(newValue)}
         onChange={(e, value) => handleSubmit(e, value)}
         renderOption={(props, option, { selected }) => (
           <li {...props}>
@@ -89,7 +90,7 @@ const SearchBar = ({ size, maxWidth }) => {
           </li>
         )}
         PaperComponent={({ children }) => (
-          <Paper elevation={4} sx={{ marginTop: "3px", background: "white" }}>{children}</Paper>
+          <Paper elevation={4} sx={{ marginTop: "3px" }}>{children}</Paper>
         )}
         renderInput={(params) => (
           <TextField

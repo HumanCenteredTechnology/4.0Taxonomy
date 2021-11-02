@@ -12,7 +12,6 @@ const initialQueries = { word: [] }
 
 export const useFetch = (queryId) => {
   const [query, setQuery] = useState("");
-  const [searchMention, setSearchMention] = useState("");
   const [results, setResults] = useState(initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -40,10 +39,7 @@ export const useFetch = (queryId) => {
           }));
           setFound(true)
           console.log("found")
-          //console.log(results)
         }
-
-        //da aggiustare: mette found lo stesso(forse fa fetch 2 volte)
       } catch (error) {
         setError(true);
         console.log(error);
@@ -76,5 +72,7 @@ export const useFetch = (queryId) => {
     if (queryMatch != null) setOptions(queryMatch.word)
   }, [queryMatch])
 
-  return { results, loading, error, setQuery, searchMention, setSearchMention, found, queryMatch, setQueryMatch, options };
+
+
+  return { results, loading, error, query, setQuery, found, options };
 };

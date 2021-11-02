@@ -33,7 +33,7 @@ const HomePage = () => {
             margin: "auto",
             my: 5,
           }}>
-          <Typography align="center" variant="h1">Planet4 Taxonomy Explorer</Typography>
+          <Typography align="center" variant="h2">Planet4 Taxonomy Explorer</Typography>
         </Box>
         <SearchBar />
         <Box
@@ -54,7 +54,7 @@ const HomePage = () => {
         </Box>
 
         {menuOpened && (
-          <BrowsableTree isVerificationTree={false} />
+          <BrowsableTree isDrawer={false} />
         )}
 
       </Container>

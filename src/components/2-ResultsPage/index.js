@@ -12,10 +12,11 @@ import { useFetch } from "../../hooks/useFetch";
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button } from "@mui/material";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
+import BrowsableTree from "../BrowsableTree";
 
 
 
@@ -28,8 +29,12 @@ const ResultsPage = () => {
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
+  const [openDrawer, setOpenDrawer] = useState(false);
 
-
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 5
+  })
 
 
   useEffect(() => {
@@ -46,16 +51,32 @@ const ResultsPage = () => {
     }
   }, [results])
 
+  useEffect(() => {
+    setOpenDrawer(false)
+  }, [queryId])
+
   return (
     <Box>
-      <TopNavBar isResults={true} />
+      <TopNavBar isResults={true} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+      <Drawer
+        sx={{
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box', width: 300
+          },
+        }}
+        anchor="left"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}>
+        <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
+      </Drawer>
       <Container  >
-        {isSmallDevice ? <></> :
-          <Box sx={{ marginY: 5, alignContent: "center" }}>
-            <SearchBar setSearchMention={setSearchMention} />
-          </Box>
-        }
-
+        {/*  {isSmallDevice ? <></> :
+          <Slide appear={false} direction="down" in={!trigger}>
+            <Box sx={{ marginY: 5, alignContent: "left" }}>
+              <SearchBar setSearchMention={setSearchMention} />
+            </Box>
+          </Slide>
+        } */}
         {!error ?
           <Box sx={{ marginY: 2 }}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
@@ -69,14 +90,9 @@ const ResultsPage = () => {
         </Box>
         <Grid container spacing={3}>
           {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
-
-          {/* <ResultsList problems={problems} technologies={technologies} /> */}
         </Grid>
-        {/* <Box sx={{ marginTop: 10, marginX: 5 }}>
-        {found ? <><p>topics suggested</p> <TopicsList results={results} /></> : <></>}
-      </Box> */}
       </Container>
-    </Box>
+    </Box >
   );
 };
 
@@ -102,7 +118,6 @@ const ResultsList = ({ problems, technologies, loading }) => {
               );
             })}
           </>}
-
       </Grid>
       <Grid item xs={12} sm={6}>
         <Box sx={{
@@ -208,8 +223,6 @@ const ResultSkeleton = () => (
         <Skeleton animation="wave" variant="rectangular" width="20%" />
       </Box>
     </Card>
-
-
   </Box>
 )
 

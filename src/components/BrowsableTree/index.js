@@ -1,10 +1,10 @@
 import React, { useState, useEffect, forwardRef } from 'react'
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import taxonomy from "../../taxonomy.json";
 
-import { Box, Grid, Typography, Checkbox } from '@mui/material';
+import { Box, Divider, Grid, Typography } from '@mui/material';
 import { TreeView, TreeItem, useTreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -12,16 +12,18 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).subLevels))
 const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 
+const initialGridBreaks = {
+    xs: 12,
+    sm: 12,
+    md: 6
+}
 
-
-const BrowsableTree = ({ isVerificationTree, responseTree }) => {
-    const [needs, setNeeds] = useState(initialNeeds)
-    const [tech, setTech] = useState(initialTech)
-    const [addCheckBox, setAddCheckBox] = useState(false)
-    useEffect(() => {
-        setAddCheckBox(isVerificationTree)
-        console.log(isVerificationTree)
-    }, [isVerificationTree])
+const BrowsableTree = ({ isDrawer }) => {
+    const [gridBreak, setGridBreak] = useState(initialGridBreaks)
+    /*     useEffect(() => {
+            setAddCheckBox(isVerificationTree)
+            console.log(isVerificationTree)
+        }, [isVerificationTree]) */
 
     /* useEffect(() => {
         if (responseTree.length !== 0) {
@@ -32,11 +34,18 @@ const BrowsableTree = ({ isVerificationTree, responseTree }) => {
         //console.log(responseTree)
         console.log()
     }, [responseTree]) */
+    useEffect(() => {
+        if (isDrawer) setGridBreak({
+            xs: 12,
+            sm: 12,
+            md: 12
+        })
+        else setGridBreak(initialGridBreaks)
+    }, [isDrawer])
 
 
-
-    const renderItem = (nodes, addCheckBox) => (
-        <CustomTreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} addCheckBox={addCheckBox} >
+    const renderItem = (nodes) => (
+        <CustomTreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} >
             {Array.isArray(nodes.subLevels)
                 ? nodes.subLevels.map((node) => renderItem(node))
                 : null}
@@ -45,32 +54,35 @@ const BrowsableTree = ({ isVerificationTree, responseTree }) => {
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12} sm={12} md={6}>
-                <Box sx={{ flexGrow: 1, my: 2, alignContent: "center" }}>
-                    <Typography align="center" variant="h6">4.0 Industry Needs</Typography>
+            <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
+                <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
+                    <Typography align="left" variant="h6">4.0 Industry Needs</Typography>
                 </Box>
                 <TreeView
+                    key="needs"
                     aria-label="4.0 industry needs hierarchy"
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
-                    isVerificationTree={isVerificationTree}
-                    sx={{ maxHeight: 400, flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialNeeds.map((n, addCheckBox) => (renderItem(n, addCheckBox)))}
+                    sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
+                    {initialNeeds.map((n) => (renderItem(n)))}
                 </ TreeView>
             </Grid>
-            <Grid item xs={12} sm={12} md={6}>
-                <Box sx={{ flexGrow: 1, my: 2, alignContent: "center" }}>
-                    <Typography align="center" variant="h6">4.0 Enabling Technologies</Typography>
+            {isDrawer && <Grid item xs={12} sm={12} md={12}>
+                <Divider variant="middle" />
+            </Grid>}
+            <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
+                <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
+                    <Typography align="left" variant="h6">4.0 Enabling Technologies</Typography>
                 </Box>
                 <TreeView
+                    key="tech"
                     aria-label="4.0 enabling technologies hierarchy"
                     defaultCollapseIcon={<ExpandMoreIcon />}
                     defaultExpandIcon={<ChevronRightIcon />}
-                    sx={{ height: 400, flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialTech.map((n, addCheckBox) => (renderItem(n, addCheckBox)))}
+                    sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
+                    {initialTech.map((n) => (renderItem(n)))}
                 </ TreeView>
             </Grid>
-
         </Grid>
     )
 }
@@ -84,7 +96,6 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
         icon: iconProp,
         expansionIcon,
         displayIcon,
-        addCheckBox
     } = props;
 
     const {
@@ -114,7 +125,6 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
     let navigate = useNavigate();
 
     const handleClick = () => {
-
         navigate("/" + label);
     }
     return (
@@ -133,27 +143,13 @@ const CustomContent = forwardRef(function CustomContent(props, ref) {
             <div onClick={handleExpansionClick} className={classes.iconContainer}>
                 {icon}
             </div>
-            {addCheckBox ?
-                <>
-                    <Typography
-                        onClick={handleSelectionClick}
-                        component="div"
-                        className={classes.label}
-                    >
-                        {label}
-                    </Typography>
-                    <Checkbox />
-                </>
-                :
-                <>
-                    <Typography
-                        onClick={handleClick}
-                        component="div"
-                        className={classes.label}
-                    >
-                        {label}
-                    </Typography>
-                </>}
+            <Typography
+                onClick={handleClick}
+                component="div"
+                className={classes.label}
+            >
+                {label}
+            </Typography>
         </div>
     );
 });

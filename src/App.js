@@ -8,13 +8,14 @@ import ResultsPage from "./components/2-ResultsPage";
 import FormPage from "./components/3 - FormPage";
 
 //Styles
+import { CssBaseline } from "@mui/material";
 import {
-  CssBaseline,
   createTheme,
+  responsiveFontSizes,
   ThemeProvider,
-} from "@material-ui/core"; //creare un tema principale che utilizzeranno tutte le pagine
+} from '@mui/material/styles';
 
-const theme = createTheme({
+const theme = responsiveFontSizes(createTheme({
   root: {
     background: "#757ce8",
   },
@@ -22,7 +23,7 @@ const theme = createTheme({
     secondary: { main: "#2d7e32" },
     background: { paper: "#ffff" },
   },
-});
+}));
 
 const App = () => {
   return (
@@ -40,6 +41,3 @@ const App = () => {
 };
 
 export default App;
-
-//per come funziona il sito forse NotFound deve essere gestito in ResultsPage (cioè dopo che ha una query
-//e restituisce un oggetto vuoto, fa comparire non trovato)

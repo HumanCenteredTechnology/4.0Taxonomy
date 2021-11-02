@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import TopicChip from "../TopicChip";
 import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
-import { Skeleton, Tooltip } from "@mui/material";
+import { CardActions, CardContent, Skeleton, Tooltip } from "@mui/material";
 
 const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
 const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitation cupidatat veniam ut fugiat tempor quis esse sit excepteur. Cupidatat aute in ullamco minim minim Lorem officia deserunt amet labore nostrud quis esse..."
@@ -42,48 +42,20 @@ const Result = ({ name, parent, category, articles, loading }) => {
           </Typography>
         </Box>
         {/* <Divider variant="middle" /> */}
-        {Array.isArray(articles) ?
-          <Box sx={{ p: 2, my: 0 }}>
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <Typography variant="body1" >Resources:</Typography>
-                <Resources articles={articles} />
+        <CardContent>
+          {Array.isArray(articles) ?
+            <Box sx={{}}>
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <Typography variant="body1" >Resources:</Typography>
+                  <Resources articles={articles} />
+                </Grid>
               </Grid>
-              {/*  <Grid item xs={1}>
-        <Divider orientation="vertical" />
-      </Grid>
-      <Grid item xs={5}>
-
-        <Typography variant="body1" >Related technologies</Typography>
-        <Grid container
-          spacing={1}
-          columnspacing={{ xs: 1 }}
-          rowspacing={{ xs: 1 }}
-          columns={{ xs: 1 }}
-          justifycontent="flex-start"
-          direction="row">
-          {topic.map((topic, i) => {
-            return (
-              <Grid item key={topic + i}>
-                <TopicChip
-                  key={topic[0]}
-                  label={topic[0]}
-                  name={topic[1]}
-                  clickable={true}
-                  link={topic[2]}
-                  size={"small"}
-                />
-              </Grid>
-            )
-          })}
-        </Grid>
-      </Grid> */}
-            </Grid>
-          </Box>
-          :
-          <></>
-        }
-
+            </Box>
+            :
+            <></>
+          }
+        </CardContent>
       </Card>
     </Box>
   );
