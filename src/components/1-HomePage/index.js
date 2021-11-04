@@ -10,8 +10,9 @@ import TopNavBar from "../TopNavBar";
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
 //Styles
-import { Container, AppBar, Toolbar, Typography, Box } from "@material-ui/core";
+import { Container, AppBar, Toolbar, Typography, Box, Divider } from "@material-ui/core";
 import { TrapFocus } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
 
 
 const HomePage = () => {
@@ -52,11 +53,24 @@ const HomePage = () => {
           </ StandardButton>
 
         </Box>
+        <Box sx={{
+          mx: "auto",
+          mb: 5,
+          flexGrow: 1,
+          maxWidth: "800px",
+          alignContent: "center",
+          bgcolor: '#fafafa',
+          boxShadow: 3,
+          borderRadius: 10
+        }}>
 
-        {menuOpened && (
-          <BrowsableTree isDrawer={false} />
-        )}
 
+          <Collapse in={menuOpened}>
+            <Divider variant="middle" />
+            <BrowsableTree isDrawer={false} />
+          </Collapse>
+
+        </Box>
       </Container>
     </Box>
   );

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import taxonomy from "../../taxonomy.json";
 
-import { Box, Divider, Grid, Typography } from '@mui/material';
+import { Box, Divider, Grid, Typography, Paper } from '@mui/material';
 import { TreeView, TreeItem, useTreeItem } from '@mui/lab';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -45,7 +45,10 @@ const BrowsableTree = ({ isDrawer }) => {
 
 
     const renderItem = (nodes) => (
-        <CustomTreeItem key={nodes.label} nodeId={nodes.label} label={nodes.label} >
+        <CustomTreeItem
+            key={nodes.label}
+            nodeId={nodes.label}
+            label={nodes.label} >
             {Array.isArray(nodes.subLevels)
                 ? nodes.subLevels.map((node) => renderItem(node))
                 : null}
@@ -53,37 +56,39 @@ const BrowsableTree = ({ isDrawer }) => {
     )
 
     return (
-        <Grid container spacing={2}>
-            <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
-                <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
-                    <Typography align="left" variant="h6">4.0 Industry Needs</Typography>
-                </Box>
-                <TreeView
-                    key="needs"
-                    aria-label="4.0 industry needs hierarchy"
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialNeeds.map((n) => (renderItem(n)))}
-                </ TreeView>
+        <Box sx={{ p: 1 }}>
+            <Grid container spacing={2}>
+                <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
+                    <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
+                        <Typography align="left" variant="h6">4.0 Industry Needs</Typography>
+                    </Box>
+                    <TreeView
+                        key="needs"
+                        aria-label="4.0 industry needs hierarchy"
+                        defaultCollapseIcon={<ExpandMoreIcon />}
+                        defaultExpandIcon={<ChevronRightIcon />}
+                        sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
+                        {initialNeeds.map((n) => (renderItem(n)))}
+                    </ TreeView>
+                </Grid>
+                {isDrawer && <Grid item xs={12} sm={12} md={12}>
+                    <Divider variant="middle" />
+                </Grid>}
+                <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
+                    <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
+                        <Typography align="left" variant="h6">4.0 Enabling Technologies</Typography>
+                    </Box>
+                    <TreeView
+                        key="tech"
+                        aria-label="4.0 enabling technologies hierarchy"
+                        defaultCollapseIcon={<ExpandMoreIcon />}
+                        defaultExpandIcon={<ChevronRightIcon />}
+                        sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
+                        {initialTech.map((n) => (renderItem(n)))}
+                    </ TreeView>
+                </Grid>
             </Grid>
-            {isDrawer && <Grid item xs={12} sm={12} md={12}>
-                <Divider variant="middle" />
-            </Grid>}
-            <Grid item xs={gridBreak.xs} sm={gridBreak.sm} md={gridBreak.md}>
-                <Box sx={{ flexGrow: 1, my: 2, marginLeft: 1 }}>
-                    <Typography align="left" variant="h6">4.0 Enabling Technologies</Typography>
-                </Box>
-                <TreeView
-                    key="tech"
-                    aria-label="4.0 enabling technologies hierarchy"
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    sx={{ flexGrow: 1, maxWidth: 600, overflowY: 'auto' }}>
-                    {initialTech.map((n) => (renderItem(n)))}
-                </ TreeView>
-            </Grid>
-        </Grid>
+        </Box>
     )
 }
 
