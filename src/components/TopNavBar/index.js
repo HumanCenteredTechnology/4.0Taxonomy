@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFetch } from '../../hooks/useFetch';
 import { useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
-import { Box, AppBar, Toolbar, IconButton, Tooltip, useScrollTrigger } from '@mui/material';
+import { Box, AppBar, Toolbar, IconButton, Button, Tooltip, useScrollTrigger, Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import Fade from '@mui/material/Fade';
 import { HomeRounded } from '@mui/icons-material';
@@ -11,6 +11,7 @@ import StandardButton from '../controls/StandardButton';
 import SearchBar from "../SearchBar";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
+import Logo from '../../images/PLANET4_logo_4_BLACK.png';
 
 import PropTypes from 'prop-types';
 
@@ -72,13 +73,21 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                             </Tooltip>
                         }
                         <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
+
                         {!isHome &&
                             <Tooltip title="Go to Homepage" arrow>
-                                <IconButton sx={{ marginRight: 2 }} aria-label="home" component={RouterLink} to="/">
-                                    <HomeRounded />
-                                </IconButton>
+                                <Box>
+                                    <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
+                                        component={RouterLink} to="/">
+                                        <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
+                                        <Typography variant="b1" color="default">texplorer</Typography>
+                                    </IconButton>
+
+                                </Box>
                             </Tooltip>
+
                         }
+                        <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexShrink: 1, }} />}
 
                         {isResults ? isSmallDevice ?

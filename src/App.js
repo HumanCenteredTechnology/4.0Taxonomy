@@ -6,14 +6,17 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
 import FormPage from "./components/3 - FormPage";
+import Footer from "./components/Footer";
 
 //Styles
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, Box } from "@mui/material";
 import {
   createTheme,
   responsiveFontSizes,
   ThemeProvider,
 } from '@mui/material/styles';
+import RobotoRegular from './fonts/Roboto-Regular.ttf'
+import Volte from './fonts/Volte.otf'
 
 const theme = responsiveFontSizes(createTheme({
   root: {
@@ -23,19 +26,25 @@ const theme = responsiveFontSizes(createTheme({
     secondary: { main: "#2d7e32" },
     background: { paper: "#ffff" },
   },
+  typography: {
+    fontFamily: 'Roboto, Arial',
+  },
 }));
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/:queryId" element={<ResultsPage />} />
-          <Route path="/form" element={<FormPage />} />
-        </Routes>
-      </Router>
+      <Box sx={{ minHeight: "85vh" }} >
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/:queryId" element={<ResultsPage />} />
+            <Route path="/form" element={<FormPage />} />
+          </Routes>
+        </Router>
+      </Box>
+      <Footer />
     </ThemeProvider>
   );
 };

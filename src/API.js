@@ -13,8 +13,8 @@ const apiSettings = {
       //console.log(await data)
       return data
     }
-
   },
+
   fetchResults: async (queryId) => {
     //se non c'è nessuna
     if (queryId === "" || queryId === undefined) return {};
@@ -25,17 +25,8 @@ const apiSettings = {
 
     const results = await fetch(`${API_URL}`, {
       method: "POST",
-      /* mode: "cors",
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }, */
       body: formData,
-
     });
-    /* for (var key of formData.entries()) {
-      console.log(key[0] + " : " + key[1])
-    } */
-    //const data = await results.json();
     const data = await results.json()
     console.log(await data)
 
