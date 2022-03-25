@@ -80,7 +80,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
                                         component={RouterLink} to="/">
                                         <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
-                                        <Typography variant="b1" color="default">texplorer</Typography>
+                                        <Typography variant="b1" color="default">T-explorer</Typography>
                                     </IconButton>
 
                                 </Box>
@@ -96,7 +96,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                             : <></>}
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}
 
-                        {!isForm ? !isSmallDevice ?
+                        {/* {!isForm ? !isSmallDevice ?
                             <StandardButton
                                 variant="text"
                                 text="Add Article"
@@ -106,7 +106,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                 to="/form"
                             />
                             : <></> : <></>
-                        }
+                        } */}
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
