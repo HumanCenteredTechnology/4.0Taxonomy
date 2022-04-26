@@ -6,7 +6,7 @@ import SearchBar from "../SearchBar";
 import ViewMenuButton from "../controls/ViewMenuButton";
 import BrowsableTree from "../BrowsableTree/";
 import TopNavBar from "../TopNavBar";
-
+import CheckBoxTree from "../CheckBoxTree";
 
 //Hooks
 import { useFetch } from "../../hooks/useFetch";
@@ -58,6 +58,7 @@ const HomePage = () => {
           </ StandardButton>
 
         </Box>
+        <CheckBoxTree />
         <Box sx={{
           mx: "auto",
           mb: 5,
@@ -68,11 +69,11 @@ const HomePage = () => {
           boxShadow: 3,
           borderRadius: 10
         }}>
-
-
+          
           <Collapse in={menuOpened}>
             <Divider variant="middle" />
-            <BrowsableTree isDrawer={false} />
+            {/* <BrowsableTree isDrawer={false} /> */}
+            
           </Collapse>
         </Box>
       </Container>
