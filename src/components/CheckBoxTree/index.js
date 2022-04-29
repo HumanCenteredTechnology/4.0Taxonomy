@@ -15,13 +15,11 @@ import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).children))
 const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).children))
 
-const CheckBoxTree = ({isNeeds}) => {
-    const [checked, setChecked] = useState([]);
+const CheckBoxTree = ({isNeeds, checked, setChecked}) => {
+    
     const [expanded, setExpanded] = useState([]);
 
-    useEffect(()=>{
-        console.log(checked)   
-    }, [checked])
+   
 
     return (
         <Box>
@@ -40,11 +38,11 @@ const CheckBoxTree = ({isNeeds}) => {
                     expandOpen: <ExpandMoreRoundedIcon />,
                     expandAll: <FontAwesomeIcon className="rct-icon rct-icon-expand-all" icon="plus-square" />,
                     collapseAll: <FontAwesomeIcon className="rct-icon rct-icon-collapse-all" icon="minus-square" />,
-                    /* parentClose: <FontAwesomeIcon className="rct-icon rct-icon-parent-close" icon="folder" />,
-                    parentOpen: <FontAwesomeIcon className="rct-icon rct-icon-parent-open" icon="folder-open" />,
-                    leaf: <FontAwesomeIcon className="rct-icon rct-icon-leaf-close" icon="file" /> */
+                    parentClose: <></>,
+                    parentOpen: <></>,
+                    leaf: <></> 
                 }}
-                />
+            />
         </Box>
     );
 

@@ -14,7 +14,6 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
 import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer, Pagination, Collapse } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
-import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
@@ -32,7 +31,7 @@ const ResultsPage = () => {
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [openFilter, setOpenFilter] = useState(false);
+
 
 
   const trigger = useScrollTrigger({
@@ -59,10 +58,7 @@ const ResultsPage = () => {
     setOpenDrawer(false)
   }, [queryId])
 
- const handleFilterClick = () =>{
-   if(openFilter==true) setOpenFilter(false)
-   else setOpenFilter(true) 
- }
+
 
   return (
     <Box>
@@ -79,34 +75,25 @@ const ResultsPage = () => {
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
       <Container  >
-        {/*  {isSmallDevice ? <></> :
-          <Slide appear={false} direction="down" in={!trigger}>
-            <Box sx={{ marginY: 5, alignContent: "left" }}>
-              <SearchBar setSearchMention={setSearchMention} />
+          {/*  {isSmallDevice ? <></> :
+            <Slide appear={false} direction="down" in={!trigger}>
+              <Box sx={{ marginY: 5, alignContent: "left" }}>
+                <SearchBar setSearchMention={setSearchMention} />
+              </Box>
+            </Slide>
+          } */}
+          {!error ?
+            <Box sx={{ marginY: 2, marginX:2 }}>
+              {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
+                <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
+                </Typography>}
             </Box>
-          </Slide>
-        } */}
-        {!error ?
-          <Box sx={{ marginY: 2, marginX:2 }}>
-            {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-              <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
-              </Typography>}
+            :
+            <></>}
+          <Box sx={{ marginY: 0 }}>
+            <Divider margin={2} variant="middle" />
           </Box>
-          :
-          <></>}
-        <Box sx={{ marginY: 0 }}>
-          <Divider margin={2} variant="middle" />
-        </Box>
-        <Box sx={{  marginY: 2, marginX:2  }}>
-          <Button color="inherit" onClick={handleFilterClick}>
-            <FilterListRoundedIcon />
-            Filter
-          </Button>
-          <Collapse in={openFilter}>
-            <Filter />
-          </Collapse>
-          
-        </Box>
+          {!isSmallDevice ? <Filter /> : <></>}
         </Container>
         <Box sx={{backgroundColor: '#fafafa'}}>
           <Container >

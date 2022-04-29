@@ -4,6 +4,112 @@
         "label": "needs",
         "children": [
             {
+                "value": "Process Optimization",
+                "label": "Process Optimization",
+                "children": [
+                    {
+                        "value": "Equipment efficiency improvement",
+                        "label": "Equipment efficiency improvement",
+                        "children": [
+                            {
+                                "value": "Real-time Production monitoring analysis and supervision",
+                                "label": "Real-time Production monitoring analysis and supervision",
+                                "children": []
+                            },
+                            {
+                                "value": "Predictive Maintenance",
+                                "label": "Predictive Maintenance",
+                                "children": []
+                            },
+                            {
+                                "value": "Vertical interconnection and integration",
+                                "label": "Vertical interconnection and integration",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Worker security improvement and accident prevention",
+                        "label": "Worker security improvement and accident prevention",
+                        "children": [
+                            {
+                                "value": "Smart PPE (Personal Protection Equipment)",
+                                "label": "Smart PPE (Personal Protection Equipment)",
+                                "children": []
+                            },
+                            {
+                                "value": "Worker attention and mental state monitoring",
+                                "label": "Worker attention and mental state monitoring",
+                                "children": []
+                            },
+                            {
+                                "value": "People counting, analysis and crowd detection",
+                                "label": "People counting, analysis and crowd detection",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Worker routine and operation optimization",
+                        "label": "Worker routine and operation optimization",
+                        "children": [
+                            {
+                                "value": "Time and Method smart measurement",
+                                "label": "Time and Method smart measurement",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Supply Chain",
+                        "label": "Supply Chain",
+                        "children": [
+                            {
+                                "value": "Horizontal interconnection and integration",
+                                "label": "Horizontal interconnection and integration",
+                                "children": []
+                            },
+                            {
+                                "value": "Production on demand enabling technology",
+                                "label": "Production on demand enabling technology",
+                                "children": []
+                            },
+                            {
+                                "value": "Smart warehouse",
+                                "label": "Smart warehouse",
+                                "children": []
+                            },
+                            {
+                                "value": "Intralogistics 4.0 - material flow control",
+                                "label": "Intralogistics 4.0 - material flow control",
+                                "children": []
+                            },
+                            {
+                                "value": "Supply chain transparency and reliability improvement",
+                                "label": "Supply chain transparency and reliability improvement",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Quality Assurance",
+                        "label": "Quality Assurance",
+                        "children": [
+                            {
+                                "value": "Technological processes intelligent supervision",
+                                "label": "Technological processes intelligent supervision",
+                                "children": []
+                            },
+                            {
+                                "value": "Intelligent FMEA",
+                                "label": "Intelligent FMEA",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "value": "Product Innovation",
                 "label": "Product Innovation",
                 "children": [
