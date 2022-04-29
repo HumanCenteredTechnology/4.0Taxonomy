@@ -38,11 +38,11 @@ const Result = ({ name, parent, category, articles, loading }) => {
           <Link
             component={RouterLink}
             to={"/" + name}>
-            <Typography variant="h6" gutterBottom  >
+            <Typography variant="h6" >
               {name}
             </Typography>
           </Link>
-          <Typography variant="body2">
+          <Typography variant="body2" gutterBottom>
             {wiki} <Link href="#">Read more</Link>
           </Typography>
         </Box>
@@ -93,7 +93,7 @@ const Resources = ({ articles }) => {
   return (
 
     <Box >
-      <List disablePadding>
+      <List disablePadding dense>
         {isLong ?
           <> {
             articles.slice(0, 4)
@@ -133,7 +133,7 @@ const Article = ({ art }) => {
   return (
     <ListItemText>
       <Tooltip title={isPdf ? "Opens a pdf in a new window" : "Opens in a new window"} followCursor>
-        <Link href={art[1]} >
+        <Link rel="noopener noreferrer" target="_blank" href={art[1]} >
           <Typography variant="body2" noWrap >
             {art[0]}
           </Typography>

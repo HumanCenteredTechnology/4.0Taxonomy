@@ -58,7 +58,6 @@ const HomePage = () => {
           </ StandardButton>
 
         </Box>
-        <CheckBoxTree />
         <Box sx={{
           mx: "auto",
           mb: 5,
@@ -71,9 +70,7 @@ const HomePage = () => {
         }}>
           
           <Collapse in={menuOpened}>
-            <Divider variant="middle" />
-            {/* <BrowsableTree isDrawer={false} /> */}
-            
+              <BrowsableTree isDrawer={false} />
           </Collapse>
         </Box>
       </Container>

@@ -12,11 +12,13 @@ import { useFetch } from "../../hooks/useFetch";
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer, Pagination } from "@mui/material";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer, Pagination, Collapse } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
+import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
+import Filter from "../Filter";
 
 
 
@@ -30,6 +32,7 @@ const ResultsPage = () => {
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
 
 
   const trigger = useScrollTrigger({
@@ -56,6 +59,11 @@ const ResultsPage = () => {
     setOpenDrawer(false)
   }, [queryId])
 
+ const handleFilterClick = () =>{
+   if(openFilter==true) setOpenFilter(false)
+   else setOpenFilter(true) 
+ }
+
   return (
     <Box>
       <TopNavBar isResults={true} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
@@ -79,20 +87,34 @@ const ResultsPage = () => {
           </Slide>
         } */}
         {!error ?
-          <Box sx={{ marginY: 2 }}>
+          <Box sx={{ marginY: 2, marginX:2 }}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
               <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
               </Typography>}
           </Box>
           :
           <></>}
-        <Box sx={{ marginY: 3 }}>
+        <Box sx={{ marginY: 0 }}>
           <Divider margin={2} variant="middle" />
         </Box>
-        <Grid container spacing={3}>
-          {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
-        </Grid>
-      </Container>
+        <Box sx={{  marginY: 2, marginX:2  }}>
+          <Button color="inherit" onClick={handleFilterClick}>
+            <FilterListRoundedIcon />
+            Filter
+          </Button>
+          <Collapse in={openFilter}>
+            <Filter />
+          </Collapse>
+          
+        </Box>
+        </Container>
+        <Box sx={{backgroundColor: '#fafafa'}}>
+          <Container >
+          <Grid >
+            {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
+          </Grid>
+        </Container>
+      </Box>
     </Box >
   );
 };
@@ -105,10 +127,10 @@ const ResultsList = ({ problems, technologies, loading }) => {
       <Grid item xs={12} sm={6}>
         <Box sx={{
           display: 'flex',
-          p: 1,
+          p: 0,
           m: 0,
         }}>
-          <Typography variant="h5" > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
+          <Typography variant="h5" gutterBottom > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
         </Box>
         {loading ? <LoadingSkeleton />
           :
@@ -123,10 +145,10 @@ const ResultsList = ({ problems, technologies, loading }) => {
       <Grid item xs={12} sm={6}>
         <Box sx={{
           display: 'flex',
-          p: 1,
+          p: 0,
           m: 0,
         }}>
-          <Typography variant="h5" >{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
+          <Typography variant="h5" gutterBottom>{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
         </Box>
         {loading ? <LoadingSkeleton />
           :

@@ -13,16 +13,20 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import ExpandMoreRoundedIcon from '@mui/icons-material/ExpandMoreRounded';
 
 const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).children))
-console.log(initialNeeds)
+const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).children))
 
-const CheckBoxTree = () => {
+const CheckBoxTree = ({isNeeds}) => {
     const [checked, setChecked] = useState([]);
     const [expanded, setExpanded] = useState([]);
+
+    useEffect(()=>{
+        console.log(checked)   
+    }, [checked])
 
     return (
         <Box>
             <CheckboxTree
-                nodes={initialNeeds}
+                nodes={isNeeds? initialNeeds:initialTech}
                 checked={checked}
                 expanded={expanded}
                 onCheck={checked=>setChecked(checked)}
@@ -31,14 +35,14 @@ const CheckBoxTree = () => {
                 icons={{
                     check: <CheckBoxRoundedIcon />,
                     uncheck: <CheckBoxOutlineBlankRoundedIcon />,
-                    halfCheck: <FontAwesomeIcon className="rct-icon rct-icon-half-check" icon="check-square" />,
+                    /* halfCheck: <FontAwesomeIcon className="rct-icon rct-icon-half-check" icon="check-square" />, */
                     expandClose: < ChevronRightRoundedIcon />,
                     expandOpen: <ExpandMoreRoundedIcon />,
                     expandAll: <FontAwesomeIcon className="rct-icon rct-icon-expand-all" icon="plus-square" />,
                     collapseAll: <FontAwesomeIcon className="rct-icon rct-icon-collapse-all" icon="minus-square" />,
-                    parentClose: <FontAwesomeIcon className="rct-icon rct-icon-parent-close" icon="folder" />,
+                    /* parentClose: <FontAwesomeIcon className="rct-icon rct-icon-parent-close" icon="folder" />,
                     parentOpen: <FontAwesomeIcon className="rct-icon rct-icon-parent-open" icon="folder-open" />,
-                    leaf: <FontAwesomeIcon className="rct-icon rct-icon-leaf-close" icon="file" />
+                    leaf: <FontAwesomeIcon className="rct-icon rct-icon-leaf-close" icon="file" /> */
                 }}
                 />
         </Box>

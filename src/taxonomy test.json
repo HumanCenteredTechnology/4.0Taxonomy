@@ -42,125 +42,143 @@
         ]
     },
     {
+        "value": "enabling technologies",
         "label": "enabling technologies",
-        "subLevels": [
+        "children": [
             {
+                "value": "Data Science",
                 "label": "Data Science",
-                "subLevels": [
+                "children": [
                     {
+                        "value": "Data Visualization and Dashboarding",
                         "label": "Data Visualization and Dashboarding",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "Grafana",
-                                "subLevels": []
+                                "value": "Grafana",
+                                "label": "Grafana"
                             },
                             {
-                                "label": "Kibana",
-                                "subLevels": []
+                                "value": "Kibana",
+                                "label": "Kibana"
                             },
                             {
-                                "label": "Metabase",
-                                "subLevels": []
+                                "value": "Metabase",
+                                "label": "Metabase"
                             }
                         ]
                     },
                     {
+                        "value": "Data Analytics",
                         "label": "Data Analytics",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "Data lake and Data Warehouse design",
-                                "subLevels": []
+                                "value": "Data lake and Data Warehouse design",
+                                "label": "Data lake and Data Warehouse design"
                             },
                             {
+                                "value": "Data Mining",
                                 "label": "Data Mining",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "Python",
-                                        "subLevels": []
+                                        "value": "Python",
+                                        "label": "Python"
+
                                     },
                                     {
-                                        "label": "R",
-                                        "subLevels": []
+                                        "value": "R",
+                                        "label": "R"
+
                                     },
                                     {
-                                        "label": "Julia",
-                                        "subLevels": []
+                                        "value": "Julia",
+                                        "label": "Julia"
+
                                     }
                                 ]
                             },
                             {
-                                "label": "Process Mining",
-                                "subLevels": []
+                                "value": "Process Mining",
+                                "label": "Process Mining"
                             }
                         ]
                     },
                     {
+                        "value": "Advanced reporting and self-service business intelligence tools",
                         "label": "Advanced reporting and self-service business intelligence tools",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "Tableau",
-                                "subLevels": []
+                                "value": "Tableau",
+                                "label": "Tableau"
                             },
                             {
-                                "label": "PowerBI",
-                                "subLevels": []
+                                "value": "PowerBI",
+                                "label": "PowerBI"
                             },
                             {
-                                "label": "Elastic Stack",
-                                "subLevels": []
+                                "value": "Elastic Stack",
+                                "label": "Elastic Stack"
                             },
                             {
-                                "label": "SAP Business Intelligence",
-                                "subLevels": []
+                                "value": "SAP Business Intelligence",
+                                "label": "SAP Business Intelligence"
                             },
                             {
-                                "label": "QlikView/Qlik Sense ",
-                                "subLevels": []
+                                "value": "QlikView/Qlik Sense ",
+                                "label": "QlikView/Qlik Sense "
                             }
                         ]
                     },
                     {
+                        "value": "DataBases",
                         "label": "DataBases",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "SQL DB",
-                                "subLevels": []
+                                "value": "SQL DB",
+                                "label": "SQL DB"
                             },
                             {
-                                "label": "Non SQL DB",
-                                "subLevels": []
+                                "value": "Non SQL DB",
+                                "label": "Non SQL DB"
                             },
                             {
+                                "value": "Time series DB",
                                 "label": "Time series DB",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "influxDB",
-                                        "subLevels": []
+                                        "value": "influxDB",
+                                        "label": "influxDB"
+
                                     },
                                     {
-                                        "label": "Prometheus",
-                                        "subLevels": []
+                                        "value": "Prometheus",
+                                        "label": "Prometheus"
+
                                     },
                                     {
-                                        "label": "Graphite",
-                                        "subLevels": []
+                                        "value": "Graphite",
+                                        "label": "Graphite"
+
                                     }
                                 ]
                             },
                             {
+                                "value": "Data engines",
                                 "label": "Data engines",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "Apache Hadoop",
-                                        "subLevels": []
+                                        "value": "Apache Hadoop",
+                                        "label": "Apache Hadoop"
+
                                     },
                                     {
-                                        "label": "Apache Kafka",
-                                        "subLevels": []
+                                        "value": "Apache Kafka",
+                                        "label": "Apache Kafka"
+
                                     },
                                     {
-                                        "label": "Apache Spark",
-                                        "subLevels": []
+                                        "value": "Apache Spark",
+                                        "label": "Apache Spark"
+
                                     }
                                 ]
                             }
@@ -169,244 +187,267 @@
                 ]
             },
             {
+                "value": "AI",
                 "label": "AI",
-                "subLevels": [
+                "children": [
                     {
-                        "label": "Machine Learning",
-                        "subLevels": []
+                        "value": "Machine Learning",
+                        "label": "Machine Learning"
                     },
                     {
-                        "label": "Deep Learning",
-                        "subLevels": []
+                        "value": "Deep Learning",
+                        "label": "Deep Learning"
                     },
                     {
-                        "label": "Reinforcement Learning",
-                        "subLevels": []
+                        "value": "Reinforcement Learning",
+                        "label": "Reinforcement Learning"
                     },
                     {
-                        "label": "Continuous Learning",
-                        "subLevels": []
+                        "value": "Continuous Learning",
+                        "label": "Continuous Learning"
                     },
                     {
-                        "label": "Computer Vision",
-                        "subLevels": []
+                        "value": "Computer Vision",
+                        "label": "Computer Vision"
                     },
                     {
-                        "label": "Natural Language Processing",
-                        "subLevels": []
+                        "value": "Natural Language Processing",
+                        "label": "Natural Language Processing"
                     }
                 ]
             },
             {
+                "value": "Cloud",
                 "label": "Cloud",
-                "subLevels": [
+                "children": [
                     {
+                        "value": "Container technology",
                         "label": "Container technology",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "Docker",
-                                "subLevels": []
+                                "value": "Docker",
+                                "label": "Docker"
                             },
                             {
-                                "label": "Kubernates",
-                                "subLevels": []
+                                "value": "Kubernates",
+                                "label": "Kubernates"
                             },
                             {
-                                "label": "Terraform",
-                                "subLevels": []
+                                "value": "Terraform",
+                                "label": "Terraform"
                             }
                         ]
                     },
                     {
+                        "value": "Serverless Programming",
                         "label": "Serverless Programming",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "AWS Lambda functions",
-                                "subLevels": []
+                                "value": "AWS Lambda functions",
+                                "label": "AWS Lambda functions"
                             },
                             {
-                                "label": "Azure functions",
-                                "subLevels": []
+                                "value": "Azure functions",
+                                "label": "Azure functions"
                             }
                         ]
                     },
                     {
+                        "value": "Device Management",
                         "label": "Device Management",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "Zerynth Device Manager",
-                                "subLevels": []
+                                "value": "Zerynth Device Manager",
+                                "label": "Zerynth Device Manager"
                             },
                             {
-                                "label": "AWS IoT Device Management",
-                                "subLevels": []
+                                "value": "AWS IoT Device Management",
+                                "label": "AWS IoT Device Management"
                             },
                             {
-                                "label": "Azure IoT Hub",
-                                "subLevels": []
+                                "value": "Azure IoT Hub",
+                                "label": "Azure IoT Hub"
                             },
                             {
-                                "label": "WinCC OA IoT OPA",
-                                "subLevels": []
+                                "value": "WinCC OA IoT OPA",
+                                "label": "WinCC OA IoT OPA"
                             }
                         ]
                     },
                     {
+                        "value": "Cloud Data Storage",
                         "label": "Cloud Data Storage",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "AWS S3",
-                                "subLevels": []
+                                "value": "AWS S3",
+                                "label": "AWS S3"
                             },
                             {
-                                "label": "Google Cloud Storage",
-                                "subLevels": []
+                                "value": "Google Cloud Storage",
+                                "label": "Google Cloud Storage"
                             },
                             {
-                                "label": "Microsoft Azure Storage",
-                                "subLevels": []
+                                "value": "Microsoft Azure Storage",
+                                "label": "Microsoft Azure Storage"
                             }
                         ]
                     },
                     {
+                        "value": "Edge Computing",
                         "label": "Edge Computing",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "AWS green pass",
-                                "subLevels": []
+                                "value": "AWS green pass",
+                                "label": "AWS green pass"
                             },
                             {
-                                "label": "Azure Edge IoT",
-                                "subLevels": []
+                                "value": "Azure Edge IoT",
+                                "label": "Azure Edge IoT"
                             },
                             {
-                                "label": "Custom solutions based on docker swarm",
-                                "subLevels": []
+                                "value": "Custom solutions based on docker swarm",
+                                "label": "Custom solutions based on docker swarm"
                             },
                             {
-                                "label": "Multi-access edge computing",
-                                "subLevels": []
+                                "value": "Multi-access edge computing",
+                                "label": "Multi-access edge computing"
                             },
                             {
-                                "label": "AWS Wavelength",
-                                "subLevels": []
+                                "value": "AWS Wavelength",
+                                "label": "AWS Wavelength"
                             }
                         ]
                     }
                 ]
             },
             {
+                "value": "IoT and IoE",
                 "label": "IoT and IoE",
-                "subLevels": [
+                "children": [
                     {
+                        "value": "Industrial IoT",
                         "label": "Industrial IoT",
-                        "subLevels": [
+                        "children": [
                             {
+                                "value": "Industrial communication protocols",
                                 "label": "Industrial communication protocols",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)",
-                                        "subLevels": []
+                                        "value": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)",
+                                        "label": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)"
+
                                     },
                                     {
-                                        "label": "Fieldbus protocols (Profibus DP,Modbus-RTU) ",
-                                        "subLevels": []
+                                        "value": "Fieldbus protocols (Profibus DP,Modbus-RTU) ",
+                                        "label": "Fieldbus protocols (Profibus DP,Modbus-RTU) "
+
                                     },
                                     {
-                                        "label": "Wireless protocols (WLAN,Bluetooth)",
-                                        "subLevels": []
+                                        "value": "Wireless protocols (WLAN,Bluetooth)",
+                                        "label": "Wireless protocols (WLAN,Bluetooth)"
+
                                     }
                                 ]
                             },
                             {
-                                "label": "Industrial gateway and data acquisition device",
-                                "subLevels": []
+                                "value": "Industrial gateway and data acquisition device",
+                                "label": "Industrial gateway and data acquisition device"
                             }
                         ]
                     },
                     {
+                        "value": "Embedded Computing",
                         "label": "Embedded Computing",
-                        "subLevels": [
+                        "children": [
                             {
+                                "value": "Microcontroller programming and RTOS",
                                 "label": "Microcontroller programming and RTOS",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "Arduino",
-                                        "subLevels": []
+                                        "value": "Arduino",
+                                        "label": "Arduino"
+
                                     },
                                     {
-                                        "label": "STM32",
-                                        "subLevels": []
+                                        "value": "STM32",
+                                        "label": "STM32"
+
                                     },
                                     {
-                                        "label": "ESP32",
-                                        "subLevels": []
+                                        "value": "ESP32",
+                                        "label": "ESP32"
+
                                     },
                                     {
-                                        "label": "FPGA",
-                                        "subLevels": []
+                                        "value": "FPGA",
+                                        "label": "FPGA"
+
                                     }
                                 ]
                             },
                             {
+                                "value": "Microprocessor programming and embedded Linux",
                                 "label": "Microprocessor programming and embedded Linux",
-                                "subLevels": [
+                                "children": [
                                     {
-                                        "label": "RaspberryPi",
-                                        "subLevels": []
+                                        "value": "RaspberryPi",
+                                        "label": "RaspberryPi"
+
                                     },
                                     {
-                                        "label": "Other SBC",
-                                        "subLevels": []
+                                        "value": "Other SBC",
+                                        "label": "Other SBC"
+
                                     }
                                 ]
                             }
                         ]
                     },
                     {
-                        "label": "Sensors (hardware)",
-                        "subLevels": []
+                        "value": "Sensors (hardware)",
+                        "label": "Sensors (hardware)"
                     },
                     {
-                        "label": "Signal processing",
-                        "subLevels": []
+                        "value": "Signal processing",
+                        "label": "Signal processing"
                     },
                     {
-                        "label": "Blockchain",
-                        "subLevels": []
+                        "value": "Blockchain",
+                        "label": "Blockchain"
                     },
                     {
+                        "value": "Connectivity",
                         "label": "Connectivity",
-                        "subLevels": [
+                        "children": [
                             {
-                                "label": "GSM/4G/5G ",
-                                "subLevels": []
+                                "value": "GSM/4G/5G ",
+                                "label": "GSM/4G/5G "
                             },
                             {
-                                "label": "MQTT, Node-Red",
-                                "subLevels": []
+                                "value": "MQTT, Node-Red",
+                                "label": "MQTT, Node-Red"
                             },
                             {
-                                "label": "REST API and Webhook",
-                                "subLevels": []
+                                "value": "REST API and Webhook",
+                                "label": "REST API and Webhook"
                             },
                             {
-                                "label": "RFID/NFC",
-                                "subLevels": []
+                                "value": "RFID/NFC",
+                                "label": "RFID/NFC"
                             },
                             {
-                                "label": "Bluetooth",
-                                "subLevels": []
+                                "value": "Bluetooth",
+                                "label": "Bluetooth"
                             },
                             {
-                                "label": "LPWAN (Low Power Wide Area Network)",
-                                "subLevels": []
+                                "value": "LPWAN (Low Power Wide Area Network)",
+                                "label": "LPWAN (Low Power Wide Area Network)"
                             }
                         ]
                     },
                     {
-                        "label": "IoE (Internet of Everything)",
-                        "subLevels": []
+                        "value": "IoE (Internet of Everything)",
+                        "label": "IoE (Internet of Everything)"
                     }
                 ]
             }
