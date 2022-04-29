@@ -80,7 +80,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
                                         component={RouterLink} to="/">
                                         <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
-                                        <Typography variant="b1" color="default">T-explorer</Typography>
+                                        <Typography variant="body1" color="default">Taxonomy</Typography>
                                     </IconButton>
 
                                 </Box>

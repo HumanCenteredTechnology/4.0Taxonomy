@@ -12,7 +12,7 @@ import { useFetch } from "../../hooks/useFetch";
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer } from "@mui/material";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer, Pagination } from "@mui/material";
 import { HomeRounded } from "@mui/icons-material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
@@ -30,6 +30,7 @@ const ResultsPage = () => {
   const [problems, setProblems] = useState([]);
   const [technologies, setTechnologies] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
+
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -105,7 +106,7 @@ const ResultsList = ({ problems, technologies, loading }) => {
         <Box sx={{
           display: 'flex',
           p: 1,
-          m: 2,
+          m: 0,
         }}>
           <Typography variant="h5" > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
         </Box>
@@ -123,7 +124,7 @@ const ResultsList = ({ problems, technologies, loading }) => {
         <Box sx={{
           display: 'flex',
           p: 1,
-          m: 2,
+          m: 0,
         }}>
           <Typography variant="h5" >{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
         </Box>

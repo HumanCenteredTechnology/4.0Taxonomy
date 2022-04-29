@@ -14,14 +14,19 @@ const Result = ({ name, parent, category, articles, loading }) => {
   return (
     <Box sx={{
       justifyContent: 'center',
-      p: 1,
-      m: 0,
+      p: 0,
+      mb: 2,
     }}>
       <Card>
-        <Box sx={{
+      <Box sx={{
           justifyContent: 'center',
-          p: 2,
-          m: 0,
+          pt: 1,
+          pb: 1,
+          pl: 2,
+          pr: 2,
+        }}>
+        <Box sx={{
+          mb: 1
         }}>
           <Link
             component={RouterLink}
@@ -42,12 +47,12 @@ const Result = ({ name, parent, category, articles, loading }) => {
           </Typography>
         </Box>
         {/* <Divider variant="middle" /> */}
-        <CardContent>
+        
           {Array.isArray(articles) ?
             <Box sx={{}}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
-                  <Typography variant="body1" >Resources:</Typography>
+                  <Typography variant="body1" >Sources:</Typography>
                   <Resources articles={articles} />
                 </Grid>
               </Grid>
@@ -55,7 +60,7 @@ const Result = ({ name, parent, category, articles, loading }) => {
             :
             <></>
           }
-        </CardContent>
+        </Box>
       </Card>
     </Box>
   );
