@@ -1,0 +1,247 @@
+[
+    {
+        "title": "AI in production: A game changer for manufacturers with heavy assets",
+        "source_type": "Consulting article",
+        "journal": "",
+        "authors": [ "McKinsey" ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    "Production on demand"
+                ]
+            },
+            {
+                "tech": [
+                    "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing", ""
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "https://www.mckinsey.com/business-functions/quantumblack/our-insights/ai-in-production-a-game-changer-for-manufacturers-with-heavy-assets",
+        "publishing_date": "07-03-2019",
+        "abstract": ""
+    },
+    {
+        "title": "Modeling and optimization of the electrical discharge machining process based on a combined artificial neural network and particle swarm optimization algorithm",
+        "source_type": "Journal paper",
+        "journal": "Scientia Iranica",
+        "authors": [ "Azadi Moghaddam, M.", "Kolahan, F." ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    "Production Planning and Scheduling" ,"Production on demand"
+                ]
+            },
+            {
+                "tech": [
+                    "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Artificial Neural Networks", "Cloud Data Storage and Computing"
+                ]
+            }
+         ],
+        "doi": "10.24200/sci.2019.5152.1123",
+        "url": "http://scientiairanica.sharif.edu/article_21299.html",
+        "publishing_date": "06-2020",
+        "abstract": "In this study EFlectrical discharge machining (EDM) process, widely used in mold manufacturing, is modeled and optimized using artificial neural network and an optimization heuristic algorithm. Material removal rate (MRR), tool wear rate (TWR), and surface roughness (SR) are considered as performance characteristics of the EDM process. Optimization of process parameters in order to find a combination of process parameters to simultaneously minimize TWR and SR and maximize MRR is the objective of this study. In order to establish the relations between the input and the output process parameters, back propagation neural network (BPNN) used. In the last section of this research, particle swarm optimization (PSO) algorithm has been employed for optimization of the multiple response characteristics. A set of verification tests is also performed to verify the accuracy of optimization procedure in determination of the optimal levels of process parameters. Results demonstrate that propose modeling technique (BPNN) can precisely simulate actual EDM process with less than 1% error. Furthermore less than 4% error for PSO algorithm results is quite efficient in optimization procedure."
+    },
+    {
+        "title": "Smart cloud manufacturing platform for resource efficiency improvement of additive manufacturing services",
+        "source_type": "Journal paper",
+        "journal": "Procedia CIRP",
+        "publisher": "Elsevier BV",
+        "authors": [ "Simeone, A.", "Caggiano, A.", "Zeng, Y." ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    "Production on demand"
+                ]
+            },
+            {
+                "tech": [
+                    "Additive Manufacturing"
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "2020",
+        "abstract": ""
+    },
+    {
+        "title": "A deep learning based-decision support tool for solution recommendation in cloud manufacturing platforms",
+        "source_type": "Conference paper",
+        "journal": "Procedia CIRP",
+        "publisher": "Elsevier BV",
+        "authors": [ "Simeone, A.", "Caggiano, A.", "Deng, B.", "Boun, L." ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    "Production on demand"
+                ]
+            },
+            {
+                "tech": [
+                    "Deep Neural Network", "Cloud Data Storage and Computing",""
+                ]
+            }
+         ],
+        "doi": "10.1016/j.procir.2020.01.019",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2212827120300263",
+        "publishing_date": "01-2019",
+        "abstract": "Industry 4.0 key enabling technologies such as cloud manufacturing allow for the dynamic sharing of distributed resources for efficient use at industrial network level. Interconnected users, i.e. suppliers and customers, offer and request manufacturing services over a cloud manufacturing platform, where an intelligent engine generates a number of solutions based on functional and geometrical requirements. A high number of suppliers leads to a higher number of solutions available for customers increasing the decision-making complexity from a customer perspective. Recommendation systems play a crucial role in expanding the opportunities in decision-making processes under complex information environments. In this scope, this paper proposes the conceptualization and the development of a recommendation decision support tool to be implemented in a cloud manufacturing platform to assist customers in appropriately selecting manufacturing services with reference to sheet metal cutting operations. In terms of solution selection, a Deep Neural Network (DNN) paradigm is adopted to allow for the automatic learning of optimal solution recommendation list based both on customers past experiences and new choices. In this respect, a virtual interaction environment is firstly built for system pre-training. Subsequently, users’ data are inputted in the pre-trained model to predict a recommendation list. This is then subject to user interaction, i.e. selection, which will be fed back into the model to update the training parameters. This paper concludes with a simulated case study reported to exemplify the proposed methodology for a variety of decision-making scenarios."
+    },
+    {
+        "title": "The use of 5G Non-Public Networks to support Industry 4.0 scenarios",
+        "source_type": "Conference paper",
+        "journal": "2019 IEEE Conference on Standards for Communications and Networking",
+        "publisher": "IEEE",
+        "authors": [ "Ordonez-Lucena, J.", "Chavarria, J. F.", "Contreras, L. M.", "Pastor, A." ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    "Real-time Production and Process Monitoring, Analysis and Supervision", "Production on demand"
+                ]
+            },
+            {
+                "tech": [
+                    "Encryption/Decryption, privacy and integrity measures", "LTE/GSM/4G/5G"
+                ]
+            }
+         ],
+        "doi": "10.1109/CSCN.2019.8931325",
+        "url": "https://ieeexplore.ieee.org/document/8931325",
+        "publishing_date": "10-2019",
+        "abstract": "The on-going digital transformation is key to progress towards a new generation of more efficient, sustainable and connected industrial systems allowing the so-called factories of the future. This new generation, commonly referred to as industry 4.0, will be accompanied by a new wave of use cases that will allow companies from logistics and manufacturing sectors to increase flexibility, productivity and usability in the industrial processes executed within their factory premises. Unlike typical use cases from other vertical sectors (e.g. energy, media, smart cities), industry 4.0 use cases will bring very stringent requirements in terms of latency, reliability and high-accuracy positioning. The combination of 5G technology with enterprise network solutions becomes crucial to satisfy these requirements in indoor, private environments. In this context, the concept of 5G non-public networks has emerged. In this article we provide an overview of 5G non-public networks, studying their applicability to the industry 4.0 ecosystem. On the basis of the work (being) developed in 3GPP Rel-16 specifications, we identify a number of deployment options relevant for non-public networks, and discuss their integration with mobile network operators' public networks. Finally, we provide a comparative analysis of these options, assessing their feasibility according to different criteria, including technical, regulatory and business aspects. The outcome of this analysis will help industry players interested in using non-public networks to decide which is the most appropriate deployment option for their use cases."
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    },
+    {
+        "title": "",
+        "source_type": "",
+        "journal": "",
+        "authors": [  ],
+        "tax_keywords": [ 
+            {
+                "needs": [
+                    
+                ]
+            },
+            {
+                "tech": [
+
+                ]
+            }
+         ],
+        "doi": "",
+        "url": "",
+        "publishing_date": "",
+        "abstract": ""
+    }
+]

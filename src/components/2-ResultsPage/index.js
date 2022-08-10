@@ -47,7 +47,7 @@ const ResultsPage = () => {
 
   useEffect(() => {
 
-    if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
+/*     if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
       if (results.related_elements[0].at(3) === "Problems") {
         setProblems(results.related_elements)
         setTechnologies(results.unrelated_elements)
@@ -56,7 +56,9 @@ const ResultsPage = () => {
         setProblems(results.unrelated_elements)
         setTechnologies(results.related_elements)
       }
-    }
+    } */
+    results=resultsTest
+    
   }, [results])
 
   useEffect(() => {
