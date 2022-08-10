@@ -19,7 +19,12 @@ import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
 import Filter from "../Filter";
 
+import Filter from "../Filter";
 
+//test
+import jsonEx from "../../SERP results example.json"
+
+const resultsTest = JSON.parse(JSON.stringify(jsonEx))
 
 
 const ResultsPage = () => {
