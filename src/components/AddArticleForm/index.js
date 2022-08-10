@@ -74,7 +74,7 @@ const AddArticleForm = () => {
         <Box sx={{ flexGrow: 1 }} />
         <StandardButton
           type="submit"
-          text="Submit"
+          text="Submit Now"
           onClick={handleSubmit}
         />
       </CardActions>

@@ -96,7 +96,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                             : <></>}
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}
 
-                        {/* {!isForm ? !isSmallDevice ?
+                        {!isForm ? !isSmallDevice ?
                             <StandardButton
                                 variant="text"
                                 text="Add Article"
@@ -106,7 +106,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                 to="/form"
                             />
                             : <></> : <></>
-                        } */}
+                         }
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
