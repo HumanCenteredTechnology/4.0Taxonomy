@@ -15,8 +15,8 @@ const TopicChip = ({ name, label, variant, size, clickable = null, link, filtere
     return (
         <Chip
             label={label}
-            /* color={name === "Problems" ? "secondary" : "primary" || "default"}
-            {...(clickable && { clickable: true })} */
+            color={name === "Problems" ? "secondary" : "primary" || "default"}
+            /*{...(clickable && { clickable: true })} */
             /* onClick={handleClick} */
             onDelete={onDelete}
             variant={variant || "default"}

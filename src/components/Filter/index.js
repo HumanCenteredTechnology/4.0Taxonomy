@@ -11,7 +11,7 @@ import TopicChip from "../TopicChip";
 const Filter = () =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
-    const [openFilter, setOpenFilter] = useState(false);
+    const [openFilter, setOpenFilter] = useState(true);
     const [checkedNeeds, setCheckedNeeds] = useState([]);
     const [checkedTech, setCheckedTech] = useState([]);
     const [filtered, setFiltered] = useState({needs: [], tech: []});
@@ -34,10 +34,15 @@ const Filter = () =>{
     }
     
     return (
-        <Box sx={{  marginY: 2, marginX:2  }}>
+        <Box sx={{ overflowY:'hidden',
+                   border: '2px solid grey',
+                   borderTopRightRadius: '15px',
+                   borderLeft: '0px',
+                   borderBottom: '0px',
+                   margin: "auto",
+                   my: 4}}>
             <Grid container spacing={0.5}>
             <Button color="inherit" onClick={handleFilterClick}><FilterListRoundedIcon />Filter</Button>
-            
                 {filtered.needs.map((el,i)=>{
                     return (
                         <Grid item key={i}>
@@ -47,14 +52,12 @@ const Filter = () =>{
                 })}
             </Grid>
             <Collapse in={openFilter}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
-                        <Paper elevation={0} sx={{minHeight:200, maxHeight:200, overflow:"auto"}}>
+                <Grid container spacing={1}>
+                    <Grid item xs={12} sm={12}>
+                        <Paper elevation={0} sx={{minHeight:200, maxHeight:600, overflow:"auto"}}>
                             <CheckBoxTree isNeeds={true} checked={checkedNeeds} setChecked={setCheckedNeeds}/>
                         </Paper>
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <Paper elevation={0} sx={{minHeight:200, maxHeight:200, overflow:"auto"}}>
+                        <Paper elevation={0} sx={{minHeight:200, maxHeight:600, overflow:"auto"}}>
                             <CheckBoxTree isNeeds={false}  checked={checkedTech} setChecked={setCheckedTech}/>
                         </Paper>
                     </Grid>

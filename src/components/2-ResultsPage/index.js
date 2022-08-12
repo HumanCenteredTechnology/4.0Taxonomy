@@ -6,24 +6,27 @@ import Result from "../Result";
 import NotFound from "../NotFound";
 import TopicChip from "../TopicChip";
 import TopNavBar from "../TopNavBar";
+import Filter from "../Filter";
+import InfoSnippet from "../InfoSnippet";
+
 //hooks
 import { useFetch } from "../../hooks/useFetch";
 
 //Style
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer, Pagination, Collapse } from "@mui/material";
-import { HomeRounded } from "@mui/icons-material";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack } from "@mui/material";
+import { Api, HomeRounded } from "@mui/icons-material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
-import Filter from "../Filter";
+import Paper from "@mui/material/Paper";
 
-//test
+
+// 10/08/2022 inserimento variabile test letta da JSON 
 import jsonEx from "../../SERP results example.json"
 
 const resultsTest = JSON.parse(JSON.stringify(jsonEx))
-
 
 const ResultsPage = () => {
   const theme = useTheme()
@@ -31,17 +34,15 @@ const ResultsPage = () => {
 
   const { queryId } = useParams();
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
-  const [problems, setProblems] = useState([]);
-  const [technologies, setTechnologies] = useState([]);
+  
+  /* 'queryResult' dovrà diventare Results quando sarà integrata con le Api */
+  const [queryResults, setqueryResult] = useState([]);
   const [openDrawer, setOpenDrawer] = useState(false);
-
-
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 5
   })
-
 
   useEffect(() => {
 
@@ -55,14 +56,13 @@ const ResultsPage = () => {
         setTechnologies(results.related_elements)
       }
     } */
-    console.log(resultsTest)
+    setqueryResult(resultsTest)
 
   }, [results])
 
   useEffect(() => {
     setOpenDrawer(false)
   }, [queryId])
-
 
 
   return (
@@ -79,7 +79,7 @@ const ResultsPage = () => {
         onClose={() => setOpenDrawer(false)}>
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
-      <Container  >
+      <Container>
           {/*  {isSmallDevice ? <></> :
             <Slide appear={false} direction="down" in={!trigger}>
               <Box sx={{ marginY: 5, alignContent: "left" }}>
@@ -88,66 +88,51 @@ const ResultsPage = () => {
             </Slide>
           } */}
           {!error ?
-            <Box sx={{ marginY: 2, marginX:2 }}>
+            <Box sx={{marginY: 2, marginX:2 }}>
               {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-                <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
-                </Typography>}
+                <Typography variant="body1">We found a total of {found ? queryResults.length : "0"} results for "{queryId}"</Typography> 
+              }
             </Box>
             :
             <></>}
-          <Box sx={{ marginY: 0 }}>
-            <Divider margin={2} variant="middle" />
-          </Box>
-          {!isSmallDevice ? <Filter /> : <></>}
-        </Container>
-        <Box sx={{backgroundColor: '#fafafa'}}>
-          <Container >
-          <Grid >
-            {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
+          <Box sx={{ marginY: 0 }}><Divider margin={2} variant="middle" /></Box>
+      </Container>
+      <Box sx={{backgroundColor: '#f5f5f5'}}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={2}>
+            <Filter></Filter>
           </Grid>
-        </Container>
+          <Grid item xs={12} sm={8}>
+            {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />}
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <InfoSnippet></InfoSnippet>
+          </Grid>
+        </Grid>
       </Box>
     </Box >
   );
 };
 
 
-const ResultsList = ({ problems, technologies, loading }) => {
+const ResultsList = ({ queryResults, loading }) => {
 
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
+    <Grid container>
+      <Grid item xs={12} sm={12}>
         <Box sx={{
           display: 'flex',
           p: 0,
           m: 0,
         }}>
-          <Typography variant="h5" gutterBottom > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
+          <Typography variant="h5" gutterBottom > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${queryResults.length})`} </Typography>
         </Box>
         {loading ? <LoadingSkeleton />
           :
           <>
-            {problems.map((el, i) => {
+            {queryResults.map((el, index) => {
               return (
-                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
-              );
-            })}
-          </>}
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={{
-          display: 'flex',
-          p: 0,
-          m: 0,
-        }}>
-          <Typography variant="h5" gutterBottom>{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
-        </Box>
-        {loading ? <LoadingSkeleton />
-          :
-          <>
-            {technologies.map((el, i) => {
-              return (
-                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
+                <Result key={index} elCard={el}></Result>
               );
             })}
           </>}
@@ -156,33 +141,6 @@ const ResultsList = ({ problems, technologies, loading }) => {
   );
 };
 
-const TopicsList = ({ results }) => {
-  return (
-    <Box sx={{ my: 2 }}>
-      <Grid container
-        spacing={1}
-        columnspacing={{ xs: 0, md: 2 }}
-        rowspacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifycontent="flex-start"
-        direction="row">
-        {results.topics.map((topic, i) => {
-          return (
-            <Grid item>
-              <TopicChip
-                key={topic[0]}
-                label={topic[0]}
-                name={topic[1]}
-                clickable={true}
-                link={topic[2]}
-              />
-            </Grid>
-          )
-        })}
-      </Grid>
-    </Box>
-  )
-}
 
 const LoadingSkeleton = () => {
   return (

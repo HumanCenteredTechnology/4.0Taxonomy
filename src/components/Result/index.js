@@ -5,61 +5,73 @@ import TopicChip from "../TopicChip";
 import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
 import { CardActions, CardContent, Skeleton, Tooltip } from "@mui/material";
 
+import TopicsList from "../TopicsList";
+import { blue } from "@mui/material/colors";
+import { element } from "prop-types";
+
 const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
 const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitation cupidatat veniam ut fugiat tempor quis esse sit excepteur. Cupidatat aute in ullamco minim minim Lorem officia deserunt amet labore nostrud quis esse..."
 
-const Result = ({ name, parent, category, articles, loading }) => {
+const Result = ({ elCard }) => {
+  const [readMore, setReadMore] = useState(false);
 
+  /* Function di controllo del bottone '...show More' della Card */
+  const switchReadMore = (event) =>{
+    if (readMore===true) {
+      setReadMore(false)
+    } else{
+      setReadMore(true)
+    }
+    console.log(elCard.tax_keywords[0])
+  }
+
+  const entireAbstractText = elCard.abstract;
 
   return (
-    <Box sx={{
-      justifyContent: 'center',
-      p: 0,
-      mb: 2,
-    }}>
+      <Box sx={{ justifyContent: 'center', p: 0, mb: 2}}>
       <Card>
-      <Box sx={{
-          justifyContent: 'center',
-          pt: 1,
-          pb: 1,
-          pl: 2,
-          pr: 2,
-        }}>
         <Box sx={{
-          mb: 1
-        }}>
-          <Link
-            component={RouterLink}
-            to={"/" + parent}>
-            <Typography variant="body2" color="textSecondary" >
-              {parent}
+            justifyContent: 'center',
+            pt: 1,
+            pb: 1,
+            pl: 1,
+            pr: 1,
+          }}>
+          <Box sx={{mb: 1}}>
+            <Link
+              component={RouterLink}
+              to={"/" + elCard.url}>
+              <Typography  variant="h6" color="textSecondary" >{elCard.title}</Typography>
+            </Link>
+                       
+            <Typography  variant="subtitle2"><Button variant="contained" size="small" disabled>Author:</Button>{elCard.authors}</Typography>
+            <Typography variant="body2" gutterBottom>
+               {! readMore ? entireAbstractText.substring(0,400) : entireAbstractText}
+               <Link align="center" onClick={switchReadMore} href="#">...read more or less</Link>
             </Typography>
-          </Link>
-          <Link
-            component={RouterLink}
-            to={"/" + name}>
-            <Typography variant="h6" >
-              {name}
-            </Typography>
-          </Link>
-          <Typography variant="body2" gutterBottom>
-            {wiki} <Link href="#">Read more</Link>
-          </Typography>
-        </Box>
-        {/* <Divider variant="middle" /> */}
+            
+          </Box>
+          {/* <Divider variant="middle" /> */}
         
-          {Array.isArray(articles) ?
-            <Box sx={{}}>
-              <Grid container spacing={1}>
-                <Grid item xs={12}>
-                  <Typography variant="body1" >Sources:</Typography>
-                  <Resources articles={articles} />
-                </Grid>
-              </Grid>
-            </Box>
-            :
-            <></>
-          }
+          {/* Elementi della Topics List */}
+          <Grid container spacing={5}>
+            <Grid item>
+                <Box sx={{}}>
+                  {/* <TopicsList results={elCard.tax_keywords.needs}></TopicsList> */}
+                  
+                </Box>
+            </Grid>
+            <Grid item>
+              {Array.isArray(['1','2','3']) ?
+                <Box sx={{}}>
+                  <TopicsList results={['1','2','3']}></TopicsList>
+                </Box>
+                :
+                <></>
+              }
+            </Grid>
+          </Grid>
+
         </Box>
       </Card>
     </Box>
