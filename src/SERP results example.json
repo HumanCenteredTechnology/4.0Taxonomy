@@ -1,5 +1,6 @@
 [
-    {
+    {   
+        "id": "0000000001",
         "title": "AI in production: A game changer for manufacturers with heavy assets",
         "source_type": "Consulting article",
         "journal": "",
@@ -10,15 +11,16 @@
                     "Production on demand"
                 ],
                 "tech": [
-                    "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing", ""
+                    "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing"
                 ]
             },
         "doi": "",
         "url": "https://www.mckinsey.com/business-functions/quantumblack/our-insights/ai-in-production-a-game-changer-for-manufacturers-with-heavy-assets",
         "publishing_date": "07-03-2019",
-        "abstract": ""
+        "abstract": "Definitely we know that now the economic growth is in peril position & our GDP is going negative. Social development is an push up of the capacity of any economy to produce goods & services. Main exploratory Factor analysis is applied for data analysis by IBM SPSS 20 to ascertain the determinants of economic development & textile industry. The study identified eight factors alike Customer satisfaction, employement, administrative scheme effectiveness, customer seller relationship, financial support system, product quality, which significantly influence economic development in India."
     },
     {
+        "id": "0000000002",
         "title": "Modeling and optimization of the electrical discharge machining process based on a combined artificial neural network and particle swarm optimization algorithm",
         "source_type": "Journal paper",
         "journal": "Scientia Iranica",
@@ -37,6 +39,7 @@
         "abstract": "In this study EFlectrical discharge machining (EDM) process, widely used in mold manufacturing, is modeled and optimized using artificial neural network and an optimization heuristic algorithm. Material removal rate (MRR), tool wear rate (TWR), and surface roughness (SR) are considered as performance characteristics of the EDM process. Optimization of process parameters in order to find a combination of process parameters to simultaneously minimize TWR and SR and maximize MRR is the objective of this study. In order to establish the relations between the input and the output process parameters, back propagation neural network (BPNN) used. In the last section of this research, particle swarm optimization (PSO) algorithm has been employed for optimization of the multiple response characteristics. A set of verification tests is also performed to verify the accuracy of optimization procedure in determination of the optimal levels of process parameters. Results demonstrate that propose modeling technique (BPNN) can precisely simulate actual EDM process with less than 1% error. Furthermore less than 4% error for PSO algorithm results is quite efficient in optimization procedure."
     },
     {
+        "id": "0000000003",
         "title": "Smart cloud manufacturing platform for resource efficiency improvement of additive manufacturing services",
         "source_type": "Journal paper",
         "journal": "Procedia CIRP",
@@ -57,6 +60,7 @@
         "abstract": ""
     },
     {
+        "id": "0000000004",
         "title": "A deep learning based-decision support tool for solution recommendation in cloud manufacturing platforms",
         "source_type": "Conference paper",
         "journal": "Procedia CIRP",
@@ -77,6 +81,7 @@
         "abstract": "Industry 4.0 key enabling technologies such as cloud manufacturing allow for the dynamic sharing of distributed resources for efficient use at industrial network level. Interconnected users, i.e. suppliers and customers, offer and request manufacturing services over a cloud manufacturing platform, where an intelligent engine generates a number of solutions based on functional and geometrical requirements. A high number of suppliers leads to a higher number of solutions available for customers increasing the decision-making complexity from a customer perspective. Recommendation systems play a crucial role in expanding the opportunities in decision-making processes under complex information environments. In this scope, this paper proposes the conceptualization and the development of a recommendation decision support tool to be implemented in a cloud manufacturing platform to assist customers in appropriately selecting manufacturing services with reference to sheet metal cutting operations. In terms of solution selection, a Deep Neural Network (DNN) paradigm is adopted to allow for the automatic learning of optimal solution recommendation list based both on customers past experiences and new choices. In this respect, a virtual interaction environment is firstly built for system pre-training. Subsequently, users’ data are inputted in the pre-trained model to predict a recommendation list. This is then subject to user interaction, i.e. selection, which will be fed back into the model to update the training parameters. This paper concludes with a simulated case study reported to exemplify the proposed methodology for a variety of decision-making scenarios."
     },
     {
+        "id": "0000000005",
         "title": "The use of 5G Non-Public Networks to support Industry 4.0 scenarios",
         "source_type": "Conference paper",
         "journal": "2019 IEEE Conference on Standards for Communications and Networking",
@@ -98,6 +103,7 @@
         "abstract": "The on-going digital transformation is key to progress towards a new generation of more efficient, sustainable and connected industrial systems allowing the so-called factories of the future. This new generation, commonly referred to as industry 4.0, will be accompanied by a new wave of use cases that will allow companies from logistics and manufacturing sectors to increase flexibility, productivity and usability in the industrial processes executed within their factory premises. Unlike typical use cases from other vertical sectors (e.g. energy, media, smart cities), industry 4.0 use cases will bring very stringent requirements in terms of latency, reliability and high-accuracy positioning. The combination of 5G technology with enterprise network solutions becomes crucial to satisfy these requirements in indoor, private environments. In this context, the concept of 5G non-public networks has emerged. In this article we provide an overview of 5G non-public networks, studying their applicability to the industry 4.0 ecosystem. On the basis of the work (being) developed in 3GPP Rel-16 specifications, we identify a number of deployment options relevant for non-public networks, and discuss their integration with mobile network operators' public networks. Finally, we provide a comparative analysis of these options, assessing their feasibility according to different criteria, including technical, regulatory and business aspects. The outcome of this analysis will help industry players interested in using non-public networks to decide which is the most appropriate deployment option for their use cases."
     },
     {
+        "id": "0000000006",
         "title": "5G network slicing strategies for a smart factory",
         "source_type": "Journal paper",
         "journal": "Computers in Industry",
@@ -117,6 +123,7 @@
         "abstract": "Factories become increasingly dependent on network connectivity. The next generation of mobile communications, 5G, will enable better flexibility and service quality through network slicing. Network slicing is a means of creating logically separated use case specific virtual networks over the same physical network. However, there is a lack of techno-economic research related to the management of network slices. Network slice management needs to take into account the multiple network domains, business actors and value networks involved in a vertical such as smart factories. The key for network slices to succeed where other resource reservation and quality of service technologies have previously failed is with well-defined feasible management models and strategies. In this paper, we focus on network slice management, possible strategies and implications for a smart factory. We study a state-of-the-art electronics assembly factory in Finland to find existing need for network slicing and missing capabilities to support smart factory use cases. Next, we define use case specific network slices and develop a network slice management model based on 5G specifications. The model allows for distribution of network functions between business actors over multiple network domains. The value network analysis method is utilized to develop alternative configurations that constitute the network slicing strategies facilitated by the model. Factory managers can decide on the most feasible strategy based on traditional factors such as make or buy, security, and level of automation. The strategies also differ in their technical applicability to different use cases. A feasibility study reveals the strategic differences from factory, local network operator and large mobile network operator perspectives."
     },
     {
+        "id": "0000000007",
         "title": "Cloud-based production logistics synchronisation service infrastructure for customised production processes",
         "source_type": "Journal paper",
         "journal": "IET Collaborative Intelligent Manufacturing",
@@ -136,6 +143,7 @@
         "abstract": "Under the customised production mode, the uncertainty of orders, resources, and processes cause the production system to inevitably be affected by various dynamics. In Industry 4.0 deployment, production logistics synchronisation (PLS) requires production systems to support synchronised operation among multiple units in the internet of things environment, thereby ensuring the optimal operation of the system. This means that enterprises need to dynamically optimise hardware/software resource configuration and execution plans for execution units. These all require a lot of capital and technology investment, which ordinary enterprises can hardly afford. Therefore, how to provide low-cost, high-quality flexible resources and synchronised decision support have become the two key challenges in achieving PLS. Then the cloud-based PLS service infrastructure (CPLSS) is proposed. The CPLSS is oriented towards the synchronised operation requirements of customised production systems and adopts an integrated service mode to provide reconfigurable hardware/software resources and synchronised decision support services for the resource service life cycle. A real-life case study of applying CPLSS solution in an air-conditioning industry has been conducted. The implementation results show that the proposed CPLSS solution can reduce operating costs and improve the efficiency of finished product warehousing."
     },
     {
+        "id": "0000000008",
         "title": "Emerging Industry 4.0 Technologies With Real-World Examples",
         "source_type": "Industry article",
         "journal": "",

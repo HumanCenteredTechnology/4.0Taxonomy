@@ -16,11 +16,9 @@ import { useFetch } from "../../hooks/useFetch";
 //import "./ResultsPage.css";
 import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
 import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack } from "@mui/material";
-import { Api, HomeRounded } from "@mui/icons-material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
-import Paper from "@mui/material/Paper";
 
 
 // 10/08/2022 inserimento variabile test letta da JSON 
@@ -80,7 +78,7 @@ const ResultsPage = () => {
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
       <Container>
-          {/*  {isSmallDevice ? <></> :
+           {/* {isSmallDevice ? <></> :
             <Slide appear={false} direction="down" in={!trigger}>
               <Box sx={{ marginY: 5, alignContent: "left" }}>
                 <SearchBar setSearchMention={setSearchMention} />
@@ -88,14 +86,15 @@ const ResultsPage = () => {
             </Slide>
           } */}
           {!error ?
-            <Box sx={{marginY: 2, marginX:2 }}>
+            <Box sx={{marginY: 2, marginX:15 }}>
               {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
                 <Typography variant="body1">We found a total of {found ? queryResults.length : "0"} results for "{queryId}"</Typography> 
               }
             </Box>
             :
-            <></>}
-          <Box sx={{ marginY: 0 }}><Divider margin={2} variant="middle" /></Box>
+            <></>
+          }
+          <Box sx={{ marginY: 1 }}><Divider margin={5} variant="left"></Divider></Box>
       </Container>
       <Box sx={{backgroundColor: '#f5f5f5'}}>
         <Grid container spacing={1}>
@@ -106,7 +105,7 @@ const ResultsPage = () => {
             {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />}
           </Grid>
           <Grid item xs={12} sm={2}>
-            <InfoSnippet></InfoSnippet>
+            <InfoSnippet snippetType={"Info"}></InfoSnippet>
           </Grid>
         </Grid>
       </Box>
@@ -114,18 +113,12 @@ const ResultsPage = () => {
   );
 };
 
-
 const ResultsList = ({ queryResults, loading }) => {
-
   return (
     <Grid container>
       <Grid item xs={12} sm={12}>
-        <Box sx={{
-          display: 'flex',
-          p: 0,
-          m: 0,
-        }}>
-          <Typography variant="h5" gutterBottom > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${queryResults.length})`} </Typography>
+        <Box sx={{display: 'flex', p: 0, m: 0}}>
+          <Typography variant="subtitle1" gutterBottom color="primary"> {loading ? <Skeleton animation="wave" width="10em" /> : `Articles`} </Typography>
         </Box>
         {loading ? <LoadingSkeleton />
           :
@@ -140,7 +133,6 @@ const ResultsList = ({ queryResults, loading }) => {
     </Grid>
   );
 };
-
 
 const LoadingSkeleton = () => {
   return (
@@ -170,9 +162,6 @@ const ResultSkeleton = () => (
           <Skeleton animation="wave" variant="text" />
         </Typography>
         <Typography variant="h6" gutterBottom  >
-          <Skeleton animation="wave" variant="text" />
-        </Typography>
-        <Typography variant="body2">
           <Skeleton animation="wave" variant="text" />
         </Typography>
         <Typography variant="body2">

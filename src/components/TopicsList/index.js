@@ -4,7 +4,7 @@ import { Grid } from "@material-ui/core";
 import TopicChip from "../TopicChip";
 
 
-const TopicsList = ({ results }) => {
+const TopicsList = ({results, category}) => {
     return (
       <Box sx={{ my: 2 }}>
         <Grid container
@@ -17,7 +17,10 @@ const TopicsList = ({ results }) => {
           {results.map((topic, index) => {
             return (
               <Grid item>
-                <TopicChip variant="outlined"
+                <TopicChip
+                  name={category}
+                  size="small" 
+                  variant="outlined"
                   key={index}
                   label={topic}
                   clickable={true}

@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link as RouterLink } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
-import TopicChip from "../TopicChip";
-import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText } from "@material-ui/core";
-import { CardActions, CardContent, Skeleton, Tooltip } from "@mui/material";
+import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText} from "@material-ui/core";
+import { CardActions, CardContent, Paper, Skeleton, Stack, Tooltip } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import TopicsList from "../TopicsList";
 import { blue } from "@mui/material/colors";
 import { element } from "prop-types";
-
-const topic = [["Data Science", "Technology"], ["Databases", "Technology"]]
-const wiki = "Velit qui nisi nisi amet adipisicing incididunt dolor. Exercitation cupidatat veniam ut fugiat tempor quis esse sit excepteur. Cupidatat aute in ullamco minim minim Lorem officia deserunt amet labore nostrud quis esse..."
+import { color } from "@mui/system";
 
 const Result = ({ elCard }) => {
   const [readMore, setReadMore] = useState(false);
@@ -22,13 +20,18 @@ const Result = ({ elCard }) => {
     } else{
       setReadMore(true)
     }
-    console.log(elCard.tax_keywords[0])
   }
 
   const entireAbstractText = elCard.abstract;
 
+  /* Pallino di separazione tra gli Authors */
+  const shot = (
+    <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>
+  );
+
+
   return (
-      <Box sx={{ justifyContent: 'center', p: 0, mb: 2}}>
+      <Box sx={{ justifyContent: 'center', p: 0, mb: 0.3}}>
       <Card>
         <Box sx={{
             justifyContent: 'center',
@@ -37,38 +40,47 @@ const Result = ({ elCard }) => {
             pl: 1,
             pr: 1,
           }}>
-          <Box sx={{mb: 1}}>
-            <Link
-              component={RouterLink}
-              to={"/" + elCard.url}>
-              <Typography  variant="h6" color="textSecondary" >{elCard.title}</Typography>
-            </Link>
-                       
-            <Typography  variant="subtitle2"><Button variant="contained" size="small" disabled>Author:</Button>{elCard.authors}</Typography>
-            <Typography variant="body2" gutterBottom>
-               {! readMore ? entireAbstractText.substring(0,400) : entireAbstractText}
-               <Link align="center" onClick={switchReadMore} href="#">...read more or less</Link>
-            </Typography>
-            
-          </Box>
-          {/* <Divider variant="middle" /> */}
-        
-          {/* Elementi della Topics List */}
-          <Grid container spacing={5}>
+          {/* Titolo Articolo */}
+          <Link component={RouterLink} to={"/SingleResult/" + elCard.id + '/' + elCard.title}>
+            <Typography  variant="h6" color="textPrimary" >{elCard.title}</Typography>
+          </Link>
+
+          {/* Tipologia articolo, data pubblicazione */}
+          <Grid container spacing={1} alignContent="center">
             <Grid item>
-                <Box sx={{}}>
-                  {/* <TopicsList results={elCard.tax_keywords.needs}></TopicsList> */}
-                  
-                </Box>
+              <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
+                  {elCard.source_type}
+              </Typography>
             </Grid>
-            <Grid item>
-              {Array.isArray(['1','2','3']) ?
-                <Box sx={{}}>
-                  <TopicsList results={['1','2','3']}></TopicsList>
-                </Box>
-                :
-                <></>
+            <Grid item><Typography variant="body2">{elCard.publishing_date}</Typography></Grid>
+            {elCard.journal!='' ? <Grid item><Typography variant="body2">: {elCard.journal}</Typography></Grid> : <></>}
+          </Grid>
+
+          {/* Lista degli autori */}
+          <Box>
+            <Box component="span" sx={{ display: 'inline-block', mx: '2px'}}>Authors:</Box>
+              {elCard.authors.map((el, index) => {
+                    return(<>
+                      <Button variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px",}}>
+                        {el}
+                      </Button>{index<elCard.authors.length-1 ? <>{shot}</> : <></>}
+                    </>); })
               }
+          </Box>
+
+          {/* Testo Abstract */}
+          <Typography variant="body2" gutterBottom>
+              {!readMore ? entireAbstractText.substring(0,350) : entireAbstractText}
+              <Link align="center" onClick={switchReadMore} href="#">{!readMore ? "...read more" : "read less"}</Link>
+          </Typography>
+          
+          {/* Elementi della Topics List */}
+          <Grid container spacing={0} padding={0}>
+            <Grid item>
+                <Box sx={{spacing:'0', padding:'0'}}>
+                  <TopicsList results={elCard.tax_keywords.needs} category={Object.keys(elCard.tax_keywords)[0]} ></TopicsList>
+                  <TopicsList results={elCard.tax_keywords.tech} category={Object.keys(elCard.tax_keywords)[1]}></TopicsList>
+                </Box>
             </Grid>
           </Grid>
 

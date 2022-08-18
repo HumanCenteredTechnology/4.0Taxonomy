@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
 import FormPage from "./components/3 - FormPage";
+import SingleResult from "./components/4 - SingleResult";
 import Footer from "./components/Footer";
 
 //Styles
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/:queryId" element={<ResultsPage />} />
             <Route path="/form" element={<FormPage />} />
+            <Route path="/SingleResult/:articleId/:articleTitleId"  element={<SingleResult />} />
           </Routes>
         </Router>
       </Box>
