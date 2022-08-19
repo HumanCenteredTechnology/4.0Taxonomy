@@ -10,21 +10,24 @@ import { BorderAll } from "@mui/icons-material";
 const InfoArticle = ({article}) => {
 
     /* Pallino di separazione tra gli Authors */
-    const bull = (
-        <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>
-    );
+    const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
     return(
         <Box>
             {/* Tipo articolo, Journal di publicazione, Titolo */}
-            <Grid container spacing={1} alignContent="center">
-                <Grid item>
-                    <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
-                    {article.source_type}
-                    </Typography>
+            <Grid container spacing={0.5} alignContent="center">
+                <Grid item> 
+                    <Box marginRight={1}>
+                        <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
+                            {article.source_type!= '' ? article.source_type : <>Article</>}
+                        </Typography>
+                    </Box>
                 </Grid>
                 <Grid item><Typography variant="body2">{article.publishing_date}</Typography></Grid>
-                {article.journal!='' ? <Grid item><Typography variant="body2">: {article.journal}</Typography></Grid> : <></>}
+                {article.journal!='' ? <>
+                    <Grid item><Typography variant="body2">{shot}</Typography></Grid>
+                    <Grid item><Typography variant="body2">{article.journal}</Typography></Grid></>
+                    : <></>}
             </Grid>
             <Box sx={{marginTop: "1em", marginBottom:"1em"}}>
                 <Typography  variant="h5" color="textPrimary" >{article.title}</Typography>
@@ -37,7 +40,7 @@ const InfoArticle = ({article}) => {
                     return(<>
                         <Button variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px",}}>
                         {el}
-                        </Button>{index<article.authors.length-1 ? <>{bull}</> : <></>}
+                        </Button>{index<article.authors.length-1 ? <>{shot}</> : <></>}
                     </>); })
                 }
             </Box>    

@@ -24,10 +24,8 @@ const Result = ({ elCard }) => {
 
   const entireAbstractText = elCard.abstract;
 
-  /* Pallino di separazione tra gli Authors */
-  const shot = (
-    <Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>
-  );
+  /* Pallino di separazione */
+  const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
 
   return (
@@ -46,14 +44,19 @@ const Result = ({ elCard }) => {
           </Link>
 
           {/* Tipologia articolo, data pubblicazione */}
-          <Grid container spacing={1} alignContent="center">
-            <Grid item>
-              <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
-                  {elCard.source_type}
-              </Typography>
+          <Grid container spacing={0.5} alignContent="center">
+            <Grid>
+              <Box marginRight={1}>
+                <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
+                    {elCard.source_type!= '' ? elCard.source_type : <>Article</>}
+                </Typography>
+              </Box> 
             </Grid>
             <Grid item><Typography variant="body2">{elCard.publishing_date}</Typography></Grid>
-            {elCard.journal!='' ? <Grid item><Typography variant="body2">: {elCard.journal}</Typography></Grid> : <></>}
+            {elCard.journal!='' ? <>
+              <Grid item><Typography variant="body2">{shot}</Typography></Grid> 
+              <Grid item><Typography variant="body2">{elCard.journal}</Typography></Grid></>
+              : <></>}
           </Grid>
 
           {/* Lista degli autori */}

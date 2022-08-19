@@ -10,7 +10,7 @@ const InfoArticleAbstract = ({ article }) => {
     const arrow = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(1.2)' }}>»</Box>);
     
     return (
-        <Container>
+        <>
             {/* Articolo standard con Link e Abstract : Academy Article*/}           
             {((article.source_type == 'Conference paper' || article.source_type == 'Journal paper')) ?
             (
@@ -54,7 +54,7 @@ const InfoArticleAbstract = ({ article }) => {
                     </Box>
                 </Card>
             }
-        </Container>
+        </>
     );
   };
 

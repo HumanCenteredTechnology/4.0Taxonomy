@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"; 
 import { useParams } from 'react-router-dom';
 import { useFetch } from "../../hooks/useFetch";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import {Box, Container, Divider} from "@material-ui/core";
 import TopNavBar from "../TopNavBar";
@@ -12,9 +13,12 @@ import jsonEx from "../../SERP results example.json"
 import { Title } from "@mui/icons-material";
 import { Grid } from "@mui/material";
 import InfoArticle from "../InfoArticle";
+import { useTheme } from "@mui/material/styles";
 
 const SingleResult = () => {
+    const theme = useTheme()
     const { articleId, articleTitleId } = useParams();
+    const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
     /* Quando il back-end sarà ultimato è qui che devo reperire le informazioni del singolo articolo, con un Id + titolo (anche solo Id)*/
     const resultsTest = JSON.parse(JSON.stringify(jsonEx))
@@ -34,7 +38,10 @@ const SingleResult = () => {
                             <Box sx={{border:'1px solid grey'}}>ShortInfoArticle</Box>
                         </Grid>
                         <Grid item xs={12} sm={9}>
-                            <InfoArticleAbstract article={article}></InfoArticleAbstract>
+                            {isSmallDevice 
+                            ? <InfoArticleAbstract article={article}></InfoArticleAbstract>
+                            : <Container><InfoArticleAbstract article={article}></InfoArticleAbstract></Container>
+                            }
                         </Grid>
                         <Grid item xs={12} sm={3}>
                             <InfoSnippet  snippetType={'Keywords'} article={article}></InfoSnippet>

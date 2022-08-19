@@ -6,7 +6,7 @@ import TopicChip from "../TopicChip";
 
 const TopicsList = ({results, category}) => {
     return (
-      <Box sx={{ my: 2 }}>
+      <Box sx={{ my: 0.5 }}>
         <Grid container
           spacing={1}
           columnspacing={{ xs: 0, md: 2 }}
