@@ -38,12 +38,12 @@ const Result = ({ elCard }) => {
             pl: 1,
             pr: 1,
           }}>
-          {/* Titolo Articolo */}
+          {/* Article Title */}
           <Link component={RouterLink} to={"/SingleResult/" + elCard.id + '/' + elCard.title}>
             <Typography  variant="h6" color="textPrimary" >{elCard.title}</Typography>
           </Link>
 
-          {/* Tipologia articolo, data pubblicazione */}
+          {/* Source type (Tipologia articolo), Publishing Date */}
           <Grid container spacing={0.5} alignContent="center">
             <Grid>
               <Box marginRight={1}>

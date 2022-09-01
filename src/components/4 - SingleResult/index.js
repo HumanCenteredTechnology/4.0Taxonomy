@@ -22,7 +22,7 @@ const SingleResult = () => {
 
     /* Quando il back-end sarà ultimato è qui che devo reperire le informazioni del singolo articolo, con un Id + titolo (anche solo Id)*/
     const resultsTest = JSON.parse(JSON.stringify(jsonEx))
-    const [article] = jsonEx.filter(el => el.title === articleTitleId && el.id === articleId)
+    const [article] = jsonEx.result_list.filter(el => el.title === articleTitleId && el.id === articleId)
  
     return (
         <Box>

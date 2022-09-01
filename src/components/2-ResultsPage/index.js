@@ -123,7 +123,7 @@ const ResultsList = ({ queryResults, loading }) => {
         {loading ? <LoadingSkeleton />
           :
           <>
-            {queryResults.map((el, index) => {
+            {queryResults.result_list.map((el, index) => {
               return (
                 <Result key={index} elCard={el}></Result>
               );

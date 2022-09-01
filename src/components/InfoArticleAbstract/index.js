@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {Box, Button, Card, Container, Divider, Grid, Link, Paper, Typography} from "@material-ui/core";
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 const InfoArticleAbstract = ({ article }) => {
 
@@ -18,9 +18,10 @@ const InfoArticleAbstract = ({ article }) => {
                     <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em'}}><Typography variant="h5" gutterBottom>Overview</Typography></Box>
                     <Button variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em",}}>Abstract</Button>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.5em', my: '1em', mx: '1em', }}>
-                        <Typography variant="subtitle1">
-                            {article.abstract}
-                        </Typography>
+                        { (article.abstract != "")
+                        ? <Typography variant="subtitle1">{article.abstract}</Typography>
+                        : <Typography variant="subtitle1"><NoAbstract></NoAbstract></Typography>
+                        }
                     </Box>
                     <Box sx={{padding: '1em', paddingTop:'1em'}}>
                         <Grid container>
@@ -40,9 +41,10 @@ const InfoArticleAbstract = ({ article }) => {
 
                     <Button variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em"}}>Abstract</Button>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.5em', my: '1em', mx: '1em', }}>
-                        <Typography variant="subtitle1">
-                            {article.abstract}
-                        </Typography>
+                        { (article.abstract != "")
+                        ? <Typography variant="subtitle1">{article.abstract}</Typography>
+                        : <Typography variant="subtitle1"><NoAbstract></NoAbstract></Typography>
+                        }
                     </Box>
                     <Box sx={{padding: '1em', paddingTop:'1em'}}>
                         <Grid container>
@@ -55,6 +57,15 @@ const InfoArticleAbstract = ({ article }) => {
                 </Card>
             }
         </>
+    );
+  };
+
+  const NoAbstract = () => {
+    return (
+        <Box sx={{padding: '1em', backgroundColor: '#dedede', paddingTop:'1em', paddingLeft:'1em'}}>
+            <FeedOutlinedIcon fontSize="large"></FeedOutlinedIcon>
+            <Typography variant="h5">No Abstract</Typography>
+        </Box>
     );
   };
 
