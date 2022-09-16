@@ -50,16 +50,17 @@ const SearchBar = ({ size, maxWidth, width }) => {
   const { query, setQuery, options } = useFetch();
 
   useEffect(() => {
-    setQuery(queryId)
+    !(queryId == "" || queryId === undefined) ? setQuery(API.from_Url(queryId)) : setQuery("")
   }, [queryId])
 
   let navigate = useNavigate();
 
   const handleSubmit = (e, value) => {
     if (value === "" || value === undefined) return;
-    navigate("/" + value);
-  };
 
+    let valueTemp = API.to_Url(value)
+    navigate("/" + valueTemp);
+  };
 
 
   return (

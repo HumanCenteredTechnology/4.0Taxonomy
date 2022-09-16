@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/system";
-import { Grid } from "@material-ui/core";
+/* import { Grid } from "@material-ui/core"; */
 import TopicChip from "../TopicChip";
+import { capitalize, Grid, Typography } from "@mui/material";
 
 
 const TopicsList = ({results, category}) => {
     return (
-      <Box sx={{ my: 0.5 }}>
-        <Grid container
-          spacing={1}
+      <Box sx={{ my: 0 }}>
+        <Grid container 
+          rowSpacing={0.4} 
+          columnSpacing={0.6}
+          /* spacing={0.8} */
           columnspacing={{ xs: 0, md: 2 }}
-          rowspacing={{ xs: 2, md: 2 }}
+          rowspacing={{ xs: 1, md: 1 }}
           columns={{ xs: 4, sm: 8, md: 12 }}
           justifycontent="flex-start"
           direction="row">
@@ -18,10 +21,10 @@ const TopicsList = ({results, category}) => {
             return (
               <Grid item>
                 <TopicChip
+                  key={index}
                   name={category}
                   size="small" 
                   variant="outlined"
-                  key={index}
                   label={topic}
                   clickable={true}
                 />

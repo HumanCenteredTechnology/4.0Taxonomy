@@ -7,26 +7,40 @@ import {Box, Container, Divider} from "@material-ui/core";
 import TopNavBar from "../TopNavBar";
 import InfoSnippet from "../InfoSnippet";
 import InfoArticleAbstract from "../InfoArticleAbstract";
+import BrowsableTree from "../BrowsableTree";
 
 // 10/08/2022 inserimento variabile test letta da JSON 
 import jsonEx from "../../SERP results example.json"
 import { Title } from "@mui/icons-material";
-import { Grid } from "@mui/material";
+import { Drawer, Grid } from "@mui/material";
 import InfoArticle from "../InfoArticle";
 import { useTheme } from "@mui/material/styles";
 
 const SingleResult = () => {
     const theme = useTheme()
     const { articleId, articleTitleId } = useParams();
+    const [openDrawer, setOpenDrawer] = useState(false);
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
     /* Quando il back-end sarà ultimato è qui che devo reperire le informazioni del singolo articolo, con un Id + titolo (anche solo Id)*/
     const resultsTest = JSON.parse(JSON.stringify(jsonEx))
     const [article] = jsonEx.result_list.filter(el => el.title === articleTitleId && el.id === articleId)
+    
  
     return (
         <Box>
-            <TopNavBar isResults={true}  />
+            <TopNavBar isResults={true} openDrawer={openDrawer} setOpenDrawer={setOpenDrawer} />
+            <Drawer
+                sx={{
+                '& .MuiDrawer-paper': {
+                    boxSizing: 'border-box', width: 300
+                },
+                }}
+                anchor="left"
+                open={openDrawer}
+                onClose={() => setOpenDrawer(false)}>
+                <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
+            </Drawer>
             <Box sx={{ marginY: 1 }}><Divider margin={5} variant="left"></Divider></Box>
             <Box sx={{backgroundColor: '#f5f5f5'}}>
                 <Container>

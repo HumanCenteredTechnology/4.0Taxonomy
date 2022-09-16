@@ -64,10 +64,10 @@ export const useFetch = (queryId) => {
       } catch (error) {
         console.log(error)
       }
-
-    }
+   }
     fetchMatch()
   }, [query])
+  
   useEffect(() => {
     if (queryMatch != null) setOptions(queryMatch.word)
   }, [queryMatch])

@@ -80,9 +80,8 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
                                         component={RouterLink} to="/">
                                         <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
-                                        <Typography variant="body1" color="default">Taxonomy</Typography>
+                                        {!isSmallDevice ? <Typography variant="body1" color="default">Taxonomy</Typography> : <></>}
                                     </IconButton>
-
                                 </Box>
                             </Tooltip>
 
@@ -91,7 +90,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexShrink: 1, }} />}
 
                         {isResults ? isSmallDevice ?
-                            <SearchBar size={"small"} maxWidth={"100%"} />
+                            <SearchBar size={"small"} maxWidth={"90%"} />
                             : <SearchBar size={"small"} width={"27em"} maxWidth={"34em"} />
                             : <></>}
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}

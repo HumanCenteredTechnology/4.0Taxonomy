@@ -50,7 +50,8 @@ const HomePage = () => {
             textAlign: "center"
           }}>
           <StandardButton
-            variant="text"
+            style={{ borderRadius: 50 }}
+            variant="outlined"
             size="small"
             color="default"
             onClick={handleOpenMenuClick}

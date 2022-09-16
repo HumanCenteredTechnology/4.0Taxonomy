@@ -42,7 +42,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/:queryId" element={<ResultsPage />} />
             <Route path="/form" element={<FormPage />} />
-            <Route path="/SingleResult/:articleId/:articleTitleId"  element={<SingleResult />} />
+            <Route path="/SingleResult/:articleId/:articleTitleId" element={<SingleResult />} />
           </Routes>
         </Router>
       </Box>

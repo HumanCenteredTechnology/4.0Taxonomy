@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Link as RouterLink } from 'react-router-dom';
 import Button from "@material-ui/core/Button";
-import { Card, Link, Box, Divider, Grid, List, ListItem, Typography, ListItemText} from "@material-ui/core";
-import { CardActions, CardContent, Paper, Skeleton, Stack, Tooltip } from "@mui/material";
+import { Card, Link, Box, List, ListItem, ListItemText} from "@material-ui/core";
+import { Tooltip, Chip, Typography, Grid } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import TopicsList from "../TopicsList";
@@ -23,10 +23,8 @@ const Result = ({ elCard }) => {
   }
 
   const entireAbstractText = elCard.abstract;
-
   /* Pallino di separazione */
   const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
-
 
   return (
       <Box sx={{ justifyContent: 'center', p: 0, mb: 0.3}}>
@@ -74,19 +72,28 @@ const Result = ({ elCard }) => {
           {/* Testo Abstract */}
           <Typography variant="body2" gutterBottom>
               {!readMore ? entireAbstractText.substring(0,350) : entireAbstractText}
-              <Link align="center" onClick={switchReadMore} href="#">{!readMore ? "...read more" : "read less"}</Link>
+              <Link align="center" onClick={switchReadMore} href="#">{!readMore ? " ...read more" : " read less"}</Link>
           </Typography>
           
           {/* Elementi della Topics List */}
-          <Grid container spacing={0} padding={0}>
-            <Grid item>
-                <Box sx={{spacing:'0', padding:'0'}}>
-                  <TopicsList results={elCard.tax_keywords.needs} category={Object.keys(elCard.tax_keywords)[0]} ></TopicsList>
-                  <TopicsList results={elCard.tax_keywords.tech} category={Object.keys(elCard.tax_keywords)[1]}></TopicsList>
-                </Box>
+          {!(elCard.tax_keywords.needs == "") ?
+            <Grid container spacing={0} justifyContent={"center"} alignItems={"flex-start"}>
+              <Grid item xs={12} sm={1}><Typography variant="subtitle2" style={{paddingLeft:"0.6em"}}>Need:</Typography></Grid>
+              <Grid item xs={12} sm={11}>
+                    <TopicsList results={elCard.tax_keywords.needs} category={Object.keys(elCard.tax_keywords)[0]} ></TopicsList>
+              </Grid>
             </Grid>
-          </Grid>
-
+            : <></>
+          }
+          {!(elCard.tax_keywords.tech == "") ?
+            <Grid container spacing={0} justifyContent={"center"} alignItems={"flex-start"}>  
+              <Grid item xs={12} sm={1}><Typography variant="subtitle2" style={{paddingLeft:"0.6em"}}>Tech:</Typography></Grid>
+              <Grid item xs={12} sm={11}>
+                    <TopicsList results={elCard.tax_keywords.tech} category={Object.keys(elCard.tax_keywords)[1]}></TopicsList>
+              </Grid>
+            </Grid>
+            : <></>
+          }
         </Box>
       </Card>
     </Box>

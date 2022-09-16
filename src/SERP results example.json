@@ -13,13 +13,13 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing", ""
+                            "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing"
                         ]
                     },
                 "doi": "",
                 "url": "https://www.mckinsey.com/business-functions/quantumblack/our-insights/ai-in-production-a-game-changer-for-manufacturers-with-heavy-assets",
                 "publishing_date": "07-03-2019",
-                "abstract": ""
+                "abstract": "For decades, companies have been “digitizing” their plants with distributed and supervisory control systems and, in some cases, advanced process controls. While this has greatly improved visualizations for operators, most companies with heavy assets have not kept up with the latest advances in analytics and in decision-support solutions that apply AI. Operators still rely on their experience, intuition, and judgment. For example, today’s downsized teams of control-room operators are expected to manually monitor a multitude of signals on numerous screens and adjust settings as needed."
             },
             {
                 "id": "0000000002",
@@ -168,7 +168,7 @@
     "info_snippet":
         {
             "snippet_title":"Production on demand",
-            "snippet_description": "(Also known as Manufacturing on Demand (MoD), Cloud Manufacturing or Demand-driven Manufacturing (DdM)) It refers to the strategy of manufacturing a product only when the customer places an order, reducing overall resource wastage.",
+            "snippet_description": "Also known as Manufacturing on Demand (MoD), Cloud Manufacturing or Demand-driven Manufacturing (DdM)) It refers to the strategy of manufacturing a product only when the customer places an order, reducing overall resource wastage.",
             "parent_topic": "Supply Chain",
             "children_topics": [
                 "Manufacturing on Demand", "Cloud Manufacturing", "Demand-driven Manufacturing"
@@ -179,7 +179,7 @@
                         "Fully Automated Production Facilities","Real-time Production and Process Monitoring, Analysis and Supervision","Smart Warehouse and Inventory Management"
                     ],
                     "tech":[
-                        "Additive Manufacturing","Artificial Neural Networks","Cloud Data Storage and Computing","Data Analytics","Data Visualization","Deep Neural Network","Encryption/Decryption, privacy and integrity measures","Industrial IoT","LTE/GSM/4G/5G","Machine Learning","NoSQL Databases","Particle Swarm Optimization","Time Series Databases","Wirelss Protocols"
+                        "Additive Manufacturing","Artificial Neural Networks","Cloud Data Storage and Computing","Data Analytics","Data Visualization","Deep Neural Network","Encryption/Decryption, privacy and integrity measures","Industrial IoT","LTE/GSM/4G/5G","Machine Learning","NoSQL Databases","Particle Swarm Optimization","Time Series Databases","Wireless Protocols"
                     ]
                 }
         },

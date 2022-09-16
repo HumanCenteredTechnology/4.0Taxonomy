@@ -14,8 +14,8 @@ import { useFetch } from "../../hooks/useFetch";
 
 //Style
 //import "./ResultsPage.css";
-import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack } from "@mui/material";
+import { Container, Box, Divider, Grid, } from "@material-ui/core";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
@@ -85,27 +85,28 @@ const ResultsPage = () => {
               </Box>
             </Slide>
           } */}
-          {!error ?
-            <Box sx={{marginY: 2, marginX:15 }}>
-              {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-                <Typography variant="body1">We found a total of {found ? queryResults.length : "0"} results for "{queryId}"</Typography> 
-              }
-            </Box>
-            :
-            <></>
-          }
-          <Box sx={{ marginY: 1 }}><Divider margin={5} variant="left"></Divider></Box>
+        {!error ?
+          <Box sx={{marginY: "0.5em", marginX:"10.5em"}}>
+            {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
+              <Typography variant="subtiltle1">We found a total of {found ? resultsTest.result_list.length : "0"} results for "{queryId}"</Typography>  /* found ? queryResults.length : "0" */
+            }
+          </Box>
+          :
+          <></>
+        }
+        <Box sx={{ marginY: 1 }}><Divider variant="left"></Divider></Box>
       </Container>
       <Box sx={{backgroundColor: '#f5f5f5'}}>
         <Grid container spacing={1}>
           <Grid item xs={12} sm={2}>
-            <Filter></Filter>
+            <Filter filterNeedList={resultsTest.filter_topics.needs} filterTechList={resultsTest.filter_topics.tech}></Filter>
           </Grid>
-          <Grid item xs={12} sm={8}>
-            {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />}
+          <Grid item xs={12} sm={7}>
+            {/* {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />} */}
+            <ResultsList queryResults={resultsTest} loading={loading} /> 
           </Grid>
-          <Grid item xs={12} sm={2}>
-            <InfoSnippet snippetType={"Info"}></InfoSnippet>
+          <Grid item xs={12} sm={3}>
+            <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
           </Grid>
         </Grid>
       </Box>

@@ -85,8 +85,18 @@ const apiSettings = {
     } */
 
     return resp
+  },
 
+   /* Coding verso url */
+  to_Url: (str) => {
+    return encodeURIComponent(str)
+  },
+
+   /* Decoding da Url */
+  from_Url: (str) => {
+    return decodeURIComponent(str)
   }
+
 };
 
 export default apiSettings;

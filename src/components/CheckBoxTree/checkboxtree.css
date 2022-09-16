@@ -1,11 +1,14 @@
 .rct-text label {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+    font-size: small;
+    overflow: hidden;
   }
 
 .rct-checkbox {
-    height: 24px;
+    height: 20px;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 2px;
 }
