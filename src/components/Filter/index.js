@@ -114,12 +114,12 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         <Box paddingX={"0.5em"}>
                             <Button variant="text" size="small" style={{color:"#000000"}} 
                                 endIcon={openIconNeed ? <KeyboardArrowDownOutlinedIcon/> : <KeyboardArrowRightOutlinedIcon/>} 
-                                onClick={handleFilterNeedsClick} >Need <b>({Object.keys(filterNeedList).length})</b>
+                                onClick={handleFilterNeedsClick} >Need   <b>({Object.keys(filterNeedList).length})</b>
                             </Button>
                         </Box>
                         <Collapse in={openFilterNeeds}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterNeedList}></CheckboxList>
+                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Tech */}
@@ -131,7 +131,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterTech}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterTechList}></CheckboxList>
+                                <CheckboxList itemList={filterTechList} filterCategory={"tech"}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Year */}
@@ -143,7 +143,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterPubblicationDateList}></CheckboxList>
+                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"date"}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Article Type */}
@@ -155,7 +155,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterArticleType}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterArticleType}></CheckboxList>
+                                <CheckboxList itemList={filterArticleType} filterCategory={"articleType"}></CheckboxList>
                             </Paper>
                         </Collapse>
                     </Grid>

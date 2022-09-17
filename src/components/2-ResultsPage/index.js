@@ -11,6 +11,7 @@ import InfoSnippet from "../InfoSnippet";
 
 //hooks
 import { useFetch } from "../../hooks/useFetch";
+import { useFilter } from "../../hooks/useFilter";
 
 //Style
 //import "./ResultsPage.css";
@@ -31,32 +32,28 @@ const ResultsPage = () => {
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { queryId } = useParams();
+  //results -> fetchedResults
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
-  
-  /* 'queryResult' dovrà diventare Results quando sarà integrata con le Api */
-  const [queryResults, setqueryResult] = useState([]);
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const { filteredResults, setFilteredResults} = useFilter(resultsTest);
 
+  const [ displayResults, setDisplayResults] = useState (resultsTest);
+
+  const [openDrawer, setOpenDrawer] = useState(false);
+  
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 5
   })
 
   useEffect(() => {
+    setDisplayResults(resultsTest) //da aggiornare con fetchedResults
+  }, [results]) //fetchedResults
 
-/*     if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
-      if (results.related_elements[0].at(3) === "Problems") {
-        setProblems(results.related_elements)
-        setTechnologies(results.unrelated_elements)
-      }
-      if (results.related_elements[0].at(3) === "Technology") {
-        setProblems(results.unrelated_elements)
-        setTechnologies(results.related_elements)
-      }
-    } */
-    setqueryResult(resultsTest)
+  useEffect(() => {
+    setDisplayResults(filteredResults) 
+    console.log(filteredResults)
+  }, [filteredResults]) 
 
-  }, [results])
 
   useEffect(() => {
     setOpenDrawer(false)
@@ -88,7 +85,7 @@ const ResultsPage = () => {
         {!error ?
           <Box sx={{marginY: "1", marginX:"10"}}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-              <Typography variant="subtiltle1">We found a total of {found ? resultsTest.result_list.length : "0"} results for "{queryId}"</Typography>  /* found ? queryResults.length : "0" */
+              <Typography variant="subtiltle1">We found a total of {found ? displayResults.result_list.length : "0"} results for "{queryId}"</Typography>  /* found ? queryResults.length : "0" */
             }
           </Box>
           :
@@ -100,14 +97,14 @@ const ResultsPage = () => {
         <Box sx={{backgroundColor: '#f5f5f5'}} >
           <Grid container spacing={4}>
             <Grid item xs={12} sm={2}>
-              <Filter filterNeedList={resultsTest.filter_topics.needs} filterTechList={resultsTest.filter_topics.tech}></Filter>
+              <Filter filterNeedList={displayResults.filter_topics.needs} filterTechList={displayResults.filter_topics.tech}></Filter>
             </Grid>
             <Grid item xs={12} sm={7}>
-              {/* {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />} */}
-              <ResultsList queryResults={resultsTest} loading={loading} /> 
+              {/* {!loading ? found ? <ResultsList queryResults={displayResults} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={displayResults} loading={loading} />} */}
+              <ResultsList queryResults={displayResults} loading={loading} /> 
             </Grid>
             <Grid item xs={12} sm={3}>
-              <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
+              <InfoSnippet snippetType={"Info"} InfoSnippet={displayResults.info_snippet}></InfoSnippet>
             </Grid>
           </Grid>
         </Box>

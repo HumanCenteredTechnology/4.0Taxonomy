@@ -6,11 +6,22 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
-const CheckboxList = ({itemList})  => {
-  const [checked, setChecked] = useState([0]);
+import { useFilter } from "../../hooks/useFilter";
+
+const CheckboxList = ({itemList, filterCategory})  => {
+  const [checked, setChecked] = useState([]);
+
+  const { setToFilterNeeds, setToFilterTech, setToFilterDate, setToFilterSourceType} = useFilter();
   
   useEffect(() =>{
-   /*  console.log(checked) */
+    //console.log(checked)
+
+    switch (filterCategory) {
+      case "needs": setToFilterNeeds(checked); break
+      case "tech": setToFilterTech(checked); break
+      case "date": setToFilterDate(checked); break
+      case "articleType": setToFilterSourceType(checked); break
+    }
   }, [checked])
 
   const handleToggle = (value) => () => {
