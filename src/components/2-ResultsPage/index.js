@@ -14,8 +14,8 @@ import { useFetch } from "../../hooks/useFetch";
 
 //Style
 //import "./ResultsPage.css";
-import { Container, Box, Divider, Grid, } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography } from "@mui/material";
+import { Container, Box, Grid, } from "@material-ui/core";
+import { Skeleton, IconButton, Card, Button, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography, Divider} from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
@@ -86,7 +86,7 @@ const ResultsPage = () => {
             </Slide>
           } */}
         {!error ?
-          <Box sx={{marginY: "0.5em", marginX:"10.5em"}}>
+          <Box sx={{marginY: "1", marginX:"10"}}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
               <Typography variant="subtiltle1">We found a total of {found ? resultsTest.result_list.length : "0"} results for "{queryId}"</Typography>  /* found ? queryResults.length : "0" */
             }
@@ -94,22 +94,24 @@ const ResultsPage = () => {
           :
           <></>
         }
-        <Box sx={{ marginY: 1 }}><Divider variant="left"></Divider></Box>
+        <Box sx={{ marginY: 2 }}><Divider></Divider></Box>
       </Container>
-      <Box sx={{backgroundColor: '#f5f5f5'}}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={2}>
-            <Filter filterNeedList={resultsTest.filter_topics.needs} filterTechList={resultsTest.filter_topics.tech}></Filter>
+      <Container maxWidth={"100vw"}>
+        <Box sx={{backgroundColor: '#f5f5f5'}} >
+          <Grid container spacing={4}>
+            <Grid item xs={12} sm={2}>
+              <Filter filterNeedList={resultsTest.filter_topics.needs} filterTechList={resultsTest.filter_topics.tech}></Filter>
+            </Grid>
+            <Grid item xs={12} sm={7}>
+              {/* {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />} */}
+              <ResultsList queryResults={resultsTest} loading={loading} /> 
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={7}>
-            {/* {!loading ? found ? <ResultsList queryResults={resultsTest} loading={loading} /> : <NotFound error={error} /> : <ResultsList queryResults={resultsTest} loading={loading} />} */}
-            <ResultsList queryResults={resultsTest} loading={loading} /> 
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
-          </Grid>
-        </Grid>
-      </Box>
+        </Box>
+      </Container>
     </Box >
   );
 };
@@ -118,8 +120,8 @@ const ResultsList = ({ queryResults, loading }) => {
   return (
     <Grid container>
       <Grid item xs={12} sm={12}>
-        <Box sx={{display: 'flex', p: 0, m: 0}}>
-          <Typography variant="subtitle1" gutterBottom color="primary"> {loading ? <Skeleton animation="wave" width="10em" /> : `Articles`} </Typography>
+        <Box sx={{display: 'flex', p: 1, m: 1}}>
+          {/* <Typography variant="subtitle1" gutterBottom color="primary"> {loading ? <Skeleton animation="wave" width="10em" /> : `Articles`} </Typography> */}
         </Box>
         {loading ? <LoadingSkeleton />
           :

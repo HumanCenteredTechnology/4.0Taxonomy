@@ -34,13 +34,13 @@ return (
 
         {/* Snippet di Info nella pagina con l'intero resultset degli articoli: 'ResultPage' */}    
         {snippetType == "Info" &&
-            <Box >
+            <Box>
                 <Grid container spacing={1} direction="row">
                     <Grid item><CollectionsBookmarkIcon fontSize="small"></CollectionsBookmarkIcon></Grid>
                     <Grid item><Typography variant='subtitle2'><b>{InfoSnippet.snippet_title}</b></Typography></Grid>
                 </Grid>
                 <Divider></Divider>
-                <Box minHeight={"180px"}><Typography variant='subtitle2' align="left">{InfoSnippet.snippet_description}</Typography></Box>
+                <Box paddingY={"1rem"}><Typography variant='subtitle2' align="left">{InfoSnippet.snippet_description}</Typography></Box>
                 <Divider></Divider>
                 {/* Industry and Technology Keys */}
                 { !(InfoSnippet.related_topics.needs == "") ?

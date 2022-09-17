@@ -5,12 +5,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
 
 const CheckboxList = ({itemList})  => {
   const [checked, setChecked] = useState([0]);
-
+  
   useEffect(() =>{
    /*  console.log(checked) */
   }, [checked])
@@ -18,7 +16,7 @@ const CheckboxList = ({itemList})  => {
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
-
+    
     if (currentIndex === -1) {
       newChecked.push(value);
     } else {
@@ -28,12 +26,12 @@ const CheckboxList = ({itemList})  => {
   };
 
   return (
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor:'background.paper', paddingLeft:"0.6em"}}>
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor:'background.paper', paddingLeft:"0.5em"}}>
       {itemList.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={index} disablePadding>
+          <ListItem key={index} dense sx={{paddingLeft:"0"}}>
             <ListItemButton role={undefined} onClick={handleToggle(value)} dense>
               <ListItemIcon>
                 <Checkbox
@@ -45,7 +43,7 @@ const CheckboxList = ({itemList})  => {
                   size="small"
                 />
               </ListItemIcon>
-              <ListItemText id={labelId} primary={`${value}`} />
+              <ListItemText sx={{marginLeft:'-1.7em'}} id={labelId} primary={`${value}`} primaryTypographyProps={{fontSize:'3em'}} />
             </ListItemButton>
           </ListItem>
         );
