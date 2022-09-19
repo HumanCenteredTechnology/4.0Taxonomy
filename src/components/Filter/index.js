@@ -12,7 +12,7 @@ import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filterNeedList, filterTechList}) =>{
+const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
@@ -87,14 +87,15 @@ const Filter = ({filterNeedList, filterTechList}) =>{
         setFiltered({needs:[(chips) => chips.filter((chip) => chip.label !== chipToDelete.label)]});
     }
   
+    const marginVerticalY =  ((!isSmallDevice) ? 4 : 0)
+
     return (
         <Box paddingY={0.5}
             sx={{ overflowY:'hidden',
-                   border: '1px solid grey',
-                   borderTopRightRadius: '15px',
-                   borderLeft: '0px',
-                   margin: "auto",
-                   my: 4}}>
+                  border: '1px solid grey',
+                  borderTopRightRadius: '15px',
+                  borderLeft: '0px',
+                  my: marginVerticalY }}>
                 {/* Parte dei chip selezionati (compaiono in alto) */}
             { (isSmallDevice) ?
                 <Box paddingLeft={0.5}><Button color="inherit" onClick={handleFilterClick}><FilterListRoundedIcon /><b>Filter in Research</b></Button></Box>
@@ -119,7 +120,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterNeeds}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"}></CheckboxList>
+                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} fetchedResults={fetchedResults}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Tech */}
@@ -131,7 +132,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterTech}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterTechList} filterCategory={"tech"}></CheckboxList>
+                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} fetchedResults={fetchedResults}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Year */}
@@ -143,7 +144,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"date"}></CheckboxList>
+                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"date"} fetchedResults={fetchedResults}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Article Type */}
@@ -155,7 +156,7 @@ const Filter = ({filterNeedList, filterTechList}) =>{
                         </Box>
                         <Collapse in={openFilterArticleType}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterArticleType} filterCategory={"articleType"}></CheckboxList>
+                                <CheckboxList itemList={filterArticleType} filterCategory={"articleType"} fetchedResults={fetchedResults}></CheckboxList>
                             </Paper>
                         </Collapse>
                     </Grid>

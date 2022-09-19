@@ -74,7 +74,7 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "Deep Neural Network", "Cloud Data Storage and Computing",""
+                            "Deep Neural Network", "Cloud Data Storage and Computing", "Deep Learning"
                         ]
                     },
                 "doi": "10.1016/j.procir.2020.01.019",
@@ -92,7 +92,7 @@
                 "tax_keywords":
                     {
                         "needs": [
-                            "Real-time Production and Process Monitoring, Analysis and Supervision", "Production on demand"
+                            "Real-time Production and Process Monitoring", "Production on demand"
                         ],
                     
                         "tech": [
@@ -133,7 +133,7 @@
                 "tax_keywords":
                     {
                         "needs": [
-                            "Real-time Production and Process Monitoring, Analysis and Supervision", "Fully Automated Production Facilities", "Production on demand", "Smart Warehouse and Inventory Management"
+                            "Real-time Production and Process Monitoring", "Fully Automated Production Facilities", "Production on demand", "Smart Warehouse and Inventory Management"
                         ],
                         "tech": [
                             "Cloud Data Storage and Computing", "Industrial IoT"
@@ -176,7 +176,7 @@
             "related_topics":
                 {
                     "needs": [
-                        "Fully Automated Production Facilities","Real-time Production and Process Monitoring, Analysis and Supervision","Smart Warehouse and Inventory Management"
+                        "Fully Automated Production Facilities", "Real-time Production and Process Monitoring", "Smart Warehouse and Inventory Management"
                     ],
                     "tech":[
                         "Additive Manufacturing","Artificial Neural Networks","Cloud Data Storage and Computing","Data Analytics","Data Visualization","Deep Neural Network","Encryption/Decryption, privacy and integrity measures","Industrial IoT","LTE/GSM/4G/5G","Machine Learning","NoSQL Databases","Particle Swarm Optimization","Time Series Databases","Wireless Protocols"
@@ -186,7 +186,7 @@
     "filter_topics":
         {
             "needs": [
-                "Fully Automated Production Facilities","Real-time Production and Process Monitoring, Analysis and Supervision","Smart Warehouse and Inventory Management"
+                "Fully Automated Production Facilities", "Real-time Production and Process Monitoring", "Smart Warehouse and Inventory Management"
             ],
             "tech":[
                 "Additive Manufacturing","Artificial Neural Networks","Cloud Data Storage and Computing","Data Analytics","Data Visualization","Deep Neural Network","Encryption/Decryption, privacy and integrity measures","Industrial IoT","LTE/GSM/4G/5G","Machine Learning","NoSQL Databases","Particle Swarm Optimization","Time Series Databases","Wirelss Protocols"

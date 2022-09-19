@@ -28,8 +28,12 @@ const apiSettings = {
       body: formData,
     });
     const data = await results.json()
-    console.log(await data)
-
+    
+    JSON.parse(JSON.stringify(data))
+    return data;
+    
+    /* console.log(await data) */
+    
     /* const data =
     {
       "topics":
@@ -48,9 +52,9 @@ const apiSettings = {
           ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
         ]
     } */
-    JSON.parse(JSON.stringify(data))
-    return data;
+    
   },
+
   submitArticle: async (article) => {
     //prepara l'articolo come form
     const formData = new FormData();

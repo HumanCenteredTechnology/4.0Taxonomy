@@ -45,19 +45,19 @@ const SingleResult = () => {
             <Box sx={{backgroundColor: '#f5f5f5'}}>
                 <Container>
                     <Grid container spacing={0.5}>
-                        <Grid item xs={12} sm={9}>
-                        <Container><InfoArticle article={article}></InfoArticle></Container>
+                        <Grid item xs={12} sm={8}>
+                            <Container><InfoArticle article={article}></InfoArticle></Container>
                         </Grid>
-                        <Grid item xs={12} sm={3}>
-                            <Box sx={{border:'1px solid grey'}}>ShortInfoArticle</Box>
+                        <Grid item xs={12} sm={4}>
+                            <Box sx={{border:'0px solid grey'}}></Box>
                         </Grid>
-                        <Grid item xs={12} sm={9}>
+                        <Grid item xs={12} sm={8}>
                             {isSmallDevice 
                             ? <InfoArticleAbstract article={article}></InfoArticleAbstract>
                             : <Container><InfoArticleAbstract article={article}></InfoArticleAbstract></Container>
                             }
                         </Grid>
-                        <Grid item xs={12} sm={3}>
+                        <Grid item xs={12} sm={4}>
                             <InfoSnippet  snippetType={'Keywords'} article={article}></InfoSnippet>
                         </Grid>
                     </Grid>

@@ -17,9 +17,9 @@ const InfoArticleAbstract = ({ article }) => {
                 <Card sx={{border:'2px solid'}}>
                     <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em'}}><Typography variant="h5" gutterBottom>Overview</Typography></Box>
                     <Button variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em",}}>Abstract</Button>
-                    <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.5em', my: '1em', mx: '1em', }}>
+                    <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.7em', my: '1em', mx: '1em', }}>
                         { (article.abstract != "")
-                        ? <Typography variant="subtitle1">{article.abstract}</Typography>
+                        ? <Typography variant="subtitle1" style={{fontSize:"0.9em"}}>{article.abstract}</Typography>
                         : <Typography variant="subtitle1"><NoAbstract></NoAbstract></Typography>
                         }
                     </Box>

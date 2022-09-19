@@ -7,22 +7,26 @@ export const useFilter = (resultsTest) => {
     /* 'resultsTemp' dovrà diventare results quando sarà integrata con le Api */
     const [ filteredResults, setFilteredResults ] = useState(resultsTest);
     
-
-    const [ toFilterNeeds, setToFilterNeeds] = useState ([""]);
+    const [ toFilterNeeds, setToFilterNeeds] = useState ([]);
     const [ toFilterTech, setToFilterTech] = useState ([]);
     const [ toFilterDate, setToFilterDate] = useState ([]);
     const [ toFilterSourceType, setToFilterSourceType] = useState ([]);
 
     useEffect (()=>{
         if (!filteredResults === undefined){
-            const filteredResults = filteredResults.result_list.filter(article => toFilterNeeds.every(filterNeed => article.needs.includes(filterNeed)))
+            const filteredResults = filteredResults.result_list.filter(article => toFilterNeeds.every(filterNeed => article.tax_keywords.needs.includes(filterNeed)))
             setFilteredResults(filteredResults)
         }
-        
-        //console.log (filteredResults)
+        console.log(filteredResults.result_list.filter(article => toFilterNeeds.every(filterNeed => article.tax_keywords.needs.includes(filterNeed))) )
     },[toFilterNeeds])
+
     useEffect (()=>{
-        
+        if (!filteredResults === undefined){
+            /* const filteredResults = filteredResults.result_list.tech.filter(el => el.id = '0000000001')  */
+           /*  setFilteredResults(filteredResultsTemp) */
+           
+        }
+         
     },[toFilterTech])
 
     return{ 

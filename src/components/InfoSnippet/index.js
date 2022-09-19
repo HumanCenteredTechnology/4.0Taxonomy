@@ -22,12 +22,12 @@ const InfoSnippet = ({snippetType, InfoSnippet, article}) => {
 const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
 return (
-    <Box flex={1} paddingY={0.5}
+    <Box flex={1}
         sx={{   overflowY:'hidden',
                 border: '1px solid grey',
                 borderTopLeftRadius: '15px',
-                margin: "auto",
                 paddingX: "0.5em",
+                paddingY: "0.3em", 
                 bgcolor: "white",
                 display:{xs:"none", sm:"block"}
             }}>

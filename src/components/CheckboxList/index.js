@@ -8,10 +8,10 @@ import Checkbox from '@mui/material/Checkbox';
 
 import { useFilter } from "../../hooks/useFilter";
 
-const CheckboxList = ({itemList, filterCategory})  => {
+const CheckboxList = ({itemList, filterCategory, fetchedResults})  => {
   const [checked, setChecked] = useState([]);
 
-  const { setToFilterNeeds, setToFilterTech, setToFilterDate, setToFilterSourceType} = useFilter();
+  const { filteredResults, setFilteredResults, toFilterNeeds, setToFilterNeeds, toFilterTech, setToFilterTech, toFilterDate, setToFilterDate, toFilterSourceType, setToFilterSourceType} = useFilter(fetchedResults);
   
   useEffect(() =>{
     //console.log(checked)

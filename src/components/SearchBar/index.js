@@ -42,9 +42,6 @@ const SearchBox = styled(Autocomplete)(({ theme }) => ({
   }
 }));
 
-
-
-
 const SearchBar = ({ size, maxWidth, width }) => {
   const { queryId } = useParams();
   const { query, setQuery, options } = useFetch();
