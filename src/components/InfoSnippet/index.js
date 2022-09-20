@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Collapse, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper } from "@mui/material";
+import { Box, Button, Collapse, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Typography } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
-import { Divider, Grid, Typography } from "@material-ui/core";
+import { Divider } from "@material-ui/core";
 
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import DeviceHubIcon from '@mui/icons-material/DeviceHub';
@@ -22,10 +22,9 @@ const InfoSnippet = ({snippetType, InfoSnippet, article}) => {
 const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
 return (
-    <Box flex={1}
-        sx={{   overflowY:'hidden',
+    <Box sx={{  overflowY:'hidden',
                 border: '1px solid grey',
-                borderTopLeftRadius: '15px',
+                borderTopLeftRadius: '16px',
                 paddingX: "0.5em",
                 paddingY: "0.3em", 
                 bgcolor: "white",
@@ -39,8 +38,7 @@ return (
                     <Grid item><CollectionsBookmarkIcon fontSize="small"></CollectionsBookmarkIcon></Grid>
                     <Grid item><Typography variant='subtitle2'><b>{InfoSnippet.snippet_title}</b></Typography></Grid>
                 </Grid>
-                <Divider></Divider>
-                <Box paddingY={"1rem"}><Typography variant='subtitle2' align="left">{InfoSnippet.snippet_description}</Typography></Box>
+                <Box paddingY={"1em"}><Typography variant='subtitle2' align="left">{InfoSnippet.snippet_description}</Typography></Box>
                 <Divider></Divider>
                 {/* Industry and Technology Keys */}
                 { !(InfoSnippet.related_topics.needs == "") ?
@@ -54,7 +52,7 @@ return (
                     : <></>
                 }    
                 { !(InfoSnippet.related_topics.tech == "") ?    
-                    <Box marginY={"1em"}>    
+                    <Box marginY={"1em"}> 
                         <Grid container spacing={1} direction="row">
                             <Grid item><PrecisionManufacturingSharp fontSize="medium" style={{color: '#395bdf'}}></PrecisionManufacturingSharp></Grid>
                             <Grid item><Typography style={{color: '#395bdf'}} variant="subtitle1">Technology keys</Typography></Grid>
@@ -76,24 +74,38 @@ return (
         {/* Snippet delle Keywords nella pagina del singolo risultato (articolo) 'SingleResultPage' con TopicList*/}
         {snippetType == "Keywords" &&
             <Box>
-                <Grid container spacing={1} direction="row">
-                    <Grid item xs={12} sm={2}><BookmarksIcon fontSize="medium"></BookmarksIcon></Grid>
-                    <Grid item xs={12} sm={10}><Typography variant='h5'>Keywords</Typography></Grid>
-                </Grid>
-                <Divider></Divider>
-
-                <Box marginTop={'1em'}>
+                {(article.tax_keywords.needs == "" && article.tax_keywords.tech == "") ? 
+                    <Typography variant="text">No Keywords for this article</Typography>
+                    :
+                    <>
                     <Grid container spacing={1} direction="row">
-                        <Grid item><EngineeringSharp fontSize="medium" style={{color: "#29bf40"}}/></Grid>
-                        <Grid item><Typography style={{color: "#29bf40"}} variant="subtitle1">Industry keys</Typography></Grid>
+                        <Grid item xs={12} sm={2}><BookmarksIcon fontSize="medium"></BookmarksIcon></Grid>
+                        <Grid item xs={12} sm={10}><Typography variant='h6'>Keywords</Typography></Grid>
                     </Grid>
-                    <TopicsList results={article.tax_keywords.needs} category={Object.keys(article.tax_keywords)[0]} ></TopicsList>
-                    <Grid container spacing={1} direction="row">
-                        <Grid item><PrecisionManufacturingSharp fontSize="medium" style={{color: '#395bdf'}}></PrecisionManufacturingSharp></Grid>
-                        <Grid item><Typography style={{color: '#395bdf'}} variant="subtitle1">Technology keys</Typography></Grid>
-                    </Grid>
-                    <TopicsList results={article.tax_keywords.tech} category={Object.keys(article.tax_keywords)[1]}></TopicsList>
-                </Box>
+                    <Divider></Divider>
+                    {/* Industry and Technology Keys */}
+                    { !(article.tax_keywords.needs == "") ?
+                        <Box marginY={'1em'} padding={1}>
+                            <Grid container spacing={1} direction="row">
+                                <Grid item><EngineeringSharp fontSize="medium" style={{color: "#29bf40"}}/></Grid>
+                                <Grid item><Typography style={{color: "#29bf40"}} variant="subtitle1">Industry keys</Typography></Grid>
+                            </Grid>
+                            <TopicsList results={article.tax_keywords.needs} category={Object.keys(article.tax_keywords)[0]} ></TopicsList>
+                        </Box>
+                    : <></>
+                    }
+                    { !(article.tax_keywords.tech == "") ?
+                        <Box marginY={"1em"} padding={1}>
+                            <Grid container spacing={1} direction="row">
+                                <Grid item><PrecisionManufacturingSharp fontSize="medium" style={{color: '#395bdf'}}></PrecisionManufacturingSharp></Grid>
+                                <Grid item><Typography style={{color: '#395bdf'}} variant="subtitle1">Technology keys</Typography></Grid>
+                            </Grid>
+                            <TopicsList results={article.tax_keywords.tech} category={Object.keys(article.tax_keywords)[1]}></TopicsList>
+                        </Box>
+                    : <></>
+                    }
+                    </>
+                }
             </Box>
         }       
 

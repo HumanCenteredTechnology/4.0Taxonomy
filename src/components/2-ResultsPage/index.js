@@ -15,8 +15,8 @@ import { useFilter } from "../../hooks/useFilter";
 
 //Style
 //import "./ResultsPage.css";
-import { Container, Box, Grid, } from "@material-ui/core";
-import { Skeleton, Card, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography, Divider} from "@mui/material";
+import { Container, Box } from "@material-ui/core";
+import { Skeleton, Card, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography, Divider, Grid} from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
@@ -75,22 +75,6 @@ const ResultsPage = () => {
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
       {!error ?
-        <Box sx={{paddingX:"1.5rem"}} >
-            <Grid container spacing={4}>
-              <Grid item sm={2}></Grid>
-              <Grid item xs={12} sm={7}>
-                {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-                <><Typography variant="subtiltle2">We found a total of {found ? displayResults.result_list.length : "0"} results for "{queryId}"</Typography>
-                <Divider></Divider></>
-                } 
-              </Grid>
-              <Grid item sm={3}></Grid>
-            </Grid>
-        </Box>
-        :<></>
-      }
-      {/* <Box sx={{ marginY: 2 }}></Box> */}
-      
       <Container maxWidth={"100vw"}>
         <Box sx={{backgroundColor: '#f5f5f5'}} >
           <Grid container spacing={4}>
@@ -115,7 +99,26 @@ const ResultsPage = () => {
               <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
             </Grid>
           </Grid>
-        </Box>
+          <Grid item xs sm={3}></Grid>
+        </Grid>
+      </Container>
+      :<></>
+      }
+      {/* SERP rendering */}
+      <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
+        <Grid container columnSpacing={{sm: 3, md: 4}}>
+          <Grid item xs={12} sm={2}>
+            <Filter filterNeedList={displayResults.filter_topics.needs} filterTechList={displayResults.filter_topics.tech} fetchedResults={resultsTest}></Filter>
+          </Grid>
+          <Grid item xs={12} sm={7}>
+            {!loading ? found ? <ResultsList queryResults={displayResults} loading={loading} /> : <NotFound error={error} /> 
+              : <ResultsList queryResults={displayResults} loading={loading} />
+            }
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <InfoSnippet snippetType={"Info"} InfoSnippet={displayResults.info_snippet}></InfoSnippet>
+          </Grid>
+        </Grid>
       </Container>
     </Box >
   );
@@ -123,11 +126,8 @@ const ResultsPage = () => {
 
 const ResultsList = ({ queryResults, loading }) => {
   return (
-    <Grid container>
+    <Grid container style={{marginTop:"1.5em"}}>
       <Grid item xs={12} sm={12}>
-        <Box sx={{display: 'flex', p: 1, m: 1, backgroundColor:""}}>
-          {/* <Typography variant="subtitle1" gutterBottom color="primary"> {loading ? <Skeleton animation="wave" width="10em" /> : `Articles`} </Typography> */}
-        </Box>
         {loading ? <LoadingSkeleton />
           :
           <>
@@ -145,7 +145,7 @@ const ResultsList = ({ queryResults, loading }) => {
 const LoadingSkeleton = () => {
   return (
     <>
-      {Array.from(Array(2)).map(() => {
+      {Array.from(Array(3)).map(() => {
         return (
           <ResultSkeleton />
         );
