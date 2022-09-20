@@ -7,12 +7,14 @@ import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 
+
+
 import CheckboxList from "../CheckboxList";
 import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
+const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
@@ -30,18 +32,25 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
         }
     }, [isSmallDevice])  
 
+
     const [openFilterNeeds, setOpenFilterNeeds] = useState(true);
     const [openFilterTech, setOpenFilterTech] = useState(true);
     const [openFilterPubblicationDate, setOpenFilterPubblicationDate] = useState(true);
     const [openFilterArticleType, setOpenFilterArticleType] = useState(true);
     const [checkedNeeds, setCheckedNeeds] = useState([]);
     const [checkedTech, setCheckedTech] = useState([]);
-    const [filtered, setFiltered] = useState({needs: [], tech: []});
+
+
+
 
     const year = new Date().getFullYear()
     const filterPubblicationDateList = [year, year-1, year-2, "Prec " + (year -3).toString()]
-    const filterArticleType = ["Academic", "Industry"]
+    const filterArticleType = ["Academia", "Industry"]
    
+   /*  useEffect (()=>{
+        console.log(filters)
+    },[filters]) */
+
     const handleFilterClick = () => {
         if(openFilter==true) setOpenFilter(false)
         else setOpenFilter(true) 
@@ -75,17 +84,7 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
         else setOpenFilterArticleType(true)
     }
 
-    useEffect(()=>{
-        setFiltered(()=>({needs:[...checkedNeeds], tech:[...checkedTech]}));
-    }, [checkedNeeds, checkedTech])
 
-    /* useEffect(()=>{
-        setCheckedNeeds(filtered.needs)
-        setCheckedTech(filtered.tech)
-    }, [filtered.needs, filtered.tech]) */
-    const handleDelete = (chipToDelete) => () => {
-        setFiltered({needs:[(chips) => chips.filter((chip) => chip.label !== chipToDelete.label)]});
-    }
   
     const marginVerticalY =  ((!isSmallDevice) ? 4 : 0)
 
@@ -120,7 +119,7 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
                         </Box>
                         <Collapse in={openFilterNeeds}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} fetchedResults={fetchedResults}></CheckboxList>
+                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} fetchedResults={fetchedResults} setSelected={onSelectNeeds}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Tech */}
@@ -132,7 +131,7 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
                         </Box>
                         <Collapse in={openFilterTech}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} fetchedResults={fetchedResults}></CheckboxList>
+                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} fetchedResults={fetchedResults} setSelected={onSelectTech}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Year */}
@@ -144,7 +143,7 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"date"} fetchedResults={fetchedResults}></CheckboxList>
+                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"publishing_date"} fetchedResults={fetchedResults} setSelected={onSelectDate}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Article Type */}
@@ -156,7 +155,7 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
                         </Box>
                         <Collapse in={openFilterArticleType}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterArticleType} filterCategory={"articleType"} fetchedResults={fetchedResults}></CheckboxList>
+                                <CheckboxList itemList={filterArticleType} filterCategory={"source_type"} fetchedResults={fetchedResults} setSelected={onSelectSourceType}></CheckboxList>
                             </Paper>
                         </Collapse>
                     </Grid>

@@ -6,22 +6,22 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
-import { useFilter } from "../../hooks/useFilter";
 
-const CheckboxList = ({itemList, filterCategory, fetchedResults})  => {
+const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected})  => {
   const [checked, setChecked] = useState([]);
 
-  const { filteredResults, setFilteredResults, toFilterNeeds, setToFilterNeeds, toFilterTech, setToFilterTech, toFilterDate, setToFilterDate, toFilterSourceType, setToFilterSourceType} = useFilter(fetchedResults);
   
   useEffect(() =>{
-    //console.log(checked)
-
-    switch (filterCategory) {
-      case "needs": setToFilterNeeds(checked); break
-      case "tech": setToFilterTech(checked); break
-      case "date": setToFilterDate(checked); break
-      case "articleType": setToFilterSourceType(checked); break
-    }
+    /* setFilters(oldFilters => {
+      return {
+        ...oldFilters,
+        [filterCategory]: {
+          checked
+        },
+      };
+    }); */
+    setSelected(checked)
+    
   }, [checked])
 
   const handleToggle = (value) => () => {
@@ -34,6 +34,7 @@ const CheckboxList = ({itemList, filterCategory, fetchedResults})  => {
       newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
+    
   };
 
   return (

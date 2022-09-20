@@ -34,9 +34,11 @@ const ResultsPage = () => {
   const { queryId } = useParams();
   //results -> fetchedResults
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
-  const {filteredResults, setFilteredResults, toFilterNeeds, setToFilterNeeds, toFilterTech, setToFilterTech, toFilterDate, setToFilterDate, toFilterSourceType, setToFilterSourceType} = useFilter(resultsTest);
+  const [ displayResults, setDisplayResults] = useState ([...resultsTest.result_list]); //fetchedResults
 
-  const [ displayResults, setDisplayResults] = useState (resultsTest);
+  const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, selectedNeeds, selectedTech, selectedDate, selectedSourceType,
+     /* setSelectedNeeds, setSelectedTech, setSelectedDate, setSelectedSourceType */} = useFilter(resultsTest); //fetchedResults
+
 
   const [openDrawer, setOpenDrawer] = useState(false);
   
@@ -46,12 +48,13 @@ const ResultsPage = () => {
   })
 
   useEffect(() => {
-    setDisplayResults(resultsTest) //da aggiornare con fetchedResults
-  }, [results]) //fetchedResults
+    setDisplayResults(filteredResults) //da aggiornare con fetchedResults
+  }, [filteredResults]) //fetchedResults
 
-  useEffect(() => {
-    setDisplayResults(filteredResults) 
-  }, [filteredResults]) 
+  useEffect (()=> {
+    console.log ("selectedFilters")
+
+}, [selectedNeeds, selectedTech, selectedDate, selectedSourceType])
 
   useEffect(() => {
     setOpenDrawer(false)
@@ -92,15 +95,24 @@ const ResultsPage = () => {
         <Box sx={{backgroundColor: '#f5f5f5'}} >
           <Grid container spacing={4}>
             <Grid item xs={12} sm={2}>
-              <Filter filterNeedList={displayResults.filter_topics.needs} filterTechList={displayResults.filter_topics.tech} fetchedResults={resultsTest}></Filter>
+              <Filter filterNeedList={resultsTest.filter_topics.needs} //qui dovrebbe aggiornarsi dinamicamente in base a displayResults, che però non ha queste informazioni al momento
+                filterTechList={resultsTest.filter_topics.tech} 
+                fetchedResults={resultsTest}
+                filters = {filters}
+                onSelectNeeds = {onSelectNeeds}
+                onSelectTech = {onSelectTech}
+                onSelectDate = {onSelectDate}
+                onSelectSourceType = {onSelectSourceType}
+                >
+                </Filter>
             </Grid>
             <Grid item xs={12} sm={7}>
-              {!loading ? found ? <ResultsList queryResults={displayResults} loading={loading} /> : <NotFound error={error} /> 
+              {!loading ?/*  found ? */ <ResultsList queryResults={displayResults} loading={loading} /> /* : <NotFound error={error} />  */
                : <ResultsList queryResults={displayResults} loading={loading} />
               }
             </Grid>
             <Grid item xs={12} sm={3}>
-              <InfoSnippet snippetType={"Info"} InfoSnippet={displayResults.info_snippet}></InfoSnippet>
+              <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
             </Grid>
           </Grid>
         </Box>
@@ -119,7 +131,7 @@ const ResultsList = ({ queryResults, loading }) => {
         {loading ? <LoadingSkeleton />
           :
           <>
-            {queryResults.result_list.map((el, index) => {
+            {queryResults.map((el, index) => {
               return (
                 <Result key={index} elCard={el}></Result>
               );
