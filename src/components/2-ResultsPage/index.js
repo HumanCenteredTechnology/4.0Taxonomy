@@ -76,8 +76,23 @@ const ResultsPage = () => {
       </Drawer>
       {!error ?
       <Container maxWidth={"100vw"}>
-        <Box sx={{backgroundColor: '#f5f5f5'}} >
-          <Grid container spacing={4}>
+        
+        <Grid container>
+          <Grid item xs sm={2}></Grid>
+          <Grid item xs={12} sm={7}>
+            {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
+            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? displayResults.result_list.length : "0"} results for "{queryId}"</Typography>
+            <Divider></Divider></>
+            } 
+          </Grid>
+          <Grid item xs sm={3}></Grid>
+        </Grid>
+      </Container>
+      :<></>
+      }
+      {/* SERP rendering */}
+      <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
+      <Grid container columnSpacing={{sm: 3, md: 4}}>
             <Grid item xs={12} sm={2}>
               <Filter filterNeedList={resultsTest.filter_topics.needs} //qui dovrebbe aggiornarsi dinamicamente in base a displayResults, che però non ha queste informazioni al momento
                 filterTechList={resultsTest.filter_topics.tech} 
@@ -98,27 +113,7 @@ const ResultsPage = () => {
             <Grid item xs={12} sm={3}>
               <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
             </Grid>
-          </Grid>
-          <Grid item xs sm={3}></Grid>
-        </Grid>
-      </Container>
-      :<></>
-      }
-      {/* SERP rendering */}
-      <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
-        <Grid container columnSpacing={{sm: 3, md: 4}}>
-          <Grid item xs={12} sm={2}>
-            <Filter filterNeedList={displayResults.filter_topics.needs} filterTechList={displayResults.filter_topics.tech} fetchedResults={resultsTest}></Filter>
-          </Grid>
-          <Grid item xs={12} sm={7}>
-            {!loading ? found ? <ResultsList queryResults={displayResults} loading={loading} /> : <NotFound error={error} /> 
-              : <ResultsList queryResults={displayResults} loading={loading} />
-            }
-          </Grid>
-          <Grid item xs={12} sm={3}>
-            <InfoSnippet snippetType={"Info"} InfoSnippet={displayResults.info_snippet}></InfoSnippet>
-          </Grid>
-        </Grid>
+            </Grid>
       </Container>
     </Box >
   );
