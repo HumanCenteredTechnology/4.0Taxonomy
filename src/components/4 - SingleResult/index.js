@@ -49,7 +49,7 @@ const SingleResult = () => {
                             <Container><InfoArticle article={article}></InfoArticle></Container>
                         </Grid>
                         <Grid item xs={12} sm={4}>
-                            <Box sx={{border:'0px solid grey'}}></Box>
+                            <Box sx={{border:'0px solid grey'}}></Box>  {/* Eventually ShortInfoSnippet (Reads, citations, ecc)*/}
                         </Grid>
                         <Grid item xs={12} sm={8}>
                             {isSmallDevice 

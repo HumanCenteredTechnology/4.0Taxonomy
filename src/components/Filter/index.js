@@ -87,14 +87,13 @@ const Filter = ({filterNeedList, filterTechList, fetchedResults}) =>{
         setFiltered({needs:[(chips) => chips.filter((chip) => chip.label !== chipToDelete.label)]});
     }
   
-    const marginVerticalY =  ((!isSmallDevice) ? 4 : 0)
+    const marginVerticalY =  ((!isSmallDevice) ? "1.5em" : "0em")
 
     return (
         <Box paddingY={0.5}
             sx={{ overflowY:'hidden',
                   border: '1px solid grey',
-                  borderTopRightRadius: '15px',
-                  borderLeft: '0px',
+                  borderTopRightRadius: '16px',
                   my: marginVerticalY }}>
                 {/* Parte dei chip selezionati (compaiono in alto) */}
             { (isSmallDevice) ?
