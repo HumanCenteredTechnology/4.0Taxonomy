@@ -38,7 +38,8 @@ const ResultsPage = () => {
   const [ loading, setLoading] = useState (false);
 
   const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
-    selectedNeeds, selectedTech, selectedDate, selectedSourceType, howManyDates, filterLoading
+    howManyNeeds, howManyTech, howManyDates, howManySourceTypes,
+    filterLoading
   } = useFilter(resultsTest); //fetchedResults
 
 
@@ -106,7 +107,10 @@ const ResultsPage = () => {
                 onSelectTech = {onSelectTech}
                 onSelectDate = {onSelectDate}
                 onSelectSourceType = {onSelectSourceType}
+                needs={howManyNeeds}
+                tech={howManyTech}
                 dates={howManyDates}
+                sourceTypes={howManySourceTypes}
                 >
                 </Filter>
             </Grid>

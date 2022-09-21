@@ -14,7 +14,7 @@ import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, dates}) =>{
+const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
@@ -37,8 +37,6 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     const [openFilterTech, setOpenFilterTech] = useState(true);
     const [openFilterPubblicationDate, setOpenFilterPubblicationDate] = useState(true);
     const [openFilterArticleType, setOpenFilterArticleType] = useState(true);
-    const [checkedNeeds, setCheckedNeeds] = useState([]);
-    const [checkedTech, setCheckedTech] = useState([]);
 
     const [clearChecked, setClearChecked] = useState(false);
 
@@ -54,9 +52,6 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
         setClearChecked(false)
     }
    
-    useEffect (()=>{
-        
-    },[dates])
 
     const handleFilterClick = () => {
         if(openFilter==true) setOpenFilter(false)
@@ -121,12 +116,12 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         <Box paddingX={"0.5em"}>
                             <Button variant="text" size="small" style={{color:"#000000"}} 
                                 endIcon={openIconNeed ? <KeyboardArrowDownOutlinedIcon/> : <KeyboardArrowRightOutlinedIcon/>} 
-                                onClick={handleFilterNeedsClick} >Need   <b>({Object.keys(filterNeedList).length})</b>
+                                onClick={handleFilterNeedsClick} >Need   <b>({Object.keys(needs).length})</b>
                             </Button>
                         </Box>
                         <Collapse in={openFilterNeeds}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} 
+                                <CheckboxList itemList={Object.keys(needs)} filterCategory={"needs"} 
                                 fetchedResults={fetchedResults} setSelected={onSelectNeeds} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
@@ -134,12 +129,12 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         <Box paddingX={"0.5em"}>
                             <Button variant="text" size="small" style={{color:"#000000", backgroundColor:"inherit"}} 
                                 endIcon={openIconTech ? <KeyboardArrowDownOutlinedIcon/> : <KeyboardArrowRightOutlinedIcon/>} 
-                                onClick={handleFilterTechClick} >Technology <b>({Object.keys(filterTechList).length})</b>
+                                onClick={handleFilterTechClick} >Technology <b>({Object.keys(tech).length})</b>
                             </Button>
                         </Box>
                         <Collapse in={openFilterTech}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} 
+                                <CheckboxList itemList={Object.keys(tech)} filterCategory={"tech"} 
                                 fetchedResults={fetchedResults} setSelected={onSelectTech} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
@@ -160,12 +155,12 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         <Box paddingX={"0.5em"}>
                             <Button variant="text" size="small" style={{color:"#000000", backgroundColor:"inherit"}} 
                                 endIcon={openIconArticleType ? <KeyboardArrowDownOutlinedIcon/> : <KeyboardArrowRightOutlinedIcon/>} 
-                                onClick={handleFilterArticleType} >Article Type <b>({filterArticleType.length})</b>
+                                onClick={handleFilterArticleType} >Article Type <b>({Object.keys(sourceTypes).length})</b>
                             </Button>
                         </Box>
                         <Collapse in={openFilterArticleType}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterArticleType} filterCategory={"source_type"}
+                                <CheckboxList itemList={Object.keys(sourceTypes)} filterCategory={"source_type"}
                                  fetchedResults={fetchedResults} setSelected={onSelectSourceType} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>

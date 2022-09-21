@@ -7,6 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
 
+
 const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected, clearChecked, checkedCleared})  => {
   const [checked, setChecked] = useState([]);
 
@@ -54,7 +55,7 @@ const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected, cl
                   size="small"
                 />
               </ListItemIcon>
-              <ListItemText sx={{marginLeft:'-1.7em'}} id={labelId} primary={`${value}`} primaryTypographyProps={{fontSize:'3em'}} />
+              <ListItemText sx={{marginLeft:'-2em', fontSize: '12px', lineHeight: '12px'}} id={labelId} primary={`${value}`} disableTypography />
             </ListItemButton>
           </ListItem>
         );

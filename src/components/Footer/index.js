@@ -46,7 +46,7 @@ export default function Footer(props) {
 
     const content = {
         'brand': { image: Logo, width: 110 },
-        'copy': '© 2021 Planet4 All rights reserved.',
+        'copy': '© 2022 Planet4 All rights reserved.',
         'link1': 'Add article',
         'link2': 'Second Link',
         'link3': 'Third Link',
