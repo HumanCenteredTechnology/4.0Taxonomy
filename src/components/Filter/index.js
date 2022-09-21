@@ -40,17 +40,17 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     const [checkedNeeds, setCheckedNeeds] = useState([]);
     const [checkedTech, setCheckedTech] = useState([]);
 
-    const [availableDates, setAvailableDates] = useState([])
+  
 
 
 
 
-    const year = new Date().getFullYear()
-    const filterPubblicationDateList = [year, year-1, year-2, "Prec " + (year -3).toString()]
+    //const year = new Date().getFullYear()
+    //const filterPubblicationDateList = [year, year-1, year-2, "Prec " + (year -3).toString()]
     const filterArticleType = ["Academia", "Industry"]
    
     useEffect (()=>{
-        setAvailableDates(Object.keys(dates).sort((a, b) => b - a))
+        
     },[dates])
 
     const handleFilterClick = () => {

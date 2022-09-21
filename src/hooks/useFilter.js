@@ -122,7 +122,7 @@ export const useFilter = (fetchedResults) => {
 
     const findDates = () => {
         let dates = [""]
-        filteredResults.map( art => dates.push(art.publishing_date.slice(-4)))
+        fetchedResults.result_list.map( art => dates.push(art.publishing_date.slice(-4)))
         setHowManyDates(dates.reduce((allDates, date) => {
             const currCount = allDates[date] ?? 0;
             return {
