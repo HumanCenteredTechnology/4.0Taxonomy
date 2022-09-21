@@ -13,7 +13,7 @@ const initialQueries = { word: [] }
 export const useFetch = (queryId) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(initialState);
-  const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
   const [options, setOptions] = useState(initialQueries)
@@ -23,7 +23,7 @@ export const useFetch = (queryId) => {
     const fetch = async () => {
       try {
         setError(false);
-        setLoading(true);
+        setFetchLoading(true);
         setFound(false)
 
         const fetchResults = await API.fetchResults(queryId);
@@ -44,7 +44,7 @@ export const useFetch = (queryId) => {
         setError(true);
         console.log(error);
       }
-      setLoading(false);
+      setFetchLoading(false);
     };
     fetch()
   }, [queryId])
@@ -72,7 +72,7 @@ export const useFetch = (queryId) => {
     if (queryMatch != null) setOptions(queryMatch.word)
   }, [queryMatch])
 
+  
 
-
-  return { results, loading, error, query, setQuery, found, options };
+  return { results, fetchLoading, error, query, setQuery, found, options };
 };

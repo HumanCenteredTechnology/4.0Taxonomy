@@ -33,11 +33,12 @@ const ResultsPage = () => {
 
   const { queryId } = useParams();
   //results -> fetchedResults
-  const { results, loading, error, setSearchMention, found } = useFetch(queryId);
+  const { results, fetchLoading, error, setSearchMention, found } = useFetch(queryId);
   const [ displayResults, setDisplayResults] = useState ([...resultsTest.result_list]); //fetchedResults
+  const [ loading, setLoading] = useState (false);
 
   const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
-    selectedNeeds, selectedTech, selectedDate, selectedSourceType, howManyDates 
+    selectedNeeds, selectedTech, selectedDate, selectedSourceType, howManyDates, filterLoading
   } = useFilter(resultsTest); //fetchedResults
 
 
@@ -48,14 +49,16 @@ const ResultsPage = () => {
     threshold: 5
   })
 
+  useEffect(()=> {
+    fetchLoading ? 
+    setLoading(fetchLoading):
+    setLoading(filterLoading)
+  }, [fetchLoading, filterLoading])
+
   useEffect(() => {
     setDisplayResults(filteredResults) //da aggiornare con fetchedResults
   }, [filteredResults]) //fetchedResults
 
-  useEffect (()=> {
-    console.log ("selectedFilters")
-
-}, [selectedNeeds, selectedTech, selectedDate, selectedSourceType])
 
   useEffect(() => {
     setOpenDrawer(false)

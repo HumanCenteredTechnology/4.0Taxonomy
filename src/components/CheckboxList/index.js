@@ -7,21 +7,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
 
-const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected})  => {
+const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected, clearChecked, checkedCleared})  => {
   const [checked, setChecked] = useState([]);
 
   
   useEffect(() =>{
-    /* setFilters(oldFilters => {
-      return {
-        ...oldFilters,
-        [filterCategory]: {
-          checked
-        },
-      };
-    }); */
     setSelected(checked)
-    
   }, [checked])
 
   const handleToggle = (value) => () => {
@@ -34,10 +25,18 @@ const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected})  
       newChecked.splice(currentIndex, 1);
     }
     setChecked(newChecked);
-    
   };
 
+  useEffect(() =>{
+    if (clearChecked==true) {
+      setChecked([])
+      checkedCleared(checked)
+    }
+  },[clearChecked])
+
+
   return (
+
     <List sx={{ width: '100%', maxWidth: 360, bgcolor:'background.paper', paddingLeft:"0.5em"}}>
       {itemList.map((value, index) => {
         const labelId = `checkbox-list-label-${value}`;

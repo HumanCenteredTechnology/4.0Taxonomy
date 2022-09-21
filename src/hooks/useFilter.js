@@ -8,6 +8,7 @@ const resultsTest = JSON.parse(JSON.stringify(jsonEx))
 export const useFilter = (fetchedResults) => {
     /* 'resultsTemp' dovrà diventare results quando sarà integrata con le Api */
     const [ filteredResults, setFilteredResults ] = useState([...fetchedResults.result_list]);
+    const [ filterLoading, setFilterLoading] = useState(false);
     
     const [filters, setFilters] = useState({topics: fetchedResults.filter_topics, publishing_date: [], source_type: []});
     const [ selectedNeeds, setSelectedNeeds] = useState ([]);
@@ -17,52 +18,35 @@ export const useFilter = (fetchedResults) => {
 
     const [ howManyDates, setHowManyDates] = useState({})
 
-    
-    const inferArtSourceType = (art) => {
-        let type;
-        if (art.hasOwnProperty('source_type')){
-            switch (art.source_type){
-                case "Consulting article": type = "Industry"; break;
-                case "Industry article": type =  "Industry"; break;
-                case "White paper": type =  "Industry"; break;
-                case "Product page": type =  "Industry"; break;
-                case "Journal paper": type =  "Academia"; break;  
-                case "Conference paper": type =  "Academia"; break;      
-                default: type = "not_found"; break;
-            }
-            return type;
-            /* setFilters((oldFilters) => ({
-            ...oldFilters,
-            source_type: [...filters.source_type, type],
-            }));  */
-        }
-    }
-    const applyFilters = () => {
+    const applyFilters = async () => {
+        setFilterLoading(true)
         let updatedResults = fetchedResults.result_list
         // Needs Filter
         if (selectedNeeds) {
-            updatedResults = updatedResults.filter(
+            updatedResults = await updatedResults.filter(
             (art) => selectedNeeds.every( filterNeed => art.tax_keywords.needs.includes(filterNeed)))
         }
         // Tech Filter
         if (selectedTech) {
-            updatedResults = updatedResults.filter(
+            updatedResults = await updatedResults.filter(
             (art) => selectedTech.every( filterTech => art.tax_keywords.tech.includes(filterTech)))
         }
         // Date Filter
         if (selectedDate) {
-            updatedResults = updatedResults.filter(
+            updatedResults = await updatedResults.filter(
             (art) => selectedDate.every( filterDate => art.publishing_date.slice(-4).includes(filterDate)))
+            // manca il caso in cui non c'è la data
         }
         // Source Type Filter
         if (selectedSourceType) {
-            let artTypes = checkType(selectedSourceType);
-            updatedResults = updatedResults.filter(
-            (art) => artTypes.every( type => art.source_type.includes(type)))
+            let artTypes = checkType();
+            updatedResults = await updatedResults.filter(
+            (art) => artTypes.every( type => {    
+                console.log(type)            
+                art.source_type.includes(type)}))
         }
         setFilteredResults(updatedResults)
-        
-
+        setFilterLoading(false)
     }
 
     const onSelectNeeds = (checked) => {
@@ -84,9 +68,14 @@ export const useFilter = (fetchedResults) => {
     }, [selectedNeeds, selectedTech, selectedDate, selectedSourceType])
 
     useEffect (()=> {
+        //let dates = !selectedDate ? findDates() : "";
             setFilters(oldFilters => {
                 return {
                   ...oldFilters,
+                  topics: {
+                    ...oldFilters.topics,
+                    needs: findNeeds()
+                  },
                   publishing_date: findDates(),
                   source_type: findTypeFilters()
                 };
@@ -94,9 +83,15 @@ export const useFilter = (fetchedResults) => {
             console.log(filters)
     }, [filteredResults])
 
+    const findNeeds = () => {
+        let needs = [""]
+        filteredResults.map( art => needs.push(art.needs))
+        return needs
+    }
+
     const findDates = () => {
         let dates = [""]
-        fetchedResults.result_list.map( art => dates.push(art.publishing_date.slice(-4)))
+        filteredResults.map( art => dates.push(art.publishing_date.slice(-4)))
         setHowManyDates(dates.reduce((allDates, date) => {
             const currCount = allDates[date] ?? 0;
             return {
@@ -125,12 +120,11 @@ export const useFilter = (fetchedResults) => {
         let check = []
         if (selectedSourceType.includes("Industry")) check.push("Consulting article", "Industry article", "White paper", "Use case", "Product page")
         if (selectedSourceType.includes("Academia")) check.push("Journal paper", "Conference paper")
-        console.log(check)
         return check;
     }
 
     return{ 
-        filteredResults, setFilteredResults, filters, setFilters, 
+        filterLoading, filteredResults, setFilteredResults, filters, setFilters, 
         selectedNeeds, selectedTech, selectedDate, selectedSourceType,
         onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType,
         howManyDates

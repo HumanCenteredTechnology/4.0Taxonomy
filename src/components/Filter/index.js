@@ -40,7 +40,7 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     const [checkedNeeds, setCheckedNeeds] = useState([]);
     const [checkedTech, setCheckedTech] = useState([]);
 
-  
+    const [clearChecked, setClearChecked] = useState(false);
 
 
 
@@ -48,6 +48,11 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     //const year = new Date().getFullYear()
     //const filterPubblicationDateList = [year, year-1, year-2, "Prec " + (year -3).toString()]
     const filterArticleType = ["Academia", "Industry"]
+
+    const checkedCleared = (checked) =>{
+        if (checked.length == 0)
+        setClearChecked(false)
+    }
    
     useEffect (()=>{
         
@@ -107,6 +112,7 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                     </Grid>
                 </Box>
             }
+             <Button variant="text" onClick={()=>setClearChecked(true)}>Clear Filters</Button>
             <Divider variant="middle"></Divider>
             <Collapse in={openFilter}>
                 <Grid container spacing={0}>
@@ -120,7 +126,8 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         </Box>
                         <Collapse in={openFilterNeeds}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} fetchedResults={fetchedResults} setSelected={onSelectNeeds}></CheckboxList>
+                                <CheckboxList itemList={filterNeedList} filterCategory={"needs"} 
+                                fetchedResults={fetchedResults} setSelected={onSelectNeeds} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Tech */}
@@ -132,7 +139,8 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         </Box>
                         <Collapse in={openFilterTech}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
-                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} fetchedResults={fetchedResults} setSelected={onSelectTech}></CheckboxList>
+                                <CheckboxList itemList={filterTechList} filterCategory={"tech"} 
+                                fetchedResults={fetchedResults} setSelected={onSelectTech} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Year */}
@@ -144,7 +152,8 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={Object.keys(dates).sort((a, b) => b - a)} filterCategory={"publishing_date"} fetchedResults={fetchedResults} setSelected={onSelectDate}></CheckboxList>
+                                <CheckboxList itemList={Object.keys(dates).sort((a, b) => b - a)} filterCategory={"publishing_date"}
+                                 fetchedResults={fetchedResults} setSelected={onSelectDate} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Article Type */}
@@ -156,7 +165,8 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         </Box>
                         <Collapse in={openFilterArticleType}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterArticleType} filterCategory={"source_type"} fetchedResults={fetchedResults} setSelected={onSelectSourceType}></CheckboxList>
+                                <CheckboxList itemList={filterArticleType} filterCategory={"source_type"}
+                                 fetchedResults={fetchedResults} setSelected={onSelectSourceType} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
                         </Collapse>
                     </Grid>
