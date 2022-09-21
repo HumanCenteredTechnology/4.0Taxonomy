@@ -14,7 +14,7 @@ import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType}) =>{
+const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, dates}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
@@ -40,6 +40,8 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     const [checkedNeeds, setCheckedNeeds] = useState([]);
     const [checkedTech, setCheckedTech] = useState([]);
 
+    const [availableDates, setAvailableDates] = useState([])
+
 
 
 
@@ -47,9 +49,9 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
     const filterPubblicationDateList = [year, year-1, year-2, "Prec " + (year -3).toString()]
     const filterArticleType = ["Academia", "Industry"]
    
-   /*  useEffect (()=>{
-        console.log(filters)
-    },[filters]) */
+    useEffect (()=>{
+        setAvailableDates(Object.keys(dates).sort((a, b) => b - a))
+    },[dates])
 
     const handleFilterClick = () => {
         if(openFilter==true) setOpenFilter(false)
@@ -137,12 +139,12 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                         <Box paddingX={"0.5em"}>
                             <Button variant="text" size="small" style={{color:"#000000", backgroundColor:"inherit"}} 
                                 endIcon={openIconDate ? <KeyboardArrowDownOutlinedIcon/> : <KeyboardArrowRightOutlinedIcon/>} 
-                                onClick={handleFilterPubblicationDate} >Date <b>({filterPubblicationDateList.length})</b> 
+                                onClick={handleFilterPubblicationDate} >Date <b>({Object.keys(dates).length})</b> 
                             </Button>
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
                             <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
-                                <CheckboxList itemList={filterPubblicationDateList} filterCategory={"publishing_date"} fetchedResults={fetchedResults} setSelected={onSelectDate}></CheckboxList>
+                                <CheckboxList itemList={Object.keys(dates).sort((a, b) => b - a)} filterCategory={"publishing_date"} fetchedResults={fetchedResults} setSelected={onSelectDate}></CheckboxList>
                             </Paper>
                         </Collapse>
                         {/* Filter Article Type */}

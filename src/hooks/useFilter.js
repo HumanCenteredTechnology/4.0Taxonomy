@@ -15,6 +15,8 @@ export const useFilter = (fetchedResults) => {
     const [ selectedDate, setSelectedDate] = useState ([]);
     const [ selectedSourceType, setSelectedSourceType] = useState ([]);
 
+    const [ howManyDates, setHowManyDates] = useState({})
+
     const findTypeFilters = () => {
         let originalTypes = [];
         let convertedTypes = [];
@@ -64,7 +66,7 @@ export const useFilter = (fetchedResults) => {
         // Date Filter
         if (selectedDate) {
             updatedResults = updatedResults.filter(
-            (art) => selectedDate.every( filterDate => art.publishing_date.includes(filterDate)))
+            (art) => selectedDate.every( filterDate => art.publishing_date.slice(-4).includes(filterDate)))
         }
         // Source Type Filter
         if (selectedSourceType) {
@@ -109,13 +111,34 @@ export const useFilter = (fetchedResults) => {
                   source_type: findTypeFilters(),
                 };
               }); */
+            setFilters(oldFilters => {
+                return {
+                  ...oldFilters,
+                  publishing_date: findDates()
+                };
+              });
             console.log(filters)
     }, [filteredResults])
 
+    const findDates = () => {
+        let dates = [""]
+        filteredResults.map( art => dates.push(art.publishing_date.slice(-4)))
+        setHowManyDates(dates.reduce((allDates, date) => {
+            const currCount = allDates[date] ?? 0;
+            return {
+              ...allDates,
+              [date]: currCount + 1,
+            };
+        }));
+        return dates
+    }
+
+    
 
     return{ 
         filteredResults, setFilteredResults, filters, setFilters, 
         selectedNeeds, selectedTech, selectedDate, selectedSourceType,
-        onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType
+        onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType,
+        howManyDates
     }
 }

@@ -36,8 +36,9 @@ const ResultsPage = () => {
   const { results, loading, error, setSearchMention, found } = useFetch(queryId);
   const [ displayResults, setDisplayResults] = useState ([...resultsTest.result_list]); //fetchedResults
 
-  const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, selectedNeeds, selectedTech, selectedDate, selectedSourceType,
-     /* setSelectedNeeds, setSelectedTech, setSelectedDate, setSelectedSourceType */} = useFilter(resultsTest); //fetchedResults
+  const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
+    selectedNeeds, selectedTech, selectedDate, selectedSourceType, howManyDates 
+  } = useFilter(resultsTest); //fetchedResults
 
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -102,6 +103,7 @@ const ResultsPage = () => {
                 onSelectTech = {onSelectTech}
                 onSelectDate = {onSelectDate}
                 onSelectSourceType = {onSelectSourceType}
+                dates={howManyDates}
                 >
                 </Filter>
             </Grid>
