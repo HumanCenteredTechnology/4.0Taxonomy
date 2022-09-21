@@ -17,21 +17,7 @@ export const useFilter = (fetchedResults) => {
 
     const [ howManyDates, setHowManyDates] = useState({})
 
-    const findTypeFilters = () => {
-        let originalTypes = [];
-        let convertedTypes = [];
-        filteredResults.map 
-        ( art => {
-            originalTypes.push(art.source_type)
-        }) 
-        if (originalTypes.includes("Consulting article", "Industry article", "White paper", "Use case", "Product page"))
-                convertedTypes.push("Industry");
-            if (originalTypes.includes("Journal paper", "Conference paper"))
-                convertedTypes.push("Academia")
-        return {
-            ...convertedTypes
-        }
-    }
+    
     const inferArtSourceType = (art) => {
         let type;
         if (art.hasOwnProperty('source_type')){
@@ -70,18 +56,12 @@ export const useFilter = (fetchedResults) => {
         }
         // Source Type Filter
         if (selectedSourceType) {
-            let artType;
+            let artTypes = checkType(selectedSourceType);
             updatedResults = updatedResults.filter(
-            (art) => 
-               /*  if (art.source_type.includes("Consulting article", "Industry article", "White paper", "Use case", "Product page"))
-                    artType = "Industry"
-                if (art.source_type.includes("Journal paper", "Conference paper"))
-                    artType = "Academia"
-                    console.log(artType) */
-                selectedSourceType.every( filterSourceType => art.source_type.includes(filterSourceType)))
+            (art) => artTypes.every( type => art.source_type.includes(type)))
         }
         setFilteredResults(updatedResults)
-        console.log(filters)
+        
 
     }
 
@@ -104,17 +84,11 @@ export const useFilter = (fetchedResults) => {
     }, [selectedNeeds, selectedTech, selectedDate, selectedSourceType])
 
     useEffect (()=> {
-            //filteredResults.map( art => inferSourceType(art)) // questo è per applicare il fitro sulla source
-            /* setFilters(oldFilters => {
-                return {
-                  ...oldFilters,
-                  source_type: findTypeFilters(),
-                };
-              }); */
             setFilters(oldFilters => {
                 return {
                   ...oldFilters,
-                  publishing_date: findDates()
+                  publishing_date: findDates(),
+                  source_type: findTypeFilters()
                 };
               });
             console.log(filters)
@@ -133,7 +107,27 @@ export const useFilter = (fetchedResults) => {
         return dates
     }
 
-    
+    const findTypeFilters = () => {
+        let originalTypes = [];
+        let convertedTypes = [];
+        fetchedResults.result_list.map 
+        ( art => {
+            originalTypes.push(art.source_type)
+        }) 
+        if (originalTypes.includes("Consulting article", "Industry article", "White paper", "Use case", "Product page"))
+            convertedTypes.push("Industry");
+        if (originalTypes.includes("Journal paper", "Conference paper"))
+            convertedTypes.push("Academia")
+        return convertedTypes
+    }
+
+    const checkType = () => {
+        let check = []
+        if (selectedSourceType.includes("Industry")) check.push("Consulting article", "Industry article", "White paper", "Use case", "Product page")
+        if (selectedSourceType.includes("Academia")) check.push("Journal paper", "Conference paper")
+        console.log(check)
+        return check;
+    }
 
     return{ 
         filteredResults, setFilteredResults, filters, setFilters, 
