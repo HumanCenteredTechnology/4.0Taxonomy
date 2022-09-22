@@ -38,8 +38,7 @@ const ResultsPage = () => {
   const [ loading, setLoading] = useState (false);
 
   const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
-    howManyNeeds, howManyTech, howManyDates, howManySourceTypes,
-    filterLoading
+          howManyNeeds, howManyTech, howManyDates, howManySourceTypes, filterLoading
   } = useFilter(resultsTest); //fetchedResults
 
 
@@ -86,7 +85,7 @@ const ResultsPage = () => {
           <Grid item xs sm={2}></Grid>
           <Grid item xs={12} sm={7}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? displayResults.result_list.length : "0"} results for "{queryId}"</Typography>
+            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? displayResults.length : "0"} results for "{queryId}"</Typography>
             <Divider></Divider></>
             } 
           </Grid>
@@ -170,11 +169,11 @@ const ResultSkeleton = () => (
         p: 2,
         m: 0,
       }}>
-        <Typography variant="body2" color="textSecondary" >
-          <Skeleton animation="wave" variant="text" />
-        </Typography>
         <Typography variant="h6" gutterBottom  >
           <Skeleton animation="wave" variant="text" />
+        </Typography>
+        <Typography variant="body2" color="textSecondary" >
+          <Skeleton animation="wave" variant="text"  width="70%"/>
         </Typography>
         <Typography variant="body2">
           <Skeleton animation="wave" variant="text" />
@@ -185,16 +184,16 @@ const ResultSkeleton = () => (
       </Box>
       <Box sx={{ p: 2, my: 0 }}>
         <Typography variant="body1" >
-          <Skeleton animation="wave" variant="text" width="20%" />
+          <Skeleton animation="wave" variant="text" width="30%" />
         </Typography>
-        {Array.from(Array(5)).map((el, i) => {
+        {Array.from(Array(3)).map((el, i) => {
           return (
             <Typography key={i} variant="body2" noWrap >
               <Skeleton animation="wave" variant="text" width={`${Math.floor(Math.random() * (8 - 4 + 1)) + 4}0%`} />
             </Typography>
           );
         })}
-        <Skeleton animation="wave" variant="rectangular" width="20%" />
+        <Skeleton animation="wave" variant="rectangular" width="60%" />
       </Box>
     </Card>
   </Box>

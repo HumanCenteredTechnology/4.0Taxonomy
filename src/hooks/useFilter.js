@@ -81,7 +81,7 @@ export const useFilter = (fetchedResults) => {
                   source_type: findTypeFilters()
                 };
               });
-            console.log(filters)
+            /* console.log(filters) */
     }, [filteredResults])
 
     const findNeeds = () => {

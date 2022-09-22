@@ -55,7 +55,7 @@ const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected, cl
                   size="small"
                 />
               </ListItemIcon>
-              <ListItemText sx={{marginLeft:'-2em', fontSize: '12px', lineHeight: '12px'}} id={labelId} primary={`${value}`} disableTypography />
+              <ListItemText sx={{marginLeft:'-2rem', fontSize: '0.8rem', lineHeight: '0.9rem'}} id={labelId} primary={`${value}`} disableTypography />
             </ListItemButton>
           </ListItem>
         );

@@ -6,8 +6,7 @@ import { Box, Grid, Paper, Collapse, Button, Chip, Typography, Divider } from "@
 import FilterListRoundedIcon from '@mui/icons-material/FilterListRounded';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
-
-
+import RemoveDoneOutlinedIcon from '@mui/icons-material/RemoveDoneOutlined';
 
 import CheckboxList from "../CheckboxList";
 import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
@@ -107,9 +106,14 @@ const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSele
                     </Grid>
                 </Box>
             }
-             <Button variant="text" onClick={()=>setClearChecked(true)}>Clear Filters</Button>
+            
             <Divider variant="middle"></Divider>
             <Collapse in={openFilter}>
+                <Button variant="text" onClick={()=>setClearChecked(true)} 
+                    size="small" style={{fontFamily:"Roboto", color:"black", fontSize:"0.7rem"}} 
+                    endIcon={<RemoveDoneOutlinedIcon size="small" />}>
+                    Clear Filters
+                </Button>
                 <Grid container spacing={0}>
                     <Grid item xs={12} sm={12}>
                         {/* Filter Need */}

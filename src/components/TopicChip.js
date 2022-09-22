@@ -23,7 +23,7 @@ const TopicChip = ({ key, name, size, label, variant, clickable = null, link, fi
             key={key}
             label={newLabel}
             /* color={name === "needs" ? "primary" : "secondary" || "default"}*/ /* not work  */ 
-            style={{border:chipColor, height:"1.5em", borderRadius:50}}
+            style={{border:chipColor, height:"1.5em", borderRadius:50, fontSize:"0.7rem"}}
             {...(clickable && { clickable: true })}
             onClick={handleClick}
             onDelete={onDelete}

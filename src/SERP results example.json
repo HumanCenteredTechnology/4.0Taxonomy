@@ -56,10 +56,10 @@
                             "Additive Manufacturing"
                         ]
                     },
-                "doi": "",
-                "url": "",
+                "doi": "10.1016/j.procir.2020.05.067",
+                "url": "https://www.sciencedirect.com/science/article/pii/S2212827120303863",
                 "publishing_date": "2020",
-                "abstract": ""
+                "abstract": "Recent advancements in Industry 4.0 key enabling technologies allow for the dynamic sharing of additive manufacturing services in a cloud manufacturing context, with great potential on resource efficiency improvement at network level. This paper proposes the conceptualization and development of a modular-structured cloud platform to match users’ instances generating feasible solutions according to various manufacturing scenarios."
             },
             {
                 "id": "0000000004",

@@ -24,7 +24,7 @@ const Result = ({ elCard }) => {
   const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
   return (
-      <Box sx={{ justifyContent: 'center', p: 0, mb: 0.3}}>
+      <Box sx={{ justifyContent: 'center', p: 0, mb: 0.6}}>
       <Card>
         <Box sx={{
             justifyContent: 'center',
