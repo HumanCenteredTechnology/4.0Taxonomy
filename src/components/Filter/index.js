@@ -13,7 +13,7 @@ import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filterNeedList, filterTechList, filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes}) =>{
+const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const [openIconNeed, setOpenIconNeed] = useState(true);

@@ -98,9 +98,8 @@ const ResultsPage = () => {
       <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
       <Grid container columnSpacing={{sm: 3, md: 4}}>
             <Grid item xs={12} sm={2}>
-              <Filter filterNeedList={resultsTest.filter_topics.needs} //qui dovrebbe aggiornarsi dinamicamente in base a displayResults, che però non ha queste informazioni al momento
-                filterTechList={resultsTest.filter_topics.tech} 
-                fetchedResults={resultsTest}
+              <Filter 
+                fetchedResults={resultsTest} //fetchedResults
                 filters = {filters}
                 onSelectNeeds = {onSelectNeeds}
                 onSelectTech = {onSelectTech}
