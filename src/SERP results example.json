@@ -13,7 +13,7 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage and Computing"
+                            "Time Series Databases", "Data Analytics", "Data Visualization", "Machine Learning", "Particle Swarm Optimization", "Cloud Data Storage & Computing"
                         ]
                     },
                 "doi": "",
@@ -32,7 +32,7 @@
                             "Production Planning and Scheduling" ,"Production on demand"
                         ],
                         "tech": [
-                            "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Artificial Neural Networks", "Cloud Data Storage and Computing"
+                            "NoSQL Databases", "Time Series Databases", "Data Analytics", "Data Visualization", "Artificial Neural Networks", "Cloud Data Storage & Computing"
                         ]
                     },
                 "doi": "10.24200/sci.2019.5152.1123",
@@ -53,7 +53,7 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "Additive Manufacturing"
+                            "Additive Manufacturing", "NoSQL Databases" 
                         ]
                     },
                 "doi": "10.1016/j.procir.2020.05.067",
@@ -74,7 +74,7 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "Deep Neural Network", "Cloud Data Storage and Computing", "Deep Learning"
+                            "Deep Neural Network", "Cloud Data Storage & Computing", "Deep Learning"
                         ]
                     },
                 "doi": "10.1016/j.procir.2020.01.019",
@@ -136,7 +136,7 @@
                             "Real-time Production and Process Monitoring", "Fully Automated Production Facilities", "Production on demand", "Smart Warehouse and Inventory Management"
                         ],
                         "tech": [
-                            "Cloud Data Storage and Computing", "Industrial IoT"
+                            "Cloud Data Storage & Computing", "Industrial IoT"
                         ]
                     },
                 "doi": "10.1049/iet-cim.2019.0063",
@@ -156,7 +156,7 @@
                             "Production on demand"
                         ],
                         "tech": [
-                            "Cloud Data Storage and Computing"
+                            "Cloud Data Storage & Computing"
                         ]
                     },
                 "doi": "",

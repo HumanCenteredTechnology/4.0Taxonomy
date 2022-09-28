@@ -11,7 +11,7 @@ import StandardButton from '../controls/StandardButton';
 import SearchBar from "../SearchBar";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
-import Logo from '../../images/PLANET4_logo_4_BLACK.png';
+import Logo from '../../images/PLANET4_logo_4_Colored.png';
 
 import PropTypes from 'prop-types';
 
@@ -90,7 +90,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexShrink: 1, }} />}
 
                         {isResults ? isSmallDevice ?
-                            <SearchBar size={"small"} maxWidth={"90%"} />
+                            <SearchBar size={"small"} maxWidth={"75%"} />
                             : <SearchBar size={"small"} width={"27em"} maxWidth={"34em"} />
                             : <></>}
                         {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}

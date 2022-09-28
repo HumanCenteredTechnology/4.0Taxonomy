@@ -6,6 +6,7 @@ import { Tooltip, Typography, Grid, Chip } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 import TopicsList from "../TopicsList";
+import { NoEncryptionRounded, PointOfSale } from "@mui/icons-material";
 
 const Result = ({ elCard }) => {
   const [readMore, setReadMore] = useState(false);
@@ -63,7 +64,7 @@ const Result = ({ elCard }) => {
             <Box component="span" sx={{ display: 'inline-block', mx: '2px', fontSize: "0.8em"}}>Authors:</Box>
               {elCard.authors.map((el, index) => {
                   return (<>
-                    <Button variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px", fontSize: "0.8em"}}>
+                    <Button variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px", fontSize: "0.8em", pointerEvents:"none"}}>
                       {el}
                     </Button>{index<elCard.authors.length-1 ? <>{shot}</> : <></>}
                   </>); 

@@ -63,9 +63,9 @@ return (
                 }
                 <Divider></Divider>
                 {/* Topics Hierarchy */}
-                <Grid container spacing={1} justifyContent="left" marginLeft="3px">
+                <Grid container spacing={1} justifyContent="left" paddingLeft={'0.1em'}>
                     <Grid item><DeviceHubIcon fontSize="medium"></DeviceHubIcon></Grid>
-                    <Grid item><Typography variant='subtitle1'>Topics Hierarchy</Typography></Grid>
+                    <Grid item><Typography variant='subtitle1'><b>Topic's Area</b></Typography></Grid>
                 </Grid>
                 <HierarchyList InfoSnippet={InfoSnippet}></HierarchyList>
             </Box>
@@ -127,9 +127,9 @@ const HierarchyList = ({InfoSnippet}) => (
         </ListItemButton>
         <List component="div" disablePadding={true}>
             <ListItemButton sx={{ paddingLeft: 5}} style={{marginLeft:"1em"}}>
-            <RemoveTwoToneIcon fontSize="small"/><Typography variant="subtitle2">{InfoSnippet.snippet_title}</Typography>                      
+            <RemoveTwoToneIcon fontSize="small"/><Typography variant="subtitle2"><b>{InfoSnippet.snippet_title}</b></Typography>                      
             </ListItemButton>
-            <List component="div" disablePadding={true} style={{marginLeft:"2em"}}>
+            <List component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
                 {InfoSnippet.children_topics.map((el, index) => {
                             return (
                             <ListItemButton sx={{ pl: 5 }}>

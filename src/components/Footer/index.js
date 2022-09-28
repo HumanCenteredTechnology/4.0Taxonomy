@@ -65,7 +65,7 @@ export default function Footer(props) {
     return (
         <footer className={classes.rootFooter}>
             <Container maxWidth="lg">
-                <Box py={6} display="flex" flexWrap="wrap" alignItems="center" className={classes.rootBox}>
+                <Box py={5} display="flex" flexWrap="wrap" alignItems="center" className={classes.rootBox}>
                     <Tooltip title="Opens Planet4 website" followCursor>
                         <Link href="https://www.planet4project.eu/" color="inherit" underline="none">
                             {brand}

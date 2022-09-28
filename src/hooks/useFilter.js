@@ -67,6 +67,7 @@ export const useFilter = (fetchedResults) => {
         applyFilters();
     }, [selectedNeeds, selectedTech, selectedDate, selectedSourceType])
 
+    /* Impostazione delle nuove label del filtro */
     useEffect (()=> {
         //let dates = !selectedDate ? findDates() : "";
             setFilters(oldFilters => {
@@ -112,13 +113,12 @@ export const useFilter = (fetchedResults) => {
         return types
     }
 
+    /* Ogni categoria del filtro è impostata con un oggetto del tipo {array,count} es. per le date è : {[2022, 2021], 2} 
+       in array ci sono le label da mostrare dentro ogni categoria del filtro e in count il loro numero */
     const reduceFilters = (array) => {
         let newObject =  array.reduce((allElements, element)=> {
             const currCount = allElements[element] ?? 0;
-            return {
-                ...allElements,
-                [element]: currCount + 1
-            }
+            return {...allElements, [element]: currCount + 1}
         })
         return newObject;
     }

@@ -15,7 +15,7 @@ import { array } from "prop-types";
 
 const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes}) =>{
     const theme = useTheme()
-    const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
+    const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
     const [openIconTech, setOpenIconTech] = useState(true);
     const [openIconDate, setOpenIconDate] = useState(true);
@@ -110,9 +110,9 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
             <Divider variant="middle"></Divider>
             <Collapse in={openFilter}>
                 <Button variant="text" onClick={()=>setClearChecked(true)} 
-                    size="small" style={{fontFamily:"Roboto", color:"black", fontSize:"0.7rem"}} 
+                    size="small" style={{fontFamily:"Roboto, Arial", color:"black", fontSize:"0.7rem"}} 
                     endIcon={<RemoveDoneOutlinedIcon size="small" />}>
-                    Clear Filters
+                    Clear
                 </Button>
                 <Grid container spacing={0}>
                     <Grid item xs={12} sm={12}>

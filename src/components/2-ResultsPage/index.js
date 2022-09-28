@@ -97,7 +97,7 @@ const ResultsPage = () => {
       {/* SERP rendering */}
       <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
       <Grid container columnSpacing={{sm: 3, md: 4}}>
-            <Grid item xs={12} sm={2}>
+            <Grid item sm={12} md={2}>
               <Filter 
                 fetchedResults={resultsTest} //fetchedResults
                 filters = {filters}
@@ -112,12 +112,12 @@ const ResultsPage = () => {
                 >
                 </Filter>
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item sm={12} md={7}>
               {!loading ?/*  found ? */ <ResultsList queryResults={displayResults} loading={loading} /> /* : <NotFound error={error} />  */
                : <ResultsList queryResults={displayResults} loading={loading} />
               }
             </Grid>
-            <Grid item xs={12} sm={3}>
+            <Grid item sm={12} md={3}>
               <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
             </Grid>
             </Grid>
