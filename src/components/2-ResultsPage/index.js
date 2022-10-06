@@ -192,22 +192,21 @@ const ResultsPage = () => {
                 </Filter>
             </Grid>
             <Grid item sm={12} md={7}>
-              {!loading ?  found ?  
-              <>
-              <ResultsList results={displayResults} loading={loading}/> 
-              <Box display="flex" justifyContent="center" marginY={2} alignContent="center" textAlign="center">
-                <Pagination count={lastPage} page={page} onChange={handlePageChange}/>
-              </Box>
-              </>
-               : <NotFound error={error} />  
-               : <ResultsList results={displayResults} loading={loading} />
-              }
+                {!loading ?  found ?  
+                <>
+                  <ResultsList results={displayResults} loading={loading}/> 
+                  <Box display="flex" justifyContent="center" marginY={2} alignContent="center" textAlign="center">
+                    <Pagination count={lastPage} page={page} onChange={handlePageChange}/>
+                  </Box>
+                </>
+                : <NotFound error={error} />  
+                : <ResultsList results={displayResults} loading={loading} />
+                }
+              </Grid>
+              <Grid item sm={12} md={3}>
+                <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
+              </Grid>
             </Grid>
-            <Grid item sm={12} md={3}>
-              <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
-            </Grid>
-            </Grid>
-            
       </Container>
     </Box >
   );

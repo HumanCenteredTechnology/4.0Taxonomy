@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {Box, Button, Card, Container, Divider, Grid, Link, Paper, Typography} from "@material-ui/core";
+import {Box, Button, Card, Container, Divider, Grid, Link, Paper, Typography, Tooltip} from "@material-ui/core";
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 
 const InfoArticleAbstract = ({ article }) => {
@@ -21,16 +21,20 @@ const InfoArticleAbstract = ({ article }) => {
                     {/* Button trasformarlo in Typography */}
                     <Button disabled variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em",}}>Abstract</Button>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.7em', my: '1em', mx: '1em', }}>
-                        { (article.abstract != "")
+                        { (article.abstract !== null)
                         ? <Typography variant="subtitle1" style={{fontSize:"0.9em"}}>{article.abstract}</Typography>
-                        : <Typography variant="subtitle1"><NoAbstract></NoAbstract></Typography>
+                        : <NoAbstract/>
                         }
                     </Box>
                     <Box sx={{padding: '1em', paddingTop:'1em'}}>
                         <Grid container>
                             <Grid item xs={12} sm={8}><></></Grid>
                             <Grid item xs={12} sm={4}>
-                                <Box><Link href={article.url}><Typography variant="h6">Link to the Article <span>{arrow}</span> </Typography></Link></Box>
+                                <Box>
+                                    <Tooltip title="Opens a new page">
+                                        <Link target="_blank" rel="noreferrer" href={article.link}><Typography variant="h6">Link to the Article <span>{arrow}</span> </Typography></Link>
+                                    </Tooltip>
+                                </Box>
                             </Grid>
                         </Grid>
                     </Box>
@@ -44,16 +48,20 @@ const InfoArticleAbstract = ({ article }) => {
 
                     <Button variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em"}}>Abstract</Button>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.5em', my: '1em', mx: '1em', }}>
-                        { (article.abstract != "")
+                        { (article.abstract !== null)
                         ? <Typography variant="subtitle1">{article.abstract}</Typography>
-                        : <Typography variant="subtitle1"><NoAbstract></NoAbstract></Typography>
+                        : <NoAbstract/>
                         }
                     </Box>
                     <Box sx={{padding: '1em', paddingTop:'1em'}}>
                         <Grid container>
                             <Grid item xs={12} sm={8}><></></Grid>
                             <Grid item xs={12} sm={4}>
-                                <Box><Link href={article.url}><Typography variant="h6">Link to the Article <span>{arrow}</span> </Typography></Link></Box>
+                                <Box>
+                                    <Tooltip title="Opens a new page">
+                                        <Link target="_blank" rel="noreferrer" href={article.link}><Typography variant="h6">Link to the Article <span>{arrow}</span> </Typography></Link>
+                                    </Tooltip>
+                                </Box>
                             </Grid>
                         </Grid>
                     </Box>
@@ -67,7 +75,7 @@ const InfoArticleAbstract = ({ article }) => {
     return (
         <Box sx={{padding: '1em', backgroundColor: '#dedede', paddingTop:'1em', paddingLeft:'1em'}}>
             <FeedOutlinedIcon fontSize="large"></FeedOutlinedIcon>
-            <Typography variant="h5">No Abstract</Typography>
+            <Typography variant="h5">Abstract not available</Typography>
         </Box>
     );
   };

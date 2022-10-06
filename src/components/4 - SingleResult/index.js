@@ -12,15 +12,16 @@ import BrowsableTree from "../BrowsableTree";
 // 10/08/2022 inserimento variabile test letta da JSON 
 import jsonEx from "../../SERP results example.json"
 import { Title } from "@mui/icons-material";
-import { Drawer, Grid } from "@mui/material";
+import { Drawer, Grid, Typography } from "@mui/material";
 import InfoArticle from "../InfoArticle";
 import { useTheme } from "@mui/material/styles";
 
 const SingleResult = () => {
     const theme = useTheme()
     const { articleId } = useParams();
-    const { article } = useResult(articleId)
+    const { article, found } = useResult(articleId)
     const [displayArticle, setDisplayArticle] = useState(article)
+    const [articleOk, setArticleOk] = useState(false)
 
     const [openDrawer, setOpenDrawer] = useState(false);
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
@@ -53,21 +54,30 @@ const SingleResult = () => {
             <Box sx={{backgroundColor: '#f5f5f5'}}>
                 <Container>
                     <Grid container spacing={0.5}>
-                        <Grid item xs={12} sm={8}>
+                        { found ?
+                        <>
+                            <Grid item xs={12} sm={8}>
                             <Container><InfoArticle article={article}></InfoArticle></Container>
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <Box sx={{border:'0px solid grey'}}></Box>  {/* Eventually ShortInfoSnippet (Reads, citations, ecc)*/}
-                        </Grid>
-                        <Grid item xs={12} sm={8}>
-                            {isSmallDevice 
-                            ? <InfoArticleAbstract article={article}></InfoArticleAbstract>
-                            : <Container><InfoArticleAbstract article={article}></InfoArticleAbstract></Container>
-                            }
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
-                            <InfoSnippet  snippetType={'Keywords'} article={article}></InfoSnippet>
-                        </Grid>
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                <Box sx={{border:'0px solid grey'}}></Box>  {/* Eventually ShortInfoSnippet (Reads, citations, ecc)*/}
+                            </Grid>
+                            <Grid item xs={12} sm={8}>
+                                {isSmallDevice 
+                                ? <InfoArticleAbstract article={article}></InfoArticleAbstract>
+                                : <Container><InfoArticleAbstract article={article}></InfoArticleAbstract></Container>
+                                }
+                            </Grid>
+                            <Grid item xs={12} sm={4}>
+                                {/* <InfoSnippet  snippetType={'Keywords'} article={article}></InfoSnippet> */}
+                            </Grid>
+                        </> 
+                        :
+                        <>
+                            <Typography>Not Found</Typography>
+                        </>
+                        }
+                        
                     </Grid>
                 </Container>
             </Box>

@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 //Routing
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 //Components
 import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
@@ -32,18 +32,29 @@ const theme = responsiveFontSizes(createTheme({
   },
 }));
 
+const ScrollToTop = (props) => {
+  const location = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  return <>{props.children}</>
+};
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ minHeight: "85vh" }} >
         <Router>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/:queryId" element={<ResultsPage />} />
-            <Route path="/form" element={<FormPage />} />
-            <Route path="/SingleResult/:articleId" element={<SingleResult />} />
-          </Routes>
+          <ScrollToTop>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/:queryId" element={<ResultsPage />} />
+              <Route path="/form" element={<FormPage />} />
+              <Route path="/SingleResult/:articleId" element={<SingleResult />} />
+            </Routes>
+          </ScrollToTop>
         </Router>
       </Box>
       <Footer />

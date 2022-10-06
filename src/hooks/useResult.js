@@ -2,20 +2,20 @@ import { useState, useEffect } from "react";
 import API from "../API.js";
 
 const initialState =  {   
-    id: "",
-    title: "",
-    source_type: "",
-    journal: "",
-    authors: [""],
+    id: "none",
+    title: "none",
+    source_type: "none",
+    journal: "none",
+    authors: ["none"],
     tax_keywords: 
         {
-            needs: [""],
-            tech: [""]
+            needs: ["none"],
+            tech: ["none"]
         },
-    doi: "",
-    url: "",
-    publishing_date: "",
-    abstract: ""
+    doi: "none",
+    url: "none",
+    publishing_date: "none",
+    abstract: "none"
 }
 
 export const useResult = (articleId) => {
@@ -35,7 +35,7 @@ export const useResult = (articleId) => {
                 setFound(false)
                 console.log("not found")
               } else {
-                setArticle(()=>retrieveArticle);
+                setArticle(retrieveArticle);
                 setFound(true)
                 console.log("found")
               }
@@ -49,5 +49,5 @@ export const useResult = (articleId) => {
           console.log(article)
     }, [articleId])
 
-    return {article};
+    return {article, found};
 }
