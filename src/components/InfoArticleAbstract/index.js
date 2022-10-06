@@ -6,6 +6,8 @@ const InfoArticleAbstract = ({ article }) => {
 
     const [articleSourceType, setArticleSourceType] = useState('Other');
 
+    //da fare: cambiare la key 'url' a 'link'
+
     /* Arrow to the article */
     const arrow = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(1.2)' }}>»</Box>);
     

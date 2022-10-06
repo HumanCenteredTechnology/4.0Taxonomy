@@ -8,6 +8,8 @@ import TopicChip from "../TopicChip";
 import TopNavBar from "../TopNavBar";
 import Filter from "../Filter";
 import InfoSnippet from "../InfoSnippet";
+import ResultsInfiniteScroll from "../ResultsInfiniteScroll";
+
 
 //hooks
 import { useFetch } from "../../hooks/useFetch";
@@ -33,16 +35,42 @@ const ResultsPage = () => {
 
   const { queryId } = useParams();
   //results -> fetchedResults
-  const { results, fetchLoading, error, setSearchMention, found } = useFetch(queryId);
-  const [ displayResults, setDisplayResults] = useState ([...resultsTest.result_list]); //fetchedResults
+  const { fetchedResults, fetchLoading, error, setSearchMention, found } = useFetch(queryId);
+  const [ displayResults, setDisplayResults] = useState ([...fetchedResults.result_list]); //fetchedResults
   const [ loading, setLoading] = useState (false);
 
   const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
           howManyNeeds, howManyTech, howManyDates, howManySourceTypes, filterLoading
-  } = useFilter(resultsTest); //fetchedResults
+  } = useFilter(fetchedResults); //fetchedResults
 
 
   const [openDrawer, setOpenDrawer] = useState(false);
+
+  //result list pagination
+  const [hasMore, setHasMore] = useState(true)
+  const resultsPerPage = 15
+  const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(10)
+
+/*   // infinite scroll logic
+  const fakeFetchMore = () => {
+    // a fake async api call like which sends
+    // 20 more records in .5 secs
+    setTimeout(() => {
+      const nextResults = displayResults.concat(paginate(filteredResults, page));
+      setDisplayResults(nextResults);
+    }, 500);
+  }; */
+
+  useEffect(() => {
+    if (displayResults.length >= filteredResults.length) {
+      setHasMore(false);
+    }
+  }, [displayResults.length]);
+
+  const handlePageChange = (e, value) => {
+    setPage(value);
+  }
   
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -53,11 +81,61 @@ const ResultsPage = () => {
     fetchLoading ? 
     setLoading(fetchLoading):
     setLoading(filterLoading)
+    console.log(loading)
   }, [fetchLoading, filterLoading])
 
   useEffect(() => {
-    setDisplayResults(filteredResults) //da aggiornare con fetchedResults
+    setPage(1)
+    setLastPage(parseInt(filteredResults.length/resultsPerPage))
+    setDisplayResults(filteredResults.slice(0, resultsPerPage))
   }, [filteredResults]) //fetchedResults
+
+  useEffect(()=>{
+    console.log(page)
+    setDisplayResults(()=>paginate(filteredResults, page));
+    goToTop()
+  }, [page])
+  
+  const goToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+};
+/*   useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+ */
+
+  const loadMoreResults = () => {
+    setDisplayResults(()=>paginate(filteredResults, page))
+    //page++
+    console.log(page)
+    console.log(displayResults)
+    //setDisplayResults(filteredResults.slice(0, currentOffset))
+    
+  };
+
+  const paginate = (results, page) => {
+    const start = resultsPerPage * page;
+    //page++
+    return results.slice(start, start + resultsPerPage);
+  }
+
+
+ /*  const handleScroll = (e) => {
+    const scrollHeight = e.target.documentElement.scrollHeight;
+    const currentHeight = Math.ceil(
+      e.target.documentElement.scrollTop + window.innerHeight
+    );
+    if (currentHeight + 1 >= scrollHeight) {
+      if (!loading) loadMoreResults();
+    }
+  }; */
+
+  useEffect(() => {
+    console.log(fetchedResults)
+  }, [fetchedResults]) //fetchedResults
 
 
   useEffect(() => {
@@ -85,7 +163,7 @@ const ResultsPage = () => {
           <Grid item xs sm={2}></Grid>
           <Grid item xs={12} sm={7}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? displayResults.length : "0"} results for "{queryId}"</Typography>
+            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? fetchedResults.result_list.length : "0"} results for "{queryId}"</Typography>
             <Divider></Divider></>
             } 
           </Grid>
@@ -109,41 +187,78 @@ const ResultsPage = () => {
                 tech={howManyTech}
                 dates={howManyDates}
                 sourceTypes={howManySourceTypes}
+                loading={loading}
                 >
                 </Filter>
             </Grid>
             <Grid item sm={12} md={7}>
-              {!loading ?/*  found ? */ <ResultsList queryResults={displayResults} loading={loading} /> /* : <NotFound error={error} />  */
-               : <ResultsList queryResults={displayResults} loading={loading} />
+              {!loading ?  found ?  
+              <>
+              <ResultsList results={displayResults} loading={loading}/> 
+              <Box display="flex" justifyContent="center" marginY={2} alignContent="center" textAlign="center">
+                <Pagination count={lastPage} page={page} onChange={handlePageChange}/>
+              </Box>
+              </>
+               : <NotFound error={error} />  
+               : <ResultsList results={displayResults} loading={loading} />
               }
             </Grid>
             <Grid item sm={12} md={3}>
               <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
             </Grid>
             </Grid>
+            
       </Container>
     </Box >
   );
 };
 
-const ResultsList = ({ queryResults, loading }) => {
+
+const ResultsList = ({ results, loading}) => {
   return (
     <Grid container style={{marginTop:"1.5em"}}>
       <Grid item xs={12} sm={12}>
         {loading ? <LoadingSkeleton />
           :
           <>
-            {queryResults.map((el, index) => {
+            {results.map((el, index) => {
               return (
-                <Result key={index} elCard={el}></Result>
+                <Result key={`${el.id}_${index}_List`} elCard={el}></Result>
               );
             })}
-          </>}
+          </>
+          }
       </Grid>
     </Grid>
   );
 };
 
+{/* <ResultsInfiniteScroll
+            dataLength={results.length}
+            hasMore={hasMore}
+            next={fakeFetchMore}
+            loader={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                loading...
+              </div>
+            }
+            height={window.visualViewport.height}
+            elementHeight={700} // 새로 추가
+            rowRenderer={({ key, index, style, parent }) => {
+              const res = results[index]
+              return (
+                <Result key={`${res.id}_${index}_List`} elCard={res} />
+              )
+            }}
+            children={results}
+            />
+ */}
 const LoadingSkeleton = () => {
   return (
     <>

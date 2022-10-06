@@ -19,7 +19,7 @@ const InfoArticle = ({article}) => {
                 <Grid item> 
                     <Box marginRight={1}>
                         <Typography style={{ backgroundColor: "#30dbd0", padding: "2px 3px", fontfamily:"Arial", fontSize: "12px", }}>
-                            {article.source_type!= '' ? article.source_type : <>Article</>}
+                            {article.source_type!== undefined ? article.source_type : <>Article</>}
                         </Typography>
                     </Box>
                 </Grid>

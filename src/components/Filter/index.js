@@ -13,7 +13,7 @@ import { getYearPickerUtilityClass, YearPicker } from "@mui/lab";
 import { faL } from "@fortawesome/free-solid-svg-icons";
 import { array } from "prop-types";
 
-const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes}) =>{
+const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, needs, tech, dates, sourceTypes, loading}) =>{
     const theme = useTheme()
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
     const [openIconNeed, setOpenIconNeed] = useState(true);
@@ -31,6 +31,10 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
         }
     }, [isSmallDevice])  
 
+/*     useEffect(()=>{
+        isSmallDevice && loading &&
+            setOpenFilter(false) 
+    },[loading]) */
 
     const [openFilterNeeds, setOpenFilterNeeds] = useState(true);
     const [openFilterTech, setOpenFilterTech] = useState(true);
@@ -56,6 +60,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
         if(openFilter==true) setOpenFilter(false)
         else setOpenFilter(true) 
     }
+
 
     /* Handle Filter Need */
     const handleFilterNeedsClick = () => {

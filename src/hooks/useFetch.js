@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import API from "../API.js";
 
 
+
 const initialState = {
-  related_elements: [],
-  topics: [],
-  unrelated_elements: []
+  filter_topics: {},
+  result_list: [],
+  _info_snippet: {}
 };
 
 const initialQueries = { word: [] }
@@ -25,20 +26,18 @@ export const useFetch = (queryId) => {
         setError(false);
         setFetchLoading(true);
         setFound(false)
-
         const fetchResults = await API.fetchResults(queryId);
-
-        if (fetchResults.related_elements == null) {
+        if (fetchResults.result_list == null) {
           setFound(false)
-          console.log("not found")
+          //console.log("not found")
         } else {
           setResults(() => ({
-            related_elements: [...fetchResults.related_elements],
-            topics: [...fetchResults.topics],
-            unrelated_elements: [...fetchResults.unrelated_elements]
+            filter_topics: fetchResults.filter_topics,
+            result_list: [...fetchResults.result_list],
+            _info_snippet: fetchResults._info_snippet
           }));
           setFound(true)
-          console.log("found")
+          //console.log("found")
         }
       } catch (error) {
         setError(true);
@@ -47,6 +46,8 @@ export const useFetch = (queryId) => {
       setFetchLoading(false);
     };
     fetch()
+    //console.log(results)
+    
   }, [queryId])
 
   useEffect(() => {
@@ -74,5 +75,5 @@ export const useFetch = (queryId) => {
 
   
 
-  return { results, fetchLoading, error, query, setQuery, found, options };
+  return {fetchedResults : results , fetchLoading, error, query, setQuery, found, options };
 };

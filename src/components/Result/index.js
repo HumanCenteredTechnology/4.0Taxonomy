@@ -35,7 +35,7 @@ const Result = ({ elCard }) => {
             pr: 1,
           }}>
           {/* Article Title */}
-          <Link component={RouterLink} to={"/SingleResult/" + elCard.id + '/' + elCard.title} underline="hover">
+          <Link component={RouterLink} to={"/SingleResult/" + elCard.id} underline="hover">
             <Typography  variant="body1" color="textPrimary"><b>{elCard.title}</b></Typography>
           </Link>
 
@@ -64,7 +64,7 @@ const Result = ({ elCard }) => {
             <Box component="span" sx={{ display: 'inline-block', mx: '2px', fontSize: "0.8em"}}>Authors:</Box>
               {elCard.authors.map((el, index) => {
                   return (<>
-                    <Button variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px", fontSize: "0.8em", pointerEvents:"none"}}>
+                    <Button key={`${index}_Author`} variant="text" size="small" startIcon={<AccountCircleIcon />} style={{padding: "0px 0px", margin: "3px 4px", fontSize: "0.8em", pointerEvents:"none"}}>
                       {el}
                     </Button>{index<elCard.authors.length-1 ? <>{shot}</> : <></>}
                   </>); 

@@ -30,6 +30,7 @@ const apiSettings = {
     const data = await results.json()
     
     JSON.parse(JSON.stringify(data))
+    
     return data;
     
     /* console.log(await data) */
@@ -53,6 +54,17 @@ const apiSettings = {
         ]
     } */
     
+  },
+
+  retrieveArticle: async (artId) => {
+    const response = await fetch(`${API_URL}/article/${artId}`, {
+      method: "GET",
+    });
+    if (response.ok) {
+      const data = await response.json()
+      JSON.parse(JSON.stringify(data))
+      return data
+    }
   },
 
   submitArticle: async (article) => {

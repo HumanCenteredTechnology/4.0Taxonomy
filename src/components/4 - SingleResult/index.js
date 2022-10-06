@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; 
 import { useParams } from 'react-router-dom';
-import { useFetch } from "../../hooks/useFetch";
+import { useResult } from "../../hooks/useResult";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import {Box, Container, Divider} from "@material-ui/core";
@@ -18,13 +18,21 @@ import { useTheme } from "@mui/material/styles";
 
 const SingleResult = () => {
     const theme = useTheme()
-    const { articleId, articleTitleId } = useParams();
+    const { articleId } = useParams();
+    const { article } = useResult(articleId)
+    const [displayArticle, setDisplayArticle] = useState(article)
+
     const [openDrawer, setOpenDrawer] = useState(false);
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
+    useEffect(()=>{
+        setDisplayArticle(article)
+        console.log(displayArticle)
+    }, [article])
+
     /* Quando il back-end sarà ultimato è qui che devo reperire le informazioni del singolo articolo, con un Id + titolo (anche solo Id)*/
-    const resultsTest = JSON.parse(JSON.stringify(jsonEx))
-    const [article] = jsonEx.result_list.filter(el => el.title === articleTitleId && el.id === articleId)
+    
+    //const [article] = jsonEx.result_list.filter(el => el.title === articleTitleId && el.id === articleId)
     
  
     return (

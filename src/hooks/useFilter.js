@@ -3,14 +3,20 @@ import API from "../API.js";
 
 import jsonEx from "../SERP results example.json"
 const resultsTest = JSON.parse(JSON.stringify(jsonEx))
+const initialState = {
+    filter_topics: {},
+    result_list: [],
+    _info_snippet: {}
+  };
+  
   
 //resultTest sarà fetchedResults
 export const useFilter = (fetchedResults) => {
     /* 'resultsTemp' dovrà diventare results quando sarà integrata con le Api */
-    const [ filteredResults, setFilteredResults ] = useState([...fetchedResults.result_list]);
+    const [ filteredResults, setFilteredResults ] = useState(initialState.result_list);
     const [ filterLoading, setFilterLoading] = useState(false);
     
-    const [filters, setFilters] = useState({topics: fetchedResults.filter_topics, publishing_date: [], source_type: []});
+    const [filters, setFilters] = useState();
     const [ selectedNeeds, setSelectedNeeds] = useState ([]);
     const [ selectedTech, setSelectedTech] = useState ([]);
     const [ selectedDate, setSelectedDate] = useState ([]);
@@ -20,6 +26,16 @@ export const useFilter = (fetchedResults) => {
     const [ howManyTech, setHowManyTech] = useState({})
     const [ howManyDates, setHowManyDates] = useState({})
     const [ howManySourceTypes, setHowManySourceTypes] = useState({})
+
+    useEffect(()=>{
+        //console.log(fetchedResults)
+        if (fetchedResults.result_list == undefined) {
+            console.log("empty")
+        } else {
+            setFilteredResults(fetchedResults.result_list)
+            setFilters({topics: fetchedResults.filter_topics, publishing_date: [], source_type: []})
+          }
+    }, [fetchedResults])
 
     const applyFilters = async () => {
         setFilterLoading(true)
