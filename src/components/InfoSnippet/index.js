@@ -35,7 +35,7 @@ return (
             <Box>
                 <Grid container spacing={1} direction="row">
                     <Grid item><CollectionsBookmarkIcon fontSize="small"></CollectionsBookmarkIcon></Grid>
-                    <Grid item><Typography variant='subtitle2'><b>{InfoSnippet.snippet_title !== undefined ? InfoSnippet.snippet_title : "notitle"}</b></Typography></Grid>
+                    <Grid item><Typography variant='body1'><b>{InfoSnippet.snippet_title !== undefined ? InfoSnippet.snippet_title : "notitle"}</b></Typography></Grid>
                 </Grid>
                 {/* NOW AS LINK BUT SHOULD BE A TYPOGRAPHY! */}
                 <Box paddingY={"1em"}><Link  target="_blank" rel="noreferrer" underline="hover" href={InfoSnippet.snippet_description}><Typography variant='subtitle2' align="left">See on Wikipedia</Typography></Link></Box>
@@ -65,7 +65,7 @@ return (
                 {/* Topics Hierarchy */}
                 <Grid container spacing={1} justifyContent="left" paddingLeft={'0.1em'}>
                     <Grid item><DeviceHubIcon fontSize="medium"></DeviceHubIcon></Grid>
-                    <Grid item><Typography variant='subtitle1'><b>Topic's Area</b></Typography></Grid>
+                    <Grid item><Typography variant='subtitle2'><b>Topic's Area</b></Typography></Grid>
                 </Grid>
                 <HierarchyList InfoSnippet={InfoSnippet}></HierarchyList>
             </Box>
@@ -120,22 +120,22 @@ const CustomList = styled(List)(({ theme }) => ({
   }));
 
 const HierarchyList = ({InfoSnippet}) => (
-    <CustomList>
-        <ListItemButton>
+    <CustomList dense>
+        <ListItem>
         <RemoveTwoToneIcon fontSize="small"/> <Typography variant="subtitle2">{InfoSnippet.parent_topic}</Typography>
             
-        </ListItemButton>
-        <List component="div" disablePadding={true}>
-            <ListItemButton sx={{ paddingLeft: 5}} style={{marginLeft:"1em"}}>
+        </ListItem>
+        <List dense component="div" disablePadding={true}>
+            <ListItem sx={{ paddingLeft: 2}} style={{marginLeft:"1em"}}>
             <RemoveTwoToneIcon fontSize="small"/><Typography variant="subtitle2"><b>{InfoSnippet.snippet_title}</b></Typography>                      
-            </ListItemButton>
+            </ListItem>
             {/* CHILDREN NOT AVAILABLE! */}
             {/* <List component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
                 {InfoSnippet.children_topics.map((el, index) => {
                             return (
-                            <ListItemButton sx={{ pl: 5 }}>
+                            <ListItem sx={{ pl: 5 }}>
                                 <FiberManualRecordIcon fontSize="small" /><Typography variant="subtitle2">{el}</Typography>
-                            </ListItemButton>    
+                            </ListItem>    
                             );
                 })}
             </List> */}

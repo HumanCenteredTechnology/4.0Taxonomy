@@ -48,7 +48,7 @@ const ResultsPage = () => {
 
   //result list pagination
   const [hasMore, setHasMore] = useState(true)
-  const resultsPerPage = 15
+  const resultsPerPage = 10
   const [page, setPage] = useState(1)
   const [lastPage, setLastPage] = useState(10)
 
