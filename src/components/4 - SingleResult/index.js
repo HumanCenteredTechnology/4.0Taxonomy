@@ -53,7 +53,7 @@ const SingleResult = () => {
             <Box sx={{ marginY: 1 }}><Divider margin={5} variant="left"></Divider></Box>
             <Box sx={{backgroundColor: '#f5f5f5'}}>
                 <Container>
-                    <Grid container spacing={0.5}>
+                    <Grid container spacing={1}>
                         { found ?
                         <>
                             <Grid item xs={12} sm={8}>

@@ -21,7 +21,7 @@ const TopicsList = ({type, results, category}) => {
     
     if (topics.length > 6) {
       const otherTopics = topics.length - 5
-      newTopics = topics.slice(0,5).concat(`Other ${otherTopics}`)
+      newTopics = topics.slice(0,5).concat(`...other ${otherTopics}`)
       return newTopics
     } else {
       return topics
@@ -46,7 +46,7 @@ const TopicsList = ({type, results, category}) => {
             return (
               <Grid item>
                 <TopicChip
-                  key={index}
+                  key={`${index}_${topic}`}
                   name={category}
                   size="small" 
                   variant="outlined"
@@ -63,7 +63,7 @@ const TopicsList = ({type, results, category}) => {
             return (
               <Grid item>
                 <TopicChip
-                  key={index}
+                  key={`${index}_${topic}`}
                   name={category}
                   size="small" 
                   variant="outlined"

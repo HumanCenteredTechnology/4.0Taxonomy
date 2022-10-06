@@ -81,7 +81,6 @@ const ResultsPage = () => {
     fetchLoading ? 
     setLoading(fetchLoading):
     setLoading(filterLoading)
-    console.log(loading)
   }, [fetchLoading, filterLoading])
 
   useEffect(() => {
@@ -91,7 +90,6 @@ const ResultsPage = () => {
   }, [filteredResults]) //fetchedResults
 
   useEffect(()=>{
-    console.log(page)
     setDisplayResults(()=>paginate(filteredResults, page));
     goToTop()
   }, [page])
@@ -102,7 +100,6 @@ const ResultsPage = () => {
       start = 0
       :
       start = resultsPerPage * page;
-    console.log(start)
     //page++
     return results.slice(start, start + resultsPerPage);
   }
@@ -139,9 +136,9 @@ const ResultsPage = () => {
     }
   }; */
 
-  useEffect(() => {
+/*   useEffect(() => {
     console.log(fetchedResults)
-  }, [fetchedResults]) //fetchedResults
+  }, [fetchedResults]) //fetchedResults */
 
 
   useEffect(() => {

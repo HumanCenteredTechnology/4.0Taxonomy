@@ -33,20 +33,20 @@ export const useResult = (articleId) => {
               const retrieveArticle = await API.retrieveArticle(articleId);
               if (retrieveArticle === undefined) {
                 setFound(false)
-                console.log("not found")
+                //console.log("not found")
               } else {
                 setArticle(retrieveArticle);
                 setFound(true)
-                console.log("found")
+                //console.log("found")
               }
             } catch (error) {
               setError(true);
-              console.log(error);
+              //console.log(error);
             }
             setLoading(false);
           };
           retrieve()
-          console.log(article)
+          //console.log(article)
     }, [articleId])
 
     return {article, found};

@@ -96,7 +96,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
 
     return (
         <Box paddingY={0.5}
-            sx={{ overflowY:'hidden',
+            sx={{ overflow:'hidden',
                   border: '1px solid grey',
                   borderTopRightRadius: '16px',
                   my: marginVerticalY }}>
@@ -129,7 +129,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
                             </Button>
                         </Box>
                         <Collapse in={openFilterNeeds}>
-                            <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1000, overflow:"auto"}}>
+                            <Paper elevation={0} sx={{minHeight:"fit-content", overflow:"hidden"}}>
                                 <CheckboxList itemList={Object.keys(needs)} filterCategory={"needs"} 
                                 fetchedResults={fetchedResults} setSelected={onSelectNeeds} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
@@ -142,7 +142,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
                             </Button>
                         </Box>
                         <Collapse in={openFilterTech}>
-                            <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:2000, overflow:"auto"}}>
+                            <Paper elevation={0} sx={{minHeight:"fit-content", overflow:"hidden"}}>
                                 <CheckboxList itemList={Object.keys(tech)} filterCategory={"tech"} 
                                 fetchedResults={fetchedResults} setSelected={onSelectTech} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
@@ -155,7 +155,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
                             </Button>
                         </Box>
                         <Collapse in={openFilterPubblicationDate}>
-                            <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
+                            <Paper elevation={0} sx={{minHeight:"fit-content", overflow:"hidden"}}>
                                 <CheckboxList itemList={Object.keys(dates).sort((a, b) => b - a)} filterCategory={"publishing_date"}
                                  fetchedResults={fetchedResults} setSelected={onSelectDate} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>
@@ -168,7 +168,7 @@ const Filter = ({filters, fetchedResults, onSelectNeeds, onSelectTech, onSelectD
                             </Button>
                         </Box>
                         <Collapse in={openFilterArticleType}>
-                            <Paper elevation={0} sx={{minHeight:"fit-content", maxHeight:1500, overflow:"auto"}}>
+                            <Paper elevation={0} sx={{minHeight:"fit-content", overflow:"hidden"}}>
                                 <CheckboxList itemList={Object.keys(sourceTypes)} filterCategory={"source_type"}
                                  fetchedResults={fetchedResults} setSelected={onSelectSourceType} clearChecked={clearChecked} checkedCleared={checkedCleared}></CheckboxList>
                             </Paper>

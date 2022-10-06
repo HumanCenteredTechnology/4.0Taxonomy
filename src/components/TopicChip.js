@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Chip from '@mui/material/Chip';   /*NUOVA Libreria: clickable not work */
 import { string } from 'prop-types';
 
-const TopicChip = ({ key, name, size, label, variant, clickable, link, filtered, setFiltered, onDelete }) => {
+const TopicChip = ({ name, size, label, variant, clickable, link, filtered, setFiltered, onDelete }) => {
     let navigate = useNavigate();
     const handleClick = () => {
         if (clickable) {
@@ -23,7 +23,6 @@ const TopicChip = ({ key, name, size, label, variant, clickable, link, filtered,
 
     return (
         <Chip
-            key={key}
             label={newLabel}
             /* color={name === "needs" ? "primary" : "secondary" || "default"}*/ /* not work  */ 
             style={{border:chipColor, height:"1.5em", borderRadius:50, fontSize:"0.7rem"}}

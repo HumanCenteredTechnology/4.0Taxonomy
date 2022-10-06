@@ -16,10 +16,10 @@ const InfoArticleAbstract = ({ article }) => {
             {/* Articolo standard con Link e Abstract : Academy Article*/}           
             {((article.source_type == 'Conference paper' || article.source_type == 'Journal paper')) ?
             (
-                <Card sx={{border:'2px solid'}}>
-                    <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em'}}><Typography variant="h5" gutterBottom>Overview</Typography></Box>
+                <Card sx={{border:'2px solid', marginBottom:"20px"}}>
+                    <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em'}}><Typography variant="h6" gutterBottom>Overview</Typography></Box>
                     {/* Button trasformarlo in Typography */}
-                    <Button disabled variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em",}}>Abstract</Button>
+                    <Typography  variant="button" style={{padding: "0.3em", margin: "2em 1em 1em 0em",}}>Abstract</Typography>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.7em', my: '1em', mx: '1em', }}>
                         { (article.abstract !== null)
                         ? <Typography variant="subtitle1" style={{fontSize:"0.9em"}}>{article.abstract}</Typography>
@@ -42,11 +42,11 @@ const InfoArticleAbstract = ({ article }) => {
             )
             :
                 /* Articolo Industriale con il Link all'Industria */
-                <Card sx={{border:'2px solid'}}>
-                    <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em'}}><Typography variant="h5" gutterBottom>Overview</Typography></Box>
-                    <Divider></Divider>
+                <Card sx={{border:'2px solid', marginBottom:"20px"}}>
+                    <Box sx={{padding: '0.5em', backgroundColor: '#dedede', paddingTop:'0.8em', marginBottom: "1em"}}><Typography variant="h6" gutterBottom>Overview</Typography></Box>
+                   
 
-                    <Button variant="outlined" size="small" style={{padding: "0.3em", margin: "1em 1em 0em 1em"}}>Abstract</Button>
+                    <Typography variant="button" style={{padding: "0.3em", margin: "2em 1em 1em 1em",}}>Abstract</Typography>
                     <Box sx={{border:'2px solid grey', borderRadius:'0.5em', padding:'0.5em', my: '1em', mx: '1em', }}>
                         { (article.abstract !== null)
                         ? <Typography variant="subtitle1">{article.abstract}</Typography>
