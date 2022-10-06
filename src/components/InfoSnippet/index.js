@@ -21,7 +21,9 @@ const InfoSnippet = ({snippetType, InfoSnippet, article}) => {
 const shot = (<Box component="span" sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}>•</Box>);
 
 return (
-    <Box sx={{  overflowY:'hidden',
+    <Box sx={{  
+                marginTop:"1.5em",
+                overflowY:'hidden',
                 border: '1px solid grey',
                 borderTopLeftRadius: '16px',
                 paddingX: "0.5em",
