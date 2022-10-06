@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Collapse, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Typography } from "@mui/material";
+import { Box, Button, Collapse, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Typography } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import { Divider } from "@material-ui/core";
 
@@ -10,7 +10,6 @@ import RemoveTwoToneIcon from '@mui/icons-material/RemoveTwoTone';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { PrecisionManufacturingSharp, EngineeringSharp }  from '@mui/icons-material';
-
 import TopicsList from "../TopicsList";
 import { ExpandLess, ExpandMore, MailRounded, StarBorder } from "@mui/icons-material";
 import { fontSize } from "@mui/system";
@@ -36,12 +35,13 @@ return (
             <Box>
                 <Grid container spacing={1} direction="row">
                     <Grid item><CollectionsBookmarkIcon fontSize="small"></CollectionsBookmarkIcon></Grid>
-                    <Grid item><Typography variant='subtitle2'><b>{InfoSnippet.snippet_title}</b></Typography></Grid>
+                    <Grid item><Typography variant='subtitle2'><b>{InfoSnippet.snippet_title !== undefined ? InfoSnippet.snippet_title : "notitle"}</b></Typography></Grid>
                 </Grid>
-                <Box paddingY={"1em"}><Typography variant='subtitle2' align="left">{InfoSnippet.snippet_description}</Typography></Box>
+                {/* NOW AS LINK BUT SHOULD BE A TYPOGRAPHY! */}
+                <Box paddingY={"1em"}><Link  target="_blank" rel="noreferrer" underline="hover" href={InfoSnippet.snippet_description}><Typography variant='subtitle2' align="left">See on Wikipedia</Typography></Link></Box>
                 <Divider></Divider>
-                {/* Industry and Technology Keys */}
-                { !(InfoSnippet.related_topics.needs == "") ?
+                {/* Industry and Technology Keys - NOT AVAILABLE! */}
+                {/* { !(InfoSnippet.related_topics.needs == "") ?
                     <Box marginY={"1em"}>
                         <Grid container spacing={1} direction="row" >
                             <Grid item><EngineeringSharp fontSize="medium" style={{color: "#29bf40"}}/></Grid>
@@ -60,7 +60,7 @@ return (
                         <TopicsList results={InfoSnippet.related_topics.tech} category={Object.keys(InfoSnippet.related_topics)[1]}></TopicsList>
                     </Box>
                     : <></>
-                }
+                } */}
                 <Divider></Divider>
                 {/* Topics Hierarchy */}
                 <Grid container spacing={1} justifyContent="left" paddingLeft={'0.1em'}>
@@ -129,7 +129,8 @@ const HierarchyList = ({InfoSnippet}) => (
             <ListItemButton sx={{ paddingLeft: 5}} style={{marginLeft:"1em"}}>
             <RemoveTwoToneIcon fontSize="small"/><Typography variant="subtitle2"><b>{InfoSnippet.snippet_title}</b></Typography>                      
             </ListItemButton>
-            <List component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
+            {/* CHILDREN NOT AVAILABLE! */}
+            {/* <List component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
                 {InfoSnippet.children_topics.map((el, index) => {
                             return (
                             <ListItemButton sx={{ pl: 5 }}>
@@ -137,7 +138,7 @@ const HierarchyList = ({InfoSnippet}) => (
                             </ListItemButton>    
                             );
                 })}
-            </List>
+            </List> */}
         </List>
     </CustomList>
 )

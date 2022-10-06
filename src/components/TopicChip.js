@@ -4,13 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import Chip from '@mui/material/Chip';   /*NUOVA Libreria: clickable not work */
 import { string } from 'prop-types';
 
-const TopicChip = ({ key, name, size, label, variant, clickable = null, link, filtered, setFiltered, onDelete }) => {
+const TopicChip = ({ key, name, size, label, variant, clickable, link, filtered, setFiltered, onDelete }) => {
     let navigate = useNavigate();
     const handleClick = () => {
-        if (!link =="")
-        window.open(link)
+        if (clickable) {
+            if (!link =="")
+            window.open(link)
+    
+            navigate("/" + label); //per UX dovrebbe non essere clickable se non c'è link
+        }
 
-        navigate("/" + label); //per UX dovrebbe non essere clickable se non c'è link
     }
     
     const chipColor = (name === "needs" ? "1px solid #29bf40" : "1px solid #395bdf")  /* Needs:green - Tech:blue */
@@ -24,7 +27,8 @@ const TopicChip = ({ key, name, size, label, variant, clickable = null, link, fi
             label={newLabel}
             /* color={name === "needs" ? "primary" : "secondary" || "default"}*/ /* not work  */ 
             style={{border:chipColor, height:"1.5em", borderRadius:50, fontSize:"0.7rem"}}
-            {...(clickable && { clickable: true })}
+            clickable = {clickable}
+            /* {...(clickable && { clickable: true })} */
             onClick={handleClick}
             onDelete={onDelete}
             variant={variant || "default"}

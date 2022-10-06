@@ -5,7 +5,30 @@ import TopicChip from "../TopicChip";
 import { capitalize, Grid, Typography } from "@mui/material";
 
 
-const TopicsList = ({results, category}) => {
+const TopicsList = ({type, results, category}) => {
+ /*  const [topics, setTopics] = useState(results)
+
+
+  useEffect(()=>{
+    setTopics(displayTopics(topics))
+  },[topics]) */
+
+
+
+  const displayTopics = (topics) => {
+    let newTopics = [];
+    
+    
+    if (topics.length > 6) {
+      const otherTopics = topics.length - 5
+      newTopics = topics.slice(0,5).concat(`Other ${otherTopics}`)
+      return newTopics
+    } else {
+      return topics
+    }
+    
+  }
+
     return (
       <Box sx={{ my: 0 }}>
         <Grid container 
@@ -17,6 +40,25 @@ const TopicsList = ({results, category}) => {
           columns={{ xs: 4, sm: 8, md: 12 }}
           justifycontent="flex-start"
           direction="row">
+          { type=="ResultsList" ?
+          <>
+          {displayTopics(results).map((topic, index) => {
+            return (
+              <Grid item>
+                <TopicChip
+                  key={index}
+                  name={category}
+                  size="small" 
+                  variant="outlined"
+                  label={topic}
+                  clickable={false}
+                />
+              </Grid>
+            )
+          })}
+          </>
+          :
+          <>
           {results.map((topic, index) => {
             return (
               <Grid item>
@@ -31,6 +73,9 @@ const TopicsList = ({results, category}) => {
               </Grid>
             )
           })}
+          </>
+          }
+          
         </Grid>
       </Box>
     )

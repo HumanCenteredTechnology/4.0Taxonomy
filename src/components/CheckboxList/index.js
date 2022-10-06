@@ -11,6 +11,20 @@ import Checkbox from '@mui/material/Checkbox';
 const CheckboxList = ({itemList, filterCategory, fetchedResults, setSelected, clearChecked, checkedCleared})  => {
   const [checked, setChecked] = useState([]);
 
+  const [isLong, setIsLong] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [buttonText, setButtonText] = useState('More filters')
+
+  const handleShowMore = () => {
+    if (showMore === true) {
+      setShowMore(false);
+      setButtonText('More filters')
+    } else {
+      setShowMore(true);
+      setButtonText('Less filters')
+    }
+
+  }
   
   useEffect(() =>{
     setSelected(checked)

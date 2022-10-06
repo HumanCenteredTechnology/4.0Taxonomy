@@ -74,10 +74,15 @@ const Result = ({ elCard }) => {
 
           {/* Testo Abstract */}
           <Typography variant="body2" gutterBottom style={{fontSize:'0.8em'}}>
-              {!readMore ? entireAbstractText.substring(0,350) : entireAbstractText}
-              <Link align="center" onClick={switchReadMore} href="#">{!readMore ? " ...read more" : " read less"}</Link>
+          {entireAbstractText !=="None" ? 
+            <>
+                {!readMore ? entireAbstractText.substring(0,350) : entireAbstractText}
+                <Link  component="button" align="center" onClick={switchReadMore} >{!readMore ? " ...read more" : " read less"}</Link >
+                </>
+          :
+              "No abstract "
+          }
           </Typography>
-
           {/* Elementi della Topics List */}
           {!(elCard.tax_keywords.needs == "") ?
             <Grid container spacing={1} justifyContent={"center"} alignItems={"flex-start"}>
@@ -85,7 +90,7 @@ const Result = ({ elCard }) => {
               {/* <Grid item xs={12} sm={1}> <Chip label="Need" style={{border:"1px solid #29bf40", height:"1.5em", borderRadius:50}}></Chip> </Grid> */}
               <Grid item xs={12} sm={1}><Typography variant="subtitle2" style={{paddingLeft:"0.6em"}}>Need:</Typography></Grid>
               <Grid item xs={12} sm={11}>
-                    <TopicsList results={elCard.tax_keywords.needs} category={Object.keys(elCard.tax_keywords)[0]} ></TopicsList>
+                    <TopicsList type={"ResultsList"} results={elCard.tax_keywords.needs} category={Object.keys(elCard.tax_keywords)[0]} ></TopicsList>
               </Grid>
             </Grid>
             : <></>
@@ -94,7 +99,7 @@ const Result = ({ elCard }) => {
             <Grid container spacing={0} justifyContent={"center"} alignItems={"flex-start"}>  
               <Grid item xs={12} sm={1}><Typography variant="subtitle2" style={{paddingLeft:"0.6em"}}>Tech:</Typography></Grid>
               <Grid item xs={12} sm={11}>
-                    <TopicsList results={elCard.tax_keywords.tech} category={Object.keys(elCard.tax_keywords)[1]}></TopicsList>
+                    <TopicsList type={"ResultsList"} results={elCard.tax_keywords.tech} category={Object.keys(elCard.tax_keywords)[1]}></TopicsList>
               </Grid>
             </Grid>
             : <></>

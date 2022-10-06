@@ -96,6 +96,17 @@ const ResultsPage = () => {
     goToTop()
   }, [page])
   
+  const paginate = (results, page) => {
+    let start
+    page === 1 ? 
+      start = 0
+      :
+      start = resultsPerPage * page;
+    console.log(start)
+    //page++
+    return results.slice(start, start + resultsPerPage);
+  }
+
   const goToTop = () => {
     window.scrollTo({
         top: 0,
@@ -107,21 +118,16 @@ const ResultsPage = () => {
   }, []);
  */
 
-  const loadMoreResults = () => {
+ /*  const loadMoreResults = () => {
     setDisplayResults(()=>paginate(filteredResults, page))
     //page++
     console.log(page)
     console.log(displayResults)
     //setDisplayResults(filteredResults.slice(0, currentOffset))
     
-  };
+  }; */
 
-  const paginate = (results, page) => {
-    const start = resultsPerPage * page;
-    //page++
-    return results.slice(start, start + resultsPerPage);
-  }
-
+  
 
  /*  const handleScroll = (e) => {
     const scrollHeight = e.target.documentElement.scrollHeight;
@@ -204,7 +210,7 @@ const ResultsPage = () => {
                 }
               </Grid>
               <Grid item sm={12} md={3}>
-                <InfoSnippet snippetType={"Info"} InfoSnippet={resultsTest.info_snippet}></InfoSnippet>
+                {fetchedResults._info_snippet !== undefined &&    <InfoSnippet snippetType={"Info"} InfoSnippet={fetchedResults._info_snippet}/>}
               </Grid>
             </Grid>
       </Container>
