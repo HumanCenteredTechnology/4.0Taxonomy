@@ -5,7 +5,7 @@ import TopicChip from "../TopicChip";
 import { capitalize, Grid, Typography } from "@mui/material";
 
 
-const TopicsList = ({type, results, category}) => {
+const TopicsList = ({id, type, results, category}) => {
  /*  const [topics, setTopics] = useState(results)
 
 
@@ -46,7 +46,7 @@ const TopicsList = ({type, results, category}) => {
             return (
               <Grid item>
                 <TopicChip
-                  key={`${index}_${topic}`}
+                  key={`${id}_${index}_${topic}`}
                   name={category}
                   size="small" 
                   variant="outlined"

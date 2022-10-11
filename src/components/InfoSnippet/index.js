@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Button, Collapse, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Typography } from "@mui/material";
+import { Skeleton, Box, Button, Collapse, Grid, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Paper, Typography } from "@mui/material";
 import { styled, alpha } from '@mui/material/styles';
 import { Divider } from "@material-ui/core";
 
@@ -14,7 +14,7 @@ import TopicsList from "../TopicsList";
 import { ExpandLess, ExpandMore, MailRounded, StarBorder } from "@mui/icons-material";
 import { fontSize } from "@mui/system";
 
-const InfoSnippet = ({snippetType, InfoSnippet, article}) => {
+const InfoSnippet = ({snippetType, InfoSnippet, article, loading}) => {
 /* InfoSnippet: From back-end, is related to user research */
 
 /* Pallino */
@@ -31,7 +31,8 @@ return (
                 bgcolor: "white",
                 display:{xs:"none", sm:"block"}
             }}>
-
+    {loading ? <SnippetSkeleton/> :
+        <>
         {/* Snippet di Info nella pagina con l'intero resultset degli articoli: 'ResultPage' */}    
         {snippetType == "Info" &&
             <Box>
@@ -72,6 +73,7 @@ return (
                 <HierarchyList InfoSnippet={InfoSnippet}></HierarchyList>
             </Box>
         }
+        
 
         {/* Snippet delle Keywords nella pagina del singolo risultato (articolo) 'SingleResultPage' con TopicList*/}
         {snippetType == "Keywords" &&
@@ -109,8 +111,9 @@ return (
                     </>
                 }
             </Box>
-        }       
-
+        }  
+        </>     
+    }
     </Box>
 )
 }
@@ -123,26 +126,77 @@ const CustomList = styled(List)(({ theme }) => ({
 
 const HierarchyList = ({InfoSnippet}) => (
     <CustomList dense>
-        <ListItem>
-        <RemoveTwoToneIcon fontSize="small"/> <Typography variant="subtitle2">{InfoSnippet.parent_topic}</Typography>
-            
-        </ListItem>
+        {InfoSnippet.parent_topic === " " ?
+            <ListItem>
+                <RemoveTwoToneIcon fontSize="small"/> <Typography variant="subtitle2"><b>{InfoSnippet.snippet_title}</b></Typography>
+            </ListItem>
+            :
+            <>
+            <ListItem>
+                <RemoveTwoToneIcon fontSize="small"/> <Typography variant="subtitle2">{InfoSnippet.parent_topic}</Typography>       
+            </ListItem>
         <List dense component="div" disablePadding={true}>
             <ListItem sx={{ paddingLeft: 2}} style={{marginLeft:"1em"}}>
             <RemoveTwoToneIcon fontSize="small"/><Typography variant="subtitle2"><b>{InfoSnippet.snippet_title}</b></Typography>                      
             </ListItem>
-            {/* CHILDREN NOT AVAILABLE! */}
-            {/* <List component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
-                {InfoSnippet.children_topics.map((el, index) => {
+             <List dense component="div" disablePadding={true} style={{marginLeft:"2.2em"}}>
+                {!InfoSnippet.children_topics === undefined && 
+                    InfoSnippet.children_topics.map((el, index) => {
                             return (
-                            <ListItem sx={{ pl: 5 }}>
+                            <ListItem sx={{ pl: 2 }}>
                                 <FiberManualRecordIcon fontSize="small" /><Typography variant="subtitle2">{el}</Typography>
                             </ListItem>    
                             );
                 })}
-            </List> */}
+            </List> 
         </List>
+        </>
+        } 
     </CustomList>
+)
+
+/*  */
+
+const SnippetSkeleton = ()=>(
+    <Box>
+        <Grid container spacing={1} direction="row">
+            <Grid item><CollectionsBookmarkIcon fontSize="small"></CollectionsBookmarkIcon></Grid>
+            <Grid item><Typography variant='body1'> <Skeleton animation="wave" variant="text" width={"12em"}/></Typography></Grid>
+        </Grid>
+                {/* NOW AS LINK BUT SHOULD BE A TYPOGRAPHY! */}
+                <Box paddingY={"1em"}>
+                    {Array.from(Array(3)).map((el, i) => {
+                        return (
+                        <Typography key={i} variant="body2" noWrap >
+                        <Skeleton animation="wave" variant="text" width={`${Math.floor(Math.random() * (8 - 4 + 1)) + 4}0%`} />
+                        </Typography>
+                        );
+                    })}
+                </Box>
+                <Divider></Divider>
+                {/* Industry and Technology Keys - NOT AVAILABLE! */}
+                {/* { !(InfoSnippet.related_topics.needs == "") ?
+                    <Box marginY={"1em"}>
+                        <Grid container spacing={1} direction="row" >
+                            <Grid item><EngineeringSharp fontSize="medium" style={{color: "#29bf40"}}/></Grid>
+                            <Grid item><Typography style={{color: "#29bf40"}} variant="subtitle1">Industry keys</Typography></Grid>
+                        </Grid>
+                        <TopicsList results={InfoSnippet.related_topics.needs} category={Object.keys(InfoSnippet.related_topics)[0]} ></TopicsList>
+                    </Box>    
+                    : <></>
+                }    
+                { !(InfoSnippet.related_topics.tech == "") ?    
+                    <Box marginY={"1em"}> 
+                        <Grid container spacing={1} direction="row">
+                            <Grid item><PrecisionManufacturingSharp fontSize="medium" style={{color: '#395bdf'}}></PrecisionManufacturingSharp></Grid>
+                            <Grid item><Typography style={{color: '#395bdf'}} variant="subtitle1">Technology keys</Typography></Grid>
+                        </Grid>
+                        <TopicsList results={InfoSnippet.related_topics.tech} category={Object.keys(InfoSnippet.related_topics)[1]}></TopicsList>
+                    </Box>
+                    : <></>
+                } */}
+                
+            </Box>
 )
 
 export default InfoSnippet;

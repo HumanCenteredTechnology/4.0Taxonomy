@@ -6,7 +6,7 @@
                 "label": "Process Optimization",
                 "subLevels": [
                     {
-                        "label": "Equipment efficiency improvement",
+                        "label": "Equipment and Process efficiency improvement",
                         "subLevels": [
                             {
                                 "label": "Real-time Production monitoring analysis and supervision",
@@ -17,16 +17,28 @@
                                 "subLevels": []
                             },
                             {
-                                "label": "Vertical interconnection and integration",
+                                "label": "Production Planning and Scheduling",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Fully Automated Production Facilities",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Legacy Systems Modernization and Retrofitting",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Commissioning Process",
                                 "subLevels": []
                             }
                         ]
                     },
                     {
-                        "label": "Worker security improvement and accident prevention",
+                        "label": "Worker Safety Improvement and Accident Prevention",
                         "subLevels": [
                             {
-                                "label": "Smart PPE (Personal Protection Equipment)",
+                                "label": "Smart PPE",
                                 "subLevels": []
                             },
                             {
@@ -36,14 +48,9 @@
                             {
                                 "label": "People counting, analysis and crowd detection",
                                 "subLevels": []
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Worker routine and operation optimization",
-                        "subLevels": [
+                            },
                             {
-                                "label": "Time and Method smart measurement",
+                                "label": "Remote Operation",
                                 "subLevels": []
                             }
                         ]
@@ -52,15 +59,19 @@
                         "label": "Supply Chain",
                         "subLevels": [
                             {
-                                "label": "Horizontal interconnection and integration",
+                                "label": "Vertical Integration",
                                 "subLevels": []
                             },
                             {
-                                "label": "Production on demand enabling technology",
+                                "label": "Horizontal Integration",
                                 "subLevels": []
                             },
                             {
-                                "label": "Smart warehouse",
+                                "label": "Production on Demand",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Smart Warehouse and Inventory Management",
                                 "subLevels": []
                             },
                             {
@@ -70,21 +81,32 @@
                             {
                                 "label": "Supply chain transparency and reliability improvement",
                                 "subLevels": []
+                            },
+                            {
+                                "label": "Production Output and Demand Forecasting",
+                                "subLevels": []
                             }
                         ]
                     },
                     {
+                        "label": "Mass Customization",
+                        "subLevels": []
+                    },
+                    {
                         "label": "Quality Assurance",
-                        "subLevels": [
-                            {
-                                "label": "Technological processes intelligent supervision",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Intelligent FMEA",
-                                "subLevels": []
-                            }
-                        ]
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Sustainable Industrial Environment",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Employee Training and Assistance in Worker’s Tasks",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Knowledge Management",
+                        "subLevels": []
                     }
                 ]
             },
@@ -92,33 +114,24 @@
                 "label": "Product Innovation",
                 "subLevels": [
                     {
-                        "label": "Product servitization",
+                        "label": "Product Servitization",
                         "subLevels": []
                     },
                     {
-                        "label": "Usability improvement",
+                        "label": "Usability Improvement",
                         "subLevels": []
                     },
                     {
-                        "label": "Smart products - intelligent self-diagnosing products",
+                        "label": "Smart Products",
                         "subLevels": []
                     },
                     {
-                        "label": "Cost and number of parts/components reduction",
+                        "label": "Cost and number of parts or components reduction",
                         "subLevels": []
                     },
                     {
-                        "label": "After-Sales support",
-                        "subLevels": [
-                            {
-                                "label": "Automatic consumables reorder",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Inventory Management",
-                                "subLevels": []
-                            }
-                        ]
+                        "label": "After-Sales Service",
+                        "subLevels": []
                     }
                 ]
             }
@@ -128,21 +141,47 @@
         "label": "enabling technologies",
         "subLevels": [
             {
-                "label": "Data Science",
+                "label": "Big Data",
                 "subLevels": [
                     {
-                        "label": "Data Visualization and Dashboarding",
+                        "label": "Big Data Frameworks",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Data Sources/Ingestion",
                         "subLevels": [
                             {
-                                "label": "Grafana",
+                                "label": "Streaming and Messaging",
                                 "subLevels": []
                             },
                             {
-                                "label": "Kibana",
+                                "label": "Orchestration and Pipelines",
                                 "subLevels": []
                             },
                             {
-                                "label": "Metabase",
+                                "label": "Query/Data Flow",
+                                "subLevels": []
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Data Storage",
+                        "subLevels": [
+                            {
+                                "label": "Databases",
+                                "subLevels": [
+                                    {
+                                        "label": "Relational Databases",
+                                        "subLevels": []
+                                    },
+                                    {
+                                        "label": "NoSQL Databases",
+                                        "subLevels": []
+                                    }
+                                ]
+                            },
+                            {
+                                "label": "Data Warehouses",
                                 "subLevels": []
                             }
                         ]
@@ -151,101 +190,36 @@
                         "label": "Data Analytics",
                         "subLevels": [
                             {
-                                "label": "Data lake and Data Warehouse design",
+                                "label": "Unified Data Analytics Engines",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Unified stream-processing and batch-processing frameworks",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Business Intelligence Tools",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Data Visualization Tools and Platforms",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Logging and Monitoring",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Spreadsheet Applications",
                                 "subLevels": []
                             },
                             {
                                 "label": "Data Mining",
-                                "subLevels": [
-                                    {
-                                        "label": "Python",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "R",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Julia",
-                                        "subLevels": []
-                                    }
-                                ]
+                                "subLevels": []
                             },
                             {
                                 "label": "Process Mining",
                                 "subLevels": []
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Advanced reporting and self-service business intelligence tools",
-                        "subLevels": [
-                            {
-                                "label": "Tableau",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "PowerBI",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Elastic Stack",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "SAP Business Intelligence",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "QlikView/Qlik Sense ",
-                                "subLevels": []
-                            }
-                        ]
-                    },
-                    {
-                        "label": "DataBases",
-                        "subLevels": [
-                            {
-                                "label": "SQL DB",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Non SQL DB",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Time series DB",
-                                "subLevels": [
-                                    {
-                                        "label": "influxDB",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Prometheus",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Graphite",
-                                        "subLevels": []
-                                    }
-                                ]
-                            },
-                            {
-                                "label": "Data engines",
-                                "subLevels": [
-                                    {
-                                        "label": "Apache Hadoop",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Apache Kafka",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Apache Spark",
-                                        "subLevels": []
-                                    }
-                                ]
                             }
                         ]
                     }
@@ -256,125 +230,159 @@
                 "subLevels": [
                     {
                         "label": "Machine Learning",
-                        "subLevels": []
-                    },
-                    {
-                        "label": "Deep Learning",
-                        "subLevels": []
-                    },
-                    {
-                        "label": "Reinforcement Learning",
-                        "subLevels": []
-                    },
-                    {
-                        "label": "Continuous Learning",
-                        "subLevels": []
+                        "subLevels": [
+                            {
+                                "label": "Supervised Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Unsupervised Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Deep Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Transfer Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Reinforcement Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Deep Reinforcement Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Semi-Supervised Learning",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Federated Learning",
+                                "subLevels": []
+                            }
+                        ]
                     },
                     {
                         "label": "Computer Vision",
                         "subLevels": []
                     },
                     {
-                        "label": "Natural Language Processing",
+                        "label": "Natural Language Processing, Natural Language Generation",
                         "subLevels": []
+                    },
+                    {
+                        "label": "Intelligent Agents and Multiagent Systems",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Soft Computing",
+                        "subLevels": [
+                            {
+                                "label": "Fuzzy Set Theory",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Neurocomputing",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Optimization Techniques",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Probabilistic Reasoning (PR)",
+                                "subLevels": []
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "label": "Cloud",
+                "label": "Cloud Computing",
                 "subLevels": [
                     {
-                        "label": "Container technology",
+                        "label": "Infrastructure as a Service (IaaS)",
                         "subLevels": [
                             {
-                                "label": "Docker",
+                                "label": "Cloud Data Storage and Computing",
                                 "subLevels": []
                             },
                             {
-                                "label": "Kubernates",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Terraform",
+                                "label": "Virtual Machines",
                                 "subLevels": []
                             }
                         ]
+                    },
+                    {
+                        "label": "Platform as a Service (PaaS)",
+                        "subLevels": [
+                            {
+                                "label": "Device Management",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Operating Systems",
+                                "subLevels": []
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Software as a Service (SaaS)",
+                        "subLevels": [
+                            {
+                                "label": "Media Streaming Software Platforms",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Website Building",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "IoT Analytics Software and Platforms",
+                                "subLevels": []
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Infrastructure as Code (IaC)",
+                        "subLevels": [
+                            {
+                                "label": "Provisioning Tools",
+                                "subLevels": []
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Container Technology (Container as a Service)",
+                        "subLevels": [
+                            {
+                                "label": "Containerization Platform",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Container Orchestration",
+                                "subLevels": []
+                            }
+                        ]
+                    },
+                    {
+                        "label": "Backend as a service (BaaS)",
+                        "subLevels": []
                     },
                     {
                         "label": "Serverless Programming",
-                        "subLevels": [
-                            {
-                                "label": "AWS Lambda functions",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Azure functions",
-                                "subLevels": []
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Device Management",
-                        "subLevels": [
-                            {
-                                "label": "Zerynth Device Manager",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "AWS IoT Device Management",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Azure IoT Hub",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "WinCC OA IoT OPA",
-                                "subLevels": []
-                            }
-                        ]
-                    },
-                    {
-                        "label": "Cloud Data Storage",
-                        "subLevels": [
-                            {
-                                "label": "AWS S3",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Google Cloud Storage",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Microsoft Azure Storage",
-                                "subLevels": []
-                            }
-                        ]
+                        "subLevels": []
                     },
                     {
                         "label": "Edge Computing",
-                        "subLevels": [
-                            {
-                                "label": "AWS green pass",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Azure Edge IoT",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Custom solutions based on docker swarm",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Multi-access edge computing",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "AWS Wavelength",
-                                "subLevels": []
-                            }
-                        ]
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Fog Computing",
+                        "subLevels": []
                     }
                 ]
             },
@@ -388,67 +396,54 @@
                                 "label": "Industrial communication protocols",
                                 "subLevels": [
                                     {
-                                        "label": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)",
+                                        "label": "Point-to-point communication Protocols",
                                         "subLevels": []
                                     },
                                     {
-                                        "label": "Fieldbus protocols (Profibus DP,Modbus-RTU) ",
+                                        "label": "Ethernet protocols",
                                         "subLevels": []
                                     },
                                     {
-                                        "label": "Wireless protocols (WLAN,Bluetooth)",
+                                        "label": "Fieldbus protocols",
+                                        "subLevels": []
+                                    },
+                                    {
+                                        "label": "Wireless protocols",
                                         "subLevels": []
                                     }
                                 ]
                             },
                             {
-                                "label": "Industrial gateway and data acquisition device",
+                                "label": "Industrial (IoT) Gateways and Data Acquisition Devices",
+                                "subLevels": []
+                            },
+                            {
+                                "label": "Software Data Adapters",
                                 "subLevels": []
                             }
                         ]
                     },
                     {
-                        "label": "Embedded Computing",
+                        "label": "Physical Devices and Controllers",
                         "subLevels": [
                             {
-                                "label": "Microcontroller programming and RTOS",
+                                "label": "Embedded Computing",
                                 "subLevels": [
                                     {
-                                        "label": "Arduino",
+                                        "label": "Microcontroller programming and RTOS",
                                         "subLevels": []
                                     },
                                     {
-                                        "label": "STM32",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "ESP32",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "FPGA",
+                                        "label": "Microprocessor programming and embedded Linux",
                                         "subLevels": []
                                     }
                                 ]
                             },
                             {
-                                "label": "Microprocessor programming and embedded Linux",
-                                "subLevels": [
-                                    {
-                                        "label": "RaspberryPi",
-                                        "subLevels": []
-                                    },
-                                    {
-                                        "label": "Other SBC",
-                                        "subLevels": []
-                                    }
-                                ]
+                                "label": "Sensors (hardware)",
+                                "subLevels": []
                             }
                         ]
-                    },
-                    {
-                        "label": "Sensors (hardware)",
-                        "subLevels": []
                     },
                     {
                         "label": "Signal processing",
@@ -462,33 +457,139 @@
                         "label": "Connectivity",
                         "subLevels": [
                             {
-                                "label": "GSM/4G/5G ",
+                                "label": "Radio Communication Technologies",
+                                "subLevels": [
+                                    {
+                                        "label": "Cellular Communications",
+                                        "subLevels": []
+                                    },
+                                    {
+                                        "label": "Short-range wireless",
+                                        "subLevels": []
+                                    },
+                                    {
+                                        "label": "Long-range wireless",
+                                        "subLevels": []
+                                    }
+                                ]
+                            },
+                            {
+                                "label": "Optical Communication Technologies",
                                 "subLevels": []
                             },
                             {
-                                "label": "MQTT, Node-Red",
+                                "label": "IoT Messaging Protocols",
                                 "subLevels": []
                             },
                             {
-                                "label": "REST API and Webhook",
+                                "label": "Application Programming Interfaces and Programming Tools",
                                 "subLevels": []
                             },
                             {
-                                "label": "RFID/NFC",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "Bluetooth",
-                                "subLevels": []
-                            },
-                            {
-                                "label": "LPWAN (Low Power Wide Area Network)",
+                                "label": "Real-time Web Frameworks",
                                 "subLevels": []
                             }
                         ]
                     },
                     {
                         "label": "IoE (Internet of Everything)",
+                        "subLevels": []
+                    }
+                ]
+            },
+            {
+                "label": "Digital Twins",
+                "subLevels": [
+                    {
+                        "label": "Computer-aided design (CAD) Software",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Finite Element Analysis (FEA) Software",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Simulation Software",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "DTs management and Orchestration Framework",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Digital Twin Data Modelling",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Virtual Process Controllers (VPC)",
+                        "subLevels": []
+                    }
+                ]
+            },
+            {
+                "label": "Industrial Robotics",
+                "subLevels": [
+                    {
+                        "label": "Offline Robot Programming and Simulation",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Middleware",
+                        "subLevels": []
+                    }
+                ]
+            },
+            {
+                "label": "AR & VR",
+                "subLevels": [
+                    {
+                        "label": "Virtual Reality",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Augmented Reality",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "AR & VR Software",
+                        "subLevels": []
+                    }
+                ]
+            },
+            {
+                "label": "Additive Manufacturing",
+                "subLevels": [
+                    {
+                        "label": "3D Printers",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "3D Printing Technologies",
+                        "subLevels": []
+                    }
+                ]
+            },
+            {
+                "label": "Cybersecurity Technologies",
+                "subLevels": [
+                    {
+                        "label": "Security Virtualization",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Data Protection",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Identity and Access Management",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Security Operations",
+                        "subLevels": []
+                    },
+                    {
+                        "label": "Foundational Security",
                         "subLevels": []
                     }
                 ]

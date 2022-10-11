@@ -87,6 +87,7 @@ const ResultsPage = () => {
     setPage(1)
     setLastPage(parseInt(filteredResults.length/resultsPerPage))
     setDisplayResults(filteredResults.slice(0, resultsPerPage))
+    console.log(fetchedResults._info_snippet)
   }, [filteredResults]) //fetchedResults
 
   useEffect(()=>{
@@ -160,7 +161,7 @@ const ResultsPage = () => {
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
       {!error ?
-      <Container maxWidth={"100vw"}>
+      <Container maxWidth={"xl"}>
         
         <Grid container>
           <Grid item xs sm={2}></Grid>
@@ -176,7 +177,7 @@ const ResultsPage = () => {
       :<></>
       }
       {/* SERP rendering */}
-      <Container maxWidth={"100vw"} style={{backgroundColor: '#f5f5f5'}}>
+      <Container maxWidth={"xl"} style={{backgroundColor: '#f5f5f5'}}>
       <Grid container columnSpacing={{sm: 3, md: 4}}>
             <Grid item sm={12} md={2}>
               <Filter 
@@ -207,7 +208,7 @@ const ResultsPage = () => {
                 }
               </Grid>
               <Grid item sm={12} md={3}>
-                {fetchedResults._info_snippet !== undefined &&    <InfoSnippet snippetType={"Info"} InfoSnippet={fetchedResults._info_snippet}/>}
+                {fetchedResults._info_snippet !== undefined && <InfoSnippet snippetType={"Info"} InfoSnippet={fetchedResults._info_snippet} loading={loading}/>}
               </Grid>
             </Grid>
       </Container>

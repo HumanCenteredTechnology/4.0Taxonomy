@@ -62,9 +62,10 @@ const apiSettings = {
     });
     if (response.ok) {
       const data = await response.json()
+      console.log(JSON.parse(data))
       return JSON.parse(data)
     } else {
-      console.log(response.status)
+      //console.log(response.status)
     }
   },
 
