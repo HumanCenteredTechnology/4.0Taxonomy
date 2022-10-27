@@ -34,14 +34,14 @@ const ResultsPage = () => {
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { queryId } = useParams();
-  //results -> fetchedResults
+
   const { fetchedResults, fetchLoading, error, setSearchMention, found } = useFetch(queryId);
-  const [ displayResults, setDisplayResults] = useState ([...fetchedResults.result_list]); //fetchedResults
+  const [ displayResults, setDisplayResults] = useState ([...fetchedResults.result_list]); 
   const [ loading, setLoading] = useState (false);
 
   const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
           howManyNeeds, howManyTech, howManyDates, howManySourceTypes, filterLoading
-  } = useFilter(fetchedResults); //fetchedResults
+  } = useFilter(fetchedResults); 
 
 
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -88,7 +88,7 @@ const ResultsPage = () => {
     setLastPage(parseInt(filteredResults.length/resultsPerPage))
     setDisplayResults(filteredResults.slice(0, resultsPerPage))
     console.log(fetchedResults._info_snippet)
-  }, [filteredResults]) //fetchedResults
+  }, [filteredResults]) 
 
   useEffect(()=>{
     setDisplayResults(()=>paginate(filteredResults, page));

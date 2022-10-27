@@ -14,6 +14,8 @@ import { useFetch } from "../../hooks/useFetch";
 import { Container, AppBar, Toolbar, Typography, Box, Divider } from "@material-ui/core";
 import { TrapFocus } from '@mui/material';
 import Collapse from '@mui/material/Collapse';
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Logo from '../../images/PLANET4_logo_PLANET4.png';
 
 
@@ -21,6 +23,9 @@ const HomePage = () => {
   const { setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
   const [menuOpened, setMenuOpened] = useState(false);
+
+  const theme = useTheme()
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleOpenMenuClick = () => {
     if (!menuOpened) setMenuOpened(true);
@@ -41,7 +46,11 @@ const HomePage = () => {
           <img width="300" src={Logo} class="custom-logo" alt="Planet4" />
           <Typography variant="h4">Taxonomy Explorer</Typography>
         </Box>
-        <SearchBar />
+        {isSmallDevice ?
+          <SearchBar maxWidth={"80%"} />
+          :
+          <SearchBar />
+        }
         <Box
           sx={{
             mx: "auto",

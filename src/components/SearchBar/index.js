@@ -53,7 +53,7 @@ const SearchBar = ({ size, maxWidth, width }) => {
   let navigate = useNavigate();
 
   const handleSubmit = (e, value) => {
-    if (value === "" || value === undefined) return;
+    if (value === "" || value === null) return;
 
     let valueTemp = API.to_Url(value)
     navigate("/" + valueTemp);

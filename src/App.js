@@ -45,7 +45,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ minHeight: "85vh" }} >
+      <Box sx={{ minHeight: "80vh" }} >
         <Router>
           <ScrollToTop>
             <Routes>
