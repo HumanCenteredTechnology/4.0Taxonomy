@@ -167,7 +167,7 @@ const ResultsPage = () => {
           <Grid item xs sm={2}></Grid>
           <Grid item xs={12} sm={7}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-            <><Typography style={{fontSize:"0.9rem"}}>We found a total of {found ? fetchedResults.result_list.length : "0"} results for "{queryId}"</Typography>
+            <><Typography variant="body1" style={{fontSize:"0.9rem"}}>We found a total of {found ? fetchedResults.result_list.length : "0"} results for "{queryId}"</Typography>
             <Divider></Divider></>
             } 
           </Grid>

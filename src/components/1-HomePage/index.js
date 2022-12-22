@@ -39,13 +39,16 @@ const HomePage = () => {
         <Box
           sx={{
             margin: "auto",
-            my: 5,
+            mt: 0,
+            mb: 5,
             alignContent: 'center',
             textAlign: 'center'
           }}>
           <img width="300" src={Logo} class="custom-logo" alt="Planet4" />
           <Typography variant="h4">Taxonomy Explorer</Typography>
         </Box>
+        
+        
         {isSmallDevice ?
           <SearchBar maxWidth={"80%"} />
           :
@@ -54,7 +57,8 @@ const HomePage = () => {
         <Box
           sx={{
             mx: "auto",
-            mt: 10,
+            mt: 3,
+            mb: 5,
             width: "100%",
             textAlign: "center"
           }}>
@@ -64,7 +68,7 @@ const HomePage = () => {
             size="small"
             color="default"
             onClick={handleOpenMenuClick}
-            text={!menuOpened ? "OR EXPLORE THE DATABASE" : "CLOSE VIEW"}>
+            text={!menuOpened ? "OR BROWSE THE TOPICS" : "CLOSE VIEW"}>
           </ StandardButton>
 
         </Box>
@@ -78,10 +82,25 @@ const HomePage = () => {
           boxShadow: 3,
           borderRadius: 10
         }}>
-          
           <Collapse in={menuOpened}>
               <BrowsableTree isDrawer={false} />
           </Collapse>
+        </Box>
+       
+      </Container>
+      <Container maxWidth={"xl"} style={{backgroundColor: '#f5f5f5'}}>
+        <Box sx={{
+          mx: "auto",
+          mt: 5,
+          mb: 5,
+          py: 5,
+          flexGrow: 1,
+          maxWidth: "1200px"}}>
+          <Typography variant="h5">Explore a database entirely dedicated to Industry 4.0</Typography>
+          <Typography variant="body">By using this tool you can identify which are the technologies that have been demonstrated to be usable for addressing similar industrial and business challenges. 
+          The Planet4 Taxonomy Explorer is a search engine that simplifies the addressing of I4.0 challenges and the selection of I4.0 enabling technologies by means of proved applications, use cases and real I4.0 project descriptions. 
+          </Typography>
+
         </Box>
       </Container>
     </Box>

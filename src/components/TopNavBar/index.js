@@ -12,6 +12,7 @@ import SearchBar from "../SearchBar";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import Logo from '../../images/PLANET4_logo_4_Colored.png';
+import LogoHome from '../../images/PLANET4_logo_PLANET4.png';
 
 import PropTypes from 'prop-types';
 
@@ -65,35 +66,52 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                     color="inherit"
                 >
                     <Toolbar >
-                        {isResults &&
-                            <Tooltip title="Open database" arrow>
-                                <IconButton aria-label="open database" component="button" onClick={handleClickMenu}>
-                                    <MenuRoundedIcon />
-                                </IconButton>
-                            </Tooltip>
-                        }
-                        <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
+                        
 
-                        {!isHome &&
-                            <Tooltip title="Go to Homepage" arrow>
-                                <Box>
-                                    <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
-                                        component={RouterLink} to="/">
-                                        <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
-                                        {!isSmallDevice ? <Typography variant="body1" color="default">Taxonomy</Typography> : <></>}
+                        {!isHome ?
+                            <>
+                                {isResults &&
+                                <Tooltip title="Open database" arrow>
+                                    <IconButton aria-label="open database" component="button" onClick={handleClickMenu}>
+                                        <MenuRoundedIcon />
                                     </IconButton>
+                                </Tooltip>
+                                }
+                                <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
+                                <Tooltip title="Go to Homepage" arrow>
+                                    <Box>
+                                        <IconButton disableFocusRipple sx={{ marginRight: 2 }} aria-label="home"
+                                            component={RouterLink} to="/">
+                                            <img width="20" src={Logo} class="custom-logo" alt="Planet4" />
+                                            {!isSmallDevice ? <Typography variant="body1" color="default">Taxonomy</Typography> : <></>}
+                                        </IconButton>
+                                    </Box>
+                                </Tooltip>
+                                <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
+                                {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexShrink: 1, }} />}
+        
+                                {isResults ? isSmallDevice ?
+                                    <SearchBar size={"small"} maxWidth={"75%"} />
+                                    : <SearchBar size={"small"} width={"27em"} maxWidth={"34em"} />
+                                    : <></>}
+                                {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}
+                            </>
+                            :
+                            <>
+                               {/*  {isSmallDevice ? <Box sx={{ flexGrow: 1}} /> : <Box sx={{ flexShrink: 1 }} />}
+                                <Box>
+                                    <img width="150" src={LogoHome} class="custom-logo" alt="Planet4" />
+                                    
                                 </Box>
-                            </Tooltip>
+                                <Box>
+                                    <Typography variant='h6'>Taxonomy Explorer</Typography>
+                                </Box>
+                                {isSmallDevice ? <Box sx={{ flexGrow: 1 }} /> : <Box sx={{ flexShrink: 1 }} />} */}
+                            </>
+                            
 
                         }
-                        <Box sx={{ flexGrow: 1, maxWidth: "100px" }} />
-                        {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexShrink: 1, }} />}
-
-                        {isResults ? isSmallDevice ?
-                            <SearchBar size={"small"} maxWidth={"75%"} />
-                            : <SearchBar size={"small"} width={"27em"} maxWidth={"34em"} />
-                            : <></>}
-                        {isSmallDevice ? <Box sx={{ flexGrow: 1, maxWidth: "5px" }} /> : <Box sx={{ flexGrow: 1, }} />}
+                        
 
                         {/* {!isForm ? !isSmallDevice ?
                             <StandardButton

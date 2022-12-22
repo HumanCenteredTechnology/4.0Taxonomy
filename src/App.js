@@ -16,8 +16,6 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@mui/material/styles';
-import RobotoRegular from './fonts/Roboto-Regular.ttf'
-import Volte from './fonts/Volte.otf'
 
 const theme = responsiveFontSizes(createTheme({
   root: {
@@ -27,9 +25,54 @@ const theme = responsiveFontSizes(createTheme({
     secondary: { main: "#2d7e32" },
     background: { paper: "#ffff" },
   },
-  typography: {
-    fontFamily: 'Roboto, Arial',
-  },
+
+  /* typography: {
+    h1: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    h2: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    h3: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    h4: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    h5: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    h6: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    subtitle1: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    subtitle2: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    body1: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    body2: {
+      fontFamily: 'Volte, sans-serif',
+      fontWeight: 400,
+    },
+    button: {
+      
+    },
+  }, */
+
+ 
 }));
 
 const ScrollToTop = (props) => {
