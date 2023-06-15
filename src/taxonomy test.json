@@ -1,0 +1,562 @@
+[
+    {
+        "value": "needs",
+        "label": "needs",
+        "children": [
+            {
+                "value": "Process Optimization",
+                "label": "Process Optimization",
+                "children": [
+                    {
+                        "value": "Equipment efficiency improvement",
+                        "label": "Equipment efficiency improvement",
+                        "children": [
+                            {
+                                "value": "Real-time Production monitoring analysis and supervision",
+                                "label": "Real-time Production monitoring analysis and supervision",
+                                "children": []
+                            },
+                            {
+                                "value": "Predictive Maintenance",
+                                "label": "Predictive Maintenance",
+                                "children": []
+                            },
+                            {
+                                "value": "Vertical interconnection and integration",
+                                "label": "Vertical interconnection and integration",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Worker security improvement and accident prevention",
+                        "label": "Worker security improvement and accident prevention",
+                        "children": [
+                            {
+                                "value": "Smart PPE (Personal Protection Equipment)",
+                                "label": "Smart PPE (Personal Protection Equipment)",
+                                "children": []
+                            },
+                            {
+                                "value": "Worker attention and mental state monitoring",
+                                "label": "Worker attention and mental state monitoring",
+                                "children": []
+                            },
+                            {
+                                "value": "People counting, analysis and crowd detection",
+                                "label": "People counting, analysis and crowd detection",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Worker routine and operation optimization",
+                        "label": "Worker routine and operation optimization",
+                        "children": [
+                            {
+                                "value": "Time and Method smart measurement",
+                                "label": "Time and Method smart measurement",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Supply Chain",
+                        "label": "Supply Chain",
+                        "children": [
+                            {
+                                "value": "Horizontal interconnection and integration",
+                                "label": "Horizontal interconnection and integration",
+                                "children": []
+                            },
+                            {
+                                "value": "Production on demand enabling technology",
+                                "label": "Production on demand enabling technology",
+                                "children": []
+                            },
+                            {
+                                "value": "Smart warehouse",
+                                "label": "Smart warehouse",
+                                "children": []
+                            },
+                            {
+                                "value": "Intralogistics 4.0 - material flow control",
+                                "label": "Intralogistics 4.0 - material flow control",
+                                "children": []
+                            },
+                            {
+                                "value": "Supply chain transparency and reliability improvement",
+                                "label": "Supply chain transparency and reliability improvement",
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Quality Assurance",
+                        "label": "Quality Assurance",
+                        "children": [
+                            {
+                                "value": "Technological processes intelligent supervision",
+                                "label": "Technological processes intelligent supervision",
+                                "children": []
+                            },
+                            {
+                                "value": "Intelligent FMEA",
+                                "label": "Intelligent FMEA",
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "value": "Product Innovation",
+                "label": "Product Innovation",
+                "children": [
+                    {
+                        "value": "Product servitization",
+                        "label": "Product servitization"
+                    },
+                    {
+                        "value": "Usability improvement",
+                        "label": "Usability improvement"
+                    },
+                    {
+                        "value": "Smart products - intelligent self-diagnosing products",
+                        "label": "Smart products - intelligent self-diagnosing products"
+                    },
+                    {
+                        "value": "Cost and number of parts/components reduction",
+                        "label": "Cost and number of parts/components reduction"
+                    },
+                    {
+                        "value": "After-Sales support",
+                        "label": "After-Sales support",
+                        "children": [
+                            {
+                                "value": "Automatic consumables reorder",
+                                "label": "Automatic consumables reorder"
+                            },
+                            {
+                                "value": "Inventory Management",
+                                "label": "Inventory Management"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "value": "enabling technologies",
+        "label": "enabling technologies",
+        "children": [
+            {
+                "value": "Data Science",
+                "label": "Data Science",
+                "children": [
+                    {
+                        "value": "Data Visualization and Dashboarding",
+                        "label": "Data Visualization and Dashboarding",
+                        "children": [
+                            {
+                                "value": "Grafana",
+                                "label": "Grafana"
+                            },
+                            {
+                                "value": "Kibana",
+                                "label": "Kibana"
+                            },
+                            {
+                                "value": "Metabase",
+                                "label": "Metabase"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Data Analytics",
+                        "label": "Data Analytics",
+                        "children": [
+                            {
+                                "value": "Data lake and Data Warehouse design",
+                                "label": "Data lake and Data Warehouse design"
+                            },
+                            {
+                                "value": "Data Mining",
+                                "label": "Data Mining",
+                                "children": [
+                                    {
+                                        "value": "Python",
+                                        "label": "Python"
+
+                                    },
+                                    {
+                                        "value": "R",
+                                        "label": "R"
+
+                                    },
+                                    {
+                                        "value": "Julia",
+                                        "label": "Julia"
+
+                                    }
+                                ]
+                            },
+                            {
+                                "value": "Process Mining",
+                                "label": "Process Mining"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Advanced reporting and self-service business intelligence tools",
+                        "label": "Advanced reporting and self-service business intelligence tools",
+                        "children": [
+                            {
+                                "value": "Tableau",
+                                "label": "Tableau"
+                            },
+                            {
+                                "value": "PowerBI",
+                                "label": "PowerBI"
+                            },
+                            {
+                                "value": "Elastic Stack",
+                                "label": "Elastic Stack"
+                            },
+                            {
+                                "value": "SAP Business Intelligence",
+                                "label": "SAP Business Intelligence"
+                            },
+                            {
+                                "value": "QlikView/Qlik Sense ",
+                                "label": "QlikView/Qlik Sense "
+                            }
+                        ]
+                    },
+                    {
+                        "value": "DataBases",
+                        "label": "DataBases",
+                        "children": [
+                            {
+                                "value": "SQL DB",
+                                "label": "SQL DB"
+                            },
+                            {
+                                "value": "Non SQL DB",
+                                "label": "Non SQL DB"
+                            },
+                            {
+                                "value": "Time series DB",
+                                "label": "Time series DB",
+                                "children": [
+                                    {
+                                        "value": "influxDB",
+                                        "label": "influxDB"
+
+                                    },
+                                    {
+                                        "value": "Prometheus",
+                                        "label": "Prometheus"
+
+                                    },
+                                    {
+                                        "value": "Graphite",
+                                        "label": "Graphite"
+
+                                    }
+                                ]
+                            },
+                            {
+                                "value": "Data engines",
+                                "label": "Data engines",
+                                "children": [
+                                    {
+                                        "value": "Apache Hadoop",
+                                        "label": "Apache Hadoop"
+
+                                    },
+                                    {
+                                        "value": "Apache Kafka",
+                                        "label": "Apache Kafka"
+
+                                    },
+                                    {
+                                        "value": "Apache Spark",
+                                        "label": "Apache Spark"
+
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "value": "AI",
+                "label": "AI",
+                "children": [
+                    {
+                        "value": "Machine Learning",
+                        "label": "Machine Learning"
+                    },
+                    {
+                        "value": "Deep Learning",
+                        "label": "Deep Learning"
+                    },
+                    {
+                        "value": "Reinforcement Learning",
+                        "label": "Reinforcement Learning"
+                    },
+                    {
+                        "value": "Continuous Learning",
+                        "label": "Continuous Learning"
+                    },
+                    {
+                        "value": "Computer Vision",
+                        "label": "Computer Vision"
+                    },
+                    {
+                        "value": "Natural Language Processing",
+                        "label": "Natural Language Processing"
+                    }
+                ]
+            },
+            {
+                "value": "Cloud",
+                "label": "Cloud",
+                "children": [
+                    {
+                        "value": "Container technology",
+                        "label": "Container technology",
+                        "children": [
+                            {
+                                "value": "Docker",
+                                "label": "Docker"
+                            },
+                            {
+                                "value": "Kubernates",
+                                "label": "Kubernates"
+                            },
+                            {
+                                "value": "Terraform",
+                                "label": "Terraform"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Serverless Programming",
+                        "label": "Serverless Programming",
+                        "children": [
+                            {
+                                "value": "AWS Lambda functions",
+                                "label": "AWS Lambda functions"
+                            },
+                            {
+                                "value": "Azure functions",
+                                "label": "Azure functions"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Device Management",
+                        "label": "Device Management",
+                        "children": [
+                            {
+                                "value": "Zerynth Device Manager",
+                                "label": "Zerynth Device Manager"
+                            },
+                            {
+                                "value": "AWS IoT Device Management",
+                                "label": "AWS IoT Device Management"
+                            },
+                            {
+                                "value": "Azure IoT Hub",
+                                "label": "Azure IoT Hub"
+                            },
+                            {
+                                "value": "WinCC OA IoT OPA",
+                                "label": "WinCC OA IoT OPA"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Cloud Data Storage",
+                        "label": "Cloud Data Storage",
+                        "children": [
+                            {
+                                "value": "AWS S3",
+                                "label": "AWS S3"
+                            },
+                            {
+                                "value": "Google Cloud Storage",
+                                "label": "Google Cloud Storage"
+                            },
+                            {
+                                "value": "Microsoft Azure Storage",
+                                "label": "Microsoft Azure Storage"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Edge Computing",
+                        "label": "Edge Computing",
+                        "children": [
+                            {
+                                "value": "AWS green pass",
+                                "label": "AWS green pass"
+                            },
+                            {
+                                "value": "Azure Edge IoT",
+                                "label": "Azure Edge IoT"
+                            },
+                            {
+                                "value": "Custom solutions based on docker swarm",
+                                "label": "Custom solutions based on docker swarm"
+                            },
+                            {
+                                "value": "Multi-access edge computing",
+                                "label": "Multi-access edge computing"
+                            },
+                            {
+                                "value": "AWS Wavelength",
+                                "label": "AWS Wavelength"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "value": "IoT and IoE",
+                "label": "IoT and IoE",
+                "children": [
+                    {
+                        "value": "Industrial IoT",
+                        "label": "Industrial IoT",
+                        "children": [
+                            {
+                                "value": "Industrial communication protocols",
+                                "label": "Industrial communication protocols",
+                                "children": [
+                                    {
+                                        "value": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)",
+                                        "label": "Ethernet protocols (EtherNet/IP,ProfiNET,Modbus,OPC,EtherCAT)"
+
+                                    },
+                                    {
+                                        "value": "Fieldbus protocols (Profibus DP,Modbus-RTU) ",
+                                        "label": "Fieldbus protocols (Profibus DP,Modbus-RTU) "
+
+                                    },
+                                    {
+                                        "value": "Wireless protocols (WLAN,Bluetooth)",
+                                        "label": "Wireless protocols (WLAN,Bluetooth)"
+
+                                    }
+                                ]
+                            },
+                            {
+                                "value": "Industrial gateway and data acquisition device",
+                                "label": "Industrial gateway and data acquisition device"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Embedded Computing",
+                        "label": "Embedded Computing",
+                        "children": [
+                            {
+                                "value": "Microcontroller programming and RTOS",
+                                "label": "Microcontroller programming and RTOS",
+                                "children": [
+                                    {
+                                        "value": "Arduino",
+                                        "label": "Arduino"
+
+                                    },
+                                    {
+                                        "value": "STM32",
+                                        "label": "STM32"
+
+                                    },
+                                    {
+                                        "value": "ESP32",
+                                        "label": "ESP32"
+
+                                    },
+                                    {
+                                        "value": "FPGA",
+                                        "label": "FPGA"
+
+                                    }
+                                ]
+                            },
+                            {
+                                "value": "Microprocessor programming and embedded Linux",
+                                "label": "Microprocessor programming and embedded Linux",
+                                "children": [
+                                    {
+                                        "value": "RaspberryPi",
+                                        "label": "RaspberryPi"
+
+                                    },
+                                    {
+                                        "value": "Other SBC",
+                                        "label": "Other SBC"
+
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "value": "Sensors (hardware)",
+                        "label": "Sensors (hardware)"
+                    },
+                    {
+                        "value": "Signal processing",
+                        "label": "Signal processing"
+                    },
+                    {
+                        "value": "Blockchain",
+                        "label": "Blockchain"
+                    },
+                    {
+                        "value": "Connectivity",
+                        "label": "Connectivity",
+                        "children": [
+                            {
+                                "value": "GSM/4G/5G ",
+                                "label": "GSM/4G/5G "
+                            },
+                            {
+                                "value": "MQTT, Node-Red",
+                                "label": "MQTT, Node-Red"
+                            },
+                            {
+                                "value": "REST API and Webhook",
+                                "label": "REST API and Webhook"
+                            },
+                            {
+                                "value": "RFID/NFC",
+                                "label": "RFID/NFC"
+                            },
+                            {
+                                "value": "Bluetooth",
+                                "label": "Bluetooth"
+                            },
+                            {
+                                "value": "LPWAN (Low Power Wide Area Network)",
+                                "label": "LPWAN (Low Power Wide Area Network)"
+                            }
+                        ]
+                    },
+                    {
+                        "value": "IoE (Internet of Everything)",
+                        "label": "IoE (Internet of Everything)"
+                    }
+                ]
+            }
+        ]
+    }
+]

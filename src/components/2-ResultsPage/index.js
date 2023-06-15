@@ -6,50 +6,141 @@ import Result from "../Result";
 import NotFound from "../NotFound";
 import TopicChip from "../TopicChip";
 import TopNavBar from "../TopNavBar";
+import Filter from "../Filter";
+import InfoSnippet from "../InfoSnippet";
+import ResultsInfiniteScroll from "../ResultsInfiniteScroll";
+
+
 //hooks
 import { useFetch } from "../../hooks/useFetch";
+import { useFilter } from "../../hooks/useFilter";
 
 //Style
 //import "./ResultsPage.css";
-import { Container, Box, Divider, Grid, Typography, AppBar, Toolbar } from "@material-ui/core";
-import { Skeleton, IconButton, Card, Button, useScrollTrigger, Slide, Drawer } from "@mui/material";
-import { HomeRounded } from "@mui/icons-material";
+import { Container, Box } from "@material-ui/core";
+import { Skeleton, Card, useScrollTrigger, Drawer, Pagination, Collapse, Stack, Typography, Divider, Grid} from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from "@mui/material/styles";
 import BrowsableTree from "../BrowsableTree";
 
 
+// 10/08/2022 inserimento variabile test letta da JSON 
+import jsonEx from "../../SERP results example.json"
 
+const resultsTest = JSON.parse(JSON.stringify(jsonEx))
 
 const ResultsPage = () => {
   const theme = useTheme()
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
   const { queryId } = useParams();
-  const { results, loading, error, setSearchMention, found } = useFetch(queryId);
-  const [problems, setProblems] = useState([]);
-  const [technologies, setTechnologies] = useState([]);
+
+  const { fetchedResults, fetchLoading, error, setSearchMention, found } = useFetch(queryId);
+  const [ displayResults, setDisplayResults] = useState ([...fetchedResults.result_list]); 
+  const [ loading, setLoading] = useState (false);
+
+  const {filters, filteredResults, onSelectNeeds, onSelectTech, onSelectDate, onSelectSourceType, 
+          howManyNeeds, howManyTech, howManyDates, howManySourceTypes, filterLoading
+  } = useFilter(fetchedResults); 
+
+
   const [openDrawer, setOpenDrawer] = useState(false);
 
+  //result list pagination
+  const [hasMore, setHasMore] = useState(true)
+  const resultsPerPage = 10
+  const [page, setPage] = useState(1)
+  const [lastPage, setLastPage] = useState(10)
+
+/*   // infinite scroll logic
+  const fakeFetchMore = () => {
+    // a fake async api call like which sends
+    // 20 more records in .5 secs
+    setTimeout(() => {
+      const nextResults = displayResults.concat(paginate(filteredResults, page));
+      setDisplayResults(nextResults);
+    }, 500);
+  }; */
+
+  useEffect(() => {
+    if (displayResults.length >= filteredResults.length) {
+      setHasMore(false);
+    }
+  }, [displayResults.length]);
+
+  const handlePageChange = (e, value) => {
+    setPage(value);
+  }
+  
   const trigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 5
   })
 
+  useEffect(()=> {
+    fetchLoading ? 
+    setLoading(fetchLoading):
+    setLoading(filterLoading)
+  }, [fetchLoading, filterLoading])
 
   useEffect(() => {
+    setPage(1)
+    setLastPage(parseInt(filteredResults.length/resultsPerPage))
+    setDisplayResults(filteredResults.slice(0, resultsPerPage))
+    console.log(fetchedResults._info_snippet)
+  }, [filteredResults]) 
 
-    if (results.related_elements.length !== 0 || results.unrelated_elements.length !== 0) {
-      if (results.related_elements[0].at(3) === "Problems") {
-        setProblems(results.related_elements)
-        setTechnologies(results.unrelated_elements)
-      }
-      if (results.related_elements[0].at(3) === "Technology") {
-        setProblems(results.unrelated_elements)
-        setTechnologies(results.related_elements)
-      }
+  useEffect(()=>{
+    setDisplayResults(()=>paginate(filteredResults, page));
+    goToTop()
+  }, [page])
+  
+  const paginate = (results, page) => {
+    let start
+    page === 1 ? 
+      start = 0
+      :
+      start = resultsPerPage * page;
+    //page++
+    return results.slice(start, start + resultsPerPage);
+  }
+
+  const goToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+};
+/*   useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+ */
+
+ /*  const loadMoreResults = () => {
+    setDisplayResults(()=>paginate(filteredResults, page))
+    //page++
+    console.log(page)
+    console.log(displayResults)
+    //setDisplayResults(filteredResults.slice(0, currentOffset))
+    
+  }; */
+
+  
+
+ /*  const handleScroll = (e) => {
+    const scrollHeight = e.target.documentElement.scrollHeight;
+    const currentHeight = Math.ceil(
+      e.target.documentElement.scrollTop + window.innerHeight
+    );
+    if (currentHeight + 1 >= scrollHeight) {
+      if (!loading) loadMoreResults();
     }
-  }, [results])
+  }; */
+
+/*   useEffect(() => {
+    console.log(fetchedResults)
+  }, [fetchedResults]) //fetchedResults */
+
 
   useEffect(() => {
     setOpenDrawer(false)
@@ -69,110 +160,112 @@ const ResultsPage = () => {
         onClose={() => setOpenDrawer(false)}>
         <BrowsableTree isDrawer={true} setOpenDrawer={setOpenDrawer} />
       </Drawer>
-      <Container  >
-        {/*  {isSmallDevice ? <></> :
-          <Slide appear={false} direction="down" in={!trigger}>
-            <Box sx={{ marginY: 5, alignContent: "left" }}>
-              <SearchBar setSearchMention={setSearchMention} />
-            </Box>
-          </Slide>
-        } */}
-        {!error ?
-          <Box sx={{ marginY: 2 }}>
+      {!error ?
+      <Container maxWidth={"xl"}>
+        
+        <Grid container>
+          <Grid item xs sm={2}></Grid>
+          <Grid item xs={12} sm={7}>
             {loading ? <Skeleton animation="wave" variant="text" width="20em" /> :
-              <Typography variant="body1">We found a total of {found ? problems.length + technologies.length : "0"} results for "{queryId}"
-              </Typography>}
-          </Box>
-          :
-          <></>}
-        <Box sx={{ marginY: 3 }}>
-          <Divider margin={2} variant="middle" />
-        </Box>
-        <Grid container spacing={3}>
-          {!loading ? found ? <ResultsList problems={problems} technologies={technologies} loading={loading} /> : <NotFound error={error} /> : <ResultsList problems={problems} technologies={technologies} loading={loading} />}
+            <><Typography variant="body1" style={{fontSize:"0.9rem"}}>We found a total of {found ? fetchedResults.result_list.length : "0"} results for "{queryId}"</Typography>
+            <Divider></Divider></>
+            } 
+          </Grid>
+          <Grid item xs sm={3}></Grid>
         </Grid>
+      </Container>
+      :<></>
+      }
+      {/* SERP rendering */}
+      <Container maxWidth={"xl"} style={{backgroundColor: '#f5f5f5'}}>
+      <Grid container columnSpacing={{sm: 3, md: 4}}>
+            <Grid item sm={12} md={2}>
+              <Filter 
+                fetchedResults={resultsTest} //fetchedResults
+                filters = {filters}
+                onSelectNeeds = {onSelectNeeds}
+                onSelectTech = {onSelectTech}
+                onSelectDate = {onSelectDate}
+                onSelectSourceType = {onSelectSourceType}
+                needs={howManyNeeds}
+                tech={howManyTech}
+                dates={howManyDates}
+                sourceTypes={howManySourceTypes}
+                loading={loading}
+                >
+                </Filter>
+            </Grid>
+            <Grid item sm={12} md={7}>
+                {!loading ?  found ?  
+                <>
+                  <ResultsList results={displayResults} loading={loading}/> 
+                  <Box display="flex" justifyContent="center" marginY={2} alignContent="center" textAlign="center">
+                    <Pagination count={lastPage} page={page} onChange={handlePageChange}/>
+                  </Box>
+                </>
+                : <NotFound error={error} />  
+                : <ResultsList results={displayResults} loading={loading} />
+                }
+              </Grid>
+              <Grid item sm={12} md={3}>
+                {fetchedResults._info_snippet !== undefined && <InfoSnippet snippetType={"Info"} InfoSnippet={fetchedResults._info_snippet} loading={loading}/>}
+              </Grid>
+            </Grid>
       </Container>
     </Box >
   );
 };
 
 
-const ResultsList = ({ problems, technologies, loading }) => {
-
+const ResultsList = ({ results, loading}) => {
   return (
-    <Grid container spacing={3}>
-      <Grid item xs={12} sm={6}>
-        <Box sx={{
-          display: 'flex',
-          p: 1,
-          m: 2,
-        }}>
-          <Typography variant="h5" > {loading ? <Skeleton animation="wave" width="10em" /> : `Business Needs (${problems.length})`} </Typography>
-        </Box>
+    <Grid container style={{marginTop:"1.5em"}}>
+      <Grid item xs={12} sm={12}>
         {loading ? <LoadingSkeleton />
           :
           <>
-            {problems.map((el, i) => {
+            {results.map((el, index) => {
               return (
-                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
+                <Result key={`${el.id}_${index}_List`} elCard={el}></Result>
               );
             })}
-          </>}
-      </Grid>
-      <Grid item xs={12} sm={6}>
-        <Box sx={{
-          display: 'flex',
-          p: 1,
-          m: 2,
-        }}>
-          <Typography variant="h5" >{loading ? <Skeleton animation="wave" width="10em" /> : `Enabling Technologies (${technologies.length})`}</Typography>
-        </Box>
-        {loading ? <LoadingSkeleton />
-          :
-          <>
-            {technologies.map((el, i) => {
-              return (
-                <Result key={el[0]} name={el[0]} parent={el[1]} category={el[3]} articles={el[2]} />
-              );
-            })}
-          </>}
+          </>
+          }
       </Grid>
     </Grid>
   );
 };
 
-const TopicsList = ({ results }) => {
-  return (
-    <Box sx={{ my: 2 }}>
-      <Grid container
-        spacing={1}
-        columnspacing={{ xs: 0, md: 2 }}
-        rowspacing={{ xs: 2, md: 2 }}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifycontent="flex-start"
-        direction="row">
-        {results.topics.map((topic, i) => {
-          return (
-            <Grid item>
-              <TopicChip
-                key={topic[0]}
-                label={topic[0]}
-                name={topic[1]}
-                clickable={true}
-                link={topic[2]}
-              />
-            </Grid>
-          )
-        })}
-      </Grid>
-    </Box>
-  )
-}
-
+{/* <ResultsInfiniteScroll
+            dataLength={results.length}
+            hasMore={hasMore}
+            next={fakeFetchMore}
+            loader={
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                loading...
+              </div>
+            }
+            height={window.visualViewport.height}
+            elementHeight={700} // 새로 추가
+            rowRenderer={({ key, index, style, parent }) => {
+              const res = results[index]
+              return (
+                <Result key={`${res.id}_${index}_List`} elCard={res} />
+              )
+            }}
+            children={results}
+            />
+ */}
 const LoadingSkeleton = () => {
   return (
     <>
-      {Array.from(Array(2)).map(() => {
+      {Array.from(Array(3)).map(() => {
         return (
           <ResultSkeleton />
         );
@@ -193,14 +286,11 @@ const ResultSkeleton = () => (
         p: 2,
         m: 0,
       }}>
-        <Typography variant="body2" color="textSecondary" >
-          <Skeleton animation="wave" variant="text" />
-        </Typography>
         <Typography variant="h6" gutterBottom  >
           <Skeleton animation="wave" variant="text" />
         </Typography>
-        <Typography variant="body2">
-          <Skeleton animation="wave" variant="text" />
+        <Typography variant="body2" color="textSecondary" >
+          <Skeleton animation="wave" variant="text"  width="70%"/>
         </Typography>
         <Typography variant="body2">
           <Skeleton animation="wave" variant="text" />
@@ -211,16 +301,16 @@ const ResultSkeleton = () => (
       </Box>
       <Box sx={{ p: 2, my: 0 }}>
         <Typography variant="body1" >
-          <Skeleton animation="wave" variant="text" width="20%" />
+          <Skeleton animation="wave" variant="text" width="30%" />
         </Typography>
-        {Array.from(Array(5)).map((el, i) => {
+        {Array.from(Array(3)).map((el, i) => {
           return (
             <Typography key={i} variant="body2" noWrap >
               <Skeleton animation="wave" variant="text" width={`${Math.floor(Math.random() * (8 - 4 + 1)) + 4}0%`} />
             </Typography>
           );
         })}
-        <Skeleton animation="wave" variant="rectangular" width="20%" />
+        <Skeleton animation="wave" variant="rectangular" width="60%" />
       </Box>
     </Card>
   </Box>

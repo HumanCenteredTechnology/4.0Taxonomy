@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import API from "../API.js";
 
 
+
 const initialState = {
-  related_elements: [],
-  topics: [],
-  unrelated_elements: []
+  filter_topics: {},
+  result_list: [],
+  _info_snippet: {}
 };
 
 const initialQueries = { word: [] }
@@ -13,7 +14,7 @@ const initialQueries = { word: [] }
 export const useFetch = (queryId) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(initialState);
-  const [loading, setLoading] = useState(false);
+  const [fetchLoading, setFetchLoading] = useState(false);
   const [error, setError] = useState(false);
   const [found, setFound] = useState(false)
   const [options, setOptions] = useState(initialQueries)
@@ -23,30 +24,30 @@ export const useFetch = (queryId) => {
     const fetch = async () => {
       try {
         setError(false);
-        setLoading(true);
+        setFetchLoading(true);
         setFound(false)
-
         const fetchResults = await API.fetchResults(queryId);
-
-        if (fetchResults.related_elements == null) {
+        if (fetchResults.result_list == null) {
           setFound(false)
-          console.log("not found")
+          //console.log("not found")
         } else {
           setResults(() => ({
-            related_elements: [...fetchResults.related_elements],
-            topics: [...fetchResults.topics],
-            unrelated_elements: [...fetchResults.unrelated_elements]
+            filter_topics: fetchResults.filter_topics,
+            result_list: [...fetchResults.result_list],
+            _info_snippet: fetchResults._info_snippet
           }));
           setFound(true)
-          console.log("found")
+          //console.log("found")
         }
       } catch (error) {
         setError(true);
         console.log(error);
       }
-      setLoading(false);
+      setFetchLoading(false);
     };
     fetch()
+    //console.log(results)
+    
   }, [queryId])
 
   useEffect(() => {
@@ -64,15 +65,15 @@ export const useFetch = (queryId) => {
       } catch (error) {
         console.log(error)
       }
-
-    }
+   }
     fetchMatch()
   }, [query])
+  
   useEffect(() => {
     if (queryMatch != null) setOptions(queryMatch.word)
   }, [queryMatch])
 
+  
 
-
-  return { results, loading, error, query, setQuery, found, options };
+  return {fetchedResults : results , fetchLoading, error, query, setQuery, found, options };
 };
