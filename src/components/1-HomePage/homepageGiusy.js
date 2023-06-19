@@ -74,30 +74,7 @@ const HomePage = () => {
     else setMenuOpened(false);
   };
 
-  /*const handleLogoutClick = async () => {
-    try {
-      // Effettua la richiesta POST al backend per il logout
-      await axios.post('/');
-      //Reindirizza alla pagina di login dopo il logout
-      navigate('/');
-    } 
-   catch (error) {
-      setError(error.response.data.error);
-      console.log(error);
-   }
-  };
-
-    const handleLoginClick = async () => {
-    try {
-      const response = await axios.post('/', { username, password });
-      console.log(response.data.message);
-      //Dopo il login torno sull'homepage
-      navigate('/');
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };*/
-
+  
   return (
     <Box>
       <TopNavBar isHome={true} />
