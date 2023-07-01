@@ -10,7 +10,7 @@ const apiSettings = {
     if (response.ok) {
       const data = response.json()
       JSON.parse(JSON.stringify(data))
-      //console.log(await data)
+      console.log(await data)
       return data
     }
   },
@@ -65,7 +65,7 @@ const apiSettings = {
       console.log(JSON.parse(data))
       return JSON.parse(data)
     } else {
-      //console.log(response.status)
+      console.log(response.status)
     }
   },
 
@@ -73,19 +73,24 @@ const apiSettings = {
     //prepara l'articolo come form
     const formData = new FormData();
     formData.append('title', article.title)
+    formData.append('link', article.link)
+    formData.append('source type', article.sourceType)
+    formData.append('journal', article.journal)
+    formData.append('authors', article.authors)
+    formData.append('doi', article.doi)
+    formData.append('publication date', article.publicationDate)
     formData.append('abstract', article.abstract)
-    formData.append('body', article.body)
 
-    //console.log(JSON.stringify(Object.fromEntries(formData.entries())))
+    console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
     //invia il form
     const resp = await (await fetch(`${API_URL}add_article`, {
       method: "POST",
       body: formData
     })).json();
-    //const data = await resp.json()
-    //console.log(await resp)
-    //JSON.parse(JSON.stringify(resp))
+    const data = await resp.json()
+    console.log(await resp)
+    JSON.parse(JSON.stringify(resp))
     /* const response = {
       "found_elements":
         [
