@@ -39,8 +39,13 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues = {
   title: "",
+  link: "",
+  sourceType: "",
+  journal: "",
+  authors: "",
+  doi: "",
+  publicationDate: "",
   abstract: "",
-  body: "",
   needs: [],
   tech: [],
 };
@@ -57,9 +62,9 @@ const FormPage = () => {
   const classes = useStyles();
 
   const { } = useForm();
-  const [steps, setSteps] = useState(['Insert your article', 'Review article in the database', 'Review affinity with other topics']);
+  const [steps, setSteps] = useState(['Insert your article', 'Review article in the database', 'Verify']);
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
+
   const [values, setValues] = useState(initialValues);
   const [check, setCheck] = useState([]);
   const [response, setResponse] = useState(initialResponse)
@@ -69,22 +74,9 @@ const FormPage = () => {
 
   const [notFoundEl, setNotFoundEl] = useState([])
 
-  const isStepOptional = (step) => {
-    return step === 2;
-  };
-
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
-
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    if (activeStep > 0) setIsSubmit(false)
 
   };
 
@@ -95,21 +87,6 @@ const FormPage = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     if (activeStep > 0) setIsSubmit(false)
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
   };
 
   const handleStepReset = () => {
@@ -166,9 +143,14 @@ const FormPage = () => {
 
   const validate = () => {
     let temp = {};
-    temp.title = values.title ? "" : "Please enter a title";
-    temp.abstract = values.abstract ? "" : "Please enter a valid abstract";
-    temp.body = values.body ? "" : "Please enter a valid body";
+    temp.title = values.title ? "" : "Please enter a valid title";
+    temp.link = values.link ? "" : "Please enter a valid link";
+    temp.sourceType = values.sourceType ? "" : "Please enter a valid source type";
+    temp.journal = values.journal ? "" : "Please enter a valid journal";
+    temp.authors = values.authors ? "" : "Please enter one or more authors: Surname Name";
+    temp.doi = values.doi ? "" : "Please enter a valid a doi";
+    temp.publicationDate = values.publicationDate ? "" : "Please enter the publication date";
+    temp.abstract = values.abstract ? "" : "Please enter a valid abstract"; 
     setErrors({ ...temp });
     return Object.values(temp).every((x) => x === "");
   };
@@ -208,7 +190,7 @@ const FormPage = () => {
       <TopNavBar isForm={true} />
       <Container>
         <Box sx={{ m: 1 }} >
-          <StepperView activeStep={activeStep} isStepOptional={isStepOptional} isStepSkipped={isStepSkipped} steps={steps} />
+          <StepperView activeStep={activeStep} steps={steps} />
         </Box>
 
 
@@ -249,20 +231,12 @@ const FormPage = () => {
   );
 };
 
-const StepperView = ({ activeStep, isStepOptional, isStepSkipped, steps }) => {
+const StepperView = ({ activeStep, steps }) => {
   return (
     <Stepper activeStep={activeStep}>
       {steps.map((label, index) => {
         const stepProps = {};
         const labelProps = {};
-        if (isStepOptional(index)) {
-          labelProps.optional = (
-            <Typography variant="caption">Optional</Typography>
-          );
-        }
-        if (isStepSkipped(index)) {
-          stepProps.completed = false;
-        }
         return (
           <Step key={label} {...stepProps}>
             <StepLabel {...labelProps}>{label}</StepLabel>
