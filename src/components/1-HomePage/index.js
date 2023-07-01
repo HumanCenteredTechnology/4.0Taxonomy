@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 //Components
 import StandardButton from "../controls/StandardButton/";
 import SearchBar from "../SearchBar";
@@ -23,9 +24,34 @@ const HomePage = () => {
   const { setSearchMention } = useFetch();
   //per l'apertura del menu dal bottone
   const [menuOpened, setMenuOpened] = useState(false);
+  const [isLoggedIn, setisLoggedIn] = useState('');
+  const navigate = useNavigate();
+  const [token, setToken] = useState('');
 
   const theme = useTheme()
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
+
+  const handleLoginClick =  () => {
+    if (!isLoggedIn) setisLoggedIn(true);
+    else setisLoggedIn(false);
+    navigate('/login');
+  };
+
+  const handleLogoutClick = () => {
+    setisLoggedIn(true)
+    if (isLoggedIn) setisLoggedIn(false);
+    else setisLoggedIn(true);
+    navigate('/login');
+  };
+
+  const handleAddArticleClick = () => {
+    //if (isLoggedIn) {
+      navigate('/form');
+    /*} else {
+      // L'utente non è autenticato 
+      console.log('Utente non autenticato. Effettua il login per accedere alla pagina.');
+    }*/
+  };
 
   const handleOpenMenuClick = () => {
     if (!menuOpened) setMenuOpened(true);
@@ -34,7 +60,9 @@ const HomePage = () => {
 
   return (
     <Box>
-      <TopNavBar isHome={true} />
+      <TopNavBar isHome={true}>
+        
+        </TopNavBar> 
       <Container >
         <Box
           sx={{
@@ -62,14 +90,22 @@ const HomePage = () => {
             width: "100%",
             textAlign: "center"
           }}>
-          <StandardButton
-            style={{ borderRadius: 50 }}
-            variant="outlined"
-            size="small"
-            color="default"
-            onClick={handleOpenMenuClick}
-            text={!menuOpened ? "OR BROWSE THE TOPICS" : "CLOSE VIEW"}>
-          </ StandardButton>
+             <StandardButton
+                style={{ borderRadius: 50 }}
+                variant="outlined"
+                size="small"
+                color="default"
+                onClick={handleAddArticleClick}
+                text="ADD ARTICLE">
+            </StandardButton>
+            <StandardButton
+              style={{ borderRadius: 50 }}
+              variant="outlined"
+              size="small"
+              color="default"
+              onClick={handleOpenMenuClick}
+              text={!menuOpened ? "OR BROWSE THE TOPICS" : "CLOSE VIEW"}>
+            </StandardButton>
 
         </Box>
         <Box sx={{
