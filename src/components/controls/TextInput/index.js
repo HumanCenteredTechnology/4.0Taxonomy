@@ -3,7 +3,7 @@ import { TextField } from "@material-ui/core";
 const TextInput = ({ name, label, value, error = null, onChange }) => {
     return (
         <TextField
-            fullWidth
+            sx={{ width: 400 }}
             variant="outlined"
             label={label}
             name={name}
@@ -11,8 +11,8 @@ const TextInput = ({ name, label, value, error = null, onChange }) => {
             onChange={onChange}
             {...(error && { error: true, helperText: error })}
             multiline
-            minRows={(name === "abstract" ? 4 : 0) || (name === "body" ? 6 : 0)}
-        />
+            minRows={(name === "title" ? 2 : 0) || (name === "link" ? 2 : 0) || (name === "journal" ? 2 : 0) || (name === "authors" ? 2 : 0) || (name === "doi" ? 2 : 0) || (name === "abstract" ? 4 : 0) }
+            />
     );
 }
 export default TextInput;
