@@ -49,12 +49,22 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
     const isMediumDevice = useMediaQuery(theme.breakpoints.up('sm'));
     const { queryId } = useParams();
     const { setSearchMention } = useFetch(queryId);
+    const navigate = useNavigate();
 
     const handleClickMenu = () => {
         if (openDrawer) setOpenDrawer(false)
         else setOpenDrawer(true)
         console.log("drawer: " + openDrawer)
     }
+
+    const handleAddArticleClick = () => {
+        //if (isLoggedIn) {
+          navigate('/form');
+        /*} else {
+          // L'utente non è autenticato 
+          console.log('Utente non autenticato. Effettua il login per accedere alla pagina.');
+        }*/
+      };
 
     return (
         <CssBaseline>
@@ -98,7 +108,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                             </>
                             :
                             <>
-                               {/*  {isSmallDevice ? <Box sx={{ flexGrow: 1}} /> : <Box sx={{ flexShrink: 1 }} />}
+                               {isSmallDevice ? <Box sx={{ flexGrow: 1}} /> : <Box sx={{ flexShrink: 1 }} />}
                                 <Box>
                                     <img width="150" src={LogoHome} class="custom-logo" alt="Planet4" />
                                     
@@ -106,24 +116,44 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                 <Box>
                                     <Typography variant='h6'>Taxonomy Explorer</Typography>
                                 </Box>
-                                {isSmallDevice ? <Box sx={{ flexGrow: 1 }} /> : <Box sx={{ flexShrink: 1 }} />} */}
+                                {isSmallDevice ? <Box sx={{ flexGrow: 1 }} /> : <Box sx={{ flexShrink: 1 }} />}
                             </>
                             
 
                         }
                         
 
-                        {/* {!isForm ? !isSmallDevice ?
-                            <StandardButton
-                                variant="text"
-                                text="Add Article"
-                                size="small"
-                                color="inherit"
-                                component={RouterLink}
-                                to="/form"
-                            />
-                            : <></> : <></>
-                        } */}
+                        {!isForm ? !isSmallDevice ?
+                             <Box
+                             sx={{
+                               mx: "auto",
+                               mt: 3,
+                               mb: 5,
+                               width: "100%",
+                               textAlign: "right"
+                             }}>
+                             <StandardButton
+                                    style={{ borderRadius: 50 }}
+                                    variant="outlined"
+                                    size="small"
+                                    color="default"
+                                    onClick={handleAddArticleClick}
+                                    text="ADD ARTICLE"
+                                />
+                                <StandardButton
+                                    style={{ borderRadius: 50 }}
+                                    variant="outlined"
+                                    size="small"
+                                    color="default"
+                                    //onClick={handleAddArticleClick}
+                                    text="LOG IN"
+                                    component={RouterLink}
+                                    to="/login"
+                                />
+                            </Box>
+                                : <></> : <></>
+                            
+                        } 
                     </Toolbar>
                 </AppBar>
             </ElevationScroll>
