@@ -1,17 +1,49 @@
 const API_URL = "http://localhost:5000/";
 
-
-
 const apiSettings = {
   fetchAutocomplete: async (query) => {
     const response = await fetch(`${API_URL}search?word=${query}`, {
       method: "GET",
     });
     if (response.ok) {
-      const data = response.json()
-      JSON.parse(JSON.stringify(data))
-      console.log(await data)
-      return data
+      const data = await response.json();
+      console.log(data);
+      return data;
+
+    }
+  },
+
+
+  login: async (username, password) => {
+    try {
+      const response = await fetch(`${API_URL}`, {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      } else {
+        throw new Error('Errore durante il login');
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  logout: async (username) => {
+    try {
+      const response = await fetch(`${API_URL}`, {
+        method: "POST",
+        body: JSON.stringify({ username }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Errore durante il logout');
+      }
+    } catch (error) {
+      throw error;
     }
   },
 
@@ -33,26 +65,7 @@ const apiSettings = {
     
     return data;
     
-    /* console.log(await data) */
-    
-    /* const data =
-    {
-      "topics":
-        [
-          ["Amazon Web Services", "Technology", "Link Wikipedia"],
-          ["Predictive Maintenance", "Problems", "Link Wikipedia"]
-        ],
-      "related_elements":
-        [
-          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-        ],
-        "unrelated_elements":
-        [
-          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-        ]
-    } */
+    console.log(await data) 
     
   },
 
@@ -61,9 +74,9 @@ const apiSettings = {
       method: "GET",
     });
     if (response.ok) {
-      const data = await response.json()
-      console.log(JSON.parse(data))
-      return JSON.parse(data)
+        const data = await response.json();
+        console.log(data);
+        return data;       
     } else {
       console.log(response.status)
     }
@@ -88,9 +101,8 @@ const apiSettings = {
       method: "POST",
       body: formData
     })).json();
-    const data = await resp.json()
     console.log(await resp)
-    JSON.parse(JSON.stringify(resp))
+    //JSON.parse(JSON.stringify(resp))
     /* const response = {
       "found_elements":
         [
