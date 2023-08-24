@@ -45,6 +45,7 @@ const ElevationScroll = ({ children, isSmallDevice, isHome }) => {
 
 const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDrawer }) => {
     const theme = useTheme()
+    const [isLoggedIn, setisLoggedIn] = useState('');
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const isMediumDevice = useMediaQuery(theme.breakpoints.up('sm'));
     const { queryId } = useParams();
@@ -132,6 +133,17 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                width: "100%",
                                textAlign: "right"
                              }}>
+                                
+                                <StandardButton
+                                    style={{ borderRadius: 50 }}
+                                    variant="outlined"
+                                    size="small"
+                                    color="default"
+                                    //onClick={handleLoginClick}
+                                    text={!isLoggedIn ? "LOG IN" : "LOG OUT"}
+                                    component={RouterLink}
+                                    to="/login"
+                                />
                              <StandardButton
                                     style={{ borderRadius: 50 }}
                                     variant="outlined"
@@ -140,16 +152,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     onClick={handleAddArticleClick}
                                     text="ADD ARTICLE"
                                 />
-                                <StandardButton
-                                    style={{ borderRadius: 50 }}
-                                    variant="outlined"
-                                    size="small"
-                                    color="default"
-                                    //onClick={handleAddArticleClick}
-                                    text="LOG IN"
-                                    component={RouterLink}
-                                    to="/login"
-                                />
+                                
                             </Box>
                                 : <></> : <></>
                             
