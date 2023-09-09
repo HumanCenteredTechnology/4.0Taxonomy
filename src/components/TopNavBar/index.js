@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useFetch } from '../../hooks/useFetch';
+import { useAuth } from "../../hooks/useAuth";
 import { useNavigate, useParams, Link as RouterLink } from 'react-router-dom';
 import { Box, AppBar, Toolbar, IconButton, Button, Tooltip, useScrollTrigger, Typography } from '@mui/material';
 import { CssBaseline } from '@mui/material';
@@ -45,11 +46,13 @@ const ElevationScroll = ({ children, isSmallDevice, isHome }) => {
 
 const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDrawer }) => {
     const theme = useTheme()
-    const [isLoggedIn, setisLoggedIn] = useState('');
+    const [isRegistred, setisRegistred] = useState('');
+    //const [isLoggedIn, setisLoggedIn] = useState('');
     const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
     const isMediumDevice = useMediaQuery(theme.breakpoints.up('sm'));
     const { queryId } = useParams();
     const { setSearchMention } = useFetch(queryId);
+    const { isLoggedIn, login, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleClickMenu = () => {
@@ -59,13 +62,24 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
     }
 
     const handleAddArticleClick = () => {
-        //if (isLoggedIn) {
+        //if (isRegistred) {
           navigate('/form');
         /*} else {
           // L'utente non è autenticato 
           console.log('Utente non autenticato. Effettua il login per accedere alla pagina.');
         }*/
       };
+
+      const handleLoginClick = () => {
+        if (isLoggedIn || isRegistred) {
+          logout();
+        } else {
+          login();
+        }
+      };
+
+
+      
 
     return (
         <CssBaseline>
@@ -139,8 +153,8 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     variant="outlined"
                                     size="small"
                                     color="default"
-                                    //onClick={handleLoginClick}
-                                    text={!isLoggedIn ? "LOG IN" : "LOG OUT"}
+                                    onClick={handleLoginClick}
+                                    text={(!isLoggedIn || !isRegistred) ? "LOG IN" : "LOG OUT"}
                                     component={RouterLink}
                                     to="/login"
                                 />
