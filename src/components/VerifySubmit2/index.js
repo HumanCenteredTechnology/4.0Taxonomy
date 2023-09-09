@@ -15,10 +15,10 @@ const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
 
 const VerifySubmit2 = ({ onBackStep, formDataVerify1, selectedTopics, setSelectedTopics }) => {
 
-  const { values, handleSubmit } = useContext(FormContext)
+  const { values, handleSubmit, handleBack } = useContext(FormContext)
 
-  const handleBack = () => {
-    onBackStep();
+  const handleBackStep = async (e) => {
+    handleBack(e);
   };
 
   const handleFormSubmit = async (e) =>  {
@@ -27,7 +27,7 @@ const VerifySubmit2 = ({ onBackStep, formDataVerify1, selectedTopics, setSelecte
   };
 
     return (
-        <form autoComplete="off">
+        <div autoComplete="off">
           <CardHeader
             title="Riepilogo delle informazioni inserite nel form"
           />
@@ -56,10 +56,10 @@ const VerifySubmit2 = ({ onBackStep, formDataVerify1, selectedTopics, setSelecte
           </CardContent>
 
           <CardActions>
-            <StandardButton color="inherit" onClick={handleBack} text="Back" />
-            <StandardButton color="primary" onClick={handleFormSubmit} text="Submit" />
+            <StandardButton type="button" color="inherit" onClick={onBackStep} text="Back" />
+            <StandardButton type="submit" color="primary" onClick={handleSubmit} text="Submit" />
           </CardActions>
-        </form>
+        </div>
       );
     };
 
