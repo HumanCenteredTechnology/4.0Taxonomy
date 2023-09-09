@@ -13,40 +13,65 @@ const apiSettings = {
     }
   },
 
-
-  login: async (username, password) => {
+  register: async (username, password, token) => {
     try {
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(`${API_URL}/register`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  login: async (username, password, token) => {
+    try {
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ username, password }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        return data;
+        return { ok: true, data };
       } else {
-        throw new Error('Errore durante il login');
+        const errorResponse = await response.json();
+        return { ok: false, error: errorResponse.message }; // Restituisci il messaggio di errore dal server
       }
     } catch (error) {
       throw error;
     }
   },
 
-  logout: async (username) => {
+  logout: async (username, token) => {
     try {
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(`${API_URL}/logout`, {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
         body: JSON.stringify({ username }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Errore durante il logout');
       }
     } catch (error) {
       throw error;
     }
-  },
-
+  },  
+  
   fetchResults: async (queryId) => {
     //se non c'è nessuna
     if (queryId === "" || queryId === undefined) return {};
@@ -96,30 +121,25 @@ const apiSettings = {
 
     console.log(JSON.stringify(Object.fromEntries(formData.entries())))
 
-    //invia il form
-    const resp = await (await fetch(`${API_URL}add_article`, {
-      method: "POST",
-      body: formData
-    })).json();
-    console.log(await resp)
-    //JSON.parse(JSON.stringify(resp))
-    /* const response = {
-      "found_elements":
-        [
-          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]],
-          ["Smart warehouse", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
- 
-        ],
-      "not_found_elements":
-        [
-          ["Computer", "Supply Chain", "Problems", ["Link to Article", "Link to Article"]],
-          ["Tableau", "Advanced reporting and self-service business intelligence tools", "Technology", ["Link to Article ", "Link To Article"]]
-        ]
-    } */
+    try {
+      const response = await fetch(`${API_URL}add_article`, {
+        method: "POST",
+        body: formData
+      });
+  
+      if (!response.ok) {
+        // Gestisci la risposta in caso di errore 
+        throw new Error("Errore durante l'invio dell'articolo al server");
+      }
+  
+      const responseData = await response.json(); // Converte la risposta JSON in un oggetto JavaScript
 
-    return resp
+      return responseData;
+    } catch (error) {
+      // Gestisci gli errori in caso di problemi durante la richiesta o la risposta
+      console.error("Errore durante l'invio dell'articolo al server:", error);
+      throw error; // Rilancia l'errore per consentire la gestione in un livello superiore
+    }
   },
 
    /* Coding verso url */
