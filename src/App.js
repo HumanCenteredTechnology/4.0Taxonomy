@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { AuthProvider } from "./hooks/useAuth";
 
 //Routing
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
@@ -7,6 +8,7 @@ import HomePage from "./components/1-HomePage";
 import ResultsPage from "./components/2-ResultsPage";
 import FormPage from "./components/3 - FormPage";
 import SingleResult from "./components/4 - SingleResult";
+import Login from "./components/Login";
 import Footer from "./components/Footer";
 
 //Styles
@@ -16,6 +18,7 @@ import {
   responsiveFontSizes,
   ThemeProvider,
 } from '@mui/material/styles';
+import VerifySubmit from "./components/VerifySubmit";
 
 const theme = responsiveFontSizes(createTheme({
   root: {
@@ -86,6 +89,7 @@ const ScrollToTop = (props) => {
 
 const App = () => {
   return (
+    <AuthProvider>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ minHeight: "80vh" }} >
@@ -95,6 +99,7 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path="/:queryId" element={<ResultsPage />} />
               <Route path="/form" element={<FormPage />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/SingleResult/:articleId" element={<SingleResult />} />
             </Routes>
           </ScrollToTop>
@@ -102,6 +107,7 @@ const App = () => {
       </Box>
       <Footer />
     </ThemeProvider>
+    </AuthProvider>
   );
 };
 
