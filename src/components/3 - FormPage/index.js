@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext, createContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import API from "../../API";
 import { Link as RouterLink } from "react-router-dom";
 import { Card, Container, makeStyles, AppBar, Toolbar, Box } from "@material-ui/core";
-import { Stepper, Step, StepLabel, Typography, CardActions } from "@mui/material"
+import { Stepper, Step, StepLabel, Typography, CardActions, FormGroup, FormControl, FormControlLabel, Checkbox } from "@mui/material"
 //Components
 import AddArticleForm from "../AddArticleForm";
 import VerifySubmit from "../VerifySubmit";
 import VerifySubmit2 from "../VerifySubmit2";
-import VerifySubmit3 from "../VerifySubmit3";
 import StandardButton from "../controls/StandardButton";
 import TopNavBar from "../TopNavBar";
+import taxonomy from "../../taxonomy.json";
 //Hooks
 import { useForm } from "../../hooks/useForm";
 
@@ -52,32 +53,50 @@ const initialValues = {
 
 const initialResponse = {
   founded_elements:
-    [],
-  not_founded_elements:
     []
 }
 
 
-const FormPage = () => {
+const FormPage = ({ onNextStep, onBackStep }) => {
   const classes = useStyles();
 
   const { } = useForm();
   const [steps, setSteps] = useState(['Insert your article', 'Review article in the database', 'Verify']);
   const [activeStep, setActiveStep] = useState(0);
-
   const [values, setValues] = useState(initialValues);
   const [check, setCheck] = useState([]);
   const [response, setResponse] = useState(initialResponse)
   const [errors, setErrors] = useState({});
   const [loaded, setLoaded] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
+  const navigate = useNavigate();
 
-  const [notFoundEl, setNotFoundEl] = useState([])
+  const [currentStep, setCurrentStep] = useState(1); // Inizia con lo step 1
+  const [activeForm, setActiveForm] = useState("AddArticleForm");
+  const [selectedTopics, setSelectedTopics] = useState([]);
+  const [formDataVerify1, setFormDataVerify1] = useState({
+    selectedEl: [],
+  });
+ 
+  const handleNext = (topics) => {
+    // Imposta il form attivo in base alla fase corrente
+    if (activeStep === 0) {
+      setActiveForm("VerifySubmit");
+    } else if (activeStep === 1) {
+      setActiveForm("VerifySubmit2");
+    }
+    setCurrentStep((prevStep) => prevStep + 1);
+    setFormDataVerify1({
+      ...formDataVerify1,
+      selectedEl: topics,
+    });
+  };
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    if (activeStep > 0) setIsSubmit(false)
-
+  const handleVerifySubmitFormChange = (updatedFormData) => {
+    setFormDataVerify1({
+      ...formDataVerify1,
+      ...updatedFormData,
+    });
   };
 
   useEffect(() => {
@@ -85,7 +104,7 @@ const FormPage = () => {
   }, [loaded])
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setCurrentStep((prevStep) => prevStep - 1);
     if (activeStep > 0) setIsSubmit(false)
   };
 
@@ -94,19 +113,11 @@ const FormPage = () => {
       setActiveStep(0);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    setResponse(await submit);
-    //setSavedValues(saveValues)
-  };
-
-
+  
+  
   useEffect(() => {
     console.log(values)
   }, [values])
-
-
 
   //ci sarebbe da formattare bene a seconda dello step
   const handleChange = (e) => {
@@ -133,8 +144,6 @@ const FormPage = () => {
     //console.log(checkboxes)
   }
 
-
-
   const handleReset = () => {
     setErrors({});
     setValues(initialValues);
@@ -148,29 +157,39 @@ const FormPage = () => {
     temp.sourceType = values.sourceType ? "" : "Please enter a valid source type";
     temp.journal = values.journal ? "" : "Please enter a valid journal";
     temp.authors = values.authors ? "" : "Please enter one or more authors: Surname Name";
-    temp.doi = values.doi ? "" : "Please enter a valid a doi";
+    temp.doi = values.doi ? "" : "Please enter a valid doi";
     temp.publicationDate = values.publicationDate ? "" : "Please enter the publication date";
     temp.abstract = values.abstract ? "" : "Please enter a valid abstract"; 
-    setErrors({ ...temp });
-    return Object.values(temp).every((x) => x === "");
-  };
-
-  const submit = async () => {
-    setLoaded(false)
-    try {
-      if (validate()) {
-        console.log("submitting...");
-        const response = await API.submitArticle(values);
-        setIsSubmit(true)
-        setLoaded(true)
-        return orderResponse(response);
+  
+      // Validazione dei campi obbligatori
+      const validationErrors = {};
+  
+      if (!values.title) {
+        validationErrors.title = 'Il campo Titolo è obbligatorio.';
       }
-      else return initialResponse
-    } catch (e) {
-      console.log(e)
-    }
-  }
+    
+      if (!values.link) {
+        validationErrors.link = 'Il campo Link è obbligatorio.';
+      }
+    
+      if (!values.sourceType) {
+        validationErrors.sourceType = 'Il campo Source Type è obbligatorio.';
+      }
+    
+    // Combina i messaggi di errore da entrambe le parti
+    //const combinedErrors = { ...temp, ...validationErrors };
+  
+    // Imposta gli errori combinati nello stato
+    setErrors(validationErrors);
 
+    // Verifica se ci sono errori
+    const hasErrors = Object.values(validationErrors).some((x) => x !== "");
+
+    // Se ci sono errori, la validazione non è riuscita
+    return !hasErrors;
+};
+ 
+    
   const orderCheckbox = (el) => {
     return { [el]: true }
   }
@@ -184,32 +203,81 @@ const FormPage = () => {
     console.log(response)
   }
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("submit is called");
+    setLoaded(false);
+    console.log("Inizio handleSubmit");
+
+    // Verifica in quale fase del form ci troviamo
+    if (currentStep === 1) {
+      // Salva i dati dalla componente "AddArticleForm" e vai avanti
+      setValues({ ...values });
+    } else if (currentStep === 2) {
+      // Salva i dati dalla componente "VerifySubmit" e vai avanti
+      setFormDataVerify1({ ...formDataVerify1 });
+    } else if (currentStep === 3) {
+      // Gestisci l'invio del form "verifySubmit2"
+        try {
+          if (validate()) {
+            console.log("Validazione riuscita, invio della richiesta API...");
+            const response = await API.submitArticle(values); // Controlla se 'values' contiene dati validi.
+            console.log("Risposta dalla richiesta API:", response);
+            setIsSubmit(true);
+            setLoaded(true);
+            console.log("handleSubmit completato con successo");
+            return orderResponse(response);
+          } else {
+            console.log("Validazione non riuscita");
+            return initialResponse;
+          }
+        } catch (e) {
+          console.error("Errore durante l'invio dell'articolo:", e);
+        }
+    }
+    setCurrentStep((prevStep) => prevStep + 1);
+    // Naviga alla destinazione finale dopo il completamento del submit o in caso di errore
+    navigate('/');
+  };
+  
+
 
   return (
+    <form className={classes.root} autoComplete="off" onSubmit={handleSubmit}>
     <FormContext.Provider value={{ values, setValues, check, response, setResponse, errors, handleChange, handleReset, handleSubmit, handleCheckboxChange, convertToEventParams }}>
       <TopNavBar isForm={true} />
       <Container>
         <Box sx={{ m: 1 }} >
           <StepperView activeStep={activeStep} steps={steps} />
         </Box>
-
-
         <Card className={classes.pageContent} sx={{ width: "50%" }}>
-          {activeStep === 0 ?
-            <AddArticleForm />
-            : activeStep === 1 ?
-              loaded ?
-                <VerifySubmit />
-                : activeStep === 2 ?
-                  < VerifySubmit2 steps={steps} setSteps={setSteps} />
-                  : activeStep === 3 ?
-                    <VerifySubmit3 steps={steps} setSteps={setSteps} />
-                    : <> </>
-              : <> </>
-          }
+          {currentStep === 1 &&(
+                <AddArticleForm onNextStep={handleNext} />
+          )}
+          {currentStep === 2 && (
+              <VerifySubmit
+                onNextStep={handleNext}
+                onBackStep={handleBack}
+                selectedTopics={selectedTopics}
+                setSelectedTopics={setSelectedTopics}
+                relatedTopics={formDataVerify1.relatedTopics}
+                onFormChange={handleVerifySubmitFormChange}
+                taxonomy={taxonomy}
+              /> 
+          )}
+          {currentStep === 3 && (
+              <VerifySubmit2
+                onBackStep={handleBack}
+                handleSubmit={handleSubmit}
+                formDataVerify1={formDataVerify1}
+                selectedTopics={selectedTopics}
+                setSelectedTopics={setSelectedTopics}
+              />
+          )}
           <CardActions>
             {activeStep > 0 ?
               <StandardButton
+                type="button"
                 color="inherit"
                 onClick={activeStep === 0 ? () => { } : handleBack}
                 text={activeStep === 0 ? "Close" : "Back"} />
@@ -218,16 +286,20 @@ const FormPage = () => {
             <Box sx={{ flexGrow: 1 }} />
             {activeStep > 0 ?
               <StandardButton
-                text={activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                type="button"
-                onClick={handleNext} />
-              : <></>}
+              type="button"
+              color="inherit"
+              onClick={activeStep === steps.length - 1 ? () => { } : handleNext} 
+              text={activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+            />
+            : <></>
+            }
 
           </CardActions>
         </Card>
 
       </ Container>
     </FormContext.Provider>
+    </form>
   );
 };
 
