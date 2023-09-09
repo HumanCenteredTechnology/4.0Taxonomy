@@ -9,33 +9,40 @@ import StandardButton from '../controls/StandardButton'
 import BrowsableTree from '../BrowsableTree'
 import CheckBoxTree from '../CheckBoxTree';
 import taxonomy from "../../taxonomy.json";
-const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).subLevels))
-const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels))
+
+const initialNeeds = JSON.parse(JSON.stringify(taxonomy.at(0).subLevels));
+const initialTech = JSON.parse(JSON.stringify(taxonomy.at(1).subLevels));
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        "& .MuiFormControl-root": {
-
-            margin: theme.spacing(2),
-        },
+  root: {
+    display: 'flex',
+    justifyContent: 'space-between', // Posiziona i box uno a sinistra e uno a destra
+    "& .MuiFormControl-root": {
+      margin: theme.spacing(2),
     },
+  },
+  box: {
+    width: '48%', // Imposta la larghezza di ciascun box
+  },
 }));
 
 const VerifySubmit = ({ onNextStep, onBackStep, selectedTopics, setSelectedTopics, formDataVerify1, setFormDataVerify1, taxonomy }) => {
-    const classes = useStyles();
-    const { values, handleCheckboxChange, convertToEventParams } = useContext(FormContext);
-    const [selectedEl, setSelectedEl] = useState([]);
-    const [isEl, setIsEl] = useState(false);
+  const classes = useStyles();
+  const { values, handleCheckboxChange, convertToEventParams } = useContext(FormContext);
+  const [selectedEl, setSelectedEl] = useState([]);
+  const [isEl, setIsEl] = useState(false);
 
-    // Stato per tenere traccia dell'eventuale errore di validazione
-    const [validationError, setValidationError] = useState(false);
-
-    // Funzione per gestire il click sul pulsante "Next"
-    const handleNextStep = () => {
+  const handleNextStep = () => {
+    // Verifica se ci sono selezioni in entrambe le liste
+    if (selectedTopics.length >  0) {
       onNextStep();
+    } else {
+      // Mostra un alert
+      alert("Seleziona almeno un elemento da entrambe le liste.");
+    }
   };
+  
 
-  // Funzione per gestire il click sul pulsante "Back"
   const handleBackStep = () => {
     onBackStep();
   };
@@ -45,26 +52,26 @@ const VerifySubmit = ({ onNextStep, onBackStep, selectedTopics, setSelectedTopic
     setSelectedTopics(selectedTopics);
   };
 
-    const handleTopicCheckboxChange = (event, taxonomy) => {
-      if (event.target.checked) {
-        setSelectedTopics([...selectedTopics, taxonomy]);
-      } else {
-        setSelectedTopics(selectedTopics.filter((selectedTopic) => selectedTopic !== taxonomy));
-      }
-    };
-  
-    const renderRelatedTopics = (categories, isSubLevel = false) => {
-      if (!categories) {
-        return null;
-      }
-  
-      return categories.map((category) => {
-        const { label, subLevels } = category;
-  
-        return (
-          <React.Fragment key={label}>
-            {!isSubLevel ? (
-              <FormControlLabel
+  const handleTopicCheckboxChange = (event, taxonomy) => {
+    if (event.target.checked) {
+      setSelectedTopics([...selectedTopics, taxonomy]);
+    } else {
+      setSelectedTopics(selectedTopics.filter((selectedTopic) => selectedTopic !== taxonomy));
+    }
+  };
+
+  const renderRelatedTopics = (categories, isSubLevel = false) => {
+    if (!categories) {
+      return null;
+    }
+
+    return categories.map((category) => {
+      const { label, subLevels } = category;
+
+      return (
+        <React.Fragment key={label}>
+          {!isSubLevel ? (
+            <FormControlLabel
               label={`- ${label}`}
               disabled
               control={
@@ -73,76 +80,47 @@ const VerifySubmit = ({ onNextStep, onBackStep, selectedTopics, setSelectedTopic
                 </Typography>
               }
             />
-            ) : (
-              <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedTopics.includes(label)}
-                onChange={(e) => handleTopicCheckboxChange(e, label)}
-              />
-            }
-            label={label}
-          />            
-            )}
-            {subLevels && renderRelatedTopics(subLevels, true)}
-          </React.Fragment>
-        );
-      });
-    };
-
-
-    const renderForm = (el, branch) => {
-        console.log(Object.values(el))
-
-        let name = Object.keys(el);
-        let value = Object.values(el)
-        console.log(name + value + branch)
-        return (
+          ) : (
             <FormControlLabel
-                key={name}
-                label={name}
-                control={
-                    <Checkbox
-                        name={name}
-                        onChange={e => handleCheckboxChange(branch, convertToEventParams(name, e.target.checked))}
-                        value={value} />} />
-        )
-  
-    }
-
-    return (
-      <form autoComplete="off">
-            <CardHeader
-                title="Select the relative topics from the"
-                subheader="Choose one or more topics for your article"
+              control={
+                <Checkbox
+                  checked={selectedTopics.includes(label)}
+                  onChange={(e) => handleTopicCheckboxChange(e, label)}
+                />
+              }
+              label={label}
             />
-            <CardContent>
-              <Box sx={{ my: 2 }}>
-                <p>Select topics</p>
-                  <Box
-                    sx={{
-                      width: '100%',
-                      margin: "0 auto",
-                      overflow: 'auto',
-                      maxHeight: 500,
-                      '& ul': { padding: 0 },
-                    }}
-                  >
-                  <FormControl>
-                  <FormLabel>Needs</FormLabel>
-                  <FormGroup>{renderRelatedTopics(taxonomy?.[0]?.subLevels)}</FormGroup>
-                  <FormLabel>Technologies</FormLabel>
-                  <FormGroup>{renderRelatedTopics(taxonomy?.[1]?.subLevels)}</FormGroup> 
-                  </FormControl>
-              </Box>
-            </Box>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Button onClick={handleBackStep}>Back</Button>
-                <Button onClick={handleNextStep}>Next</Button>
-              </Box>
-            </CardContent>
-        </form>
-    )
-}
+          )}
+          {subLevels && renderRelatedTopics(subLevels, true)}
+        </React.Fragment>
+      );
+    });
+  };
 
-export default VerifySubmit
+  return (
+    <div autoComplete="off">
+      <CardHeader
+        title="Select the relative topics"
+        subheader="Choose one or more topics for your article"
+      />
+      <CardContent className={classes.root}>
+        {/* Box per i 'Need' */}
+        <Box className={classes.box}>
+          <FormLabel>Needs</FormLabel>
+          <FormGroup>{renderRelatedTopics(taxonomy?.[0]?.subLevels)}</FormGroup>
+        </Box>
+        {/* Box per le 'Technologies' */}
+        <Box className={classes.box}>
+          <FormLabel>Technologies</FormLabel>
+          <FormGroup>{renderRelatedTopics(taxonomy?.[1]?.subLevels)}</FormGroup>
+        </Box>
+      </CardContent>
+      <CardActions>
+        <Button onClick={onBackStep}>Back</Button>
+        <Button onClick={onNextStep}>Next</Button>
+      </CardActions>
+    </div>
+  );
+};
+
+export default VerifySubmit;
