@@ -62,19 +62,14 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
     }
 
     const handleAddArticleClick = () => {
-        //if (isRegistred) {
           navigate('/form');
-        /*} else {
-          // L'utente non è autenticato 
-          console.log('Utente non autenticato. Effettua il login per accedere alla pagina.');
-        }*/
       };
 
       const handleLoginClick = () => {
-        if (isLoggedIn || isRegistred) {
-          logout();
+        if (!isLoggedIn || !isRegistred) {
+          navigate('/login');
         } else {
-          login();
+          logout();
         }
       };
 
@@ -154,7 +149,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     size="small"
                                     color="default"
                                     onClick={handleLoginClick}
-                                    text={(!isLoggedIn || !isRegistred) ? "LOG IN" : "LOG OUT"}
+                                    text={!isLoggedIn ? "LOG IN" : "LOG OUT"}
                                     component={RouterLink}
                                     to="/login"
                                 />
@@ -165,6 +160,7 @@ const TopNavBar = ({ isHome, isResults, isForm, children, openDrawer, setOpenDra
                                     color="default"
                                     onClick={handleAddArticleClick}
                                     text="ADD ARTICLE"
+                                    disabled={!isLoggedIn} // Disabilita il pulsante se l'utente non è autenticato
                                 />
                                 
                             </Box>
